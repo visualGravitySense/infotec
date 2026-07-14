@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infotec ERP — Корпоративная ERP-платформа</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: 'Inter', sans-serif;
+      --color-brand: #0A6ED1;
+      --color-deep: #122136;
+      --color-muted: #6A7B95;
+      --color-border: #E2E8F0;
+      --color-surface: #F5F7FA;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2 {
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    h1 {
+      font-weight: 800;
+    }
+
+    .desc-text {
+      font-weight: 400;
+      line-height: 1.625;
+      color: #6A7B95;
+    }
+
+    .ui-text {
+      font-weight: 500;
+    }
+
+    .mesh-bg {
+      background-color: #F5F7FA;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(10, 110, 209, 0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 45% at 85% 65%, rgba(59, 130, 246, 0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 55% 80%, rgba(10, 110, 209, 0.05) 0%, transparent 50%);
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #0A6ED1 0%, #3B82F6 50%, #0A6ED1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #0A6ED1;
+      border-radius: 1px;
+      transition: width 0.25s ease, left 0.25s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+
+    .chart-bar {
+      animation: growBar 1.2s ease-out forwards;
+      transform-origin: bottom;
+      transform: scaleY(0);
+    }
+
+    @keyframes growBar {
+      to { transform: scaleY(1); }
+    }
+
+    .float-card {
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .dashboard-panel {
+      background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(245,247,250,0.9) 100%);
+      box-shadow:
+        0 0 0 1px rgba(226, 232, 240, 0.8),
+        0 20px 50px -12px rgba(18, 33, 54, 0.12),
+        0 8px 20px -6px rgba(10, 110, 209, 0.08);
+    }
+
+    .progress-fill {
+      transition: width 1.5s ease-out;
+    }
+
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .mobile-menu.open {
+      max-height: 320px;
+      opacity: 1;
+    }
+
+    .bento-card {
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .donut-segment {
+      transition: stroke-dashoffset 1.2s ease-out;
+    }
+
+    .flow-arrow {
+      animation: flowPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes flowPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .metric-line path {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: drawLine 2s ease-out forwards;
+    }
+
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .btn-cushion {
+      display: inline-flex;
+      padding: 5px;
+      border-radius: 9999px;
+      background: rgba(10, 110, 209, 0.10);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.12),
+        0 4px 16px -2px rgba(10, 110, 209, 0.20),
+        0 10px 28px -6px rgba(10, 110, 209, 0.15);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-cushion:hover {
+      background: rgba(10, 110, 209, 0.15);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.18),
+        0 6px 22px -2px rgba(10, 110, 209, 0.30),
+        0 14px 36px -6px rgba(10, 110, 209, 0.20);
+    }
+
+    .btn-cushion:active {
+      transform: scale(0.98);
+    }
+
+    .btn-cushion-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.125rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: #FFFFFF;
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 50%, #0960bd 100%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow:
+        0 1px 2px rgba(8, 91, 176, 0.35),
+        0 4px 14px -2px rgba(10, 110, 209, 0.40),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30),
+        inset 0 -2px 4px rgba(8, 91, 176, 0.25);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-cushion:hover .btn-cushion-inner {
+      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 50%, #074a93 100%);
+      box-shadow:
+        0 2px 4px rgba(8, 91, 176, 0.40),
+        0 6px 18px -2px rgba(10, 110, 209, 0.50),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 -2px 4px rgba(7, 74, 147, 0.30);
+    }
+
+    .btn-cushion:active .btn-cushion-inner {
+      box-shadow:
+        0 1px 2px rgba(8, 91, 176, 0.30),
+        inset 0 2px 4px rgba(7, 74, 147, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-cushion-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .lead-form-cushion {
+      padding: 6px;
+      border-radius: 1.25rem;
+      background: linear-gradient(145deg, rgba(10, 110, 209, 0.10) 0%, rgba(245, 247, 250, 0.95) 45%, rgba(10, 110, 209, 0.07) 100%);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.08),
+        0 6px 20px -4px rgba(10, 110, 209, 0.20),
+        0 14px 36px -8px rgba(10, 110, 209, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    @media (min-width: 640px) {
+      .lead-form-cushion {
+        border-radius: 9999px;
+      }
+    }
+
+    .lead-form-cushion:focus-within,
+    .lead-form-cushion:hover {
+      background: linear-gradient(145deg, rgba(10, 110, 209, 0.14) 0%, rgba(245, 247, 250, 0.98) 45%, rgba(10, 110, 209, 0.10) 100%);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.12),
+        0 8px 24px -4px rgba(10, 110, 209, 0.26),
+        0 18px 40px -8px rgba(10, 110, 209, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    .lead-form-track {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      padding: 5px;
+      border-radius: 1rem;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 45%, #F0F4F8 100%);
+      box-shadow:
+        0 1px 4px rgba(18, 33, 54, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 6px rgba(18, 33, 54, 0.04);
+    }
+
+    @media (min-width: 640px) {
+      .lead-form-track {
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        border-radius: 9999px;
+        padding: 5px 5px 5px 8px;
+      }
+    }
+
+    .lead-input-wrap {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+      padding: 0.75rem 1rem;
+      border-radius: 0.875rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(245, 247, 250, 0.4) 100%);
+      box-shadow: inset 0 1px 3px rgba(18, 33, 54, 0.04);
+      transition: box-shadow 0.3s ease;
+    }
+
+    @media (min-width: 640px) {
+      .lead-input-wrap {
+        padding: 0.625rem 1rem 0.625rem 1.25rem;
+        border-radius: 9999px;
+        background: transparent;
+        box-shadow: none;
+      }
+    }
+
+    .lead-form-cushion:focus-within .lead-input-wrap {
+      box-shadow: inset 0 0 0 1px rgba(10, 110, 209, 0.12);
+    }
+
+    @media (min-width: 640px) {
+      .lead-form-cushion:focus-within .lead-input-wrap {
+        box-shadow: none;
+      }
+    }
+
+    .lead-input-wrap input {
+      width: 100%;
+      background: transparent;
+      outline: none;
+      font-size: 0.875rem;
+      color: #122136;
+    }
+
+    .lead-input-wrap input::placeholder {
+      color: rgba(106, 123, 149, 0.65);
+    }
+
+    .btn-cushion--submit {
+      padding: 6px;
+    }
+
+    .btn-cushion--submit .btn-cushion-inner {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border-radius: 9999px;
+    }
+
+    @media (min-width: 640px) {
+      .btn-cushion--submit .btn-cushion-inner {
+        padding: 0.75rem 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .btn-cushion--submit .btn-cushion-inner {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.9375rem;
+      }
+    }
+
+    .tab-card {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .tab-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .tab-card[aria-selected="true"] {
+      background-color: #FFFFFF;
+      border-color: rgba(10, 110, 209, 0.35);
+      box-shadow: 0 8px 28px -6px rgba(10, 110, 209, 0.18), 0 0 0 1px rgba(10, 110, 209, 0.08);
+    }
+
+    .tab-card[aria-selected="false"] {
+      background-color: #F5F7FA;
+      border-color: #E2E8F0;
+    }
+
+    .btn-cushion--tab {
+      padding: 3px;
+      border-radius: 9999px;
+      background: rgba(18, 33, 54, 0.06);
+      box-shadow: 0 2px 8px -2px rgba(18, 33, 54, 0.12);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-cushion--tab .btn-cushion-inner {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      gap: 0.375rem;
+      background: linear-gradient(180deg, #1a2d47 0%, #122136 55%, #0e1a2a 100%);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 1px 2px rgba(18, 33, 54, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        inset 0 -1px 3px rgba(0, 0, 0, 0.20);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tab-card:hover .btn-cushion--tab,
+    .tab-card[aria-selected="true"] .btn-cushion--tab {
+      background: rgba(10, 110, 209, 0.10);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.10),
+        0 4px 14px -2px rgba(10, 110, 209, 0.22),
+        0 8px 20px -4px rgba(10, 110, 209, 0.12);
+    }
+
+    .tab-card:hover .btn-cushion--tab .btn-cushion-inner,
+    .tab-card[aria-selected="true"] .btn-cushion--tab .btn-cushion-inner {
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 50%, #0960bd 100%);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow:
+        0 1px 2px rgba(8, 91, 176, 0.35),
+        0 4px 12px -2px rgba(10, 110, 209, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -2px 3px rgba(8, 91, 176, 0.22);
+    }
+
+    .tab-card:hover .btn-cushion--tab .btn-cushion-inner {
+      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 50%, #074a93 100%);
+    }
+
+    .tab-panel {
+      animation: tabFadeIn 0.35s ease-out;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-graphic-orb {
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .glass-3d {
+      background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 8px 32px rgba(10, 110, 209, 0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .footer-link {
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-cta-cushion {
+      padding: 3px;
+      border-radius: 9999px;
+      background: rgba(10, 110, 209, 0.10);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.10),
+        0 4px 14px -2px rgba(10, 110, 209, 0.28),
+        0 8px 22px -4px rgba(10, 110, 209, 0.14);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .footer-cta-cushion:hover {
+      background: rgba(10, 110, 209, 0.15);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.14),
+        0 6px 18px -2px rgba(10, 110, 209, 0.35),
+        0 12px 28px -4px rgba(10, 110, 209, 0.18);
+    }
+
+    .footer-cta-primary {
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 55%, #0960bd 100%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -1px 3px rgba(8, 91, 176, 0.22);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .footer-cta-cushion:hover .footer-cta-primary {
+      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 55%, #074a93 100%);
+    }
+
+    .footer-cta-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .footer-cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .footer-wordmark {
+      font-size: clamp(4rem, 14vw, 11rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-eyebrow-pill {
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .hero-eyebrow-pill::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background-image:
+        linear-gradient(90deg, rgba(10, 110, 209, 0.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(10, 110, 209, 0.04) 1px, transparent 1px),
+        repeating-linear-gradient(
+          125deg,
+          transparent,
+          transparent 6px,
+          rgba(10, 110, 209, 0.03) 6px,
+          rgba(10, 110, 209, 0.03) 7px
+        );
+      background-size: 10px 10px, 10px 10px, auto;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow-pill:hover,
+    .group\/hero:hover .hero-eyebrow-pill {
+      box-shadow: 0 4px 20px rgba(10, 110, 209, 0.10), 0 2px 12px rgba(10, 110, 209, 0.06);
+      border-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-eyebrow-chevron {
+      transition: transform 0.3s ease;
+    }
+
+    .hero-eyebrow-pill:hover .hero-eyebrow-chevron,
+    .group\/hero:hover .hero-eyebrow-chevron {
+      transform: translateX(2px) scale(1.05);
+    }
+
+    .module-card {
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+    }
+
+    .module-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .module-card--active {
+      border-color: rgba(10, 110, 209, 0.45);
+      background: linear-gradient(135deg, rgba(10, 110, 209, 0.06) 0%, #FFFFFF 60%);
+      box-shadow: 0 4px 20px -4px rgba(10, 110, 209, 0.18), 0 0 0 1px rgba(10, 110, 209, 0.08);
+    }
+
+    .module-card--active .module-chevron {
+      background: #0A6ED1;
+      transform: translateX(2px);
+    }
+
+    .module-chevron {
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .nav-dropdown {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+
+    .nav-dropdown-wrap:hover .nav-dropdown,
+    .nav-dropdown-wrap:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="mesh-bg min-h-screen font-sans text-[#122136] antialiased">
+
+  <!-- Ambient glow orbs -->
+  <div class="glow-orb w-[500px] h-[500px] bg-[#0A6ED1]/10 top-[-10%] right-[10%] fixed" aria-hidden="true"></div>
+  <div class="glow-orb w-[300px] h-[300px] bg-[#3B82F6]/8 bottom-[20%] right-[30%] fixed" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       HEADER / NAVIGATION
+       ═══════════════════════════════════════════ -->
+  <header class="sticky top-4 z-50 px-4 sm:px-6 lg:px-8">
+    <nav class="max-w-7xl mx-auto backdrop-blur-md bg-white/70 border border-[#E2E8F0]/50 rounded-2xl shadow-sm px-6 py-4 flex items-center justify-between gap-4" aria-label="Основная навигация">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 shrink-0 group">
+        <div class="w-8 h-8 rounded-lg bg-[#0A6ED1] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path d="M4 6h16M4 12h10M4 18h14" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="font-bold text-[#122136] text-base sm:text-lg tracking-tight">Infotec ERP</span>
+      </a>
+
+      <!-- Center menu (desktop) -->
+      <ul class="hidden lg:flex items-center gap-1" role="menubar">
+        <li role="none">
+          <a href="#" role="menuitem" class="nav-link ui-text active px-4 py-2 text-sm text-[#122136] hover:text-[#122136] transition-colors rounded-lg">Главная</a>
+        </li>
+        <li role="none" class="relative nav-dropdown-wrap">
+          <a href="#modules" role="menuitem" class="nav-link ui-text px-4 py-2 text-sm text-[#6A7B95] hover:text-[#122136] transition-colors rounded-lg inline-flex items-center gap-1">
+            ERP Модули
+            <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown absolute top-full left-0 mt-2 w-64 backdrop-blur-md bg-white/95 border border-[#E2E8F0] rounded-xl shadow-lg p-2 z-50" role="menu">
+            <a href="#modules" class="block px-3 py-2 text-xs font-semibold text-[#0A6ED1] rounded-lg hover:bg-[#F5F7FA]">Управление продажами</a>
+            <a href="#modules" class="block px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136]">Управление закупками</a>
+            <a href="#modules" class="block px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136]">Управление запасами</a>
+            <a href="#modules" class="block px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136]">Все 12 модулей →</a>
+          </div>
+        </li>
+        <li role="none">
+          <a href="#" role="menuitem" class="nav-link ui-text px-4 py-2 text-sm text-[#6A7B95] hover:text-[#122136] transition-colors rounded-lg">Готовые решения</a>
+        </li>
+        <li role="none">
+          <a href="#" role="menuitem" class="nav-link ui-text px-4 py-2 text-sm text-[#6A7B95] hover:text-[#122136] transition-colors rounded-lg">Новости</a>
+        </li>
+      </ul>
+
+      <!-- Right panel -->
+      <div class="flex items-center gap-3 sm:gap-4 shrink-0">
+        <a href="#" class="ui-text hidden sm:inline text-sm text-[#6A7B95] hover:text-[#122136] transition-colors duration-200">Войти</a>
+        <a href="#" class="btn-cushion group shrink-0 transition-all duration-300 bg-[#0A6ED1]/10 px-1 py-1 rounded-full" aria-label="Демо-доступ">
+          <span class="btn-cushion-inner bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-xs font-medium px-4 py-2">
+            Демо-доступ
+            <svg class="btn-cushion-arrow w-3.5 h-3.5 text-white group-hover:translate-x-0.5 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </span>
+        </a>
+        <span class="text-lg leading-none" title="Эстония" aria-label="Эстония">🇪🇪</span>
+
+        <!-- Mobile menu toggle -->
+        <button id="menuToggle" type="button" class="lg:hidden p-2 rounded-lg hover:bg-[#E2E8F0]/50 transition-colors" aria-expanded="false" aria-controls="mobileMenu" aria-label="Открыть меню">
+          <svg class="w-5 h-5 text-[#122136]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path id="menuIcon" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile dropdown -->
+    <div id="mobileMenu" class="mobile-menu lg:hidden max-w-7xl mx-auto mt-2 backdrop-blur-md bg-white/80 border border-[#E2E8F0]/50 rounded-2xl shadow-sm" role="menu">
+      <ul class="p-4 space-y-1">
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#122136] hover:bg-[#F5F7FA] rounded-lg transition-colors" role="menuitem">Главная</a></li>
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:bg-[#F5F7FA] hover:text-[#0A6ED1] rounded-lg transition-colors" role="menuitem">ERP Модули</a></li>
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:bg-[#F5F7FA] hover:text-[#0A6ED1] rounded-lg transition-colors" role="menuitem">Готовые решения</a></li>
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:bg-[#F5F7FA] hover:text-[#0A6ED1] rounded-lg transition-colors" role="menuitem">Новости</a></li>
+        <li class="pt-2 border-t border-[#E2E8F0]"><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:text-[#0A6ED1] transition-colors" role="menuitem">Войти</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════════ -->
+  <main class="relative z-10">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-20 lg:pb-28">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <!-- LEFT COLUMN -->
+        <div class="group/hero flex flex-col gap-6 lg:gap-7 order-2 lg:order-1">
+
+          <!-- Eyebrow pill badge -->
+          <div class="hero-eyebrow-pill group inline-flex items-center gap-2.5 self-start backdrop-blur-md bg-white/60 border border-white/80 rounded-full px-3.5 py-1.5 shadow-[0_2px_12px_rgba(10,110,209,0.05)]">
+            <span class="relative z-10 flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
+              <svg class="hero-eyebrow-chevron w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 3h5.5L4.5 17H0L1 3z" fill="#0A6ED1" fill-opacity="0.35"/>
+                <path d="M6.5 3H12L11 17H5.5L6.5 3z" fill="#0A6ED1" fill-opacity="0.65"/>
+                <path d="M12.5 3H18L17 17H11.5L12.5 3z" fill="#0A6ED1"/>
+                <path d="M2 5.5L7 5.5" stroke="#0A6ED1" stroke-opacity="0.2" stroke-width="0.5"/>
+                <path d="M7.5 5.5L12.5 5.5" stroke="#0A6ED1" stroke-opacity="0.3" stroke-width="0.5"/>
+                <path d="M13 5.5L18 5.5" stroke="#0A6ED1" stroke-opacity="0.4" stroke-width="0.5"/>
+              </svg>
+            </span>
+            <span class="relative z-10 text-xs text-[#122136]">Trusted by leading Baltic enterprises</span>
+          </div>
+
+          <!-- H1 -->
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tighter text-[#122136] leading-none mb-6">
+            Управляйте <span class="text-[#0A6ED1]">продажами</span> на&nbsp;основе <span class="text-[#0A6ED1]">точных данных</span>, а&nbsp;не&nbsp;интуиции
+          </h1>
+
+          <!-- Lead -->
+          <p class="desc-text text-base sm:text-lg max-w-xl">
+            Автоматизируйте сквозной цикл от регистрации заказа до отгрузки. Интеллектуальный расчёт индивидуальных скидок, автоматический импорт заказов из XML/TXT и встроенный аудит рентабельности защитят вашу маржинальность.
+          </p>
+
+          <!-- Lead generation form -->
+          <form class="lead-form-cushion group w-full max-w-xl mt-1" action="#" method="post" novalidate>
+            <div class="lead-form-track">
+              <label class="lead-input-wrap" for="emailInput">
+                <span class="sr-only">Ваш email</span>
+                <svg class="w-5 h-5 text-[#6A7B95] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                </svg>
+                <input
+                  id="emailInput"
+                  name="email"
+                  type="email"
+                  placeholder="your@company.ee"
+                  autocomplete="email"
+                  required
+                >
+              </label>
+              <button type="submit" class="btn-cushion btn-cushion--submit group shrink-0 w-full sm:w-auto transition-all duration-300">
+                <span class="btn-cushion-inner justify-center sm:justify-start w-full sm:w-auto rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.3)]">
+                  Получить спецификацию модуля "
+                  <svg class="btn-cushion-arrow w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Trust indicators -->
+          <div class="flex items-center gap-6 pt-2 text-xs text-[#6A7B95]">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#0A6ED1]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+              Без обязательств
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#0A6ED1]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+              Ответ за 24 часа
+            </span>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN — Layered showcase -->
+        <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end" aria-label="Демонстрация интерфейса ERP">
+
+          <!-- Decorative back layer -->
+          <div class="absolute -top-4 -right-4 w-[90%] h-[95%] rounded-2xl bg-gradient-to-br from-[#0A6ED1]/5 to-[#3B82F6]/10 border border-[#E2E8F0]/40 rotate-2" aria-hidden="true"></div>
+
+          <!-- Main dashboard panel -->
+          <div class="dashboard-panel relative w-full max-w-[520px] rounded-2xl border border-[#E2E8F0]/60 overflow-hidden">
+
+            <!-- Panel header -->
+            <div class="flex items-center justify-between px-5 py-3.5 border-b border-[#E2E8F0]/60 bg-white/80">
+              <div class="flex items-center gap-2.5">
+                <div class="flex gap-1.5" aria-hidden="true">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                </div>
+                <span class="text-sm font-semibold text-[#122136] tracking-tight">Управление продажами</span>
+              </div>
+              <span class="text-xs font-medium text-[#0A6ED1] bg-[#0A6ED1]/8 px-2.5 py-1 rounded-md">Live</span>
+            </div>
+
+            <!-- Mini chart row -->
+            <div class="px-5 py-4 border-b border-[#E2E8F0]/40 bg-[#F5F7FA]/50">
+              <div class="flex items-end justify-between gap-1 h-16" role="img" aria-label="График продаж за неделю">
+                <div class="chart-bar flex-1 bg-[#0A6ED1]/20 rounded-t-sm" style="height:40%;animation-delay:0.1s"></div>
+                <div class="chart-bar flex-1 bg-[#0A6ED1]/30 rounded-t-sm" style="height:55%;animation-delay:0.2s"></div>
+                <div class="chart-bar flex-1 bg-[#0A6ED1]/25 rounded-t-sm" style="height:45%;animation-delay:0.3s"></div>
+                <div class="chart-bar flex-1 bg-[#0A6ED1]/40 rounded-t-sm" style="height:70%;animation-delay:0.4s"></div>
+                <div class="chart-bar flex-1 bg-[#0A6ED1]/50 rounded-t-sm" style="height:85%;animation-delay:0.5s"></div>
+                <div class="chart-bar flex-1 bg-[#0A6ED1] rounded-t-sm" style="height:100%;animation-delay:0.6s"></div>
+                <div class="chart-bar flex-1 bg-[#0A6ED1]/35 rounded-t-sm" style="height:60%;animation-delay:0.7s"></div>
+              </div>
+              <div class="flex justify-between mt-2 text-[10px] text-[#6A7B95] font-medium">
+                <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <div class="px-5 py-3">
+              <table class="w-full text-left" aria-label="Список заказов">
+                <thead>
+                  <tr class="ui-text text-[10px] uppercase tracking-wider text-[#6A7B95]">
+                    <th class="pb-2.5 font-semibold">Заказ</th>
+                    <th class="pb-2.5 font-semibold">Клиент</th>
+                    <th class="pb-2.5 font-semibold text-right">Статус</th>
+                  </tr>
+                </thead>
+                <tbody class="ui-text text-xs sm:text-sm">
+                  <tr class="border-t border-[#E2E8F0]/50 hover:bg-[#F5F7FA]/80 transition-colors">
+                    <td class="py-2.5 font-semibold text-[#122136]">#8022136</td>
+                    <td class="py-2.5 text-[#6A7B95]">Baltic Trade OÜ</td>
+                    <td class="py-2.5 text-right">
+                      <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        Ready to ship
+                      </span>
+                    </td>
+                  </tr>
+                  <tr class="border-t border-[#E2E8F0]/50 hover:bg-[#F5F7FA]/80 transition-colors">
+                    <td class="py-2.5 font-semibold text-[#122136]">#8022091</td>
+                    <td class="py-2.5 text-[#6A7B95]">Nordic Parts AS</td>
+                    <td class="py-2.5 text-right">
+                      <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-[#0A6ED1] bg-[#0A6ED1]/8 border border-[#0A6ED1]/20 px-2 py-0.5 rounded-full">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span>
+                        Processing
+                      </span>
+                    </td>
+                  </tr>
+                  <tr class="border-t border-[#E2E8F0]/50 hover:bg-[#F5F7FA]/80 transition-colors">
+                    <td class="py-2.5 font-semibold text-[#122136]">#8022044</td>
+                    <td class="py-2.5 text-[#6A7B95]">EstMetall Grupp</td>
+                    <td class="py-2.5 text-right">
+                      <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded-full">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                        Pending
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Progress indicators -->
+            <div class="px-5 py-4 border-t border-[#E2E8F0]/40 space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-[#6A7B95] font-medium">Выполнение плана</span>
+                  <span class="text-[#122136] font-semibold">78%</span>
+                </div>
+                <div class="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
+                  <div class="progress-fill h-full bg-gradient-to-r from-[#0A6ED1] to-[#3B82F6] rounded-full" style="width:78%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-[#6A7B95] font-medium">Маржинальность</span>
+                  <span class="text-[#122136] font-semibold">62%</span>
+                </div>
+                <div class="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
+                  <div class="progress-fill h-full bg-gradient-to-r from-[#0A6ED1]/70 to-[#0A6ED1] rounded-full" style="width:62%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating metric card (layered overlay) -->
+          <div class="float-card absolute -bottom-6 -left-4 sm:-left-8 backdrop-blur-lg bg-white/75 border border-white/60 shadow-xl rounded-2xl p-4 w-[200px] sm:w-[220px] z-20">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-8 h-8 rounded-lg bg-[#0A6ED1]/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                </svg>
+              </div>
+              <span class="text-xs font-medium text-[#6A7B95]">Рентабельность</span>
+            </div>
+            <p class="text-2xl font-bold text-[#122136] tracking-tight">+24.5%</p>
+            <p class="text-[10px] text-emerald-600 font-medium mt-0.5 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>
+              +3.2% за месяц
+            </p>
+          </div>
+
+          <!-- Floating order popup (like $3,000 transaction card) -->
+          <div class="float-card absolute -top-5 -right-2 sm:-right-6 backdrop-blur-lg bg-white/80 border border-[#E2E8F0]/60 shadow-xl rounded-2xl p-3.5 w-[180px] sm:w-[200px] z-20" style="animation-delay:-3s">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#0A6ED1] to-[#3B82F6] flex items-center justify-center shadow-sm">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-[10px] text-[#6A7B95] font-medium">Заказ отгружен</p>
+                <p class="text-sm font-bold text-[#122136] tracking-tight">€ 12 450</p>
+              </div>
+            </div>
+            <p class="text-[10px] text-[#6A7B95] mt-2 pl-11">#8022136 · Baltic Trade</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         BENTO GRID — Управление продажами
+         ═══════════════════════════════════════════ -->
+    <section class="bg-white border-t border-[#E2E8F0]/60" aria-labelledby="bento-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+
+        <!-- Section intro -->
+        <div class="mb-10 sm:mb-12 lg:mb-14 max-w-2xl">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">ERP Модуль · Управление продажами</p>
+          <h2 id="bento-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-4">
+            Ключевые возможности модуля
+          </h2>
+          <p class="desc-text text-base sm:text-lg">
+            Полный цикл от заказа до отгрузки — автоматизированная регистрация, импорт XML/TXT и защита маржинальности в единой интеллектуальной среде.
+          </p>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 auto-rows-[minmax(180px,auto)] lg:auto-rows-[minmax(160px,auto)]">
+
+          <!-- Card 1: Полный контроль заказов (large featured) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-2 lg:row-span-2 bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col">
+            <div class="mb-5">
+              <h3 class="text-xl font-bold text-[#122136] tracking-tight mb-2">Полный контроль заказов</h3>
+              <p class="desc-text text-sm max-w-md">
+                Фиксируйте заявки на поставку товаров и услуг в единой цифровой очереди. Система автоматически отслеживает сроки, объёмы и статусы выполнения.
+              </p>
+            </div>
+
+            <!-- Order list mockup -->
+            <div class="mt-auto bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl sm:rounded-2xl p-3 sm:p-4 space-y-2.5">
+              <div class="flex items-center justify-between px-1 mb-1">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">Активные заказы</span>
+                <span class="text-[10px] font-medium text-[#0A6ED1] bg-[#0A6ED1]/8 px-2 py-0.5 rounded-md">3 новых</span>
+              </div>
+
+              <div class="flex items-center justify-between bg-white border border-[#E2E8F0]/60 rounded-xl px-3.5 py-3 hover:border-[#0A6ED1]/30 transition-colors">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-8 h-8 rounded-lg bg-[#0A6ED1]/10 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-[#122136] truncate">#8022136</p>
+                    <p class="text-xs text-[#6A7B95] truncate">Baltic Trade OÜ · € 12 450</p>
+                  </div>
+                </div>
+                <span class="shrink-0 ml-2 text-[10px] font-semibold text-[#0A6ED1] bg-[#0A6ED1]/10 border border-[#0A6ED1]/20 px-2.5 py-1 rounded-full">В обработке</span>
+              </div>
+
+              <div class="flex items-center justify-between bg-white border border-[#E2E8F0]/60 rounded-xl px-3.5 py-3 hover:border-[#0A6ED1]/30 transition-colors">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-[#122136] truncate">#8022091</p>
+                    <p class="text-xs text-[#6A7B95] truncate">Nordic Parts AS · € 8 720</p>
+                  </div>
+                </div>
+                <span class="shrink-0 ml-2 text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full">Готов к отгрузке</span>
+              </div>
+
+              <div class="flex items-center justify-between bg-white border border-[#E2E8F0]/60 rounded-xl px-3.5 py-3 hover:border-[#0A6ED1]/30 transition-colors">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-8 h-8 rounded-lg bg-[#E2E8F0]/60 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 text-[#6A7B95]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-[#122136] truncate">#8022044</p>
+                    <p class="text-xs text-[#6A7B95] truncate">EstMetall Grupp · € 5 180</p>
+                  </div>
+                </div>
+                <span class="shrink-0 ml-2 text-[10px] font-semibold text-[#6A7B95] bg-[#F5F7FA] border border-[#E2E8F0] px-2.5 py-1 rounded-full">Ожидание</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Индивидуальные тарифы (compact) -->
+          <article class="bento-card group lg:col-span-1 lg:row-span-2 bg-[#F5F7FA] border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-[#122136] tracking-tight mb-2">Индивидуальные тарифы</h3>
+              <p class="desc-text text-xs">
+                Управляйте маржинальностью с помощью умного конструктора прайс-листов и объёмных скидок.
+              </p>
+            </div>
+
+            <div class="mt-5">
+              <div class="flex items-baseline gap-3 mb-4">
+                <span class="text-3xl sm:text-4xl font-bold text-[#0A6ED1] tracking-tight">-2%</span>
+                <span class="text-lg font-semibold text-[#6A7B95]">/</span>
+                <span class="text-3xl sm:text-4xl font-bold text-[#122136] tracking-tight">-15%</span>
+              </div>
+
+              <!-- Discount tier mini-graph -->
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] text-[#6A7B95] w-14 shrink-0">до 100</span>
+                  <div class="flex-1 h-2 bg-[#E2E8F0] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#0A6ED1]/30 rounded-full" style="width:25%"></div>
+                  </div>
+                  <span class="text-[10px] font-semibold text-[#0A6ED1] w-8 text-right">-2%</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] text-[#6A7B95] w-14 shrink-0">100–500</span>
+                  <div class="flex-1 h-2 bg-[#E2E8F0] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#0A6ED1]/60 rounded-full" style="width:55%"></div>
+                  </div>
+                  <span class="text-[10px] font-semibold text-[#0A6ED1] w-8 text-right">-8%</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] text-[#6A7B95] w-14 shrink-0">500+</span>
+                  <div class="flex-1 h-2 bg-[#E2E8F0] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#0A6ED1] rounded-full" style="width:100%"></div>
+                  </div>
+                  <span class="text-[10px] font-semibold text-[#122136] w-8 text-right">-15%</span>
+                </div>
+              </div>
+
+              <div class="mt-5 pt-4 border-t border-[#E2E8F0]">
+                <p class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95] mb-2">Активных прайс-листов</p>
+                <p class="text-2xl font-bold text-[#122136] tracking-tight">47</p>
+                <p class="text-[10px] text-emerald-600 font-medium mt-1 flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>
+                  +6 за квартал
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Анализ отгрузок и просрочек (tall asymmetric) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-1 lg:row-span-2 bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col">
+            <div class="mb-4">
+              <h3 class="text-lg font-bold text-[#122136] tracking-tight mb-2">Анализ отгрузок и просрочек</h3>
+              <p class="desc-text text-xs sm:text-sm">
+                Формируйте точные графики поставок на основе реальных остатков. Модуль мгновенно подсвечивает риски задержек и анализирует просроченные наряды.
+              </p>
+            </div>
+
+            <div class="flex-1 flex flex-col items-center justify-center mt-2">
+              <!-- Donut chart -->
+              <div class="relative w-36 h-36 sm:w-40 sm:h-40 mb-5" role="img" aria-label="Диаграмма отгрузок: 72% в срок, 18% риск, 10% просрочено">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#E2E8F0" stroke-width="12"/>
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#0A6ED1" stroke-width="12" stroke-dasharray="181 251" stroke-linecap="round" class="donut-segment"/>
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#F59E0B" stroke-width="12" stroke-dasharray="45 251" stroke-dashoffset="-181" stroke-linecap="round" class="donut-segment"/>
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#EF4444" stroke-width="12" stroke-dasharray="25 251" stroke-dashoffset="-226" stroke-linecap="round" class="donut-segment"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                  <span class="text-2xl font-bold text-[#122136] tracking-tight">72%</span>
+                  <span class="text-[10px] text-[#6A7B95] font-medium">в срок</span>
+                </div>
+              </div>
+
+              <!-- Timeline + alert -->
+              <div class="w-full space-y-3">
+                <div class="flex items-center gap-2">
+                  <div class="flex-1 flex items-center gap-1">
+                    <div class="h-1.5 flex-1 bg-[#0A6ED1] rounded-full"></div>
+                    <div class="h-1.5 flex-1 bg-[#0A6ED1]/50 rounded-full"></div>
+                    <div class="h-1.5 flex-1 bg-[#F59E0B]/60 rounded-full"></div>
+                    <div class="h-1.5 w-6 bg-[#EF4444] rounded-full"></div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 bg-red-50 border border-red-200/60 rounded-xl px-3 py-2">
+                  <svg class="w-4 h-4 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 6a.75.75 0 00-.75.75v3.5a.75.75 0 001.5 0v-3.5A.75.75 0 0010 6zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                  <div class="min-w-0">
+                    <p class="text-xs font-semibold text-red-700">3 просроченных отгрузки</p>
+                    <p class="text-[10px] text-red-600/80">Наряды #8019, #8021, #8024</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: Бесшовный импорт и ЭДО (wide horizontal) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-2 bg-gradient-to-br from-[#122136] to-[#1a3352] border border-[#122136]/20 rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-lg hover:border-[#0A6ED1]/40 overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-48 h-48 bg-[#0A6ED1]/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+            <div class="relative grid sm:grid-cols-2 gap-6 items-center">
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight mb-2">Бесшовный импорт и ЭДО</h3>
+                <p class="desc-text text-xs sm:text-sm">
+                  Автоматически загружайте входящие заказы из файлов XML/TXT и мгновенно выгружайте счета во внешние логистические системы в один клик.
+                </p>
+              </div>
+
+              <!-- Data flow visualization -->
+              <div class="flex items-center justify-center gap-2 sm:gap-3" aria-label="Поток данных: XML и TXT в ERP">
+                <div class="flex flex-col gap-2">
+                  <span class="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#0A6ED1] bg-white/90 border border-[#E2E8F0] px-3 py-1.5 rounded-lg shadow-sm">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    XML
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#6A7B95] bg-white/90 border border-[#E2E8F0] px-3 py-1.5 rounded-lg shadow-sm">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/></svg>
+                    TXT
+                  </span>
+                </div>
+
+                <div class="flex flex-col items-center gap-0.5 px-1">
+                  <svg class="w-8 h-4 text-[#0A6ED1] flow-arrow" viewBox="0 0 32 16" fill="none" aria-hidden="true">
+                    <path d="M0 8h24M20 4l6 4-6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg class="w-8 h-4 text-[#0A6ED1]/50 flow-arrow" style="animation-delay:1s" viewBox="0 0 32 16" fill="none" aria-hidden="true">
+                    <path d="M0 8h24M20 4l6 4-6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <div class="flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 shadow-inner">
+                  <div class="w-10 h-10 rounded-xl bg-[#0A6ED1] flex items-center justify-center mb-2 shadow-md">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3z"/><path stroke-linecap="round" d="M9 12h6M12 9v6"/></svg>
+                  </div>
+                  <span class="text-xs font-bold text-white tracking-tight">ERP</span>
+                  <span class="text-[9px] text-[#6A7B95] mt-0.5">Infotec</span>
+                </div>
+
+                <svg class="w-6 h-4 text-white/30 hidden sm:block flow-arrow" style="animation-delay:0.5s" viewBox="0 0 24 16" fill="none" aria-hidden="true">
+                  <path d="M0 8h16M12 4l6 4-6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <div class="hidden sm:flex flex-col items-center bg-white/5 border border-white/10 rounded-xl px-3 py-3">
+                  <svg class="w-5 h-5 text-[#0A6ED1] mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                  <span class="text-[9px] font-medium text-white/70">Logistics</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5: Аналитика рентабельности (focus metric) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-2 bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col sm:flex-row gap-5 sm:gap-6 items-stretch">
+            <div class="sm:w-2/5 flex flex-col justify-center">
+              <h3 class="text-lg sm:text-xl font-bold text-[#122136] tracking-tight mb-2">Аналитика рентабельности</h3>
+              <p class="desc-text text-xs sm:text-sm">
+                Оценивайте чистую доходность каждой сделки ещё до начала отгрузки. Встроенные сквозные отчёты по продажам выводят точную маржу.
+              </p>
+
+              <div class="mt-5 inline-flex items-center gap-2 self-start bg-[#0A6ED1]/8 border border-[#0A6ED1]/20 rounded-xl px-4 py-2.5">
+                <svg class="w-5 h-5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+                <div>
+                  <p class="text-[10px] text-[#6A7B95] font-medium uppercase tracking-wider">Маржинальность</p>
+                  <p class="text-xl font-bold text-[#0A6ED1] tracking-tight">+24.5%</p>
+                </div>
+                <span class="ml-2 text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full">↑ 3.2%</span>
+              </div>
+            </div>
+
+            <!-- Line chart mockup -->
+            <div class="sm:w-3/5 bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl sm:rounded-2xl p-4 flex flex-col justify-end min-h-[160px]">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">Динамика маржи</span>
+                <div class="flex items-center gap-3 text-[10px] text-[#6A7B95]">
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#0A6ED1]"></span>Маржа</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>План</span>
+                </div>
+              </div>
+
+              <div class="relative flex-1 min-h-[100px]">
+                <svg class="metric-line w-full h-full" viewBox="0 0 280 100" preserveAspectRatio="none" aria-hidden="true">
+                  <line x1="0" y1="80" x2="280" y2="80" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <line x1="0" y1="50" x2="280" y2="50" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <line x1="0" y1="20" x2="280" y2="20" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <path d="M0 75 Q40 70 70 55 T140 40 T210 25 T280 15" fill="none" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M0 85 Q40 78 70 60 T140 42 T210 28 T280 18" fill="url(#marginGradient)" stroke="#0A6ED1" stroke-width="2.5" stroke-linecap="round"/>
+                  <defs>
+                    <linearGradient id="marginGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#0A6ED1" stop-opacity="0.15"/>
+                      <stop offset="100%" stop-color="#0A6ED1" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="absolute top-2 right-2 bg-white border border-[#E2E8F0] rounded-lg px-2 py-1 shadow-sm">
+                  <span class="text-[10px] font-bold text-[#0A6ED1]">+24.5%</span>
+                </div>
+              </div>
+
+              <div class="flex justify-between mt-2 text-[9px] text-[#6A7B95] font-medium">
+                <span>Янв</span><span>Фев</span><span>Мар</span><span>Апр</span><span>Май</span><span>Июн</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TABS SHOWCASE — Управление продажами
+         ═══════════════════════════════════════════ -->
+    <section class="bg-[#F5F7FA] border-t border-[#E2E8F0]/60" aria-labelledby="tabs-showcase-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+
+        <h2 id="tabs-showcase-heading" class="text-2xl sm:text-3xl font-bold text-[#122136] tracking-tighter mb-8 sm:mb-10">
+          Полезное для вас
+        </h2>
+
+        <!-- Tab switcher cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-6 sm:mb-8" role="tablist" aria-label="Разделы модуля продаж">
+          <button
+            type="button"
+            role="tab"
+            id="tab-orders"
+            aria-selected="true"
+            aria-controls="panel-orders"
+            data-tab="orders"
+            class="tab-card ui-text relative overflow-hidden text-left rounded-2xl border p-5 sm:p-6 min-h-[180px] sm:min-h-[200px] cursor-pointer group"
+          >
+            <div class="relative z-10 flex flex-col items-start max-w-[68%]">
+              <h3 class="text-base sm:text-lg font-bold text-[#122136] tracking-tight mb-1.5">Заказы на продажу</h3>
+              <p class="desc-text text-xs sm:text-sm max-w-[200px] mb-4">Планирование и контроль сроков</p>
+              <span class="btn-cushion btn-cushion--tab inline-flex shrink-0 pointer-events-none" aria-hidden="true">
+                <span class="btn-cushion-inner rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-xs font-semibold">
+                  Подробнее
+                  <svg class="btn-cushion-arrow w-3 h-3 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </span>
+              </span>
+            </div>
+            <div class="absolute -bottom-3 -right-3 w-24 h-24 sm:w-28 sm:h-28" aria-hidden="true">
+              <div class="w-full h-full rounded-2xl bg-gradient-to-br from-[#0A6ED1] to-[#3B82F6] shadow-lg flex items-center justify-center rotate-6 group-hover:rotate-3 transition-transform duration-300">
+                <svg class="w-10 h-10 text-white/90" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <div class="absolute -top-2 right-4 w-8 h-8 rounded-lg bg-[#0A6ED1]/30 backdrop-blur-sm border border-white/40"></div>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            role="tab"
+            id="tab-pricing"
+            aria-selected="false"
+            aria-controls="panel-pricing"
+            data-tab="pricing"
+            class="tab-card ui-text relative overflow-hidden text-left rounded-2xl border p-5 sm:p-6 min-h-[180px] sm:min-h-[200px] cursor-pointer group"
+          >
+            <div class="relative z-10 flex flex-col items-start max-w-[68%]">
+              <h3 class="text-base sm:text-lg font-bold text-[#122136] tracking-tight mb-1.5">Цены и скидки</h3>
+              <p class="desc-text text-xs sm:text-sm max-w-[200px] mb-4">Гибкие матрицы ценообразования</p>
+              <span class="btn-cushion btn-cushion--tab inline-flex shrink-0 pointer-events-none" aria-hidden="true">
+                <span class="btn-cushion-inner rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-xs font-semibold">
+                  Подробнее
+                  <svg class="btn-cushion-arrow w-3 h-3 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </span>
+              </span>
+            </div>
+            <div class="absolute -bottom-2 -right-2 w-24 h-24 sm:w-28 sm:h-28" aria-hidden="true">
+              <div class="w-full h-full rounded-full bg-gradient-to-br from-[#0A6ED1] to-[#085bb0] shadow-lg flex items-center justify-center -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                <span class="text-2xl font-bold text-white tracking-tight">%</span>
+              </div>
+              <div class="absolute top-0 right-6 w-7 h-7 rounded-full bg-white/80 border border-[#E2E8F0] flex items-center justify-center shadow-sm">
+                <svg class="w-3.5 h-3.5 text-[#0A6ED1]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            role="tab"
+            id="tab-logistics"
+            aria-selected="false"
+            aria-controls="panel-logistics"
+            data-tab="logistics"
+            class="tab-card ui-text relative overflow-hidden text-left rounded-2xl border p-5 sm:p-6 min-h-[180px] sm:min-h-[200px] cursor-pointer group"
+          >
+            <div class="relative z-10 flex flex-col items-start max-w-[68%]">
+              <h3 class="text-base sm:text-lg font-bold text-[#122136] tracking-tight mb-1.5">Логистика и ЭДО</h3>
+              <p class="desc-text text-xs sm:text-sm max-w-[200px] mb-4">Контроль отгрузок и XML-обмен</p>
+              <span class="btn-cushion btn-cushion--tab inline-flex shrink-0 pointer-events-none" aria-hidden="true">
+                <span class="btn-cushion-inner rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-xs font-semibold">
+                  Подробнее
+                  <svg class="btn-cushion-arrow w-3 h-3 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </span>
+              </span>
+            </div>
+            <div class="absolute -bottom-3 -right-1 w-28 h-24" aria-hidden="true">
+              <div class="absolute bottom-0 left-0 w-16 h-14 rounded-2xl bg-gradient-to-br from-[#0A6ED1] to-[#3B82F6] shadow-lg rotate-[-8deg]"></div>
+              <div class="absolute bottom-2 right-0 w-14 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/80 to-[#0A6ED1] shadow-md rotate-6 flex items-center justify-center">
+                <span class="text-[9px] font-bold text-white">XML</span>
+              </div>
+              <div class="absolute top-0 right-4 w-6 h-6 rounded-full bg-white border border-[#E2E8F0] shadow-sm flex items-center justify-center">
+                <svg class="w-3 h-3 text-[#0A6ED1]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- Dynamic content panels -->
+        <div class="relative">
+
+          <!-- Panel 1: Orders -->
+          <div
+            id="panel-orders"
+            role="tabpanel"
+            aria-labelledby="tab-orders"
+            data-panel="orders"
+            class="tab-panel flex flex-col lg:flex-row gap-0 rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A6ED1] via-[#0A6ED1] to-[#085bb0] shadow-xl"
+          >
+            <div class="lg:w-[42%] relative min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] flex items-center justify-center p-8 sm:p-10 overflow-hidden">
+              <div class="tab-graphic-orb absolute w-48 h-48 bg-white/20 rounded-full top-1/4 left-1/4" aria-hidden="true"></div>
+              <div class="tab-graphic-orb absolute w-32 h-32 bg-[#3B82F6]/40 rounded-full bottom-1/4 right-1/4" aria-hidden="true"></div>
+              <div class="relative w-full max-w-[300px]" aria-hidden="true">
+                <div class="absolute -inset-4 rounded-full border-2 border-white/20"></div>
+                <div class="glass-3d rounded-2xl p-4 mb-3 rotate-[-4deg] translate-x-2">
+                  <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 rounded-lg bg-[#0A6ED1]/20 flex items-center justify-center">
+                      <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <span class="text-xs font-bold text-[#122136]">Заказ #8022136</span>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="h-2 bg-[#E2E8F0] rounded-full w-full"></div>
+                    <div class="h-2 bg-[#0A6ED1]/30 rounded-full w-3/4"></div>
+                    <div class="h-2 bg-[#E2E8F0] rounded-full w-1/2"></div>
+                  </div>
+                </div>
+                <div class="glass-3d rounded-xl p-3 rotate-[3deg] -translate-x-1 shadow-lg">
+                  <div class="flex justify-between items-center text-[10px]">
+                    <span class="font-semibold text-[#122136]">Baltic Trade OÜ</span>
+                    <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">Ready</span>
+                  </div>
+                </div>
+                <div class="absolute -bottom-2 -right-4 glass-3d rounded-lg px-3 py-2 rotate-6">
+                  <span class="text-[10px] font-bold text-[#0A6ED1]">Сквозной трекинг</span>
+                </div>
+                <div class="absolute top-0 -left-2 w-10 h-10 rounded-full bg-emerald-400/80 flex items-center justify-center shadow-lg">
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-[58%] bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <h3 class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight mb-4">Заказы на продажу: Сквозной учет обязательств</h3>
+              <p class="desc-text text-sm sm:text-base mb-6">
+                Ведение списка заказов позволяет гибко планировать отгрузку продукции и контролировать сроки обязательств. При регистрации заявки система автоматически подтягивает контрагента из справочника, формирует уникальный код строки для сквозного трекинга и готовит спецификации.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Автоматический контроль условий поставки и вариантов оплаты.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Подбор товарной номенклатуры из справочника, остатков или истории частых покупок.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Интеграция данных об отправителе груза и транспортной фирме-перевозчике.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Гибкое описание спец-требований к качеству, виду упаковки и маркировке.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Panel 2: Pricing -->
+          <div
+            id="panel-pricing"
+            role="tabpanel"
+            aria-labelledby="tab-pricing"
+            data-panel="pricing"
+            class="tab-panel hidden flex-col lg:flex-row gap-0 rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A6ED1] via-[#0A6ED1] to-[#085bb0] shadow-xl"
+          >
+            <div class="lg:w-[42%] relative min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] flex items-center justify-center p-8 sm:p-10 overflow-hidden">
+              <div class="tab-graphic-orb absolute w-40 h-40 bg-white/15 rounded-full top-1/3 right-1/4" aria-hidden="true"></div>
+              <div class="relative w-full max-w-[280px] space-y-3" aria-hidden="true">
+                <div class="flex gap-2 justify-center mb-4">
+                  <span class="glass-3d text-lg font-bold text-[#0A6ED1] px-4 py-2 rounded-xl">-2%</span>
+                  <span class="glass-3d text-lg font-bold text-[#122136] px-4 py-2 rounded-xl">-8%</span>
+                  <span class="glass-3d text-lg font-bold text-white bg-[#0A6ED1]/90 px-4 py-2 rounded-xl shadow-md">-15%</span>
+                </div>
+                <div class="glass-3d rounded-2xl p-4">
+                  <p class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95] mb-3">Уровни ценообразования</p>
+                  <div class="space-y-2.5">
+                    <div class="flex items-center gap-2">
+                      <span class="text-[10px] text-[#6A7B95] w-12">Базовый</span>
+                      <div class="flex-1 h-2.5 bg-[#E2E8F0] rounded-full"><div class="h-full w-1/4 bg-[#0A6ED1]/40 rounded-full"></div></div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-[10px] text-[#6A7B95] w-12">Опт</span>
+                      <div class="flex-1 h-2.5 bg-[#E2E8F0] rounded-full"><div class="h-full w-3/5 bg-[#0A6ED1]/70 rounded-full"></div></div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-[10px] text-[#6A7B95] w-12">VIP</span>
+                      <div class="flex-1 h-2.5 bg-[#E2E8F0] rounded-full"><div class="h-full w-full bg-[#0A6ED1] rounded-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="glass-3d rounded-xl p-3 flex items-center justify-between">
+                  <span class="text-xs font-medium text-[#6A7B95]">Мин. рентабельность</span>
+                  <span class="text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60">18% ✓</span>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-[58%] bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <h3 class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight mb-4">Цены продажи и скидки: Защита маржинальности</h3>
+              <p class="desc-text text-sm sm:text-base mb-6">
+                Управляйте доходностью сделок без ручного пересчета. Система автоматически определяет доступные ценовые уровни и применяет дисконт на базе объемов закупок.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Умный автоматизированный конструктор индивидуальных прайс-листов.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Контроль за соблюдением лимитов минимально допустимой рентабельности.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Мгновенная сверка с актуальными остатками товаров на складах дистрибуции.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Panel 3: Logistics -->
+          <div
+            id="panel-logistics"
+            role="tabpanel"
+            aria-labelledby="tab-logistics"
+            data-panel="logistics"
+            class="tab-panel hidden flex-col lg:flex-row gap-0 rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A6ED1] via-[#0A6ED1] to-[#085bb0] shadow-xl"
+          >
+            <div class="lg:w-[42%] relative min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] flex items-center justify-center p-8 sm:p-10 overflow-hidden">
+              <div class="tab-graphic-orb absolute w-56 h-56 bg-white/10 rounded-full bottom-0 left-0" aria-hidden="true"></div>
+              <div class="relative w-full max-w-[300px]" aria-hidden="true">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                  <span class="glass-3d text-[10px] font-bold text-[#0A6ED1] px-3 py-1.5 rounded-lg">XML</span>
+                  <svg class="w-6 h-4 text-white/70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 16"><path stroke-linecap="round" d="M2 8h16M14 4l6 4-6 4"/></svg>
+                  <span class="glass-3d text-[10px] font-bold text-[#6A7B95] px-3 py-1.5 rounded-lg">TXT</span>
+                  <svg class="w-6 h-4 text-white/70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 16"><path stroke-linecap="round" d="M2 8h16M14 4l6 4-6 4"/></svg>
+                  <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center">
+                    <span class="text-[9px] font-bold text-white">ERP</span>
+                  </div>
+                </div>
+                <div class="glass-3d rounded-2xl p-4">
+                  <p class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95] mb-3">План отгрузок</p>
+                  <div class="grid grid-cols-7 gap-1 text-center">
+                    <span class="text-[8px] text-[#6A7B95]">Пн</span><span class="text-[8px] text-[#6A7B95]">Вт</span><span class="text-[8px] text-[#6A7B95]">Ср</span><span class="text-[8px] text-[#6A7B95]">Чт</span><span class="text-[8px] text-[#6A7B95]">Пт</span><span class="text-[8px] text-[#6A7B95]">Сб</span><span class="text-[8px] text-[#6A7B95]">Вс</span>
+                    <span class="w-6 h-6 rounded-md bg-[#E2E8F0]/60 text-[9px] flex items-center justify-center text-[#6A7B95] mx-auto">12</span>
+                    <span class="w-6 h-6 rounded-md bg-[#0A6ED1] text-[9px] flex items-center justify-center text-white font-bold mx-auto">13</span>
+                    <span class="w-6 h-6 rounded-md bg-[#E2E8F0]/60 text-[9px] flex items-center justify-center text-[#6A7B95] mx-auto">14</span>
+                    <span class="w-6 h-6 rounded-md bg-emerald-100 text-[9px] flex items-center justify-center text-emerald-700 font-bold mx-auto">15</span>
+                    <span class="w-6 h-6 rounded-md bg-red-100 text-[9px] flex items-center justify-center text-red-600 font-bold mx-auto">16</span>
+                    <span class="w-6 h-6 rounded-md bg-[#E2E8F0]/60 text-[9px] flex items-center justify-center text-[#6A7B95] mx-auto">17</span>
+                    <span class="w-6 h-6 rounded-md bg-[#E2E8F0]/60 text-[9px] flex items-center justify-center text-[#6A7B95] mx-auto">18</span>
+                  </div>
+                </div>
+                <div class="absolute -bottom-1 -right-2 glass-3d rounded-lg px-2.5 py-1.5 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                  <span class="text-[9px] font-semibold text-red-600">2 просрочки</span>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-[58%] bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <h3 class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight mb-4">План отгрузок и ЭДО: Исключение кассовых разрывов</h3>
+              <p class="desc-text text-sm sm:text-base mb-6">
+                Оптимизируйте цепочки поставок и избавьте персонал от рутинного ручного ввода документов во внешние логистические и бухгалтерские контуры.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Мгновенный импорт входящих спецификаций из файлов форматов XML и TXT.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Своевременное выявление просроченных нарядов и предиктивный анализ задержек.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Бесшовная выгрузка закрывающих электронных счетов в один клик.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         12-MODULE DIRECTORY MATRIX
+         ═══════════════════════════════════════════ -->
+    <section id="modules" class="bg-white border-t border-[#E2E8F0]/60" aria-labelledby="modules-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+
+        <div class="mb-10 sm:mb-12 max-w-2xl">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">Экосистема Infotec ERP</p>
+          <h2 id="modules-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-4">
+            12 корпоративных модулей
+          </h2>
+          <p class="desc-text text-base sm:text-lg">
+            Модульная архитектура для полного покрытия бизнес-процессов — от продаж и производства до гостиничного сервиса и специализированных отраслевых решений.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <a href="#" class="module-card module-card--active group bg-white border border-[#0A6ED1]/40 p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Управление продажами</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Управление закупками</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Управление запасами</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Управление производством</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Бухгалтерский учет</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Расчет заработной платы</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Учет основных средств</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Специальные разработки</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Торговый зал магазина</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Квартирные товарищества</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Калькуляция для кафе и ресторанов</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="#" class="module-card group bg-white border border-[#E2E8F0] p-5 rounded-2xl flex items-center justify-between hover:border-[#0A6ED1]/40 hover:shadow-sm transition-all cursor-pointer">
+            <span class="text-[#122136] font-semibold text-sm pr-3">Организация работы отеля</span>
+            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="bg-[#0B0F17] text-[#E2E8F0] border-t border-white/5" aria-label="Подвал сайта">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+
+      <!-- 5-column navigation grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 mb-16 sm:mb-20 lg:mb-24">
+
+        <!-- Column 1: Платформа -->
+        <div>
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Платформа</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#modules" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Управление продажами</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Управление закупками</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Управление запасами</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Управление производством</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Бухгалтерский учет</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Расчет заработной платы</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 2: Решения -->
+        <div>
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Решения</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Дистрибьюция и торговля</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Металлообработка</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">HoReCa и гостиницы</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">ЖК и товарищества</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Таллинн -->
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Таллинн</h3>
+          <address class="not-italic space-y-2.5 text-sm text-[#E2E8F0]/90 leading-relaxed">
+            <p>Narva mnt 150, off. 202</p>
+            <p>
+              Тел: <a href="tel:+3725111876" class="footer-link hover:text-white transition-colors duration-200">+372 5111876</a>
+            </p>
+            <p>
+              Тел: <a href="tel:+372525163595" class="footer-link hover:text-white transition-colors duration-200">+372 525163595</a>
+            </p>
+          </address>
+        </div>
+
+        <!-- Column 4: Нарва -->
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Нарва</h3>
+          <address class="not-italic space-y-2.5 text-sm text-[#E2E8F0]/90 leading-relaxed">
+            <p>Pähklimäe tn 7-62, 13619</p>
+            <p>Ида-Вирумаа, Эстония</p>
+            <p>
+              <a href="mailto:support@infotec.ee" class="footer-link hover:text-white transition-colors duration-200">support@infotec.ee</a>
+            </p>
+          </address>
+        </div>
+
+        <!-- Column 5: Компания & CTA -->
+        <div class="col-span-2 sm:col-span-3 lg:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Компания</h3>
+          <ul class="space-y-2.5 mb-6">
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">О нас</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Новости</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Партнеры</a></li>
+          </ul>
+          <div class="flex flex-col gap-2.5 w-full sm:w-auto lg:max-w-[210px]">
+            <a href="#" class="footer-cta-cushion inline-flex w-full transition-all duration-200">
+              <span class="footer-cta-primary inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-sm font-semibold">
+                Демо-доступ
+              </span>
+            </a>
+            <a href="#" class="footer-cta-secondary inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-white/5 border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-all duration-200">
+              Связаться с нами
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom band: wordmark + right panel -->
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-16">
+
+        <!-- Giant wordmark -->
+        <div class="flex items-end gap-3 sm:gap-4 select-none" aria-label="Infotec">
+          <div class="shrink-0 mb-2 sm:mb-4 hidden sm:flex flex-col gap-1" aria-hidden="true">
+            <span class="w-8 h-2.5 bg-white rounded-sm"></span>
+            <span class="w-8 h-2.5 bg-white/70 rounded-sm"></span>
+            <span class="w-5 h-2.5 bg-white/40 rounded-sm"></span>
+          </div>
+          <span class="footer-wordmark font-bold text-white tracking-tight">Infotec</span>
+        </div>
+
+        <!-- Right panel: social, legal -->
+        <div class="flex flex-col items-start lg:items-end gap-6 lg:gap-7 lg:pb-2 shrink-0">
+
+          <!-- Social icons -->
+          <div class="flex items-center gap-5">
+            <a href="#" class="text-[#E2E8F0]/80 hover:text-white transition-colors duration-200" aria-label="LinkedIn">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.126 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" class="text-[#E2E8F0]/80 hover:text-white transition-colors duration-200" aria-label="X">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="text-[#E2E8F0]/80 hover:text-white transition-colors duration-200" aria-label="GitHub">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+
+          <!-- Legal links -->
+          <nav aria-label="Legal information">
+            <ul class="flex flex-col lg:items-end gap-1.5">
+              <li><a href="#" class="footer-link text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider hover:text-white transition-colors duration-200">Privacy Policy</a></li>
+              <li><a href="#" class="footer-link text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider hover:text-white transition-colors duration-200">Terms of Use</a></li>
+              <li><p class="text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider pt-1">INFOTEC 2026</p></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      menuIcon.setAttribute('d', isOpen
+        ? 'M6 6l12 12M18 6L6 18'
+        : 'M4 7h16M4 12h16M4 17h16'
+      );
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.remove('active', 'text-[#122136]');
+          l.classList.add('text-[#6A7B95]');
+        });
+        link.classList.add('active', 'text-[#122136]');
+        link.classList.remove('text-[#6A7B95]');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuIcon.setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
+      }
+    });
+
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+    function switchTab(targetId) {
+      tabButtons.forEach(btn => {
+        const isActive = btn.dataset.tab === targetId;
+        btn.setAttribute('aria-selected', isActive);
+      });
+
+      tabPanels.forEach(panel => {
+        const isActive = panel.dataset.panel === targetId;
+        if (isActive) {
+          panel.classList.remove('hidden');
+          panel.classList.add('flex');
+          panel.classList.remove('tab-panel');
+          void panel.offsetWidth;
+          panel.classList.add('tab-panel');
+        } else {
+          panel.classList.add('hidden');
+          panel.classList.remove('flex');
+        }
+      });
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      btn.addEventListener('keydown', (e) => {
+        const tabs = Array.from(tabButtons);
+        const idx = tabs.indexOf(btn);
+        let next = -1;
+        if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next >= 0) {
+          e.preventDefault();
+          tabs[next].focus();
+          switchTab(tabs[next].dataset.tab);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

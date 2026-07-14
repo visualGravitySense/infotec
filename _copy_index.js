@@ -1,0 +1,15 @@
+const fs = require('fs');
+const path = require('path');
+const src = path.join(__dirname, 'inner-page-1.html');
+const dst = path.join(__dirname, 'index.html');
+fs.copyFileSync(src, dst);
+const srcBuf = fs.readFileSync(src);
+const dstBuf = fs.readFileSync(dst);
+const srcLines = srcBuf.toString('utf8').split(/\r?\n/).length;
+const dstLines = dstBuf.toString('utf8').split(/\r?\n/).length;
+console.log('index.html exists:', fs.existsSync(dst));
+console.log('inner-page-1.html lines:', srcLines);
+console.log('index.html lines:', dstLines);
+console.log('inner-page-1.html bytes:', srcBuf.length);
+console.log('index.html bytes:', dstBuf.length);
+console.log('Byte-for-byte match:', Buffer.compare(srcBuf, dstBuf) === 0);

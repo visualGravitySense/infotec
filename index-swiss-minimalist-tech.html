@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infotec ERP — Корпоративная ERP-платформа</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: 'Inter', sans-serif;
+      --color-ink: #002FA7;
+      --color-graphite: #0F172A;
+      --color-slate: #475569;
+      --color-border: #E2E8F0;
+      --color-surface: #F8FAFC;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FFFFFF;
+      color: #0F172A;
+    }
+
+    .desc-text {
+      color: #475569;
+      line-height: 1.625;
+      font-weight: 400;
+    }
+
+    .btn-primary {
+      background: #002FA7;
+      color: #FFFFFF;
+      font-weight: 600;
+      transition: background 0.15s ease;
+    }
+
+    .btn-primary:hover { background: #002589; }
+
+    .nav-link.active { color: #0F172A; font-weight: 600; }
+
+    .tab-card[aria-selected="true"] {
+      border-color: #0F172A;
+      border-width: 2px;
+    }
+
+    .tab-card[aria-selected="false"] {
+      border-color: #E2E8F0;
+    }
+
+    .module-card--active { border-color: #0F172A; border-width: 2px; }
+
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.open { max-height: 320px; }
+
+    .footer-wordmark {
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+    }
+
+    .schematic-stroke { stroke: #475569; fill: none; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white border-b border-[#E2E8F0]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center justify-between h-14 sm:h-16" aria-label="Основная навигация">
+        <a href="#" class="flex items-center gap-2.5 shrink-0">
+          <div class="w-7 h-7 border border-[#E2E8F0] rounded-md flex items-center justify-center">
+            <svg class="w-3.5 h-3.5 text-[#0F172A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 6h16M4 12h10M4 18h14" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <span class="font-bold text-[#0F172A] text-sm sm:text-base tracking-tight">Infotec ERP</span>
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-6" role="menubar">
+          <li><a href="#" role="menuitem" class="nav-link active text-sm text-[#0F172A]">Главная</a></li>
+          <li><a href="#modules" role="menuitem" class="nav-link text-sm text-[#475569] hover:text-[#0F172A]">ERP Модули</a></li>
+          <li><a href="#" role="menuitem" class="nav-link text-sm text-[#475569] hover:text-[#0F172A]">Готовые решения</a></li>
+          <li><a href="#" role="menuitem" class="nav-link text-sm text-[#475569] hover:text-[#0F172A]">Новости</a></li>
+        </ul>
+
+        <div class="flex items-center gap-4 shrink-0">
+          <a href="#" class="hidden sm:inline text-sm text-[#475569] hover:text-[#0F172A]">Войти</a>
+          <a href="#" class="btn-primary text-xs sm:text-sm px-4 py-2 rounded-md">Демо-доступ</a>
+          <button id="menuToggle" type="button" class="lg:hidden p-2 border border-[#E2E8F0] rounded-md" aria-expanded="false" aria-controls="mobileMenu" aria-label="Меню">
+            <svg class="w-4 h-4 text-[#0F172A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path id="menuIcon" stroke-linecap="square" d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <div id="mobileMenu" class="mobile-menu lg:hidden border-t border-[#E2E8F0]" role="menu">
+        <ul class="py-3 space-y-1">
+          <li><a href="#" class="block px-2 py-2 text-sm font-semibold text-[#0F172A]" role="menuitem">Главная</a></li>
+          <li><a href="#modules" class="block px-2 py-2 text-sm text-[#475569]" role="menuitem">ERP Модули</a></li>
+          <li><a href="#" class="block px-2 py-2 text-sm text-[#475569]" role="menuitem">Готовые решения</a></li>
+          <li><a href="#" class="block px-2 py-2 text-sm text-[#475569]" role="menuitem">Новости</a></li>
+          <li class="pt-2 border-t border-[#E2E8F0]"><a href="#" class="block px-2 py-2 text-sm text-[#475569]" role="menuitem">Войти</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div class="flex flex-col gap-6 order-2 lg:order-1">
+          <p class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#475569]">REF · SALES-MODULE · v4.2</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tighter text-[#0F172A] leading-[1.02]">
+            Управляйте продажами на&nbsp;основе точных данных, а&nbsp;не&nbsp;интуиции
+          </h1>
+          <p class="desc-text text-base sm:text-lg max-w-xl">
+            Автоматизируйте сквозной цикл от регистрации заказа до отгрузки. Интеллектуальный расчёт индивидуальных скидок, автоматический импорт заказов из XML/TXT и встроенный аудит рентабельности защитят вашу маржинальность.
+          </p>
+          <form class="flex flex-col sm:flex-row gap-2 max-w-xl" action="#" method="post" novalidate>
+            <label class="flex-1 flex items-center gap-2 border border-[#E2E8F0] rounded-md px-3 py-2.5 bg-white">
+              <span class="sr-only">Email</span>
+              <svg class="w-4 h-4 text-[#475569] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="square" d="M4 6h16v12H4zM4 7l8 6 8-6"/>
+              </svg>
+              <input id="emailInput" name="email" type="email" placeholder="your@company.ee" autocomplete="email" required class="w-full text-sm text-[#0F172A] outline-none bg-transparent placeholder:text-[#475569]/60">
+            </label>
+            <button type="submit" class="btn-primary text-sm px-5 py-2.5 rounded-md whitespace-nowrap">Получить спецификацию →</button>
+          </form>
+          <div class="flex items-center gap-6 text-xs text-[#475569] font-mono">
+            <span>✓ Без обязательств</span>
+            <span>✓ Ответ за 24 часа</span>
+          </div>
+        </div>
+
+        <!-- Schematic blueprint -->
+        <div class="order-1 lg:order-2 border border-[#E2E8F0] rounded-md bg-white p-4 sm:p-6" aria-label="Схема интерфейса ERP">
+          <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3 mb-4">
+            <span class="text-xs font-mono text-[#475569]">FIG.01 — Управление продажами</span>
+            <span class="text-[10px] font-mono text-[#475569] border border-[#E2E8F0] rounded-md px-2 py-0.5">LIVE</span>
+          </div>
+          <svg class="w-full" viewBox="0 0 400 280" aria-hidden="true">
+            <rect x="0" y="0" width="400" height="280" class="schematic-stroke" stroke-width="0.5" opacity="0.3"/>
+            <line x1="0" y1="56" x2="400" y2="56" class="schematic-stroke" stroke-width="0.75"/>
+            <line x1="0" y1="140" x2="400" y2="140" class="schematic-stroke" stroke-width="0.5" stroke-dasharray="4 4"/>
+            <line x1="0" y1="200" x2="400" y2="200" class="schematic-stroke" stroke-width="0.5" stroke-dasharray="4 4"/>
+            <text x="12" y="36" fill="#475569" font-size="9" font-family="Inter,sans-serif" font-weight="600">REVENUE INDEX</text>
+            <polyline points="20,120 60,108 100,95 140,80 180,88 220,62 260,68 300,48 340,42 380,32" class="schematic-stroke" stroke-width="1.5"/>
+            <circle cx="380" cy="32" r="3" class="schematic-stroke" stroke-width="1.5" fill="#FFFFFF"/>
+            <text x="12" y="158" fill="#475569" font-size="8" font-family="monospace">ORDER</text>
+            <text x="120" y="158" fill="#475569" font-size="8" font-family="monospace">CLIENT</text>
+            <text x="320" y="158" fill="#475569" font-size="8" font-family="monospace">STATUS</text>
+            <line x1="12" y1="168" x2="388" y2="168" class="schematic-stroke" stroke-width="0.5"/>
+            <text x="12" y="184" fill="#0F172A" font-size="9" font-family="monospace" font-weight="600">#8022136</text>
+            <text x="120" y="184" fill="#475569" font-size="9" font-family="monospace">Baltic Trade OÜ</text>
+            <rect x="310" y="172" width="72" height="16" class="schematic-stroke" stroke-width="0.75" rx="0"/>
+            <text x="318" y="183" fill="#475569" font-size="7" font-family="monospace">READY</text>
+            <text x="12" y="204" fill="#0F172A" font-size="9" font-family="monospace" font-weight="600">#8022091</text>
+            <text x="120" y="204" fill="#475569" font-size="9" font-family="monospace">Nordic Parts AS</text>
+            <rect x="310" y="192" width="72" height="16" class="schematic-stroke" stroke-width="0.75"/>
+            <text x="314" y="203" fill="#475569" font-size="7" font-family="monospace">PROCESS</text>
+            <text x="12" y="224" fill="#0F172A" font-size="9" font-family="monospace" font-weight="600">#8022044</text>
+            <text x="120" y="224" fill="#475569" font-size="9" font-family="monospace">EstMetall Grupp</text>
+            <rect x="310" y="212" width="72" height="16" class="schematic-stroke" stroke-width="0.75"/>
+            <text x="320" y="223" fill="#475569" font-size="7" font-family="monospace">PENDING</text>
+            <text x="12" y="252" fill="#475569" font-size="8" font-family="monospace">PLAN 78%</text>
+            <rect x="12" y="258" width="180" height="6" class="schematic-stroke" stroke-width="0.75"/>
+            <rect x="12" y="258" width="140" height="6" fill="#475569" opacity="0.25" stroke="none"/>
+            <text x="220" y="252" fill="#475569" font-size="8" font-family="monospace">MARGIN 62%</text>
+            <rect x="220" y="258" width="168" height="6" class="schematic-stroke" stroke-width="0.75"/>
+            <rect x="220" y="258" width="104" height="6" fill="#475569" opacity="0.15" stroke="none"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENTO -->
+    <section class="border-t border-[#E2E8F0]" aria-labelledby="bento-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <p class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-3">ERP Модуль · Управление продажами</p>
+        <h2 id="bento-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-tighter mb-4">Ключевые возможности модуля</h2>
+        <p class="desc-text text-base max-w-2xl mb-10">Полный цикл от заказа до отгрузки — автоматизированная регистрация, импорт XML/TXT и защита маржинальности в единой интеллектуальной среде.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E2E8F0] border border-[#E2E8F0] rounded-md overflow-hidden">
+          <!-- Card 1 -->
+          <article class="bg-white p-5 sm:p-6 md:col-span-2 lg:col-span-2 lg:row-span-2">
+            <h3 class="text-lg font-bold text-[#0F172A] tracking-tight mb-2">Полный контроль заказов</h3>
+            <p class="desc-text text-sm mb-5">Фиксируйте заявки на поставку товаров и услуг в единой цифровой очереди. Система автоматически отслеживает сроки, объёмы и статусы выполнения.</p>
+            <div class="border border-[#E2E8F0] rounded-md p-3 font-mono text-[10px] text-[#475569] space-y-2">
+              <div class="flex justify-between border-b border-[#E2E8F0] pb-2 text-[#0F172A] font-semibold">
+                <span>АКТИВНЫЕ ЗАКАЗЫ</span><span>3 новых</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#E2E8F0]"><span>#8022136 · Baltic Trade</span><span>€ 12 450</span></div>
+              <div class="flex justify-between py-1 border-b border-[#E2E8F0]"><span>#8022091 · Nordic Parts</span><span>€ 8 720</span></div>
+              <div class="flex justify-between py-1"><span>#8022044 · EstMetall</span><span>€ 5 180</span></div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="bg-white p-5 sm:p-6 lg:row-span-2">
+            <h3 class="text-base font-bold text-[#0F172A] tracking-tight mb-2">Индивидуальные тарифы</h3>
+            <p class="desc-text text-xs mb-4">Управляйте маржинальностью с помощью умного конструктора прайс-листов и объёмных скидок.</p>
+            <div class="text-3xl font-bold text-[#0F172A] tracking-tighter mb-4">-2% <span class="text-[#475569] text-lg font-normal">/</span> -15%</div>
+            <div class="space-y-2 font-mono text-[10px] text-[#475569]">
+              <div class="flex gap-2 items-center"><span class="w-12">до 100</span><div class="flex-1 h-px bg-[#E2E8F0] relative"><div class="absolute inset-y-0 left-0 w-1/4 bg-[#475569]/30 h-px"></div></div><span>-2%</span></div>
+              <div class="flex gap-2 items-center"><span class="w-12">100–500</span><div class="flex-1 h-px bg-[#E2E8F0] relative"><div class="absolute inset-y-0 left-0 w-3/5 bg-[#475569]/50 h-px"></div></div><span>-8%</span></div>
+              <div class="flex gap-2 items-center"><span class="w-12">500+</span><div class="flex-1 h-px bg-[#E2E8F0] relative"><div class="absolute inset-y-0 left-0 w-full bg-[#475569] h-px"></div></div><span>-15%</span></div>
+            </div>
+            <p class="mt-5 pt-4 border-t border-[#E2E8F0] font-mono text-[10px] text-[#475569]">АКТИВНЫХ ПРАЙС-ЛИСТОВ</p>
+            <p class="text-2xl font-bold text-[#0F172A] tracking-tight">47</p>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="bg-white p-5 sm:p-6 lg:row-span-2">
+            <h3 class="text-base font-bold text-[#0F172A] tracking-tight mb-2">Анализ отгрузок и просрочек</h3>
+            <p class="desc-text text-xs mb-4">Формируйте точные графики поставок на основе реальных остатков.</p>
+            <svg class="w-full max-w-[160px] mx-auto mb-4" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="38" class="schematic-stroke" stroke-width="8"/>
+              <circle cx="50" cy="50" r="38" class="schematic-stroke" stroke-width="8" stroke-dasharray="170 240" transform="rotate(-90 50 50)"/>
+              <text x="50" y="52" text-anchor="middle" fill="#0F172A" font-size="14" font-weight="700" font-family="Inter">72%</text>
+            </svg>
+            <p class="text-xs font-mono text-[#475569] border border-[#E2E8F0] rounded-md px-3 py-2">⚠ 3 просроченных отгрузки · #8019, #8021, #8024</p>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="bg-white p-5 sm:p-6 md:col-span-2">
+            <h3 class="text-base font-bold text-[#0F172A] tracking-tight mb-2">Бесшовный импорт и ЭДО</h3>
+            <p class="desc-text text-xs sm:text-sm mb-4">Автоматически загружайте входящие заказы из файлов XML/TXT и мгновенно выгружайте счета во внешние логистические системы.</p>
+            <div class="flex items-center justify-center gap-3 font-mono text-[10px] text-[#475569]">
+              <span class="border border-[#E2E8F0] rounded-md px-3 py-2">XML</span>
+              <span>→</span>
+              <span class="border border-[#E2E8F0] rounded-md px-3 py-2">TXT</span>
+              <span>→</span>
+              <span class="border-2 border-[#0F172A] rounded-md px-4 py-2 text-[#0F172A] font-semibold">ERP</span>
+              <span>→</span>
+              <span class="border border-[#E2E8F0] rounded-md px-3 py-2">LOGISTICS</span>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="bg-white p-5 sm:p-6 md:col-span-2 flex flex-col sm:flex-row gap-5">
+            <div class="sm:w-2/5">
+              <h3 class="text-base font-bold text-[#0F172A] tracking-tight mb-2">Аналитика рентабельности</h3>
+              <p class="desc-text text-xs mb-4">Оценивайте чистую доходность каждой сделки ещё до начала отгрузки.</p>
+              <p class="font-mono text-[10px] text-[#475569]">МАРЖИНАЛЬНОСТЬ</p>
+              <p class="text-2xl font-bold text-[#0F172A] tracking-tight">+24.5%</p>
+            </div>
+            <div class="sm:w-3/5 border border-[#E2E8F0] rounded-md p-3">
+              <p class="font-mono text-[10px] text-[#475569] mb-2">ДИНАМИКА МАРЖИ</p>
+              <svg class="w-full h-20" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="0" y1="15" x2="200" y2="15" class="schematic-stroke" stroke-width="0.5" stroke-dasharray="3 3"/>
+                <line x1="0" y1="30" x2="200" y2="30" class="schematic-stroke" stroke-width="0.5" stroke-dasharray="3 3"/>
+                <line x1="0" y1="45" x2="200" y2="45" class="schematic-stroke" stroke-width="0.5" stroke-dasharray="3 3"/>
+                <polyline points="0,50 40,42 80,35 120,28 160,20 200,12" class="schematic-stroke" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <section class="border-t border-[#E2E8F0] bg-[#F8FAFC]" aria-labelledby="tabs-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <h2 id="tabs-heading" class="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tighter mb-8">Полезное для вас</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#E2E8F0] border border-[#E2E8F0] rounded-md overflow-hidden mb-px" role="tablist">
+          <button type="button" role="tab" id="tab-orders" aria-selected="true" aria-controls="panel-orders" data-tab="orders" class="tab-card bg-white text-left p-5 cursor-pointer border-2">
+            <h3 class="text-sm font-bold text-[#0F172A] mb-1">Заказы на продажу</h3>
+            <p class="desc-text text-xs">Планирование и контроль сроков</p>
+          </button>
+          <button type="button" role="tab" id="tab-pricing" aria-selected="false" aria-controls="panel-pricing" data-tab="pricing" class="tab-card bg-white text-left p-5 cursor-pointer border">
+            <h3 class="text-sm font-bold text-[#0F172A] mb-1">Цены и скидки</h3>
+            <p class="desc-text text-xs">Гибкие матрицы ценообразования</p>
+          </button>
+          <button type="button" role="tab" id="tab-logistics" aria-selected="false" aria-controls="panel-logistics" data-tab="logistics" class="tab-card bg-white text-left p-5 cursor-pointer border">
+            <h3 class="text-sm font-bold text-[#0F172A] mb-1">Логистика и ЭДО</h3>
+            <p class="desc-text text-xs">Контроль отгрузок и XML-обмен</p>
+          </button>
+        </div>
+
+        <!-- Panel 1 -->
+        <div id="panel-orders" role="tabpanel" aria-labelledby="tab-orders" data-panel="orders" class="flex flex-col lg:flex-row border border-[#E2E8F0] rounded-md bg-white overflow-hidden">
+          <div class="lg:w-2/5 border-b lg:border-b-0 lg:border-r border-[#E2E8F0] p-6 flex items-center justify-center bg-[#F8FAFC]">
+            <svg class="w-full max-w-[240px]" viewBox="0 0 200 160" aria-hidden="true">
+              <rect x="10" y="10" width="180" height="140" class="schematic-stroke" stroke-width="1"/>
+              <rect x="20" y="24" width="60" height="40" class="schematic-stroke" stroke-width="0.75"/>
+              <line x1="28" y1="36" x2="72" y2="36" class="schematic-stroke" stroke-width="0.5"/>
+              <line x1="28" y1="44" x2="60" y2="44" class="schematic-stroke" stroke-width="0.5"/>
+              <line x1="28" y1="52" x2="50" y2="52" class="schematic-stroke" stroke-width="0.5"/>
+              <rect x="90" y="30" width="90" height="24" class="schematic-stroke" stroke-width="0.75"/>
+              <text x="98" y="46" fill="#475569" font-size="7" font-family="monospace">#8022136 READY</text>
+              <circle cx="170" cy="20" r="8" class="schematic-stroke" stroke-width="0.75"/>
+              <path d="M166 20l3 3 6-6" class="schematic-stroke" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="lg:w-3/5 p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-[#0F172A] tracking-tight mb-4">Заказы на продажу: Сквозной учет обязательств</h3>
+            <p class="desc-text text-sm mb-6">Ведение списка заказов позволяет гибко планировать отгрузку продукции и контролировать сроки обязательств. При регистрации заявки система автоматически подтягивает контрагента из справочника, формирует уникальный код строки для сквозного трекинга и готовит спецификации.</p>
+            <ul class="space-y-2.5 text-sm text-[#0F172A]">
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">01</span>Автоматический контроль условий поставки и вариантов оплаты.</li>
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">02</span>Подбор товарной номенклатуры из справочника, остатков или истории частых покупок.</li>
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">03</span>Интеграция данных об отправителе груза и транспортной фирме-перевозчике.</li>
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">04</span>Гибкое описание спец-требований к качеству, виду упаковки и маркировке.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div id="panel-pricing" role="tabpanel" aria-labelledby="tab-pricing" data-panel="pricing" class="hidden flex-col lg:flex-row border border-[#E2E8F0] rounded-md bg-white overflow-hidden">
+          <div class="lg:w-2/5 border-b lg:border-b-0 lg:border-r border-[#E2E8F0] p-6 flex items-center justify-center bg-[#F8FAFC]">
+            <svg class="w-full max-w-[200px]" viewBox="0 0 180 140" aria-hidden="true">
+              <text x="20" y="30" fill="#0F172A" font-size="16" font-weight="700" font-family="Inter">-2%</text>
+              <text x="70" y="30" fill="#475569" font-size="16" font-family="Inter">-8%</text>
+              <text x="120" y="30" fill="#0F172A" font-size="16" font-weight="700" font-family="Inter">-15%</text>
+              <rect x="20" y="50" width="140" height="70" class="schematic-stroke" stroke-width="0.75"/>
+              <line x1="30" y1="70" x2="150" y2="70" class="schematic-stroke" stroke-width="0.5"/>
+              <rect x="30" y="64" width="30" height="12" fill="#475569" opacity="0.2" stroke="none"/>
+              <rect x="30" y="86" width="70" height="12" fill="#475569" opacity="0.35" stroke="none"/>
+              <rect x="30" y="100" width="120" height="12" fill="#475569" opacity="0.5" stroke="none"/>
+            </svg>
+          </div>
+          <div class="lg:w-3/5 p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-[#0F172A] tracking-tight mb-4">Цены продажи и скидки: Защита маржинальности</h3>
+            <p class="desc-text text-sm mb-6">Управляйте доходностью сделок без ручного пересчета. Система автоматически определяет доступные ценовые уровни и применяет дисконт на базе объемов закупок.</p>
+            <ul class="space-y-2.5 text-sm text-[#0F172A]">
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">01</span>Умный автоматизированный конструктор индивидуальных прайс-листов.</li>
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">02</span>Контроль за соблюдением лимитов минимально допустимой рентабельности.</li>
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">03</span>Мгновенная сверка с актуальными остатками товаров на складах дистрибуции.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div id="panel-logistics" role="tabpanel" aria-labelledby="tab-logistics" data-panel="logistics" class="hidden flex-col lg:flex-row border border-[#E2E8F0] rounded-md bg-white overflow-hidden">
+          <div class="lg:w-2/5 border-b lg:border-b-0 lg:border-r border-[#E2E8F0] p-6 flex items-center justify-center bg-[#F8FAFC]">
+            <svg class="w-full max-w-[200px]" viewBox="0 0 180 140" aria-hidden="true">
+              <rect x="20" y="20" width="140" height="100" class="schematic-stroke" stroke-width="0.75"/>
+              <text x="30" y="38" fill="#475569" font-size="7" font-family="monospace">SHIPMENT PLAN</text>
+              <rect x="30" y="48" width="16" height="16" class="schematic-stroke" stroke-width="0.5"/>
+              <rect x="50" y="48" width="16" height="16" fill="#475569" opacity="0.3" stroke="#475569" stroke-width="0.5"/>
+              <rect x="70" y="48" width="16" height="16" class="schematic-stroke" stroke-width="0.5"/>
+              <text x="30" y="90" fill="#475569" font-size="7" font-family="monospace">XML → ERP → EDO</text>
+              <rect x="30" y="98" width="80" height="14" class="schematic-stroke" stroke-width="0.5"/>
+              <text x="36" y="108" fill="#475569" font-size="6" font-family="monospace">2 OVERDUE</text>
+            </svg>
+          </div>
+          <div class="lg:w-3/5 p-6 sm:p-8">
+            <h3 class="text-xl font-bold text-[#0F172A] tracking-tight mb-4">План отгрузок и ЭДО: Исключение кассовых разрывов</h3>
+            <p class="desc-text text-sm mb-6">Оптимизируйте цепочки поставок и избавьте персонал от рутинного ручного ввода документов во внешние логистические и бухгалтерские контуры.</p>
+            <ul class="space-y-2.5 text-sm text-[#0F172A]">
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">01</span>Мгновенный импорт входящих спецификаций из файлов форматов XML и TXT.</li>
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">02</span>Своевременное выявление просроченных нарядов и предиктивный анализ задержек.</li>
+              <li class="flex gap-2"><span class="text-[#475569] font-mono">03</span>Бесшовная выгрузка закрывающих электронных счетов в один клик.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 MODULES -->
+    <section id="modules" class="border-t border-[#E2E8F0]" aria-labelledby="modules-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <p class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-3">Экосистема Infotec ERP</p>
+        <h2 id="modules-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-tighter mb-4">12 корпоративных модулей</h2>
+        <p class="desc-text text-base max-w-2xl mb-10">Модульная архитектура для полного покрытия бизнес-процессов — от продаж и производства до гостиничного сервиса и специализированных отраслевых решений.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E2E8F0] border border-[#E2E8F0] rounded-md overflow-hidden">
+          <a href="#" class="module-card module-card--active group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Управление продажами</span>
+            <span class="text-[#475569] group-hover:text-[#0F172A]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between border border-transparent hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Управление закупками</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Управление запасами</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Управление производством</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Бухгалтерский учет</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Расчет заработной платы</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Учет основных средств</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Специальные разработки</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Торговый зал магазина</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Квартирные товарищества</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Калькуляция для кафе и ресторанов</span><span class="text-[#475569]">→</span>
+          </a>
+          <a href="#" class="module-card group bg-white p-5 flex items-center justify-between hover:bg-[#F8FAFC]">
+            <span class="text-sm font-semibold text-[#0F172A]">Организация работы отеля</span><span class="text-[#475569]">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#F8FAFC] border-t border-[#E2E8F0] text-[#0F172A]" aria-label="Подвал сайта">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 pb-8 sm:pb-10">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 mb-16 sm:mb-20">
+        <div>
+          <h3 class="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-4">Платформа</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#modules" class="text-[#0F172A] hover:underline">Управление продажами</a></li>
+            <li><a href="#modules" class="text-[#0F172A] hover:underline">Управление закупками</a></li>
+            <li><a href="#modules" class="text-[#0F172A] hover:underline">Управление запасами</a></li>
+            <li><a href="#modules" class="text-[#0F172A] hover:underline">Управление производством</a></li>
+            <li><a href="#modules" class="text-[#0F172A] hover:underline">Бухгалтерский учет</a></li>
+            <li><a href="#modules" class="text-[#0F172A] hover:underline">Расчет заработной платы</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-4">Решения</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-[#0F172A] hover:underline">Дистрибьюция и торговля</a></li>
+            <li><a href="#" class="text-[#0F172A] hover:underline">Металлообработка</a></li>
+            <li><a href="#" class="text-[#0F172A] hover:underline">HoReCa и гостиницы</a></li>
+            <li><a href="#" class="text-[#0F172A] hover:underline">ЖК и товарищества</a></li>
+          </ul>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-4">Таллинн</h3>
+          <address class="not-italic font-mono text-xs text-[#475569] space-y-1 leading-relaxed">
+            <p>Narva mnt 150, off. 202</p>
+            <p>TEL +372 5111876</p>
+            <p>TEL +372 525163595</p>
+          </address>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-4">Нарва</h3>
+          <address class="not-italic font-mono text-xs text-[#475569] space-y-1 leading-relaxed">
+            <p>Pähklimäe tn 7-62, 13619</p>
+            <p>IDA-VIRUMAA, ESTONIA</p>
+            <p><a href="mailto:support@infotec.ee" class="hover:underline">support@infotec.ee</a></p>
+          </address>
+        </div>
+        <div class="col-span-2 sm:col-span-3 lg:col-span-1">
+          <h3 class="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-4">Компания</h3>
+          <ul class="space-y-2 text-sm mb-6">
+            <li><a href="#" class="text-[#0F172A] hover:underline">О нас</a></li>
+            <li><a href="#" class="text-[#0F172A] hover:underline">Новости</a></li>
+            <li><a href="#" class="text-[#0F172A] hover:underline">Партнеры</a></li>
+          </ul>
+          <div class="flex flex-col gap-2 max-w-[200px]">
+            <a href="#" class="btn-primary text-sm text-center px-5 py-2.5 rounded-md">Демо-доступ</a>
+            <a href="#" class="text-sm text-center px-5 py-2.5 rounded-md border border-[#E2E8F0] text-[#0F172A] bg-white hover:bg-white">Связаться с нами</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pt-8 border-t border-[#E2E8F0]">
+        <div class="flex items-end gap-3" aria-label="Infotec">
+          <div class="hidden sm:flex flex-col gap-0.5 mb-2 font-mono text-[8px] text-[#475569]" aria-hidden="true">
+            <span>█ █ █</span>
+            <span>█ █ ░</span>
+            <span>█ ░ ░</span>
+          </div>
+          <span class="footer-wordmark font-bold text-[#0F172A] tracking-tight">Infotec</span>
+        </div>
+        <div class="flex flex-col items-start lg:items-end gap-4 font-mono text-[10px] text-[#475569] uppercase tracking-wider">
+          <div class="flex gap-5">
+            <a href="#" class="hover:text-[#0F172A]" aria-label="LinkedIn">LinkedIn</a>
+            <a href="#" class="hover:text-[#0F172A]" aria-label="X">X</a>
+            <a href="#" class="hover:text-[#0F172A]" aria-label="GitHub">GitHub</a>
+          </div>
+          <nav aria-label="Legal">
+            <ul class="flex flex-col lg:items-end gap-1">
+              <li><a href="#" class="hover:text-[#0F172A]">Privacy Policy</a></li>
+              <li><a href="#" class="hover:text-[#0F172A]">Terms of Use</a></li>
+              <li>INFOTEC 2026</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      menuIcon.setAttribute('d', isOpen ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuIcon.setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
+      }
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (link.getAttribute('href') === '#') e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+    function switchTab(targetId) {
+      tabButtons.forEach(btn => {
+        const isActive = btn.dataset.tab === targetId;
+        btn.setAttribute('aria-selected', isActive);
+        btn.classList.toggle('border-2', isActive);
+        btn.classList.toggle('border-[#0F172A]', isActive);
+      });
+      tabPanels.forEach(panel => {
+        const isActive = panel.dataset.panel === targetId;
+        panel.classList.toggle('hidden', !isActive);
+        panel.classList.toggle('flex', isActive);
+      });
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      btn.addEventListener('keydown', (e) => {
+        const tabs = Array.from(tabButtons);
+        const idx = tabs.indexOf(btn);
+        let next = -1;
+        if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next >= 0) { e.preventDefault(); tabs[next].focus(); switchTab(tabs[next].dataset.tab); }
+      });
+    });
+  </script>
+</body>
+</html>
