@@ -1,0 +1,11 @@
+const fs = require('fs');
+const path = require('path');
+const src = path.join(__dirname, 'inner-page-3.html');
+const dst = path.join(__dirname, 'inner-page-metalworking.html');
+fs.copyFileSync(src, dst);
+const srcLines = fs.readFileSync(src, 'utf8').split('\n').length;
+const dstLines = fs.readFileSync(dst, 'utf8').split('\n').length;
+const dstLast = fs.readFileSync(dst, 'utf8').trim().split('\n').pop();
+console.log('Source lines:', srcLines);
+console.log('Destination lines:', dstLines);
+console.log('Last line:', dstLast);

@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infotec ERP — Металлообработка и Машиностроение</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: 'Inter', sans-serif;
+      --color-brand: #0A6ED1;
+      --color-deep: #122136;
+      --color-muted: #6A7B95;
+      --color-border: #E2E8F0;
+      --color-surface: #F5F7FA;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2 {
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    h1 {
+      font-weight: 800;
+    }
+
+    .desc-text {
+      font-weight: 400;
+      line-height: 1.625;
+      color: #6A7B95;
+    }
+
+    .ui-text {
+      font-weight: 500;
+    }
+
+    .mesh-bg {
+      background-color: #FAFBFD;
+      background-image:
+        radial-gradient(ellipse 90% 70% at 75% 25%, rgba(10, 110, 209, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 60%, rgba(59, 130, 246, 0.04) 0%, transparent 55%),
+        linear-gradient(180deg, #FFFFFF 0%, #FAFBFD 40%, #F8FAFC 100%);
+    }
+
+    .hero-section {
+      background: linear-gradient(165deg, #FFFFFF 0%, #FAFCFF 35%, #F5F9FF 70%, #FAFBFD 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 82% 55%, rgba(10, 110, 209, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 35% at 65% 75%, rgba(59, 130, 246, 0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, rgba(10, 110, 209, 0.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(10, 110, 209, 0.035) 1px, transparent 1px),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 11px,
+          rgba(10, 110, 209, 0.02) 11px,
+          rgba(10, 110, 209, 0.02) 12px
+        );
+      background-size: 20px 20px, 20px 20px, auto;
+      mask-image: radial-gradient(ellipse 85% 75% at 68% 45%, black 15%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 75% at 68% 45%, black 15%, transparent 72%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-stat-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(226, 232, 240, 0.5),
+        0 8px 32px -8px rgba(18, 33, 54, 0.10),
+        0 20px 48px -12px rgba(10, 110, 209, 0.08);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .hero-stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.12),
+        0 12px 40px -8px rgba(18, 33, 54, 0.12),
+        0 24px 56px -12px rgba(10, 110, 209, 0.12);
+    }
+
+    .hero-ribbon-stage {
+      position: relative;
+      border-radius: 2rem;
+      background: linear-gradient(145deg, rgba(255,255,255,0.6) 0%, rgba(240,247,255,0.4) 50%, rgba(255,255,255,0.3) 100%);
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    @media (min-width: 640px) {
+      .hero-ribbon-stage {
+        min-height: 360px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-ribbon-stage {
+        min-height: 440px;
+        border-radius: 2.5rem;
+      }
+    }
+
+    .hero-stats-overlay {
+      position: relative;
+      margin-top: -1rem;
+      z-index: 20;
+    }
+
+    @media (min-width: 640px) {
+      .hero-stats-overlay {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 1rem;
+        right: 1rem;
+        margin-top: 0;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-stats-overlay {
+        bottom: 2.5rem;
+        left: 2rem;
+        right: 2rem;
+      }
+    }
+
+    .hero-ribbon-svg {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+    }
+
+    .ribbon-float {
+      animation: ribbonDrift 12s ease-in-out infinite;
+    }
+
+    .ribbon-float-delay {
+      animation: ribbonDrift 12s ease-in-out infinite;
+      animation-delay: -4s;
+    }
+
+    @keyframes ribbonDrift {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-6px) scale(1.01); }
+    }
+
+    .hero-lead-elegant {
+      padding: 4px;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(226, 232, 240, 0.7);
+      box-shadow: 0 4px 24px -6px rgba(18, 33, 54, 0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero-lead-elegant:focus-within {
+      border-color: rgba(10, 110, 209, 0.25);
+      box-shadow: 0 4px 32px -6px rgba(10, 110, 209, 0.12);
+    }
+
+    @media (min-width: 640px) {
+      .hero-lead-elegant {
+        border-radius: 9999px;
+      }
+    }
+
+    .btn-cushion--hero {
+      padding: 6px;
+    }
+
+    .btn-cushion--hero .btn-cushion-inner {
+      padding: 0.875rem 1.75rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+
+    @media (min-width: 1024px) {
+      .btn-cushion--hero .btn-cushion-inner {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #0A6ED1 0%, #3B82F6 50%, #0A6ED1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #0A6ED1;
+      border-radius: 1px;
+      transition: width 0.25s ease, left 0.25s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+
+    .chart-bar {
+      animation: growBar 1.2s ease-out forwards;
+      transform-origin: bottom;
+      transform: scaleY(0);
+    }
+
+    @keyframes growBar {
+      to { transform: scaleY(1); }
+    }
+
+    .float-card {
+      animation: floatY 6s ease-in-out infinite;
+    }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .dashboard-panel {
+      background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(245,247,250,0.9) 100%);
+      box-shadow:
+        0 0 0 1px rgba(226, 232, 240, 0.8),
+        0 20px 50px -12px rgba(18, 33, 54, 0.12),
+        0 8px 20px -6px rgba(10, 110, 209, 0.08);
+    }
+
+    .progress-fill {
+      transition: width 1.5s ease-out;
+    }
+
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .mobile-menu.open {
+      max-height: 320px;
+      opacity: 1;
+    }
+
+    .bento-card {
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .donut-segment {
+      transition: stroke-dashoffset 1.2s ease-out;
+    }
+
+    .flow-arrow {
+      animation: flowPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes flowPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .metric-line path {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: drawLine 2s ease-out forwards;
+    }
+
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .btn-cushion {
+      display: inline-flex;
+      padding: 5px;
+      border-radius: 9999px;
+      background: rgba(10, 110, 209, 0.10);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.12),
+        0 4px 16px -2px rgba(10, 110, 209, 0.20),
+        0 10px 28px -6px rgba(10, 110, 209, 0.15);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-cushion:hover {
+      background: rgba(10, 110, 209, 0.15);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.18),
+        0 6px 22px -2px rgba(10, 110, 209, 0.30),
+        0 14px 36px -6px rgba(10, 110, 209, 0.20);
+    }
+
+    .btn-cushion:active {
+      transform: scale(0.98);
+    }
+
+    .btn-cushion-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.125rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: #FFFFFF;
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 50%, #0960bd 100%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow:
+        0 1px 2px rgba(8, 91, 176, 0.35),
+        0 4px 14px -2px rgba(10, 110, 209, 0.40),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30),
+        inset 0 -2px 4px rgba(8, 91, 176, 0.25);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-cushion:hover .btn-cushion-inner {
+      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 50%, #074a93 100%);
+      box-shadow:
+        0 2px 4px rgba(8, 91, 176, 0.40),
+        0 6px 18px -2px rgba(10, 110, 209, 0.50),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 -2px 4px rgba(7, 74, 147, 0.30);
+    }
+
+    .btn-cushion:active .btn-cushion-inner {
+      box-shadow:
+        0 1px 2px rgba(8, 91, 176, 0.30),
+        inset 0 2px 4px rgba(7, 74, 147, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-cushion-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .lead-form-cushion {
+      padding: 6px;
+      border-radius: 1.25rem;
+      background: linear-gradient(145deg, rgba(10, 110, 209, 0.10) 0%, rgba(245, 247, 250, 0.95) 45%, rgba(10, 110, 209, 0.07) 100%);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.08),
+        0 6px 20px -4px rgba(10, 110, 209, 0.20),
+        0 14px 36px -8px rgba(10, 110, 209, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    @media (min-width: 640px) {
+      .lead-form-cushion {
+        border-radius: 9999px;
+      }
+    }
+
+    .lead-form-cushion:focus-within,
+    .lead-form-cushion:hover {
+      background: linear-gradient(145deg, rgba(10, 110, 209, 0.14) 0%, rgba(245, 247, 250, 0.98) 45%, rgba(10, 110, 209, 0.10) 100%);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.12),
+        0 8px 24px -4px rgba(10, 110, 209, 0.26),
+        0 18px 40px -8px rgba(10, 110, 209, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    .lead-form-track {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      padding: 5px;
+      border-radius: 1rem;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 45%, #F0F4F8 100%);
+      box-shadow:
+        0 1px 4px rgba(18, 33, 54, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 6px rgba(18, 33, 54, 0.04);
+    }
+
+    @media (min-width: 640px) {
+      .lead-form-track {
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        border-radius: 9999px;
+        padding: 5px 5px 5px 8px;
+      }
+    }
+
+    .lead-input-wrap {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+      padding: 0.75rem 1rem;
+      border-radius: 0.875rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(245, 247, 250, 0.4) 100%);
+      box-shadow: inset 0 1px 3px rgba(18, 33, 54, 0.04);
+      transition: box-shadow 0.3s ease;
+    }
+
+    @media (min-width: 640px) {
+      .lead-input-wrap {
+        padding: 0.625rem 1rem 0.625rem 1.25rem;
+        border-radius: 9999px;
+        background: transparent;
+        box-shadow: none;
+      }
+    }
+
+    .lead-form-cushion:focus-within .lead-input-wrap {
+      box-shadow: inset 0 0 0 1px rgba(10, 110, 209, 0.12);
+    }
+
+    @media (min-width: 640px) {
+      .lead-form-cushion:focus-within .lead-input-wrap {
+        box-shadow: none;
+      }
+    }
+
+    .lead-input-wrap input {
+      width: 100%;
+      background: transparent;
+      outline: none;
+      font-size: 0.875rem;
+      color: #122136;
+    }
+
+    .lead-input-wrap input::placeholder {
+      color: rgba(106, 123, 149, 0.65);
+    }
+
+    .btn-cushion--submit {
+      padding: 6px;
+    }
+
+    .btn-cushion--submit .btn-cushion-inner {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border-radius: 9999px;
+    }
+
+    @media (min-width: 640px) {
+      .btn-cushion--submit .btn-cushion-inner {
+        padding: 0.75rem 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .btn-cushion--submit .btn-cushion-inner {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.9375rem;
+      }
+    }
+
+    .tab-card {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .tab-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .tab-card[aria-selected="true"] {
+      background-color: #FFFFFF;
+      border-color: rgba(10, 110, 209, 0.35);
+      box-shadow: 0 8px 28px -6px rgba(10, 110, 209, 0.18), 0 0 0 1px rgba(10, 110, 209, 0.08);
+    }
+
+    .tab-card[aria-selected="false"] {
+      background-color: #F5F7FA;
+      border-color: #E2E8F0;
+    }
+
+    .btn-cushion--tab {
+      padding: 3px;
+      border-radius: 9999px;
+      background: rgba(18, 33, 54, 0.06);
+      box-shadow: 0 2px 8px -2px rgba(18, 33, 54, 0.12);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-cushion--tab .btn-cushion-inner {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      gap: 0.375rem;
+      background: linear-gradient(180deg, #1a2d47 0%, #122136 55%, #0e1a2a 100%);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 1px 2px rgba(18, 33, 54, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        inset 0 -1px 3px rgba(0, 0, 0, 0.20);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tab-card:hover .btn-cushion--tab,
+    .tab-card[aria-selected="true"] .btn-cushion--tab {
+      background: rgba(10, 110, 209, 0.10);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.10),
+        0 4px 14px -2px rgba(10, 110, 209, 0.22),
+        0 8px 20px -4px rgba(10, 110, 209, 0.12);
+    }
+
+    .tab-card:hover .btn-cushion--tab .btn-cushion-inner,
+    .tab-card[aria-selected="true"] .btn-cushion--tab .btn-cushion-inner {
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 50%, #0960bd 100%);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow:
+        0 1px 2px rgba(8, 91, 176, 0.35),
+        0 4px 12px -2px rgba(10, 110, 209, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -2px 3px rgba(8, 91, 176, 0.22);
+    }
+
+    .tab-card:hover .btn-cushion--tab .btn-cushion-inner {
+      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 50%, #074a93 100%);
+    }
+
+    .tab-panel {
+      animation: tabFadeIn 0.35s ease-out;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-graphic-orb {
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .glass-3d {
+      background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 8px 32px rgba(10, 110, 209, 0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .footer-link {
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-cta-cushion {
+      padding: 3px;
+      border-radius: 9999px;
+      background: rgba(10, 110, 209, 0.10);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.10),
+        0 4px 14px -2px rgba(10, 110, 209, 0.28),
+        0 8px 22px -4px rgba(10, 110, 209, 0.14);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .footer-cta-cushion:hover {
+      background: rgba(10, 110, 209, 0.15);
+      box-shadow:
+        0 0 0 1px rgba(10, 110, 209, 0.14),
+        0 6px 18px -2px rgba(10, 110, 209, 0.35),
+        0 12px 28px -4px rgba(10, 110, 209, 0.18);
+    }
+
+    .footer-cta-primary {
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 55%, #0960bd 100%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -1px 3px rgba(8, 91, 176, 0.22);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .footer-cta-cushion:hover .footer-cta-primary {
+      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 55%, #074a93 100%);
+    }
+
+    .footer-cta-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .footer-cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .footer-wordmark {
+      font-size: clamp(4rem, 14vw, 11rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-eyebrow-pill {
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .hero-eyebrow-pill::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background-image:
+        linear-gradient(90deg, rgba(10, 110, 209, 0.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(10, 110, 209, 0.04) 1px, transparent 1px),
+        repeating-linear-gradient(
+          125deg,
+          transparent,
+          transparent 6px,
+          rgba(10, 110, 209, 0.03) 6px,
+          rgba(10, 110, 209, 0.03) 7px
+        );
+      background-size: 10px 10px, 10px 10px, auto;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow-pill:hover,
+    .group\/hero:hover .hero-eyebrow-pill {
+      box-shadow: 0 4px 20px rgba(10, 110, 209, 0.10), 0 2px 12px rgba(10, 110, 209, 0.06);
+      border-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-eyebrow-chevron {
+      transition: transform 0.3s ease;
+    }
+
+    .hero-eyebrow-pill:hover .hero-eyebrow-chevron,
+    .group\/hero:hover .hero-eyebrow-chevron {
+      transform: translateX(2px) scale(1.05);
+    }
+
+    .gantt-row {
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .gantt-row:hover,
+    .gantt-row[aria-selected="true"] {
+      background-color: rgba(10, 110, 209, 0.06);
+      border-color: rgba(10, 110, 209, 0.25);
+    }
+
+    .gantt-bar-segment {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gantt-row[aria-selected="true"] .gantt-bar-segment {
+      opacity: 1;
+    }
+
+    .gantt-row:not([aria-selected="true"]) .gantt-bar-segment {
+      opacity: 0.55;
+    }
+
+    .gantt-row[aria-selected="true"] .gantt-bar-segment.is-active {
+      transform: scaleY(1.05);
+      box-shadow: 0 0 0 1px rgba(10, 110, 209, 0.3);
+    }
+
+    .tablet-mockup {
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+      box-shadow:
+        0 0 0 2px #2d3748,
+        0 20px 50px -12px rgba(18, 33, 54, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .accordion-trigger {
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .accordion-trigger:hover {
+      background-color: #F5F7FA;
+    }
+
+    .accordion-trigger[aria-expanded="true"] {
+      background-color: #FFFFFF;
+      border-color: rgba(10, 110, 209, 0.25);
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .accordion-panel.open {
+      max-height: 320px;
+      opacity: 1;
+    }
+
+    .integration-card {
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .integration-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(10, 110, 209, 0.35);
+    }
+  </style>
+</head>
+<body class="mesh-bg min-h-screen font-sans text-[#122136] antialiased">
+
+  <div class="glow-orb w-[400px] h-[400px] bg-[#0A6ED1]/6 top-[-8%] right-[5%] fixed" aria-hidden="true"></div>
+  <div class="glow-orb w-[250px] h-[250px] bg-[#3B82F6]/5 bottom-[25%] right-[35%] fixed" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="sticky top-4 z-50 px-4 sm:px-6 lg:px-8">
+    <nav class="max-w-7xl mx-auto backdrop-blur-md bg-white/70 border border-[#E2E8F0]/50 rounded-2xl shadow-sm px-4 sm:px-6 py-3 flex items-center justify-between gap-4" aria-label="Основная навигация">
+      <a href="#" class="flex items-center gap-2 shrink-0 group">
+        <div class="w-8 h-8 rounded-lg bg-[#0A6ED1] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path d="M4 6h16M4 12h10M4 18h14" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="font-bold text-[#122136] text-base sm:text-lg tracking-tight">Infotec ERP</span>
+      </a>
+      <ul class="hidden lg:flex items-center gap-1" role="menubar">
+        <li role="none"><a href="#" role="menuitem" class="nav-link ui-text active px-4 py-2 text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors rounded-lg">Главная</a></li>
+        <li role="none"><a href="#" role="menuitem" class="nav-link ui-text px-4 py-2 text-sm text-[#6A7B95] hover:text-[#0A6ED1] transition-colors rounded-lg">ERP Модули</a></li>
+        <li role="none"><a href="#" role="menuitem" class="nav-link ui-text px-4 py-2 text-sm text-[#6A7B95] hover:text-[#0A6ED1] transition-colors rounded-lg">Готовые решения</a></li>
+        <li role="none"><a href="#" role="menuitem" class="nav-link ui-text px-4 py-2 text-sm text-[#6A7B95] hover:text-[#0A6ED1] transition-colors rounded-lg">Новости</a></li>
+      </ul>
+      <div class="flex items-center gap-3 sm:gap-4 shrink-0">
+        <a href="#" class="ui-text hidden sm:inline text-sm text-[#6A7B95] hover:text-[#0A6ED1] transition-colors duration-200">Войти</a>
+        <a href="#" class="btn-cushion group shrink-0 transition-all duration-300" aria-label="Демо-доступ">
+          <span class="btn-cushion-inner bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-sm font-medium">
+            Демо-доступ
+            <svg class="btn-cushion-arrow w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+        <span class="text-lg leading-none" title="Эстония" aria-label="Эстония">🇪🇪</span>
+        <button id="menuToggle" type="button" class="lg:hidden p-2 rounded-lg hover:bg-[#E2E8F0]/50 transition-colors" aria-expanded="false" aria-controls="mobileMenu" aria-label="Открыть меню">
+          <svg class="w-5 h-5 text-[#122136]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path id="menuIcon" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+    <div id="mobileMenu" class="mobile-menu lg:hidden max-w-7xl mx-auto mt-2 backdrop-blur-md bg-white/80 border border-[#E2E8F0]/50 rounded-2xl shadow-sm" role="menu">
+      <ul class="p-4 space-y-1">
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#122136] hover:bg-[#F5F7FA] rounded-lg transition-colors" role="menuitem">Главная</a></li>
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:bg-[#F5F7FA] hover:text-[#0A6ED1] rounded-lg transition-colors" role="menuitem">ERP Модули</a></li>
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:bg-[#F5F7FA] hover:text-[#0A6ED1] rounded-lg transition-colors" role="menuitem">Готовые решения</a></li>
+        <li><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:bg-[#F5F7FA] hover:text-[#0A6ED1] rounded-lg transition-colors" role="menuitem">Новости</a></li>
+        <li class="pt-2 border-t border-[#E2E8F0]"><a href="#" class="block px-4 py-2.5 text-sm font-medium text-[#6A7B95] hover:text-[#0A6ED1] transition-colors" role="menuitem">Войти</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <!-- HERO -->
+    <section class="hero-section relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 lg:pb-24 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-10 sm:mb-12 lg:mb-14">
+          <div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-6 lg:gap-8">
+            <div class="hero-eyebrow-pill group inline-flex items-center gap-2.5 self-start backdrop-blur-md bg-white/70 border border-white/90 rounded-full px-3.5 py-1.5 shadow-[0_2px_12px_rgba(10,110,209,0.04)]">
+              <span class="relative z-10 flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
+                <svg class="hero-eyebrow-chevron w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 2l2 4h4l-3.5 3 1.5 4.5L10 11.5 5.5 13.5 7 9 3.5 6h4L10 2z" fill="#0A6ED1" fill-opacity="0.85"/>
+                </svg>
+              </span>
+              <span class="relative z-10 text-xs font-medium tracking-wide text-[#122136]">
+                ERP для <span class="text-[#0A6ED1] font-semibold">металлообработки</span> и <span class="text-[#0A6ED1] font-semibold">машиностроения</span>
+              </span>
+            </div>
+            <h1 class="text-[2rem] sm:text-4xl lg:text-5xl xl:text-[3.5rem] font-extrabold text-[#122136] tracking-tighter leading-[1.08] max-w-4xl">
+              <span class="text-gradient">Автоматизация производства</span> для металлообработки и&nbsp;машиностроения
+            </h1>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
+              <a href="#lead-form" class="btn-cushion btn-cushion--hero group shrink-0 transition-all duration-300">
+                <span class="btn-cushion-inner bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white">
+                  Получить демо для машиностроения
+                  <svg class="btn-cushion-arrow w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </span>
+              </a>
+              <a href="#" class="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border-2 border-[#0A6ED1]/25 bg-white/80 backdrop-blur-sm text-[#0A6ED1] font-semibold text-sm hover:bg-[#0A6ED1]/5 hover:border-[#0A6ED1]/45 transition-all duration-300 shrink-0">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+                Смотреть видео
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5 xl:col-span-4 flex items-start lg:items-end lg:justify-end">
+            <p class="desc-text text-sm sm:text-base lg:text-right max-w-sm lg:max-w-xs leading-relaxed">
+              Прямая интеграция с CAD/PLM, точный учёт серийного и проектного производства, управление цехом в реальном времени.
+            </p>
+          </div>
+        </div>
+
+        <!-- Manufacturing visual stage -->
+        <div class="relative" aria-label="Визуализация интеграции CAD и ERP">
+          <div class="hero-ribbon-stage ribbon-float p-4 sm:p-6 lg:p-8">
+            <div class="relative z-10 h-full min-h-[240px] sm:min-h-[300px] lg:min-h-[360px] flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-5 lg:gap-6">
+              <!-- CAD Panel -->
+              <div class="dashboard-panel rounded-2xl p-3 sm:p-4 w-full lg:w-[28%] shrink-0 float-card">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-[#0A6ED1]/10 flex items-center justify-center">
+                      <svg class="w-3.5 h-3.5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-[#122136]">Компас-3D</p>
+                      <p class="text-[9px] text-[#6A7B95]">КД-2024-0847</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">Активен</span>
+                </div>
+                <div class="bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl p-3 aspect-[4/3] relative overflow-hidden">
+                  <svg class="w-full h-full" viewBox="0 0 160 120" aria-hidden="true">
+                    <rect x="10" y="10" width="140" height="100" fill="none" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 3"/>
+                    <path d="M30 90 L50 50 L90 60 L120 30 L140 70" fill="none" stroke="#0A6ED1" stroke-width="1.5" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="3" fill="#0A6ED1"/>
+                    <circle cx="90" cy="60" r="3" fill="#0A6ED1"/>
+                    <circle cx="120" cy="30" r="3" fill="#0A6ED1"/>
+                    <line x1="50" y1="50" x2="90" y2="60" stroke="#6A7B95" stroke-width="0.8" stroke-dasharray="2 2"/>
+                    <line x1="90" y1="60" x2="120" y2="30" stroke="#6A7B95" stroke-width="0.8" stroke-dasharray="2 2"/>
+                    <text x="30" y="105" font-size="7" fill="#6A7B95">Ø 45 мм · L 120</text>
+                  </svg>
+                  <div class="absolute bottom-2 left-2 right-2 flex gap-1">
+                    <span class="text-[8px] bg-white/90 border border-[#E2E8F0] px-1.5 py-0.5 rounded text-[#6A7B95]">Вид спереди</span>
+                    <span class="text-[8px] bg-white/90 border border-[#E2E8F0] px-1.5 py-0.5 rounded text-[#0A6ED1] font-medium">Сборка</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Import arrows -->
+              <div class="flex flex-col items-center gap-2 shrink-0 py-2 lg:py-0">
+                <span class="inline-flex items-center gap-1 text-[9px] font-bold text-[#0A6ED1] bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-lg shadow-sm">XML</span>
+                <svg class="w-10 h-5 text-[#0A6ED1] flow-arrow hidden sm:block" viewBox="0 0 40 20" fill="none"><path d="M0 10h28M24 5l8 5-8 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="inline-flex items-center gap-1 text-[9px] font-bold text-[#6A7B95] bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-lg shadow-sm">STEP</span>
+                <svg class="w-10 h-5 text-[#0A6ED1]/60 flow-arrow hidden sm:block" style="animation-delay:1s" viewBox="0 0 40 20" fill="none"><path d="M0 10h28M24 5l8 5-8 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+
+              <!-- ERP Panel + Gantt -->
+              <div class="dashboard-panel rounded-2xl p-3 sm:p-4 w-full lg:flex-1">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-[#0A6ED1] flex items-center justify-center shadow-sm">
+                      <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3z"/><path stroke-linecap="round" d="M9 12h6M12 9v6"/></svg>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-[#122136]">Infotec ERP</p>
+                      <p class="text-[9px] text-[#6A7B95]">Загрузка цеха</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] font-semibold text-[#0A6ED1] bg-[#0A6ED1]/8 px-2 py-0.5 rounded-full">Live</span>
+                </div>
+                <div class="space-y-2.5">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[9px] text-[#6A7B95] w-16 shrink-0 font-medium">CNC-01</span>
+                    <div class="flex-1 h-3 bg-[#E2E8F0] rounded-full overflow-hidden">
+                      <div class="h-full bg-[#0A6ED1] rounded-full progress-fill chart-bar" style="width:92%;animation-delay:0.1s"></div>
+                    </div>
+                    <span class="text-[9px] font-bold text-[#0A6ED1] w-8 text-right">92%</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-[9px] text-[#6A7B95] w-16 shrink-0 font-medium">Токарный</span>
+                    <div class="flex-1 h-3 bg-[#E2E8F0] rounded-full overflow-hidden">
+                      <div class="h-full bg-[#3B82F6] rounded-full progress-fill chart-bar" style="width:87%;animation-delay:0.3s"></div>
+                    </div>
+                    <span class="text-[9px] font-bold text-[#3B82F6] w-8 text-right">87%</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-[9px] text-[#6A7B95] w-16 shrink-0 font-medium">Фрезерный</span>
+                    <div class="flex-1 h-3 bg-[#E2E8F0] rounded-full overflow-hidden">
+                      <div class="h-full bg-[#0A6ED1]/60 rounded-full progress-fill chart-bar" style="width:74%;animation-delay:0.5s"></div>
+                    </div>
+                    <span class="text-[9px] font-bold text-[#122136] w-8 text-right">74%</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-[9px] text-[#6A7B95] w-16 shrink-0 font-medium">Сварка</span>
+                    <div class="flex-1 h-3 bg-[#E2E8F0] rounded-full overflow-hidden">
+                      <div class="h-full bg-emerald-500 rounded-full progress-fill chart-bar" style="width:68%;animation-delay:0.7s"></div>
+                    </div>
+                    <span class="text-[9px] font-bold text-emerald-600 w-8 text-right">68%</span>
+                  </div>
+                </div>
+                <div class="mt-3 pt-3 border-t border-[#E2E8F0]/80 flex items-end justify-between gap-1 h-14">
+                  <div class="flex flex-col items-center gap-1 flex-1">
+                    <div class="w-full bg-[#0A6ED1]/80 rounded-t chart-bar h-[70%]" style="animation-delay:0.2s"></div>
+                    <span class="text-[7px] text-[#6A7B95]">Пн</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-1 flex-1">
+                    <div class="w-full bg-[#0A6ED1] rounded-t chart-bar h-[90%]" style="animation-delay:0.35s"></div>
+                    <span class="text-[7px] text-[#6A7B95]">Вт</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-1 flex-1">
+                    <div class="w-full bg-[#3B82F6] rounded-t chart-bar h-[85%]" style="animation-delay:0.5s"></div>
+                    <span class="text-[7px] text-[#6A7B95]">Ср</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-1 flex-1">
+                    <div class="w-full bg-[#0A6ED1]/70 rounded-t chart-bar h-[78%]" style="animation-delay:0.65s"></div>
+                    <span class="text-[7px] text-[#6A7B95]">Чт</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-1 flex-1">
+                    <div class="w-full bg-emerald-500 rounded-t chart-bar h-[60%]" style="animation-delay:0.8s"></div>
+                    <span class="text-[7px] text-[#6A7B95]">Пт</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Stat cards -->
+          <div class="hero-stats-overlay grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+            <article class="hero-stat-card rounded-2xl p-4 sm:p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-xl bg-[#0A6ED1]/10 flex items-center justify-center shrink-0">
+                  <svg class="w-4.5 h-4.5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight leading-none">+35%</p>
+                  <p class="text-sm font-semibold text-[#122136] mt-1">рост загрузки оборудования</p>
+                  <p class="text-[11px] text-[#6A7B95] mt-1.5 leading-relaxed">Оптимальное планирование смен и станков</p>
+                </div>
+              </div>
+            </article>
+            <article class="hero-stat-card rounded-2xl p-4 sm:p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-xl bg-[#3B82F6]/10 flex items-center justify-center shrink-0">
+                  <svg class="w-4.5 h-4.5 text-[#3B82F6]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight leading-none">−40%</p>
+                  <p class="text-sm font-semibold text-[#122136] mt-1">времени на планирование</p>
+                  <p class="text-[11px] text-[#6A7B95] mt-1.5 leading-relaxed">Автоматическое формирование производственных нарядов</p>
+                </div>
+              </div>
+            </article>
+            <article class="hero-stat-card rounded-2xl p-4 sm:p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
+                  <svg class="w-4.5 h-4.5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.25 10.5a.75.75 0 01-.71.97H6.96a.75.75 0 01-.71-.97L8.5 5.47m0 0a48.416 48.416 0 00-3.75-.47"/></svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-lg sm:text-xl font-bold text-[#122136] tracking-tight leading-tight">Точный расчёт себестоимости</p>
+                  <p class="text-sm font-semibold text-[#122136] mt-1">кг / тонны</p>
+                  <p class="text-[11px] text-[#6A7B95] mt-1.5 leading-relaxed">Учёт материалов, отходов и накладных расходов</p>
+                </div>
+              </div>
+            </article>
+            <article class="hero-stat-card rounded-2xl p-4 sm:p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center shrink-0">
+                  <svg class="w-4.5 h-4.5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-lg sm:text-xl font-bold text-[#122136] tracking-tight leading-tight">Автоматическая сдельная оплата</p>
+                  <p class="text-[11px] text-[#6A7B95] mt-1.5 leading-relaxed">Нормирование операций и расчёт зарплаты по факту</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Lead form -->
+        <div id="lead-form" class="mt-10 sm:mt-12 lg:mt-14 max-w-2xl">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#6A7B95] mb-3">Получить демо для машиностроения</p>
+          <form class="hero-lead-elegant group w-full" action="#" method="post" novalidate>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-1.5 sm:p-1">
+              <label class="flex flex-1 items-center gap-3 min-w-0 px-4 py-3 sm:py-2.5 rounded-xl sm:rounded-full" for="emailInput">
+                <span class="sr-only">Ваш email</span>
+                <svg class="w-5 h-5 text-[#6A7B95] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                <input id="emailInput" name="email" type="email" placeholder="your@company.ee" autocomplete="email" class="w-full bg-transparent outline-none text-sm text-[#122136] placeholder:text-[#6A7B95]/60" required>
+              </label>
+              <button type="submit" class="btn-cushion btn-cushion--submit group shrink-0 w-full sm:w-auto transition-all duration-300">
+                <span class="btn-cushion-inner justify-center w-full sm:w-auto rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white font-semibold">
+                  Отправить
+                  <svg class="btn-cushion-arrow w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANUFACTURING CLIENTS -->
+    <section class="bg-white py-16 sm:py-20 lg:py-24 border-t border-[#E2E8F0]" aria-labelledby="customers-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="customers-heading" class="text-3xl sm:text-4xl font-bold text-[#122136] tracking-tighter mb-8">
+          Производители, которые доверяют Infotec
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 items-center">
+          <div class="flex justify-center items-center h-16 opacity-75 hover:opacity-100 transition-opacity">
+            <span class="text-xl sm:text-2xl font-semibold text-[#122136] tracking-tight">EstMetall</span>
+          </div>
+          <div class="flex justify-center items-center h-16 opacity-75 hover:opacity-100 transition-opacity">
+            <span class="text-xl sm:text-2xl font-semibold text-[#122136] tracking-tight">Tallinn Steel</span>
+          </div>
+          <div class="flex justify-center items-center h-16 opacity-75 hover:opacity-100 transition-opacity">
+            <span class="text-xl sm:text-2xl font-semibold text-[#122136] tracking-tight">Baltic CNC</span>
+          </div>
+          <div class="flex justify-center items-center h-16 opacity-75 hover:opacity-100 transition-opacity">
+            <span class="text-xl sm:text-2xl font-semibold text-[#122136] tracking-tight">Viru Engineering</span>
+          </div>
+          <div class="flex justify-center items-center h-16 opacity-75 hover:opacity-100 transition-opacity col-span-2 sm:col-span-1">
+            <span class="text-xl sm:text-2xl font-semibold text-[#122136] tracking-tight">Nordic Machine</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENTO GRID -->
+    <section class="bg-white border-t border-[#E2E8F0]/60" aria-labelledby="bento-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="mb-10 sm:mb-12 lg:mb-14 max-w-2xl">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">Готовое решение</p>
+          <h2 id="bento-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-4">
+            Металлообработка и машиностроение
+          </h2>
+          <p class="desc-text text-base sm:text-lg">
+            Полный цикл от конструкторской документации до отгрузки готовой продукции.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 auto-rows-[minmax(180px,auto)] lg:auto-rows-[minmax(160px,auto)]">
+
+          <!-- Card 1: Инженерная интеграция (2x2) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-2 lg:row-span-2 bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col">
+            <div class="mb-5">
+              <h3 class="text-xl font-bold text-[#122136] tracking-tight mb-2">Инженерная интеграция</h3>
+              <p class="desc-text text-sm max-w-md">
+                Прямой импорт конструкторских данных из CAD/PLM-систем. Автоматическое формирование спецификаций с весом, материалом и версионностью.
+              </p>
+            </div>
+            <div class="mt-auto bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl sm:rounded-2xl p-3 sm:p-4">
+              <div class="flex items-center justify-between px-1 mb-3">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">CAD → ERP · BOM</span>
+                <span class="text-[10px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">Импорт OK</span>
+              </div>
+              <div class="space-y-1.5 font-mono text-xs">
+                <div class="flex items-center gap-2 bg-white border border-[#E2E8F0]/60 rounded-lg px-3 py-2">
+                  <svg class="w-3.5 h-3.5 text-[#0A6ED1] shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>
+                  <span class="text-[#122136] font-semibold">Сборка КД-0847</span>
+                  <span class="ml-auto text-[10px] text-[#6A7B95]">2.4 т</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white border border-[#E2E8F0]/60 rounded-lg px-3 py-2 ml-4">
+                  <span class="text-[#6A7B95]">├─</span>
+                  <span class="text-[#122136]">Узел-01 Корпус</span>
+                  <span class="ml-auto text-[10px] text-[#0A6ED1] font-medium">840 кг</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white border border-[#E2E8F0]/60 rounded-lg px-3 py-2 ml-8">
+                  <span class="text-[#6A7B95]">├─</span>
+                  <span class="text-[#122136]">Деталь-12 Вал</span>
+                  <span class="ml-auto text-[10px] text-[#0A6ED1] font-medium">12 кг</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white border border-[#E2E8F0]/60 rounded-lg px-3 py-2 ml-8">
+                  <span class="text-[#6A7B95]">└─</span>
+                  <span class="text-[#122136]">Деталь-18 Крышка</span>
+                  <span class="ml-auto text-[10px] text-[#0A6ED1] font-medium">4.2 кг</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white border border-[#E2E8F0]/60 rounded-lg px-3 py-2 ml-4">
+                  <span class="text-[#6A7B95]">└─</span>
+                  <span class="text-[#122136]">Узел-02 Рама</span>
+                  <span class="ml-auto text-[10px] text-[#0A6ED1] font-medium">1.56 т</span>
+                </div>
+              </div>
+              <div class="mt-3 flex items-center gap-2">
+                <svg class="w-5 h-3 text-[#0A6ED1] flow-arrow" viewBox="0 0 20 12" fill="none"><path d="M0 6h14M10 2l6 4-6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span class="text-[10px] font-semibold text-[#0A6ED1]">XML / STEP → Infotec ERP</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Проектный и серийный учёт (tall) -->
+          <article class="bento-card group lg:col-span-1 lg:row-span-2 bg-[#F5F7FA] border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-[#122136] tracking-tight mb-2">Проектный и серийный учёт</h3>
+              <p class="desc-text text-xs">
+                Два сценария производства в одной системе: уникальные проекты и серийные партии с разным расчётом себестоимости.
+              </p>
+            </div>
+            <div class="mt-5 space-y-3">
+              <div class="bg-white border border-[#E2E8F0]/80 rounded-xl p-3">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-[#0A6ED1]">Проект</span>
+                  <span class="text-[10px] text-[#6A7B95]">ПР-2024-031</span>
+                </div>
+                <p class="text-sm font-semibold text-[#122136]">Редуктор RV-450</p>
+                <p class="text-[10px] text-[#6A7B95] mt-1">1 шт · индивидуальный расчёт</p>
+              </div>
+              <div class="bg-white border border-[#E2E8F0]/80 rounded-xl p-3">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-[#122136]">Серия</span>
+                  <span class="text-[10px] text-[#6A7B95]">СЗ-2024-118</span>
+                </div>
+                <p class="text-sm font-semibold text-[#122136]">Кронштейн К-12</p>
+                <p class="text-[10px] text-[#6A7B95] mt-1">500 шт · € 8.40 / ед.</p>
+              </div>
+              <div class="pt-3 border-t border-[#E2E8F0]">
+                <p class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95] mb-2">Калькулятор себестоимости</p>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-2xl font-bold text-[#0A6ED1] tracking-tight">€ 4 280</span>
+                  <span class="text-[10px] text-emerald-600 font-medium">↓ 12% к плану</span>
+                </div>
+                <div class="mt-2 space-y-1">
+                  <div class="flex justify-between text-[10px]"><span class="text-[#6A7B95]">Материалы</span><span class="text-[#122136] font-medium">€ 1 840</span></div>
+                  <div class="flex justify-between text-[10px]"><span class="text-[#6A7B95]">Операции</span><span class="text-[#122136] font-medium">€ 1 620</span></div>
+                  <div class="flex justify-between text-[10px]"><span class="text-[#6A7B95]">Накладные</span><span class="text-[#122136] font-medium">€ 820</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Управление цехом (tall) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-1 lg:row-span-2 bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col">
+            <div class="mb-4">
+              <h3 class="text-lg font-bold text-[#122136] tracking-tight mb-2">Управление цехом</h3>
+              <p class="desc-text text-xs sm:text-sm">
+                Диспетчеризация в реальном времени: загрузка станков, статусы операций и контроль план/факт по сменам.
+              </p>
+            </div>
+            <div class="flex-1 space-y-2.5">
+              <div class="bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl p-3">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[10px] font-semibold text-[#122136]">CNC-01 · Наряд #ПН-0841</span>
+                  <span class="text-[9px] font-bold text-white bg-[#0A6ED1] px-2 py-0.5 rounded-full">В работе</span>
+                </div>
+                <div class="h-2 bg-[#E2E8F0] rounded-full overflow-hidden mb-1">
+                  <div class="h-full bg-[#0A6ED1] rounded-full" style="width:72%"></div>
+                </div>
+                <p class="text-[9px] text-[#6A7B95]">72% · Осталось 1ч 20м</p>
+              </div>
+              <div class="bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl p-3">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[10px] font-semibold text-[#122136]">Токарный-03</span>
+                  <span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">Готов</span>
+                </div>
+                <div class="h-2 bg-[#E2E8F0] rounded-full overflow-hidden mb-1">
+                  <div class="h-full bg-emerald-500 rounded-full" style="width:100%"></div>
+                </div>
+                <p class="text-[9px] text-[#6A7B95]">100% · Сдано в ОТК</p>
+              </div>
+              <div class="bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl p-3">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[10px] font-semibold text-[#122136]">Фрезерный-02</span>
+                  <span class="text-[9px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200/60">Ожидание</span>
+                </div>
+                <div class="h-2 bg-[#E2E8F0] rounded-full overflow-hidden mb-1">
+                  <div class="h-full bg-amber-400 rounded-full" style="width:15%"></div>
+                </div>
+                <p class="text-[9px] text-[#6A7B95]">15% · Очередь: 2 наряда</p>
+              </div>
+              <div class="flex gap-1 pt-1">
+                <div class="flex-1 h-8 bg-[#0A6ED1]/20 rounded chart-bar" style="animation-delay:0.1s"></div>
+                <div class="flex-1 h-8 bg-[#0A6ED1]/40 rounded chart-bar" style="animation-delay:0.2s"></div>
+                <div class="flex-1 h-8 bg-[#0A6ED1] rounded chart-bar" style="animation-delay:0.3s"></div>
+                <div class="flex-1 h-8 bg-[#0A6ED1]/60 rounded chart-bar" style="animation-delay:0.4s"></div>
+                <div class="flex-1 h-8 bg-[#0A6ED1]/30 rounded chart-bar" style="animation-delay:0.5s"></div>
+              </div>
+              <p class="text-[9px] text-center text-[#6A7B95] font-medium">Gantt · загрузка по сменам</p>
+            </div>
+          </article>
+
+          <!-- Card 4: Сдельная оплата (wide dark) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-2 bg-gradient-to-br from-[#122136] to-[#1a3352] border border-[#122136]/20 rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-lg hover:border-[#0A6ED1]/40 overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-48 h-48 bg-[#0A6ED1]/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+            <div class="relative grid sm:grid-cols-2 gap-6 items-center">
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight mb-2">Сдельная оплата и нормирование</h3>
+                <p class="desc-text text-xs sm:text-sm text-[#6A7B95]">
+                  Автоматический расчёт сдельной зарплаты по нормам времени, тарифным ставкам и фактически выполненным операциям.
+                </p>
+              </div>
+              <div class="flex items-center justify-center gap-2 sm:gap-3" aria-label="Поток сдельной оплаты">
+                <div class="flex flex-col gap-2">
+                  <span class="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#0A6ED1] bg-white/90 border border-[#E2E8F0] px-3 py-1.5 rounded-lg shadow-sm">Наряд</span>
+                  <span class="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#6A7B95] bg-white/90 border border-[#E2E8F0] px-3 py-1.5 rounded-lg shadow-sm">Норма</span>
+                </div>
+                <svg class="w-8 h-4 text-[#0A6ED1] flow-arrow" viewBox="0 0 32 16" fill="none"><path d="M0 8h24M20 4l6 4-6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 shadow-inner">
+                  <div class="w-10 h-10 rounded-xl bg-[#0A6ED1] flex items-center justify-center mb-2 shadow-md">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+                  </div>
+                  <span class="text-xs font-bold text-white tracking-tight">Оператор</span>
+                  <span class="text-[9px] text-[#6A7B95] mt-0.5">Терминал цеха</span>
+                </div>
+                <svg class="w-6 h-4 text-white/30 hidden sm:block flow-arrow" style="animation-delay:0.5s" viewBox="0 0 24 16" fill="none"><path d="M0 8h16M12 4l6 4-6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="hidden sm:flex flex-col items-center bg-white/5 border border-white/10 rounded-xl px-3 py-3">
+                  <span class="text-lg font-bold text-white tracking-tight">€ 842</span>
+                  <span class="text-[9px] font-medium text-white/70">Смена</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5: Аналитика себестоимости (wide) -->
+          <article class="bento-card group md:col-span-2 lg:col-span-2 bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40 flex flex-col sm:flex-row gap-5 sm:gap-6 items-stretch">
+            <div class="sm:w-2/5 flex flex-col justify-center">
+              <h3 class="text-lg sm:text-xl font-bold text-[#122136] tracking-tight mb-2">Аналитика себестоимости</h3>
+              <p class="desc-text text-xs sm:text-sm">
+                Сравнение плановой и фактической себестоимости по материалам, операциям и накладным расходам в динамике.
+              </p>
+              <div class="mt-5 inline-flex items-center gap-2 self-start bg-[#0A6ED1]/8 border border-[#0A6ED1]/20 rounded-xl px-4 py-2.5">
+                <svg class="w-5 h-5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75z"/></svg>
+                <div>
+                  <p class="text-[10px] text-[#6A7B95] font-medium uppercase tracking-wider">Отклонение план/факт</p>
+                  <p class="text-xl font-bold text-[#0A6ED1] tracking-tight">−8.4%</p>
+                </div>
+                <span class="ml-2 text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full">В норме</span>
+              </div>
+            </div>
+            <div class="sm:w-3/5 bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl sm:rounded-2xl p-4 flex flex-col justify-end min-h-[160px]">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">Себестоимость, €/т</span>
+                <div class="flex items-center gap-3 text-[10px] text-[#6A7B95]">
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#0A6ED1]"></span>Факт</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>План</span>
+                </div>
+              </div>
+              <div class="relative flex-1 min-h-[100px]">
+                <svg class="metric-line w-full h-full" viewBox="0 0 280 100" preserveAspectRatio="none" aria-hidden="true">
+                  <line x1="0" y1="80" x2="280" y2="80" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <line x1="0" y1="50" x2="280" y2="50" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <line x1="0" y1="20" x2="280" y2="20" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <path d="M0 60 Q40 58 70 52 T140 48 T210 45 T280 42" fill="none" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M0 70 Q40 65 70 55 T140 50 T210 48 T280 44" fill="url(#costGradient)" stroke="#0A6ED1" stroke-width="2.5" stroke-linecap="round"/>
+                  <defs>
+                    <linearGradient id="costGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#0A6ED1" stop-opacity="0.15"/>
+                      <stop offset="100%" stop-color="#0A6ED1" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="absolute top-2 right-2 bg-white border border-[#E2E8F0] rounded-lg px-2 py-1 shadow-sm">
+                  <span class="text-[10px] font-bold text-[#0A6ED1]">€ 1 240/т</span>
+                </div>
+              </div>
+              <div class="flex justify-between mt-2 text-[9px] text-[#6A7B95] font-medium">
+                <span>Янв</span><span>Фев</span><span>Мар</span><span>Апр</span><span>Май</span><span>Июн</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS SHOWCASE -->
+    <section class="bg-white border-t border-[#E2E8F0]/60" aria-labelledby="tabs-showcase-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <h2 id="tabs-showcase-heading" class="text-2xl sm:text-3xl font-bold text-[#122136] tracking-tighter mb-8 sm:mb-10">
+          Ключевые возможности решения
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-6 sm:mb-8" role="tablist" aria-label="Разделы решения для машиностроения">
+          <button type="button" role="tab" id="tab-engineering" aria-selected="true" aria-controls="panel-engineering" data-tab="engineering" class="tab-card ui-text relative overflow-hidden text-left rounded-2xl border p-5 sm:p-6 min-h-[180px] sm:min-h-[200px] cursor-pointer group">
+            <div class="relative z-10 flex flex-col items-start max-w-[68%]">
+              <h3 class="text-base sm:text-lg font-bold text-[#122136] tracking-tight mb-1.5">Инженерная интеграция</h3>
+              <p class="desc-text text-xs sm:text-sm max-w-[200px] mb-4">CAD/PLM, BOM, версионность</p>
+              <span class="btn-cushion btn-cushion--tab inline-flex shrink-0 pointer-events-none" aria-hidden="true">
+                <span class="btn-cushion-inner rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-xs font-semibold">Подробнее <svg class="btn-cushion-arrow w-3 h-3 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+              </span>
+            </div>
+            <div class="absolute -bottom-3 -right-3 w-24 h-24 sm:w-28 sm:h-28" aria-hidden="true">
+              <div class="w-full h-full rounded-2xl bg-gradient-to-br from-[#0A6ED1] to-[#3B82F6] shadow-lg flex items-center justify-center rotate-6 group-hover:rotate-3 transition-transform duration-300">
+                <svg class="w-10 h-10 text-white/90" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" role="tab" id="tab-accounting" aria-selected="false" aria-controls="panel-accounting" data-tab="accounting" class="tab-card ui-text relative overflow-hidden text-left rounded-2xl border p-5 sm:p-6 min-h-[180px] sm:min-h-[200px] cursor-pointer group">
+            <div class="relative z-10 flex flex-col items-start max-w-[68%]">
+              <h3 class="text-base sm:text-lg font-bold text-[#122136] tracking-tight mb-1.5">Проектный и серийный учёт</h3>
+              <p class="desc-text text-xs sm:text-sm max-w-[200px] mb-4">Расчёт, материалы, накладные</p>
+              <span class="btn-cushion btn-cushion--tab inline-flex shrink-0 pointer-events-none" aria-hidden="true">
+                <span class="btn-cushion-inner rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-xs font-semibold">Подробнее <svg class="btn-cushion-arrow w-3 h-3 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+              </span>
+            </div>
+            <div class="absolute -bottom-2 -right-2 w-24 h-24 sm:w-28 sm:h-28" aria-hidden="true">
+              <div class="w-full h-full rounded-full bg-gradient-to-br from-[#0A6ED1] to-[#085bb0] shadow-lg flex items-center justify-center -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                <span class="text-xl font-bold text-white tracking-tight">€</span>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" role="tab" id="tab-shopfloor" aria-selected="false" aria-controls="panel-shopfloor" data-tab="shopfloor" class="tab-card ui-text relative overflow-hidden text-left rounded-2xl border p-5 sm:p-6 min-h-[180px] sm:min-h-[200px] cursor-pointer group">
+            <div class="relative z-10 flex flex-col items-start max-w-[68%]">
+              <h3 class="text-base sm:text-lg font-bold text-[#122136] tracking-tight mb-1.5">Управление цехом</h3>
+              <p class="desc-text text-xs sm:text-sm max-w-[200px] mb-4">Диспетчеризация, план/факт</p>
+              <span class="btn-cushion btn-cushion--tab inline-flex shrink-0 pointer-events-none" aria-hidden="true">
+                <span class="btn-cushion-inner rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-xs font-semibold">Подробнее <svg class="btn-cushion-arrow w-3 h-3 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+              </span>
+            </div>
+            <div class="absolute -bottom-3 -right-1 w-28 h-24" aria-hidden="true">
+              <div class="absolute bottom-0 left-0 w-16 h-14 rounded-2xl bg-gradient-to-br from-[#0A6ED1] to-[#3B82F6] shadow-lg rotate-[-8deg]"></div>
+              <div class="absolute bottom-2 right-0 w-14 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/80 to-[#0A6ED1] shadow-md rotate-6 flex items-center justify-center">
+                <span class="text-[9px] font-bold text-white">CNC</span>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <div class="relative">
+          <!-- Panel 1: Engineering -->
+          <div id="panel-engineering" role="tabpanel" aria-labelledby="tab-engineering" data-panel="engineering" class="tab-panel flex flex-col lg:flex-row gap-0 rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A6ED1] via-[#0A6ED1] to-[#085bb0] shadow-xl">
+            <div class="lg:w-[42%] relative min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] flex items-center justify-center p-8 sm:p-10 overflow-hidden">
+              <div class="tab-graphic-orb absolute w-48 h-48 bg-white/20 rounded-full top-1/4 left-1/4" aria-hidden="true"></div>
+              <div class="relative w-full max-w-[300px]" aria-hidden="true">
+                <div class="glass-3d rounded-2xl p-4 mb-3 rotate-[-4deg] translate-x-2">
+                  <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 rounded-lg bg-[#0A6ED1]/20 flex items-center justify-center">
+                      <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5"/></svg>
+                    </div>
+                    <span class="text-xs font-bold text-[#122136]">SolidWorks · v3.2</span>
+                  </div>
+                  <div class="space-y-1.5 text-[10px]">
+                    <div class="flex justify-between"><span class="text-[#6A7B95]">Сборка</span><span class="font-semibold text-[#122136]">КД-0847</span></div>
+                    <div class="flex justify-between"><span class="text-[#6A7B95]">Деталей</span><span class="font-semibold text-[#0A6ED1]">47</span></div>
+                    <div class="flex justify-between"><span class="text-[#6A7B95]">Вес</span><span class="font-semibold text-[#122136]">2.4 т</span></div>
+                  </div>
+                </div>
+                <div class="glass-3d rounded-xl p-3 rotate-[3deg] -translate-x-1 shadow-lg">
+                  <div class="flex justify-between items-center text-[10px]">
+                    <span class="font-semibold text-[#122136]">BOM импорт</span>
+                    <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">100%</span>
+                  </div>
+                </div>
+                <div class="absolute -bottom-2 -right-4 glass-3d rounded-lg px-3 py-2 rotate-6">
+                  <span class="text-[10px] font-bold text-[#0A6ED1]">Версия Rev. C</span>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-[58%] bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <h3 class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight mb-4">Инженерная интеграция: CAD/PLM без ручного ввода</h3>
+              <p class="desc-text text-sm sm:text-base mb-6">
+                Импортируйте конструкторскую документацию напрямую из SolidWorks, Компас-3D и PLM-систем. Система автоматически формирует спецификации, рассчитывает вес и отслеживает версии изменений.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Прямой обмен данными с CAD/PLM через XML, STEP и открытые API.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Автоматическое построение многоуровневых BOM с весом в кг и тоннах.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Версионность конструкторских изменений с историей и согласованием.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Синхронизация материалов, покрытий и технологических маршрутов.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Panel 2: Accounting -->
+          <div id="panel-accounting" role="tabpanel" aria-labelledby="tab-accounting" data-panel="accounting" class="tab-panel hidden flex-col lg:flex-row gap-0 rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A6ED1] via-[#0A6ED1] to-[#085bb0] shadow-xl">
+            <div class="lg:w-[42%] relative min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] flex items-center justify-center p-8 sm:p-10 overflow-hidden">
+              <div class="tab-graphic-orb absolute w-40 h-40 bg-white/15 rounded-full top-1/3 right-1/4" aria-hidden="true"></div>
+              <div class="relative w-full max-w-[280px] space-y-3" aria-hidden="true">
+                <div class="flex gap-2 justify-center mb-4">
+                  <span class="glass-3d text-sm font-bold text-[#0A6ED1] px-4 py-2 rounded-xl">Проект</span>
+                  <span class="glass-3d text-sm font-bold text-white bg-[#0A6ED1]/90 px-4 py-2 rounded-xl shadow-md">Серия</span>
+                </div>
+                <div class="glass-3d rounded-2xl p-4">
+                  <p class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95] mb-3">Калькулятор себестоимости</p>
+                  <div class="space-y-2.5">
+                    <div class="flex items-center gap-2"><span class="text-[10px] text-[#6A7B95] w-16">Материалы</span><div class="flex-1 h-2.5 bg-[#E2E8F0] rounded-full"><div class="h-full w-[43%] bg-[#0A6ED1]/60 rounded-full"></div></div></div>
+                    <div class="flex items-center gap-2"><span class="text-[10px] text-[#6A7B95] w-16">Операции</span><div class="flex-1 h-2.5 bg-[#E2E8F0] rounded-full"><div class="h-full w-[38%] bg-[#0A6ED1]/80 rounded-full"></div></div></div>
+                    <div class="flex items-center gap-2"><span class="text-[10px] text-[#6A7B95] w-16">Накладные</span><div class="flex-1 h-2.5 bg-[#E2E8F0] rounded-full"><div class="h-full w-[19%] bg-[#0A6ED1] rounded-full"></div></div></div>
+                  </div>
+                </div>
+                <div class="glass-3d rounded-xl p-3 flex items-center justify-between">
+                  <span class="text-xs font-medium text-[#6A7B95]">Итого себестоимость</span>
+                  <span class="text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60">€ 4 280</span>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-[58%] bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <h3 class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight mb-4">Проектный и серийный учёт: Точная себестоимость</h3>
+              <p class="desc-text text-sm sm:text-base mb-6">
+                Ведите уникальные проекты и серийные партии в единой системе. Автоматический расчёт себестоимости с учётом материалов, отходов и накладных расходов.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Раздельный учёт проектного и серийного производства с разными методиками калькуляции.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Расчёт себестоимости по весу (кг/тонны) с учётом коэффициентов отходов.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Распределение накладных расходов по операциям, участкам и проектам.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Контроль отклонений плановой и фактической себестоимости в реальном времени.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Panel 3: Shop floor -->
+          <div id="panel-shopfloor" role="tabpanel" aria-labelledby="tab-shopfloor" data-panel="shopfloor" class="tab-panel hidden flex-col lg:flex-row gap-0 rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A6ED1] via-[#0A6ED1] to-[#085bb0] shadow-xl">
+            <div class="lg:w-[42%] relative min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] flex items-center justify-center p-8 sm:p-10 overflow-hidden">
+              <div class="tab-graphic-orb absolute w-56 h-56 bg-white/10 rounded-full bottom-0 left-0" aria-hidden="true"></div>
+              <div class="relative w-full max-w-[300px]" aria-hidden="true">
+                <div class="glass-3d rounded-2xl p-4 mb-3">
+                  <p class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95] mb-3">Загрузка цеха · Live</p>
+                  <div class="space-y-2">
+                    <div class="flex items-center gap-2"><span class="text-[9px] text-[#6A7B95] w-14">CNC-01</span><div class="flex-1 h-2 bg-[#E2E8F0] rounded-full"><div class="h-full w-[92%] bg-[#0A6ED1] rounded-full"></div></div><span class="text-[9px] font-bold text-[#0A6ED1]">92%</span></div>
+                    <div class="flex items-center gap-2"><span class="text-[9px] text-[#6A7B95] w-14">Токарный</span><div class="flex-1 h-2 bg-[#E2E8F0] rounded-full"><div class="h-full w-[87%] bg-[#3B82F6] rounded-full"></div></div><span class="text-[9px] font-bold text-[#3B82F6]">87%</span></div>
+                    <div class="flex items-center gap-2"><span class="text-[9px] text-[#6A7B95] w-14">Сварка</span><div class="flex-1 h-2 bg-[#E2E8F0] rounded-full"><div class="h-full w-[68%] bg-emerald-500 rounded-full"></div></div><span class="text-[9px] font-bold text-emerald-600">68%</span></div>
+                  </div>
+                </div>
+                <div class="glass-3d rounded-xl p-3 flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-[#0A6ED1]/20 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>
+                  </div>
+                  <div><p class="text-[10px] font-semibold text-[#122136]">Терминал оператора</p><p class="text-[9px] text-emerald-600">План/факт: 98%</p></div>
+                </div>
+                <div class="absolute -bottom-1 -right-2 glass-3d rounded-lg px-2.5 py-1.5 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#0A6ED1] animate-pulse"></span>
+                  <span class="text-[9px] font-semibold text-[#0A6ED1]">Real-time</span>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-[58%] bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+              <h3 class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight mb-4">Управление цехом: Диспетчеризация в реальном времени</h3>
+              <p class="desc-text text-sm sm:text-base mb-6">
+                Контролируйте загрузку оборудования, статусы операций и выполнение плана по каждой смене. Операторские терминалы фиксируют факт без бумажных нарядов.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Формирование планов производства по рабочим центрам и бригадам.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Выдача сменных заданий и Gantt-план по станкам с перепланированием.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Пооперационное рапортование с планшетов и терминалов у станка.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Автоматический расчёт сдельной оплаты труда на основе фактически выполненных операций.
+                </li>
+                <li class="flex items-start gap-3 text-sm sm:text-base text-[#122136]">
+                  <span class="shrink-0 w-5 h-5 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0A6ED1]"></span></span>
+                  Контроль простоев и OEE (Overall Equipment Effectiveness) в дашборде загрузки.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP FLOOR SHOWCASE — Gantt + Mobile + Dashboard -->
+    <section class="bg-[#F5F7FA] border-t border-[#E2E8F0]/60" aria-labelledby="shopfloor-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="mb-10 sm:mb-12 max-w-2xl">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">Управление цехом</p>
+          <h2 id="shopfloor-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-4">
+            Цех под контролем в реальном времени
+          </h2>
+          <p class="desc-text text-base sm:text-lg">
+            Интерактивный Gantt по рабочим центрам, мобильное рапортование у станка и дашборд загрузки оборудования — в одном интерфейсе.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-5 sm:gap-6">
+          <!-- Interactive Gantt -->
+          <div class="lg:col-span-7 bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-base sm:text-lg font-bold text-[#122136] tracking-tight">Gantt-план по станкам</h3>
+                <p class="text-xs text-[#6A7B95] mt-0.5">Смена 1 · 07.07.2026 · кликните на рабочий центр</p>
+              </div>
+              <span class="text-[10px] font-semibold text-[#0A6ED1] bg-[#0A6ED1]/8 px-2.5 py-1 rounded-full">Live</span>
+            </div>
+            <div class="flex gap-2 mb-3 text-[9px] text-[#6A7B95] font-medium pl-[72px] sm:pl-[88px]">
+              <span class="flex-1 text-center">08:00</span>
+              <span class="flex-1 text-center">10:00</span>
+              <span class="flex-1 text-center">12:00</span>
+              <span class="flex-1 text-center">14:00</span>
+              <span class="flex-1 text-center">16:00</span>
+            </div>
+            <div id="ganttBoard" class="space-y-2" role="listbox" aria-label="План загрузки рабочих центров">
+              <div class="gantt-row flex items-center gap-2 sm:gap-3 border border-[#E2E8F0]/80 rounded-xl px-2 sm:px-3 py-2" role="option" aria-selected="true" data-machine="cnc01" tabindex="0">
+                <span class="text-[10px] sm:text-xs font-semibold text-[#122136] w-16 sm:w-20 shrink-0">CNC-01</span>
+                <div class="flex-1 flex gap-0.5 h-7 sm:h-8">
+                  <div class="gantt-bar-segment is-active flex-[2] bg-[#0A6ED1] rounded-l" title="ПН-0841"></div>
+                  <div class="gantt-bar-segment flex-[1] bg-[#0A6ED1]/40 rounded-none" title="Настройка"></div>
+                  <div class="gantt-bar-segment flex-[3] bg-[#3B82F6] rounded-none" title="ПН-0842"></div>
+                  <div class="gantt-bar-segment flex-[1] bg-amber-400 rounded-r" title="Простой"></div>
+                </div>
+                <span class="text-[9px] font-bold text-[#0A6ED1] w-10 text-right shrink-0">92%</span>
+              </div>
+              <div class="gantt-row flex items-center gap-2 sm:gap-3 border border-[#E2E8F0]/80 rounded-xl px-2 sm:px-3 py-2" role="option" aria-selected="false" data-machine="tokar" tabindex="0">
+                <span class="text-[10px] sm:text-xs font-semibold text-[#122136] w-16 sm:w-20 shrink-0">Токарный</span>
+                <div class="flex-1 flex gap-0.5 h-7 sm:h-8">
+                  <div class="gantt-bar-segment flex-[1] bg-[#E2E8F0] rounded-l"></div>
+                  <div class="gantt-bar-segment is-active flex-[4] bg-[#3B82F6] rounded-none" title="ПН-0839"></div>
+                  <div class="gantt-bar-segment flex-[2] bg-[#0A6ED1]/60 rounded-r" title="ПН-0843"></div>
+                </div>
+                <span class="text-[9px] font-bold text-[#3B82F6] w-10 text-right shrink-0">87%</span>
+              </div>
+              <div class="gantt-row flex items-center gap-2 sm:gap-3 border border-[#E2E8F0]/80 rounded-xl px-2 sm:px-3 py-2" role="option" aria-selected="false" data-machine="frez" tabindex="0">
+                <span class="text-[10px] sm:text-xs font-semibold text-[#122136] w-16 sm:w-20 shrink-0">Фрезерный</span>
+                <div class="flex-1 flex gap-0.5 h-7 sm:h-8">
+                  <div class="gantt-bar-segment flex-[3] bg-[#0A6ED1]/50 rounded-l" title="ПН-0835"></div>
+                  <div class="gantt-bar-segment is-active flex-[2] bg-[#0A6ED1] rounded-none" title="ПН-0844"></div>
+                  <div class="gantt-bar-segment flex-[2] bg-[#E2E8F0] rounded-r"></div>
+                </div>
+                <span class="text-[9px] font-bold text-[#122136] w-10 text-right shrink-0">74%</span>
+              </div>
+              <div class="gantt-row flex items-center gap-2 sm:gap-3 border border-[#E2E8F0]/80 rounded-xl px-2 sm:px-3 py-2" role="option" aria-selected="false" data-machine="welding" tabindex="0">
+                <span class="text-[10px] sm:text-xs font-semibold text-[#122136] w-16 sm:w-20 shrink-0">Сварка</span>
+                <div class="flex-1 flex gap-0.5 h-7 sm:h-8">
+                  <div class="gantt-bar-segment flex-[2] bg-emerald-500 rounded-l" title="ПН-0830"></div>
+                  <div class="gantt-bar-segment is-active flex-[2] bg-emerald-400 rounded-none" title="ПН-0845"></div>
+                  <div class="gantt-bar-segment flex-[3] bg-[#E2E8F0] rounded-r"></div>
+                </div>
+                <span class="text-[9px] font-bold text-emerald-600 w-10 text-right shrink-0">68%</span>
+              </div>
+            </div>
+            <div id="ganttDetail" class="mt-4 bg-[#F5F7FA] border border-[#E2E8F0]/80 rounded-xl p-3 sm:p-4">
+              <div class="flex items-center justify-between mb-2">
+                <p class="text-sm font-semibold text-[#122136]" id="ganttDetailTitle">CNC-01 · Наряд #ПН-0841</p>
+                <span class="text-[10px] font-bold text-white bg-[#0A6ED1] px-2 py-0.5 rounded-full" id="ganttDetailStatus">В работе</span>
+              </div>
+              <p class="text-xs text-[#6A7B95]" id="ganttDetailDesc">Операция 3/5 · Токарная обработка вала · Осталось 1ч 20м · Бригада А</p>
+            </div>
+            <div class="flex gap-3 mt-3 text-[9px]">
+              <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#0A6ED1]"></span>В работе</span>
+              <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#3B82F6]"></span>Запланировано</span>
+              <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-amber-400"></span>Простой</span>
+              <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#E2E8F0]"></span>Свободно</span>
+            </div>
+          </div>
+
+          <!-- Mobile tablet + OEE dashboard -->
+          <div class="lg:col-span-5 flex flex-col gap-5 sm:gap-6">
+            <!-- Tablet mockup -->
+            <div class="bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-sm flex-1">
+              <h3 class="text-sm font-bold text-[#122136] mb-3">Мобильное рапортование</h3>
+              <div class="flex justify-center">
+                <div class="tablet-mockup rounded-2xl p-2 w-[200px] sm:w-[220px]">
+                  <div class="bg-white rounded-xl p-3 min-h-[200px]">
+                    <div class="flex items-center justify-between mb-3">
+                      <span class="text-[9px] font-bold text-[#122136]">Терминал · CNC-01</span>
+                      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    </div>
+                    <p class="text-[10px] font-semibold text-[#122136] mb-1">ПН-0841 · Оп. 3/5</p>
+                    <p class="text-[9px] text-[#6A7B95] mb-3">Токарная обработка вала</p>
+                    <div class="space-y-2">
+                      <button type="button" class="w-full text-[9px] font-semibold text-white bg-[#0A6ED1] rounded-lg py-2">Завершить операцию</button>
+                      <button type="button" class="w-full text-[9px] font-semibold text-[#122136] bg-[#F5F7FA] border border-[#E2E8F0] rounded-lg py-2">Зафиксировать брак</button>
+                      <button type="button" class="w-full text-[9px] font-semibold text-amber-700 bg-amber-50 border border-amber-200/60 rounded-lg py-2">Простой оборудования</button>
+                    </div>
+                    <p class="text-[8px] text-center text-[#6A7B95] mt-3">Планшет у станка · offline-ready</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- OEE Dashboard -->
+            <div class="bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-sm">
+              <h3 class="text-sm font-bold text-[#122136] mb-4">Дашборд загрузки и OEE</h3>
+              <div class="flex items-center gap-4 sm:gap-6">
+                <div class="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0" role="img" aria-label="OEE 78%">
+                  <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#E2E8F0" stroke-width="10"/>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#0A6ED1" stroke-width="10" stroke-dasharray="196 251" stroke-linecap="round" class="donut-segment"/>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#F59E0B" stroke-width="10" stroke-dasharray="35 251" stroke-dashoffset="-196" stroke-linecap="round" class="donut-segment"/>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span class="text-xl font-bold text-[#122136]">78%</span>
+                    <span class="text-[9px] text-[#6A7B95]">OEE</span>
+                  </div>
+                </div>
+                <div class="flex-1 space-y-2.5">
+                  <div class="flex justify-between text-xs"><span class="text-[#6A7B95]">Доступность</span><span class="font-semibold text-[#122136]">91%</span></div>
+                  <div class="h-1.5 bg-[#E2E8F0] rounded-full"><div class="h-full bg-[#0A6ED1] rounded-full w-[91%]"></div></div>
+                  <div class="flex justify-between text-xs"><span class="text-[#6A7B95]">Производительность</span><span class="font-semibold text-[#122136]">84%</span></div>
+                  <div class="h-1.5 bg-[#E2E8F0] rounded-full"><div class="h-full bg-[#3B82F6] rounded-full w-[84%]"></div></div>
+                  <div class="flex justify-between text-xs"><span class="text-[#6A7B95]">Качество</span><span class="font-semibold text-[#122136]">97%</span></div>
+                  <div class="h-1.5 bg-[#E2E8F0] rounded-full"><div class="h-full bg-emerald-500 rounded-full w-[97%]"></div></div>
+                </div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#E2E8F0] flex items-center justify-between">
+                <span class="text-[10px] text-[#6A7B95]">Средняя загрузка цеха</span>
+                <span class="text-sm font-bold text-[#0A6ED1]">+35% за квартал</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS IN NUMBERS -->
+    <section class="bg-white border-t border-[#E2E8F0]/60" aria-labelledby="benefits-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="mb-10 sm:mb-12 max-w-2xl">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">Преимущества в цифрах</p>
+          <h2 id="benefits-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-4">
+            Измеримый эффект для производства
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          <article class="bento-card bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40">
+            <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <p class="text-3xl sm:text-4xl font-bold text-[#0A6ED1] tracking-tight mb-2">−28%</p>
+            <h3 class="text-lg font-bold text-[#122136] tracking-tight mb-2">Снижение брака и пересорта</h3>
+            <p class="desc-text text-sm">Сквозной контроль операций и материалов исключает ошибки при комплектации и передаче между участками.</p>
+          </article>
+          <article class="bento-card bg-[#F5F7FA] border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40">
+            <div class="w-10 h-10 rounded-xl bg-[#0A6ED1]/10 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375"/></svg>
+            </div>
+            <p class="text-3xl sm:text-4xl font-bold text-[#122136] tracking-tight mb-2">−22%</p>
+            <h3 class="text-lg font-bold text-[#122136] tracking-tight mb-2">Точное планирование закупок</h3>
+            <p class="desc-text text-sm">Потребность в материалах рассчитывается из BOM и производственного плана — без излишков на складе.</p>
+          </article>
+          <article class="bento-card bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-md hover:border-[#0A6ED1]/40">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5"/></svg>
+            </div>
+            <p class="text-3xl sm:text-4xl font-bold text-emerald-600 tracking-tight mb-2">24/7</p>
+            <h3 class="text-lg font-bold text-[#122136] tracking-tight mb-2">Прозрачность для руководителя</h3>
+            <p class="desc-text text-sm">Дашборды загрузки, себестоимости и отклонений план/факт доступны директору производства в любой момент.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEGRATIONS -->
+    <section class="bg-[#F5F7FA] border-t border-[#E2E8F0]/60" aria-labelledby="integrations-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="mb-10 sm:mb-12 text-center max-w-2xl mx-auto">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">Интеграции</p>
+          <h2 id="integrations-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-4">
+            Подключается к вашему IT-ландшафту
+          </h2>
+          <p class="desc-text text-base sm:text-lg">От конструкторского отдела до бухгалтерии — единый поток данных без двойного ввода.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          <article class="integration-card bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm text-center">
+            <div class="w-14 h-14 rounded-2xl bg-[#0A6ED1]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-7 h-7 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5m14.8.8l1.402 1.402"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-[#122136] mb-2">CAD / PLM</h3>
+            <p class="desc-text text-sm mb-4">Компас-3D, SolidWorks, Autodesk Inventor, Windchill, Лоцман</p>
+            <div class="flex flex-wrap justify-center gap-2">
+              <span class="text-[10px] font-semibold text-[#0A6ED1] bg-[#0A6ED1]/8 px-2.5 py-1 rounded-full border border-[#0A6ED1]/15">XML</span>
+              <span class="text-[10px] font-semibold text-[#6A7B95] bg-[#F5F7FA] px-2.5 py-1 rounded-full border border-[#E2E8F0]">STEP</span>
+              <span class="text-[10px] font-semibold text-[#6A7B95] bg-[#F5F7FA] px-2.5 py-1 rounded-full border border-[#E2E8F0]">API</span>
+            </div>
+          </article>
+          <article class="integration-card bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm text-center">
+            <div class="w-14 h-14 rounded-2xl bg-[#3B82F6]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-7 h-7 text-[#3B82F6]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M11.42 15.17l-5.1-2.96a1 1 0 00-1.02.07v3.02a1 1 0 001.02.07l5.1-2.96M20.25 8.25v7.5M3.75 8.25v7.5"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-[#122136] mb-2">Станки с ЧПУ</h3>
+            <p class="desc-text text-sm mb-4">Сбор данных по протоколам MTConnect, OPC-UA, Modbus и проприетарным API</p>
+            <div class="flex flex-wrap justify-center gap-2">
+              <span class="text-[10px] font-semibold text-[#3B82F6] bg-[#3B82F6]/8 px-2.5 py-1 rounded-full border border-[#3B82F6]/15">OPC-UA</span>
+              <span class="text-[10px] font-semibold text-[#6A7B95] bg-[#F5F7FA] px-2.5 py-1 rounded-full border border-[#E2E8F0]">MTConnect</span>
+            </div>
+          </article>
+          <article class="integration-card bg-white border border-[#E2E8F0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm text-center">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-[#122136] mb-2">1С, бухгалтерия, ЭДО</h3>
+            <p class="desc-text text-sm mb-4">Выгрузка первичных документов, зарплаты, складских движений и счетов-фактур</p>
+            <div class="flex flex-wrap justify-center gap-2">
+              <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">1С</span>
+              <span class="text-[10px] font-semibold text-[#6A7B95] bg-[#F5F7FA] px-2.5 py-1 rounded-full border border-[#E2E8F0]">Merit</span>
+              <span class="text-[10px] font-semibold text-[#6A7B95] bg-[#F5F7FA] px-2.5 py-1 rounded-full border border-[#E2E8F0]">ЭДО</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDY -->
+    <section class="bg-[#F5F7FA] border-t border-[#E2E8F0]/60" aria-labelledby="case-study-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">Реальный результат</p>
+            <h2 id="case-study-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-6">
+              Кейс: EstMetall Grupp
+            </h2>
+            <p class="desc-text text-base sm:text-lg mb-8 max-w-lg">
+              Производитель металлоконструкций из Таллинна внедрил Infotec ERP для автоматизации полного производственного цикла — от импорта CAD до сдельной оплаты.
+            </p>
+            <div class="grid grid-cols-3 gap-4 sm:gap-6 mb-8">
+              <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-sm">
+                <p class="text-2xl sm:text-3xl font-bold text-[#0A6ED1] tracking-tight">+35%</p>
+                <p class="text-xs sm:text-sm font-semibold text-[#122136] mt-1">загрузка</p>
+              </div>
+              <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-sm">
+                <p class="text-2xl sm:text-3xl font-bold text-[#122136] tracking-tight">−40%</p>
+                <p class="text-xs sm:text-sm font-semibold text-[#122136] mt-1">планирование</p>
+              </div>
+              <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 shadow-sm">
+                <p class="text-2xl sm:text-3xl font-bold text-emerald-600 tracking-tight">100%</p>
+                <p class="text-xs sm:text-sm font-semibold text-[#122136] mt-1">BOM из CAD</p>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="bg-white border border-[#E2E8F0] rounded-3xl p-6 sm:p-8 lg:p-10 shadow-lg relative">
+              <svg class="w-10 h-10 text-[#0A6ED1]/20 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z"/></svg>
+              <blockquote class="text-base sm:text-lg text-[#122136] leading-relaxed font-medium mb-6">
+                «До внедрения Infotec планирование занимало два дня в неделю. Сейчас производственный план формируется автоматически из CAD, а загрузка цеха выросла на треть. BOM из конструкторского отдела попадает в ERP без единой ручной строки.»
+              </blockquote>
+              <div class="flex items-center gap-4 pt-6 border-t border-[#E2E8F0]">
+                <div class="w-12 h-12 rounded-full bg-[#0A6ED1]/10 flex items-center justify-center shrink-0">
+                  <span class="text-sm font-bold text-[#0A6ED1]">АК</span>
+                </div>
+                <div>
+                  <p class="font-semibold text-[#122136]">Андрес Каллас</p>
+                  <p class="text-sm text-[#6A7B95]">Директор по производству, EstMetall Grupp</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -bottom-4 -right-4 sm:-right-6 bg-[#0A6ED1] text-white rounded-2xl px-4 py-3 shadow-xl">
+              <p class="text-[10px] font-semibold uppercase tracking-wider opacity-80">Внедрение</p>
+              <p class="text-sm font-bold">4 месяца</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-white border-t border-[#E2E8F0]/60" aria-labelledby="faq-heading">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="text-center mb-10 sm:mb-12">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">FAQ</p>
+          <h2 id="faq-heading" class="text-2xl sm:text-3xl font-bold text-[#122136] tracking-tighter">
+            Частые вопросы
+          </h2>
+        </div>
+        <div class="space-y-3" id="faqAccordion">
+          <div class="border border-[#E2E8F0] rounded-2xl overflow-hidden">
+            <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="true" aria-controls="faq-1">
+              <span class="text-sm sm:text-base font-semibold text-[#122136]">С какими CAD-системами работает интеграция?</span>
+              <svg class="faq-chevron w-5 h-5 text-[#0A6ED1] shrink-0 transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faq-1" class="accordion-panel open px-5 pb-4">
+              <p class="desc-text text-sm">Поддерживаются Компас-3D, SolidWorks, Autodesk Inventor и PLM-системы через XML, STEP и открытые API. BOM с весовыми характеристиками импортируется автоматически.</p>
+            </div>
+          </div>
+          <div class="border border-[#E2E8F0] rounded-2xl overflow-hidden">
+            <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="false" aria-controls="faq-2">
+              <span class="text-sm sm:text-base font-semibold text-[#122136]">Можно ли вести и проектное, и серийное производство?</span>
+              <svg class="faq-chevron w-5 h-5 text-[#0A6ED1] shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faq-2" class="accordion-panel px-5 pb-4">
+              <p class="desc-text text-sm">Да. Система поддерживает оба сценария параллельно: уникальные проекты под заказ и серийные партии с разными методиками калькуляции себестоимости.</p>
+            </div>
+          </div>
+          <div class="border border-[#E2E8F0] rounded-2xl overflow-hidden">
+            <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="false" aria-controls="faq-3">
+              <span class="text-sm sm:text-base font-semibold text-[#122136]">Как операторы фиксируют выполнение операций?</span>
+              <svg class="faq-chevron w-5 h-5 text-[#0A6ED1] shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faq-3" class="accordion-panel px-5 pb-4">
+              <p class="desc-text text-sm">Через планшет или терминал у станка: начало/окончание операции, фиксация брака и простоев. Данные сразу попадают в план/факт и расчёт сдельной оплаты.</p>
+            </div>
+          </div>
+          <div class="border border-[#E2E8F0] rounded-2xl overflow-hidden">
+            <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="false" aria-controls="faq-4">
+              <span class="text-sm sm:text-base font-semibold text-[#122136]">Что такое OEE и как он считается?</span>
+              <svg class="faq-chevron w-5 h-5 text-[#0A6ED1] shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faq-4" class="accordion-panel px-5 pb-4">
+              <p class="desc-text text-sm">OEE (Overall Equipment Effectiveness) — интегральный показатель эффективности оборудования. Infotec рассчитывает его из доступности, производительности и качества на основе данных рапортования и простоев.</p>
+            </div>
+          </div>
+          <div class="border border-[#E2E8F0] rounded-2xl overflow-hidden">
+            <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="false" aria-controls="faq-5">
+              <span class="text-sm sm:text-base font-semibold text-[#122136]">Сколько длится внедрение?</span>
+              <svg class="faq-chevron w-5 h-5 text-[#0A6ED1] shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faq-5" class="accordion-panel px-5 pb-4">
+              <p class="desc-text text-sm">Типовое внедрение для металлообработки занимает 3–6 месяцев в зависимости от числа участков, интеграций с CAD и станками. Пилотный цех можно запустить за 6–8 недель.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA with form -->
+    <section id="final-cta" class="relative overflow-hidden" style="background: linear-gradient(135deg, #122136 0%, #1a3352 50%, #122136 100%);" aria-labelledby="cta-heading">
+      <div class="absolute inset-0 opacity-30 pointer-events-none" aria-hidden="true" style="background-image: linear-gradient(90deg, rgba(10,110,209,0.05) 1px, transparent 1px), linear-gradient(0deg, rgba(10,110,209,0.05) 1px, transparent 1px); background-size: 24px 24px;"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div class="text-center lg:text-left">
+            <h2 id="cta-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tighter mb-4">
+              Готовы автоматизировать производство?
+            </h2>
+            <p class="text-base sm:text-lg text-[#6A7B95] max-w-xl mx-auto lg:mx-0 mb-6">
+              Оставьте заявку — проведём демонстрацию с учётом специфики вашего цеха, CAD-систем и парка оборудования.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+              <a href="tel:+3725111876" class="footer-cta-secondary inline-flex items-center justify-center px-6 py-3 rounded-full text-white text-sm font-semibold hover:bg-white/10 transition-all duration-300">
+                +372 5111876
+              </a>
+              <a href="mailto:support@infotec.ee" class="footer-cta-secondary inline-flex items-center justify-center px-6 py-3 rounded-full text-white text-sm font-semibold hover:bg-white/10 transition-all duration-300">
+                support@infotec.ee
+              </a>
+            </div>
+          </div>
+          <div>
+            <form class="lead-form-cushion group w-full" action="#" method="post" novalidate>
+              <p class="text-xs font-semibold uppercase tracking-widest text-[#6A7B95] mb-3 px-2">Заявка на демо</p>
+              <div class="lead-form-track flex-col sm:flex-col gap-3 p-4 sm:p-5 rounded-2xl">
+                <label class="lead-input-wrap rounded-xl" for="ctaName">
+                  <span class="sr-only">Ваше имя</span>
+                  <input id="ctaName" name="name" type="text" placeholder="Имя и фамилия" required>
+                </label>
+                <label class="lead-input-wrap rounded-xl" for="ctaEmail">
+                  <span class="sr-only">Email</span>
+                  <input id="ctaEmail" name="email" type="email" placeholder="your@company.ee" autocomplete="email" required>
+                </label>
+                <label class="lead-input-wrap rounded-xl" for="ctaCompany">
+                  <span class="sr-only">Компания</span>
+                  <input id="ctaCompany" name="company" type="text" placeholder="Название компании">
+                </label>
+                <button type="submit" class="btn-cushion btn-cushion--submit group w-full transition-all duration-300">
+                  <span class="btn-cushion-inner justify-center w-full rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white font-semibold">
+                    Получить демо для машиностроения
+                    <svg class="btn-cushion-arrow w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0B0F17] text-[#E2E8F0] border-t border-white/5" aria-label="Подвал сайта">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 mb-16 sm:mb-20 lg:mb-24">
+        <div>
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Платформа</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Инженерная интеграция</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Управление цехом</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Проектный учёт</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Сдельная оплата</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Аналитика себестоимости</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Решения</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Для металлообработки</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Для машиностроения</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Серийное производство</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Проектное производство</a></li>
+          </ul>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Таллинн</h3>
+          <address class="not-italic space-y-2.5 text-sm text-[#E2E8F0]/90 leading-relaxed">
+            <p>Narva mnt 150, off. 202</p>
+            <p>Тел: <a href="tel:+3725111876" class="footer-link hover:text-white transition-colors duration-200">+372 5111876</a></p>
+            <p>Тел: <a href="tel:+372525163595" class="footer-link hover:text-white transition-colors duration-200">+372 525163595</a></p>
+          </address>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Нарва</h3>
+          <address class="not-italic space-y-2.5 text-sm text-[#E2E8F0]/90 leading-relaxed">
+            <p>Pähklimäe tn 7-62, 13619</p>
+            <p>Ида-Вирумаа, Эстония</p>
+            <p><a href="mailto:support@infotec.ee" class="footer-link hover:text-white transition-colors duration-200">support@infotec.ee</a></p>
+          </address>
+        </div>
+        <div class="col-span-2 sm:col-span-3 lg:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Компания</h3>
+          <ul class="space-y-2.5 mb-6">
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">О нас</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Новости</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#E2E8F0]/90 hover:text-white transition-colors duration-200">Партнеры</a></li>
+          </ul>
+          <div class="flex flex-col gap-2.5 w-full sm:w-auto lg:max-w-[210px]">
+            <a href="#" class="footer-cta-cushion inline-flex w-full transition-all duration-200">
+              <span class="footer-cta-primary inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-sm font-semibold">Демо-доступ</span>
+            </a>
+            <a href="#" class="footer-cta-secondary inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-white/5 border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-all duration-200">Связаться с нами</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-16">
+        <div class="flex items-end gap-3 sm:gap-4 select-none" aria-label="Infotec">
+          <div class="shrink-0 mb-2 sm:mb-4 hidden sm:flex flex-col gap-1" aria-hidden="true">
+            <span class="w-8 h-2.5 bg-white rounded-sm"></span>
+            <span class="w-8 h-2.5 bg-white/70 rounded-sm"></span>
+            <span class="w-5 h-2.5 bg-white/40 rounded-sm"></span>
+          </div>
+          <span class="footer-wordmark font-bold text-white tracking-tight">Infotec</span>
+        </div>
+        <div class="flex flex-col items-start lg:items-end gap-6 lg:gap-7 lg:pb-2 shrink-0">
+          <div class="flex items-center gap-5">
+            <a href="#" class="text-[#E2E8F0]/80 hover:text-white transition-colors duration-200" aria-label="LinkedIn">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.126 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" class="text-[#E2E8F0]/80 hover:text-white transition-colors duration-200" aria-label="X">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="text-[#E2E8F0]/80 hover:text-white transition-colors duration-200" aria-label="GitHub">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+          <nav aria-label="Legal information">
+            <ul class="flex flex-col lg:items-end gap-1.5">
+              <li><a href="#" class="footer-link text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider hover:text-white transition-colors duration-200">Terms of Use</a></li>
+              <li><a href="#" class="footer-link text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider hover:text-white transition-colors duration-200">Privacy Policy</a></li>
+              <li><a href="#" class="footer-link text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider hover:text-white transition-colors duration-200">Site Map</a></li>
+              <li><p class="text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider pt-1">© INFOTEC 2026</p></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      menuIcon.setAttribute('d', isOpen
+        ? 'M6 6l12 12M18 6L6 18'
+        : 'M4 7h16M4 12h16M4 17h16'
+      );
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.remove('active', 'text-[#122136]');
+          l.classList.add('text-[#6A7B95]');
+        });
+        link.classList.add('active', 'text-[#122136]');
+        link.classList.remove('text-[#6A7B95]');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuIcon.setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
+      }
+    });
+
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+    function switchTab(targetId) {
+      tabButtons.forEach(btn => {
+        const isActive = btn.dataset.tab === targetId;
+        btn.setAttribute('aria-selected', isActive);
+      });
+
+      tabPanels.forEach(panel => {
+        const isActive = panel.dataset.panel === targetId;
+        if (isActive) {
+          panel.classList.remove('hidden');
+          panel.classList.add('flex');
+          panel.classList.remove('tab-panel');
+          void panel.offsetWidth;
+          panel.classList.add('tab-panel');
+        } else {
+          panel.classList.add('hidden');
+          panel.classList.remove('flex');
+        }
+      });
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      btn.addEventListener('keydown', (e) => {
+        const tabs = Array.from(tabButtons);
+        const idx = tabs.indexOf(btn);
+        let next = -1;
+        if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next >= 0) {
+          e.preventDefault();
+          tabs[next].focus();
+          switchTab(tabs[next].dataset.tab);
+        }
+      });
+    });
+
+    const ganttData = {
+      cnc01: { title: 'CNC-01 · Наряд #ПН-0841', status: 'В работе', statusClass: 'text-white bg-[#0A6ED1]', desc: 'Операция 3/5 · Токарная обработка вала · Осталось 1ч 20м · Бригада А' },
+      tokar: { title: 'Токарный · Наряд #ПН-0839', status: 'В работе', statusClass: 'text-white bg-[#3B82F6]', desc: 'Операция 2/4 · Расточка корпуса · Осталось 2ч 45м · Бригада Б' },
+      frez: { title: 'Фрезерный · Наряд #ПН-0844', status: 'В работе', statusClass: 'text-white bg-[#0A6ED1]', desc: 'Операция 1/3 · Фрезерование паза · Осталось 3ч 10м · Бригада А' },
+      welding: { title: 'Сварка · Наряд #ПН-0845', status: 'В работе', statusClass: 'text-emerald-700 bg-emerald-50 border border-emerald-200/60', desc: 'Операция 4/4 · Сварка шва · Осталось 45м · Бригада В' }
+    };
+
+    const ganttRows = document.querySelectorAll('.gantt-row');
+    const ganttDetailTitle = document.getElementById('ganttDetailTitle');
+    const ganttDetailStatus = document.getElementById('ganttDetailStatus');
+    const ganttDetailDesc = document.getElementById('ganttDetailDesc');
+
+    function selectGanttRow(row) {
+      ganttRows.forEach(r => r.setAttribute('aria-selected', 'false'));
+      row.setAttribute('aria-selected', 'true');
+      const data = ganttData[row.dataset.machine];
+      if (data && ganttDetailTitle) {
+        ganttDetailTitle.textContent = data.title;
+        ganttDetailStatus.textContent = data.status;
+        ganttDetailStatus.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full ' + data.statusClass;
+        ganttDetailDesc.textContent = data.desc;
+      }
+    }
+
+    ganttRows.forEach(row => {
+      row.addEventListener('click', () => selectGanttRow(row));
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectGanttRow(row);
+        }
+      });
+    });
+
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const panel = document.getElementById(trigger.getAttribute('aria-controls'));
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.accordion-trigger').forEach(t => {
+          t.setAttribute('aria-expanded', 'false');
+          t.querySelector('.faq-chevron')?.classList.remove('rotate-180');
+        });
+        document.querySelectorAll('.accordion-panel').forEach(p => p.classList.remove('open'));
+        if (!isOpen) {
+          trigger.setAttribute('aria-expanded', 'true');
+          trigger.querySelector('.faq-chevron')?.classList.add('rotate-180');
+          panel?.classList.add('open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
