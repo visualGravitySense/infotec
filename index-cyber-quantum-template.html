@@ -576,37 +576,75 @@
     }
 
     .module-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(10, 110, 209, 0.15);
-      box-shadow: 0 8px 32px rgba(10, 110, 209, 0.06);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     }
 
     .module-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(10, 110, 209, 0.45);
-      box-shadow:
-        0 0 0 1px rgba(10, 110, 209, 0.25),
-        0 8px 32px rgba(10, 110, 209, 0.12),
-        0 0 40px rgba(10, 110, 209, 0.06);
+      border-color: rgba(10, 110, 209, 0.2);
+      background: rgba(255, 255, 255, 0.65);
     }
 
     .module-card--active {
-      border-color: rgba(10, 110, 209, 0.55);
-      background: linear-gradient(135deg, rgba(10, 110, 209, 0.04) 0%, #FFFFFF 70%);
+      border-color: rgba(10, 110, 209, 0.4);
+      background: linear-gradient(135deg, rgba(10, 110, 209, 0.06) 0%, rgba(255, 255, 255, 0.85) 55%, rgba(139, 92, 246, 0.04) 100%);
       box-shadow:
-        0 0 0 1px rgba(10, 110, 209, 0.35),
-        0 8px 32px rgba(10, 110, 209, 0.14),
-        0 0 48px rgba(139, 92, 246, 0.08);
+        0 8px 20px rgba(10, 110, 209, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 0 0 1px rgba(10, 110, 209, 0.08);
+    }
+
+    .module-card--active .module-label {
+      color: #122136;
+      font-weight: 600;
     }
 
     .module-card--active .module-chevron {
-      background: #0A6ED1;
-      transform: translateX(2px);
+      opacity: 1;
+      transform: translateX(0);
+      filter: drop-shadow(0 0 6px rgba(10, 110, 209, 0.55));
     }
 
     .module-chevron {
-      transition: background 0.25s ease, transform 0.25s ease;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .module-card:hover .module-chevron {
+      opacity: 0.45;
+      transform: translateX(0);
+    }
+
+    .module-card--active:hover .module-chevron {
+      opacity: 1;
+    }
+
+    .module-fade {
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .module-fade.is-switching {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    .module-blueprint-frame {
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 50px rgba(10, 110, 209, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .quantum-sensor {
+      box-shadow: 0 1px 2px rgba(10, 110, 209, 0.06);
+    }
+
+    .quantum-sensor svg {
+      filter: drop-shadow(0 0 3px rgba(10, 110, 209, 0.55));
     }
 
     .nav-dropdown {
@@ -1537,12 +1575,17 @@
     </section>
 
     <!-- ═══════════════════════════════════════════
-         12-MODULE DIRECTORY MATRIX
+         ERP MODULE SHOWCASE — 3-column asymmetric
          ═══════════════════════════════════════════ -->
-    <section id="modules" class="section-blueprint border-t border-[#0A6ED1]/10" aria-labelledby="modules-heading">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+    <section id="modules" class="section-blueprint border-t border-[#0A6ED1]/10 relative overflow-hidden" aria-labelledby="modules-heading">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="glow-orb w-[420px] h-[420px] bg-[#0A6ED1]/[0.04] -top-24 -left-24"></div>
+        <div class="glow-orb w-[360px] h-[360px] bg-[#8B5CF6]/[0.04] bottom-0 right-0"></div>
+      </div>
 
-        <div class="mb-10 sm:mb-12 max-w-2xl">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+
+        <header class="mb-10 sm:mb-12 max-w-2xl">
           <p class="text-xs font-semibold uppercase tracking-widest text-[#0A6ED1] mb-3">Экосистема Infotec ERP</p>
           <h2 id="modules-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-tight mb-4">
             12 корпоративных модулей
@@ -1550,93 +1593,238 @@
           <p class="desc-text text-base sm:text-lg">
             Модульная архитектура для полного покрытия бизнес-процессов — от продаж и производства до гостиничного сервиса и специализированных отраслевых решений.
           </p>
-        </div>
+        </header>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
-          <a href="#" class="module-card module-card--active group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Управление продажами</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
+          <!-- LEFT — Module Navigator (~25–30%) -->
+          <nav class="lg:col-span-3 order-1" aria-label="Навигатор модулей ERP" id="module-navigator">
+            <ul class="flex flex-col gap-2" role="listbox" aria-labelledby="modules-heading" id="module-nav-list">
+              <!-- Populated / enhanced by script; static fallback for no-JS -->
+              <li>
+                <button type="button" role="option" aria-selected="true" data-module="sales" class="module-card module-card--active group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left">Управление продажами</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="purchasing" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Управление закупками</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="inventory" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Управление запасами</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="production" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Управление производством</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="accounting" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Бухгалтерский учет</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="payroll" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Расчет заработной платы</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="assets" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Учет основных средств</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="custom" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Специальные разработки</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="pos" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Торговый зал магазина</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="housing" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Квартирные товарищества</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="horeca" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Калькуляция для кафе и ресторанов</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" role="option" aria-selected="false" data-module="hotel" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl border border-white/50 bg-white/40 backdrop-blur-md transition-all duration-300 cursor-pointer">
+                  <span class="module-label text-sm pr-2 text-left text-[#6A7B95] group-hover:text-[#122136]">Организация работы отеля</span>
+                  <svg class="module-chevron shrink-0 w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
 
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Управление закупками</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
+          <!-- CENTER — Styled Content Core (~35–40%) -->
+          <div class="lg:col-span-4 order-2 flex items-center min-h-[320px] lg:min-h-[480px]" id="module-content-core">
+            <article class="module-fade w-full" id="module-content" aria-live="polite">
+              <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] text-[#8B5CF6]/80 mb-3 uppercase" id="module-overline">[MODULE.SPEC // ACTIVE]</p>
+              <h3 class="text-3xl font-extrabold tracking-tight text-[#122136] mb-4" id="module-title">Управление продажами</h3>
+              <p class="text-[#6A7B95] text-sm sm:text-base leading-relaxed mb-6" id="module-description">
+                Полный цикл от заказа до отгрузки: регистрация заявок, матрицы цен и скидок, контроль маржинальности и электронный документооборот в единой операционной среде.
+              </p>
+              <ul class="space-y-3.5" id="module-features" role="list">
+                <li class="flex items-start">
+                  <span class="quantum-sensor w-5 h-5 rounded-md border border-[#0A6ED1]/20 bg-white shadow-xs inline-flex items-center justify-center mr-3 mt-0.5 shrink-0" aria-hidden="true">
+                    <svg class="w-3 h-3 text-[#0A6ED1]" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="0.9" opacity="0.45"/></svg>
+                  </span>
+                  <span class="text-[#122136] font-medium text-sm sm:text-base">Заказы на продажу с трекингом статусов и сроков</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="quantum-sensor w-5 h-5 rounded-md border border-[#0A6ED1]/20 bg-white shadow-xs inline-flex items-center justify-center mr-3 mt-0.5 shrink-0" aria-hidden="true">
+                    <svg class="w-3 h-3 text-[#0A6ED1]" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="0.9" opacity="0.45"/></svg>
+                  </span>
+                  <span class="text-[#122136] font-medium text-sm sm:text-base">Динамические прайс-листы, скидки и защита маржи</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="quantum-sensor w-5 h-5 rounded-md border border-[#0A6ED1]/20 bg-white shadow-xs inline-flex items-center justify-center mr-3 mt-0.5 shrink-0" aria-hidden="true">
+                    <svg class="w-3 h-3 text-[#0A6ED1]" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="0.9" opacity="0.45"/></svg>
+                  </span>
+                  <span class="text-[#122136] font-medium text-sm sm:text-base">Импорт XML/TXT заказов и ЭДО с контрагентами</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="quantum-sensor w-5 h-5 rounded-md border border-[#0A6ED1]/20 bg-white shadow-xs inline-flex items-center justify-center mr-3 mt-0.5 shrink-0" aria-hidden="true">
+                    <svg class="w-3 h-3 text-[#0A6ED1]" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="0.9" opacity="0.45"/></svg>
+                  </span>
+                  <span class="text-[#122136] font-medium text-sm sm:text-base">AI-оценка выполнения плана и рентабельности</span>
+                </li>
+              </ul>
+            </article>
+          </div>
 
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Управление запасами</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
+          <!-- RIGHT — Interface Blueprint / Live Scheme (~35%) -->
+          <div class="lg:col-span-5 order-3" id="module-blueprint-wrap">
+            <div class="module-blueprint-frame module-fade rounded-2xl border border-white/60 bg-white/30 backdrop-blur-xl p-5 relative overflow-hidden" id="module-blueprint" aria-label="Интерфейс модуля">
+              <!-- Default sales mockup (hydrated/replaced by script) -->
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="flex gap-1.5" aria-hidden="true">
+                    <span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>
+                    <span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>
+                    <span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>
+                  </div>
+                  <span class="text-xs sm:text-sm font-semibold text-[#122136] tracking-tight" id="blueprint-window-title">Sales Orders · Live</span>
+                </div>
+                <span class="text-[10px] font-medium quantum-badge px-2 py-0.5 rounded-md flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse"></span>Live
+                </span>
+              </div>
 
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Управление производством</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
+              <div class="rounded-xl border border-white/70 bg-white/70 p-3.5 mb-4">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">Выручка · 7 дней</span>
+                  <span class="text-[10px] font-bold text-[#0A6ED1]">€ 284K</span>
+                </div>
+                <div class="relative h-16" role="img" aria-label="График продаж">
+                  <svg class="w-full h-full" viewBox="0 0 280 64" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="modChartFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#0A6ED1" stop-opacity="0.18"/>
+                        <stop offset="100%" stop-color="#0A6ED1" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0 56 L40 48 L80 42 L120 28 L160 32 L200 16 L240 20 L280 8 L280 64 L0 64 Z" fill="url(#modChartFill)"/>
+                    <path d="M0 56 L40 48 L80 42 L120 28 L160 32 L200 16 L240 20 L280 8" fill="none" stroke="#0A6ED1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="280" cy="8" r="3" fill="#0A6ED1"/>
+                  </svg>
+                </div>
+              </div>
 
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Бухгалтерский учет</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
+              <div class="rounded-xl border border-white/70 bg-white/70 overflow-hidden mb-4">
+                <table class="w-full text-left" aria-label="Заказы на продажу">
+                  <thead>
+                    <tr class="text-[10px] uppercase tracking-wider text-[#6A7B95] bg-white/50">
+                      <th class="px-3 py-2 font-semibold">Order ID</th>
+                      <th class="px-3 py-2 font-semibold">Client</th>
+                      <th class="px-3 py-2 font-semibold text-right">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-xs">
+                    <tr class="border-t border-[#E2E8F0]/60">
+                      <td class="px-3 py-2.5 font-semibold text-[#122136]">#8022136</td>
+                      <td class="px-3 py-2.5 text-[#6A7B95]">Baltic Trade OÜ</td>
+                      <td class="px-3 py-2.5 text-right">
+                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full">
+                          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Ready
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="border-t border-[#E2E8F0]/60">
+                      <td class="px-3 py-2.5 font-semibold text-[#122136]">#8022091</td>
+                      <td class="px-3 py-2.5 text-[#6A7B95]">Nordic Parts AS</td>
+                      <td class="px-3 py-2.5 text-right">
+                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold quantum-badge px-2 py-0.5 rounded-full">
+                          <span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]"></span>Processing
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="border-t border-[#E2E8F0]/60">
+                      <td class="px-3 py-2.5 font-semibold text-[#122136]">#8022044</td>
+                      <td class="px-3 py-2.5 text-[#6A7B95]">EstMetall Grupp</td>
+                      <td class="px-3 py-2.5 text-right">
+                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded-full">
+                          <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Pending
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Расчет заработной платы</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Учет основных средств</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Специальные разработки</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Торговый зал магазина</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Квартирные товарищества</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Калькуляция для кафе и ресторанов</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-
-          <a href="#" class="module-card group p-5 rounded-2xl flex items-center justify-between cursor-pointer">
-            <span class="text-[#122136] font-semibold text-sm pr-3">Организация работы отеля</span>
-            <span class="module-chevron shrink-0 w-7 h-7 rounded-full bg-[#0A6ED1] flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
+              <div class="rounded-xl border border-[#0A6ED1]/15 bg-white/80 backdrop-blur-md p-3.5 shadow-[0_8px_24px_rgba(10,110,209,0.06)]">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-[#0A6ED1]/10 border border-[#0A6ED1]/15 inline-flex items-center justify-center">
+                      <svg class="w-3.5 h-3.5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                    </span>
+                    <span class="text-xs font-semibold text-[#122136]">AI Performance Assessment</span>
+                  </div>
+                  <span class="text-[10px] font-bold text-[#0A6ED1]">78%</span>
+                </div>
+                <div class="space-y-2.5">
+                  <div>
+                    <div class="flex justify-between text-[10px] mb-1">
+                      <span class="text-[#6A7B95] font-medium">Выполнение плана</span>
+                      <span class="text-[#122136] font-semibold">78%</span>
+                    </div>
+                    <div class="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
+                      <div class="h-full rounded-full bg-gradient-to-r from-[#0A6ED1] to-[#5B8DEF]" style="width:78%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-[10px] mb-1">
+                      <span class="text-[#6A7B95] font-medium">Маржинальность</span>
+                      <span class="text-[#122136] font-semibold">62%</span>
+                    </div>
+                    <div class="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
+                      <div class="h-full rounded-full bg-gradient-to-r from-[#0A6ED1]/80 to-[#8B5CF6]" style="width:62%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -1840,6 +2028,550 @@
         }
       });
     });
+
+    /* ── ERP Module Showcase ── */
+    const MODULE_CATALOG = {
+      sales: {
+        title: 'Управление продажами',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Полный цикл от заказа до отгрузки: регистрация заявок, матрицы цен и скидок, контроль маржинальности и электронный документооборот в единой операционной среде.',
+        features: [
+          'Заказы на продажу с трекингом статусов и сроков',
+          'Динамические прайс-листы, скидки и защита маржи',
+          'Импорт XML/TXT заказов и ЭДО с контрагентами',
+          'AI-оценка выполнения плана и рентабельности'
+        ],
+        blueprint: {
+          windowTitle: 'Sales Orders · Live',
+          metricLabel: 'Выручка · 7 дней',
+          metricValue: '€ 284K',
+          chartPath: 'M0 56 L40 48 L80 42 L120 28 L160 32 L200 16 L240 20 L280 8',
+          rows: [
+            { id: '#8022136', meta: 'Baltic Trade OÜ', status: 'Ready', tone: 'emerald' },
+            { id: '#8022091', meta: 'Nordic Parts AS', status: 'Processing', tone: 'quantum' },
+            { id: '#8022044', meta: 'EstMetall Grupp', status: 'Pending', tone: 'amber' }
+          ],
+          cols: ['Order ID', 'Client', 'Status'],
+          aiTitle: 'AI Performance Assessment',
+          bars: [
+            { label: 'Выполнение плана', value: 78 },
+            { label: 'Маржинальность', value: 62 }
+          ]
+        }
+      },
+      purchasing: {
+        title: 'Управление закупками',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Планирование потребностей, заявки поставщикам, согласование условий и контроль исполнения закупочных ордеров с прозрачной аналитикой экономии.',
+        features: [
+          'Заявки и заказы поставщикам в едином контуре',
+          'Сравнение предложений и контроль сроков поставки',
+          'Связка с запасами и производственными потребностями',
+          'Аналитика экономии и KPI по поставщикам'
+        ],
+        blueprint: {
+          windowTitle: 'Purchase Orders · Live',
+          metricLabel: 'Закупки · 30 дней',
+          metricValue: '€ 156K',
+          chartPath: 'M0 40 L40 44 L80 36 L120 48 L160 30 L200 34 L240 22 L280 18',
+          rows: [
+            { id: 'PO-4412', meta: 'TechSupply EE', status: 'Approved', tone: 'emerald' },
+            { id: 'PO-4408', meta: 'Baltic Steel', status: 'In transit', tone: 'quantum' },
+            { id: 'PO-4399', meta: 'Nordic Pack', status: 'Draft', tone: 'amber' }
+          ],
+          cols: ['PO ID', 'Vendor', 'Status'],
+          aiTitle: 'AI Procurement Score',
+          bars: [
+            { label: 'Соблюдение SLA', value: 84 },
+            { label: 'Экономия vs план', value: 57 }
+          ]
+        }
+      },
+      inventory: {
+        title: 'Управление запасами',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Складской учёт в реальном времени, многоуровневые локации, партии и серийные номера, резервирование и автоматические точки перезаказа.',
+        features: [
+          'Остатки, резервы и перемещения между складами',
+          'Партионный / серийный учёт и срок годности',
+          'Минимальные остатки и авто-формирование заявок',
+          'Инвентаризация с план-факт сверкой'
+        ],
+        blueprint: {
+          windowTitle: 'Stock Matrix · Live',
+          metricLabel: 'Оборачиваемость',
+          metricValue: '12.4×',
+          chartPath: 'M0 50 L40 46 L80 38 L120 42 L160 28 L200 24 L240 30 L280 14',
+          rows: [
+            { id: 'SKU-8841', meta: 'Склад A · 1 240 ед.', status: 'OK', tone: 'emerald' },
+            { id: 'SKU-7712', meta: 'Склад B · 86 ед.', status: 'Low', tone: 'amber' },
+            { id: 'SKU-5520', meta: 'Склад C · 0 ед.', status: 'Out', tone: 'rose' }
+          ],
+          cols: ['SKU', 'Location', 'Status'],
+          aiTitle: 'AI Stock Health',
+          bars: [
+            { label: 'Доступность SKU', value: 91 },
+            { label: 'Точность учёта', value: 97 }
+          ]
+        }
+      },
+      production: {
+        title: 'Управление производством',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Планирование нарядов, маршрутные карты, списание материалов и контроль себестоимости готовой продукции — от заказа до выпуска.',
+        features: [
+          'Производственные наряды и загрузка цехов',
+          'BOM, маршруты и нормы расхода',
+          'Списание материалов и учёт НЗП',
+          'План-факт по выпуску и себестоимости'
+        ],
+        blueprint: {
+          windowTitle: 'Shop Floor · Live',
+          metricLabel: 'Выпуск · смена',
+          metricValue: '428 ед.',
+          chartPath: 'M0 48 L40 44 L80 50 L120 36 L160 40 L200 26 L240 22 L280 12',
+          rows: [
+            { id: 'WO-301', meta: 'Линия 1 · 92%', status: 'Running', tone: 'emerald' },
+            { id: 'WO-298', meta: 'Линия 2 · 61%', status: 'Setup', tone: 'quantum' },
+            { id: 'WO-290', meta: 'Линия 3 · 0%', status: 'Idle', tone: 'amber' }
+          ],
+          cols: ['Work Order', 'Line', 'Status'],
+          aiTitle: 'AI Throughput Index',
+          bars: [
+            { label: 'OEE', value: 73 },
+            { label: 'План выпуска', value: 88 }
+          ]
+        }
+      },
+      accounting: {
+        title: 'Бухгалтерский учет',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Главная книга, проводки, НДС и отчётность по эстонским стандартам с автоматической связью операций модулей и закрытием периода.',
+        features: [
+          'Автопроводки из операционных модулей',
+          'НДС, банк, касса и взаиморасчёты',
+          'Закрытие периода и регламентированная отчётность',
+          'Аналитика P&L и баланса в реальном времени'
+        ],
+        blueprint: {
+          windowTitle: 'General Ledger · Live',
+          metricLabel: 'Оборот · период',
+          metricValue: '€ 1.2M',
+          chartPath: 'M0 36 L40 40 L80 32 L120 38 L160 24 L200 28 L240 16 L280 10',
+          rows: [
+            { id: 'JE-99102', meta: 'Продажи · CR', status: 'Posted', tone: 'emerald' },
+            { id: 'JE-99088', meta: 'НДС · DR', status: 'Posted', tone: 'emerald' },
+            { id: 'JE-99071', meta: 'Банк · CR', status: 'Review', tone: 'amber' }
+          ],
+          cols: ['Entry', 'Account', 'Status'],
+          aiTitle: 'AI Close Readiness',
+          bars: [
+            { label: 'Сверка счетов', value: 96 },
+            { label: 'Готовность close', value: 81 }
+          ]
+        }
+      },
+      payroll: {
+        title: 'Расчет заработной платы',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Начисление зарплаты, налоги, отпуска и больничные с учётом эстонского законодательства и интеграцией табельного учёта.',
+        features: [
+          'Начисления, удержания и налоги работодателя',
+          'Табель, отпуска, больничные и премии',
+          'Выгрузки в банк и налоговые декларации',
+          'Аналитика ФОТ по подразделениям'
+        ],
+        blueprint: {
+          windowTitle: 'Payroll Run · Live',
+          metricLabel: 'ФОТ · месяц',
+          metricValue: '€ 94.6K',
+          chartPath: 'M0 42 L40 40 L80 38 L120 36 L160 34 L200 30 L240 28 L280 22',
+          rows: [
+            { id: 'EMP-104', meta: 'Производство', status: 'Paid', tone: 'emerald' },
+            { id: 'EMP-087', meta: 'Офис', status: 'Queued', tone: 'quantum' },
+            { id: 'EMP-062', meta: 'Склад', status: 'Hold', tone: 'amber' }
+          ],
+          cols: ['Employee', 'Dept', 'Status'],
+          aiTitle: 'AI Payroll Integrity',
+          bars: [
+            { label: 'Корректность начислений', value: 99 },
+            { label: 'Срок выплаты', value: 100 }
+          ]
+        }
+      },
+      assets: {
+        title: 'Учет основных средств',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Карточки ОС, амортизация, перемещения, модернизация и списание — полный жизненный цикл активов с инвентаризацией.',
+        features: [
+          'Карточки ОС и группы амортизации',
+          'Линейная и ускоренная амортизация',
+          'Перемещения, ремонт, модернизация',
+          'Инвентаризация и списание активов'
+        ],
+        blueprint: {
+          windowTitle: 'Fixed Assets · Live',
+          metricLabel: 'Балансовая ст-ть',
+          metricValue: '€ 2.4M',
+          chartPath: 'M0 20 L40 22 L80 26 L120 28 L160 32 L200 36 L240 40 L280 46',
+          rows: [
+            { id: 'FA-2201', meta: 'CNC · цех 2', status: 'Active', tone: 'emerald' },
+            { id: 'FA-1884', meta: 'Погрузчик', status: 'Service', tone: 'quantum' },
+            { id: 'FA-1502', meta: 'Сервер rack', status: 'Depreciating', tone: 'amber' }
+          ],
+          cols: ['Asset', 'Location', 'Status'],
+          aiTitle: 'AI Asset Utilization',
+          bars: [
+            { label: 'Загрузка парка', value: 68 },
+            { label: 'Своевременность ТО', value: 85 }
+          ]
+        }
+      },
+      custom: {
+        title: 'Специальные разработки',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Отраслевые расширения и кастомные контуры под уникальные процессы бизнеса — без разрыва единой ERP-архитектуры Infotec.',
+        features: [
+          'Кастомные workflow и экранные формы',
+          'Интеграции API / EDI / отраслевые шлюзы',
+          'Специализированная аналитика и отчёты',
+          'Сопровождение и эволюция решений'
+        ],
+        blueprint: {
+          windowTitle: 'Custom Apps · Live',
+          metricLabel: 'Активные контуры',
+          metricValue: '14',
+          chartPath: 'M0 50 L40 36 L80 44 L120 22 L160 34 L200 18 L240 26 L280 12',
+          rows: [
+            { id: 'APP-07', meta: 'EDI Gateway', status: 'Online', tone: 'emerald' },
+            { id: 'APP-12', meta: 'QC Portal', status: 'Online', tone: 'emerald' },
+            { id: 'APP-03', meta: 'Legacy Bridge', status: 'Sync', tone: 'quantum' }
+          ],
+          cols: ['App', 'Layer', 'Status'],
+          aiTitle: 'AI Integration Health',
+          bars: [
+            { label: 'Uptime API', value: 99 },
+            { label: 'Sync latency', value: 76 }
+          ]
+        }
+      },
+      pos: {
+        title: 'Торговый зал магазина',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'POS-операции, кассы, скидки в зале, остатки на витрине и сквозная связь с оптовым контуром и бухгалтерией.',
+        features: [
+          'Кассовые смены и фискальные чеки',
+          'Промо, купоны и программа лояльности',
+          'Остатки зала и быстрый приём/возврат',
+          'Сводки продаж в реальном времени'
+        ],
+        blueprint: {
+          windowTitle: 'POS Terminal · Live',
+          metricLabel: 'Продажи · сегодня',
+          metricValue: '€ 8.4K',
+          chartPath: 'M0 52 L40 48 L80 40 L120 44 L160 30 L200 28 L240 18 L280 14',
+          rows: [
+            { id: 'POS-01', meta: 'Касса 1 · € 3.1K', status: 'Open', tone: 'emerald' },
+            { id: 'POS-02', meta: 'Касса 2 · € 2.8K', status: 'Open', tone: 'emerald' },
+            { id: 'POS-03', meta: 'Касса 3 · € 2.5K', status: 'Break', tone: 'amber' }
+          ],
+          cols: ['Terminal', 'Shift', 'Status'],
+          aiTitle: 'AI Retail Pulse',
+          bars: [
+            { label: 'Конверсия чека', value: 64 },
+            { label: 'Средний чек vs план', value: 79 }
+          ]
+        }
+      },
+      housing: {
+        title: 'Квартирные товарищества',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Учёт собственников, начисления ЖКУ, квитанции, платежи и отчётность для квартирных товариществ Эстонии.',
+        features: [
+          'Реестр объектов и собственников',
+          'Начисления, перерасчёты и квитанции',
+          'Учёт платежей и задолженностей',
+          'Отчёты для правления и ревизии'
+        ],
+        blueprint: {
+          windowTitle: 'Housing Assoc. · Live',
+          metricLabel: 'Сбор · месяц',
+          metricValue: '94.2%',
+          chartPath: 'M0 30 L40 28 L80 26 L120 24 L160 22 L200 20 L240 18 L280 16',
+          rows: [
+            { id: 'APT-12A', meta: 'Tamm · 68.4 m²', status: 'Paid', tone: 'emerald' },
+            { id: 'APT-08B', meta: 'Kask · 42.1 m²', status: 'Partial', tone: 'amber' },
+            { id: 'APT-03C', meta: 'Saar · 55.0 m²', status: 'Overdue', tone: 'rose' }
+          ],
+          cols: ['Unit', 'Owner', 'Status'],
+          aiTitle: 'AI Collection Forecast',
+          bars: [
+            { label: 'Своевременность оплаты', value: 87 },
+            { label: 'Прогноз сбора', value: 93 }
+          ]
+        }
+      },
+      horeca: {
+        title: 'Калькуляция для кафе и ресторанов',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Техкарты, себестоимость блюд, списание ингредиентов и контроль food cost для кафе, ресторанов и кейтеринга.',
+        features: [
+          'Технологические карты и порционность',
+          'Калькуляция себестоимости в реальном времени',
+          'Списание со склада кухни по продажам',
+          'Контроль food cost и меню-инжиниринг'
+        ],
+        blueprint: {
+          windowTitle: 'Kitchen Costing · Live',
+          metricLabel: 'Food cost',
+          metricValue: '31.4%',
+          chartPath: 'M0 28 L40 32 L80 30 L120 36 L160 34 L200 40 L240 38 L280 42',
+          rows: [
+            { id: 'RCP-21', meta: 'Caesar Salad', status: 'OK', tone: 'emerald' },
+            { id: 'RCP-08', meta: 'Beef Steak', status: 'Watch', tone: 'amber' },
+            { id: 'RCP-44', meta: 'Soup of Day', status: 'OK', tone: 'emerald' }
+          ],
+          cols: ['Recipe', 'Dish', 'Status'],
+          aiTitle: 'AI Food Cost Guard',
+          bars: [
+            { label: 'Target food cost', value: 30 },
+            { label: 'Menu margin health', value: 74 }
+          ]
+        }
+      },
+      hotel: {
+        title: 'Организация работы отеля',
+        overline: '[MODULE.SPEC // ACTIVE]',
+        description: 'Номерной фонд, бронирования, тарифы, дополнительные услуги и аналитика загрузки с интеграцией channel manager.',
+        features: [
+          'Бронирования, check-in / check-out',
+          'Тарифные планы и channel manager',
+          'Доп. услуги, house-keeping, мини-бар',
+          'RevPAR, загрузка и гостевая аналитика'
+        ],
+        blueprint: {
+          windowTitle: 'Front Desk · Live',
+          metricLabel: 'Occupancy · today',
+          metricValue: '86%',
+          chartPath: 'M0 40 L40 36 L80 32 L120 28 L160 24 L200 20 L240 18 L280 14',
+          rows: [
+            { id: 'RM-204', meta: 'Deluxe · 2 nights', status: 'In-house', tone: 'emerald' },
+            { id: 'RM-118', meta: 'Standard · ETA 15:00', status: 'Arrival', tone: 'quantum' },
+            { id: 'RM-312', meta: 'Suite · checkout', status: 'Departing', tone: 'amber' }
+          ],
+          cols: ['Room', 'Guest stay', 'Status'],
+          aiTitle: 'AI Revenue Outlook',
+          bars: [
+            { label: 'Occupancy forecast', value: 89 },
+            { label: 'RevPAR vs plan', value: 82 }
+          ]
+        }
+      }
+    };
+
+    const SENSOR_SVG = '<svg class="w-3 h-3 text-[#0A6ED1]" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="6" cy="6" r="4.2" stroke="currentColor" stroke-width="0.9" opacity="0.45"/></svg>';
+
+    function statusToneClasses(tone) {
+      if (tone === 'emerald') return 'text-emerald-700 bg-emerald-50 border-emerald-200/60';
+      if (tone === 'amber') return 'text-amber-700 bg-amber-50 border-amber-200/60';
+      if (tone === 'rose') return 'text-rose-700 bg-rose-50 border-rose-200/60';
+      return 'text-[#7C3AED] bg-[rgba(139,92,246,0.08)] border-[rgba(139,92,246,0.2)]';
+    }
+
+    function statusDotClass(tone) {
+      if (tone === 'emerald') return 'bg-emerald-500';
+      if (tone === 'amber') return 'bg-amber-500';
+      if (tone === 'rose') return 'bg-rose-500';
+      return 'bg-[#8B5CF6]';
+    }
+
+    function renderBlueprint(bp) {
+      const rowsHtml = bp.rows.map(function (row) {
+        return (
+          '<tr class="border-t border-[#E2E8F0]/60">' +
+            '<td class="px-3 py-2.5 font-semibold text-[#122136]">' + row.id + '</td>' +
+            '<td class="px-3 py-2.5 text-[#6A7B95]">' + row.meta + '</td>' +
+            '<td class="px-3 py-2.5 text-right">' +
+              '<span class="inline-flex items-center gap-1 text-[10px] font-semibold border px-2 py-0.5 rounded-full ' + statusToneClasses(row.tone) + '">' +
+                '<span class="w-1.5 h-1.5 rounded-full ' + statusDotClass(row.tone) + '"></span>' + row.status +
+              '</span>' +
+            '</td>' +
+          '</tr>'
+        );
+      }).join('');
+
+      const barsHtml = bp.bars.map(function (bar, i) {
+        const gradient = i === 0
+          ? 'from-[#0A6ED1] to-[#5B8DEF]'
+          : 'from-[#0A6ED1]/80 to-[#8B5CF6]';
+        return (
+          '<div>' +
+            '<div class="flex justify-between text-[10px] mb-1">' +
+              '<span class="text-[#6A7B95] font-medium">' + bar.label + '</span>' +
+              '<span class="text-[#122136] font-semibold">' + bar.value + '%</span>' +
+            '</div>' +
+            '<div class="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">' +
+              '<div class="h-full rounded-full bg-gradient-to-r ' + gradient + '" style="width:' + bar.value + '%"></div>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+
+      const endMatch = bp.chartPath.match(/([\d.]+)\s+([\d.]+)\s*$/);
+      const endX = endMatch ? endMatch[1] : '280';
+      const endY = endMatch ? endMatch[2] : '8';
+      const fillPath = bp.chartPath + ' L' + endX + ' 64 L0 64 Z';
+      const uid = 'modFill_' + Math.random().toString(36).slice(2, 8);
+
+      return (
+        '<div class="flex items-center justify-between mb-4">' +
+          '<div class="flex items-center gap-2.5">' +
+            '<div class="flex gap-1.5" aria-hidden="true">' +
+              '<span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>' +
+              '<span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>' +
+              '<span class="w-2 h-2 rounded-full bg-[#E2E8F0]"></span>' +
+            '</div>' +
+            '<span class="text-xs sm:text-sm font-semibold text-[#122136] tracking-tight">' + bp.windowTitle + '</span>' +
+          '</div>' +
+          '<span class="text-[10px] font-medium quantum-badge px-2 py-0.5 rounded-md flex items-center gap-1.5">' +
+            '<span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse"></span>Live' +
+          '</span>' +
+        '</div>' +
+        '<div class="rounded-xl border border-white/70 bg-white/70 p-3.5 mb-4">' +
+          '<div class="flex items-center justify-between mb-2">' +
+            '<span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">' + bp.metricLabel + '</span>' +
+            '<span class="text-[10px] font-bold text-[#0A6ED1]">' + bp.metricValue + '</span>' +
+          '</div>' +
+          '<div class="relative h-16" role="img" aria-label="' + bp.metricLabel + '">' +
+            '<svg class="w-full h-full" viewBox="0 0 280 64" preserveAspectRatio="none" aria-hidden="true">' +
+              '<defs><linearGradient id="' + uid + '" x1="0" y1="0" x2="0" y2="1">' +
+                '<stop offset="0%" stop-color="#0A6ED1" stop-opacity="0.18"/>' +
+                '<stop offset="100%" stop-color="#0A6ED1" stop-opacity="0"/>' +
+              '</linearGradient></defs>' +
+              '<path d="' + fillPath + '" fill="url(#' + uid + ')"/>' +
+              '<path d="' + bp.chartPath + '" fill="none" stroke="#0A6ED1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>' +
+              '<circle cx="' + endX + '" cy="' + endY + '" r="3" fill="#0A6ED1"/>' +
+            '</svg>' +
+          '</div>' +
+        '</div>' +
+        '<div class="rounded-xl border border-white/70 bg-white/70 overflow-hidden mb-4">' +
+          '<table class="w-full text-left">' +
+            '<thead><tr class="text-[10px] uppercase tracking-wider text-[#6A7B95] bg-white/50">' +
+              '<th class="px-3 py-2 font-semibold">' + bp.cols[0] + '</th>' +
+              '<th class="px-3 py-2 font-semibold">' + bp.cols[1] + '</th>' +
+              '<th class="px-3 py-2 font-semibold text-right">' + bp.cols[2] + '</th>' +
+            '</tr></thead>' +
+            '<tbody class="text-xs">' + rowsHtml + '</tbody>' +
+          '</table>' +
+        '</div>' +
+        '<div class="rounded-xl border border-[#0A6ED1]/15 bg-white/80 backdrop-blur-md p-3.5 shadow-[0_8px_24px_rgba(10,110,209,0.06)]">' +
+          '<div class="flex items-center justify-between mb-3">' +
+            '<div class="flex items-center gap-2">' +
+              '<span class="w-6 h-6 rounded-lg bg-[#0A6ED1]/10 border border-[#0A6ED1]/15 inline-flex items-center justify-center">' +
+                '<svg class="w-3.5 h-3.5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>' +
+              '</span>' +
+              '<span class="text-xs font-semibold text-[#122136]">' + bp.aiTitle + '</span>' +
+            '</div>' +
+            '<span class="text-[10px] font-bold text-[#0A6ED1]">' + bp.bars[0].value + '%</span>' +
+          '</div>' +
+          '<div class="space-y-2.5">' + barsHtml + '</div>' +
+        '</div>'
+      );
+    }
+
+    function renderFeatures(features) {
+      return features.map(function (text) {
+        return (
+          '<li class="flex items-start">' +
+            '<span class="quantum-sensor w-5 h-5 rounded-md border border-[#0A6ED1]/20 bg-white shadow-xs inline-flex items-center justify-center mr-3 mt-0.5 shrink-0" aria-hidden="true">' +
+              SENSOR_SVG +
+            '</span>' +
+            '<span class="text-[#122136] font-medium text-sm sm:text-base">' + text + '</span>' +
+          '</li>'
+        );
+      }).join('');
+    }
+
+    (function initModuleShowcase() {
+      const navButtons = document.querySelectorAll('#module-nav-list [data-module]');
+      const contentEl = document.getElementById('module-content');
+      const blueprintEl = document.getElementById('module-blueprint');
+      const titleEl = document.getElementById('module-title');
+      const descEl = document.getElementById('module-description');
+      const overlineEl = document.getElementById('module-overline');
+      const featuresEl = document.getElementById('module-features');
+      if (!navButtons.length || !contentEl || !blueprintEl) return;
+
+      let activeId = 'sales';
+      let isAnimating = false;
+
+      function setActiveButton(id) {
+        navButtons.forEach(function (btn) {
+          const isActive = btn.dataset.module === id;
+          btn.classList.toggle('module-card--active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          const label = btn.querySelector('.module-label');
+          if (label) {
+            if (isActive) {
+              label.classList.remove('text-[#6A7B95]', 'group-hover:text-[#122136]');
+            } else {
+              label.classList.add('text-[#6A7B95]', 'group-hover:text-[#122136]');
+            }
+          }
+        });
+      }
+
+      function applyModule(id) {
+        const data = MODULE_CATALOG[id];
+        if (!data) return;
+        overlineEl.textContent = data.overline;
+        titleEl.textContent = data.title;
+        descEl.textContent = data.description;
+        featuresEl.innerHTML = renderFeatures(data.features);
+        blueprintEl.innerHTML = renderBlueprint(data.blueprint);
+      }
+
+      function selectModule(id) {
+        if (id === activeId || isAnimating || !MODULE_CATALOG[id]) return;
+        isAnimating = true;
+        contentEl.classList.add('is-switching');
+        blueprintEl.classList.add('is-switching');
+
+        window.setTimeout(function () {
+          activeId = id;
+          setActiveButton(id);
+          applyModule(id);
+          contentEl.classList.remove('is-switching');
+          blueprintEl.classList.remove('is-switching');
+          isAnimating = false;
+        }, 180);
+      }
+
+      navButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          selectModule(btn.dataset.module);
+        });
+        btn.addEventListener('keydown', function (e) {
+          const list = Array.from(navButtons);
+          const idx = list.indexOf(btn);
+          let next = -1;
+          if (e.key === 'ArrowDown') next = (idx + 1) % list.length;
+          else if (e.key === 'ArrowUp') next = (idx - 1 + list.length) % list.length;
+          else if (e.key === 'Home') next = 0;
+          else if (e.key === 'End') next = list.length - 1;
+          else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectModule(btn.dataset.module);
+            return;
+          }
+          if (next >= 0) {
+            e.preventDefault();
+            list[next].focus();
+            selectModule(list[next].dataset.module);
+          }
+        });
+      });
+    })();
   </script>
 </body>
 </html>

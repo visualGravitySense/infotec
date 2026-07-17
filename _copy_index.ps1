@@ -1,0 +1,1 @@
+Copy-Item -Path "C:\Users\Admin\Documents\cust\infotec\index-cyber.html" -Destination "C:\Users\Admin\Documents\cust\infotec\index.html" -Force

@@ -1,0 +1,4867 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infotec • Управление производством и продажами</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+  <style>
+    :root {
+      --bg: #0a1628;
+      --bg-elev: #12253f;
+      --bg-card: #162c47;
+      --accent: #2563eb;
+      --accent-2: #3b82f6;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-soft: #cbd5e1;
+      --border: #334155;
+      --border-light: #475569;
+    }
+
+    .reveal {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      padding: 40px 60px;
+    }
+
+    /* Strict IT dark theme */
+    .reveal .slides section {
+      background: var(--bg);
+    }
+
+    /* Typography */
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+
+    .reveal h2 {
+      font-size: 2.1rem;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+
+    .reveal h3 {
+      font-size: 1.35rem;
+      margin: 0 0 0.55rem 0;
+      color: #fff;
+    }
+
+    .reveal p {
+      color: var(--text-soft);
+      margin-bottom: 0.9rem;
+    }
+
+    .reveal .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Logo / brand */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .brand .logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      font-weight: 800;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+
+    .brand-name {
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    .brand-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    /* Section header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 2.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 13px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent-2);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+      gap: 18px;
+      margin-top: 0.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), 
+                  box-shadow 0.2s ease,
+                  border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25), 0 8px 10px -6px rgb(0 0 0 / 0.25);
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      margin-bottom: 16px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-icon svg {
+      width: 42px;
+      height: 42px;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      line-height: 1.35;
+      margin-bottom: 9px;
+    }
+
+    .card p {
+      font-size: 0.96rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: var(--accent-2);
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Overview cards */
+    .overview-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 2.5rem;
+    }
+
+    .overview-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 26px;
+      cursor: default;
+      transition: all 0.2s ease;
+    }
+
+    .overview-card:hover {
+      border-color: var(--accent);
+      background: #1b3656;
+    }
+
+    .overview-card .num {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .overview-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .overview-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Title slide */
+    .title-slide {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100%;
+      text-align: center;
+      padding: 40px 60px;
+    }
+
+    .title-slide h1 {
+      font-size: 3.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .title-slide .tagline {
+      font-size: 1.45rem;
+      max-width: 720px;
+      color: var(--text-soft);
+      margin-bottom: 3.5rem;
+    }
+
+    .meta {
+      display: flex;
+      gap: 32px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Accent bar */
+    .accent-bar {
+      height: 4px;
+      width: 72px;
+      background: linear-gradient(to right, var(--accent), var(--accent-2));
+      border-radius: 999px;
+      margin: 18px 0 28px;
+    }
+
+    /* Footer */
+    .slide-footer {
+      position: absolute;
+      bottom: 22px;
+      left: 60px;
+      right: 60px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0.75;
+      z-index: 10;
+    }
+
+    .slide-footer .link {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    /* Module title slide */
+    .module-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 0 80px;
+    }
+
+    .module-number {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    .module-title h2 {
+      font-size: 3.1rem;
+      margin-bottom: 12px;
+    }
+
+    .module-desc {
+      font-size: 1.3rem;
+      max-width: 820px;
+      color: var(--text-muted);
+    }
+
+    /* Closing slide */
+    .closing {
+      text-align: center;
+      padding: 60px;
+    }
+
+    .closing h2 {
+      font-size: 2.6rem;
+    }
+
+    .contact {
+      margin-top: 2.5rem;
+      font-size: 1.35rem;
+    }
+
+    .contact a {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* Reveal overrides */
+    .reveal .slides section {
+      box-sizing: border-box;
+    }
+
+    .reveal .progress {
+      height: 3px;
+      background: var(--border);
+    }
+
+    .reveal .progress span {
+      background: var(--accent);
+    }
+
+    .reveal .controls {
+      color: var(--accent);
+    }
+
+    .reveal .slide-number {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .reveal {
+        font-size: 18px;
+      }
+      .reveal h1 { font-size: 2.1rem; }
+      .reveal h2 { font-size: 1.75rem; }
+      .reveal .slides section {
+        padding: 28px 32px;
+      }
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .title-slide h1 {
+        font-size: 2.5rem;
+      }
+      .module-title {
+        padding: 0 30px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .reveal {
+        font-size: 17px;
+      }
+      .slide-footer {
+        display: none;
+      }
+    }
+
+    /* Fragments */
+    .reveal .fragment {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s ease;
+    }
+
+    .reveal .fragment.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .reveal .fragment.fade-up {
+      transform: translateY(18px);
+    }
+
+    .reveal .fragment.fade-up.visible {
+      transform: translateY(0);
+    }
+
+    /* Subtle grid for hero */
+    .hero-bg {
+      position: relative;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Mindmap / Structure draft slide */
+    .mindmap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .mindmap-col {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+    }
+    .mindmap-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mindmap-header strong {
+      font-size: 0.95rem;
+      color: #fff;
+      letter-spacing: -0.2px;
+    }
+    .variant-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border-radius: 4px;
+      background: rgba(37, 99, 235, 0.2);
+      color: var(--accent-2);
+      flex-shrink: 0;
+    }
+    .tree {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.73rem;
+      line-height: 1.35;
+      color: var(--text-soft);
+    }
+    .tree-module {
+      font-weight: 600;
+      color: #e0e7ff;
+      margin: 6px 0 0;
+      font-size: 0.78rem;
+    }
+    .tree-module:first-child {
+      margin-top: 0;
+    }
+    .tree-item {
+      padding-left: 11px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+    .tree-item:before {
+      content: "├─ ";
+      color: #475569;
+    }
+    .tree-item:last-child:before {
+      content: "└─ ";
+    }
+    .tree-url {
+      color: #64748b;
+      font-size: 0.69rem;
+    }
+    .tree-form {
+      font-size: 0.65rem;
+      background: rgba(37, 99, 235, 0.13);
+      color: #60a5fa;
+      padding: 0 5px;
+      border-radius: 2px;
+      margin-left: 3px;
+    }
+    .platform-mock {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #0b182c;
+      overflow: hidden;
+      font-size: 0.76rem;
+    }
+    .url-bar {
+      background: #0a1628;
+      padding: 5px 11px;
+      font-family: ui-monospace, monospace;
+      color: #64748b;
+      font-size: 0.71rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .tabs {
+      display: flex;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+    }
+    .tab {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border-right: 1px solid var(--border);
+      transition: all .1s;
+      user-select: none;
+    }
+    .tab:last-child {
+      border-right: none;
+    }
+    .tab.active {
+      background: #0b182c;
+      color: #fff;
+      font-weight: 500;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: -1px;
+    }
+    .tab-content {
+      padding: 7px 11px;
+      min-height: 62px;
+      color: var(--text-soft);
+    }
+    .mini-list {
+      margin: 0;
+      padding-left: 15px;
+      font-size: 0.72rem;
+    }
+    .mini-list li {
+      margin: 1.5px 0;
+    }
+    .cross-form {
+      border-top: 1px solid var(--border);
+      padding: 7px 11px;
+      background: #0f2139;
+    }
+    .form-title {
+      font-size: 0.66rem;
+      color: var(--accent-2);
+      font-weight: 600;
+      margin-bottom: 4px;
+      letter-spacing: .3px;
+    }
+    .mock-row {
+      display: flex;
+      gap: 6px;
+    }
+    .mock-input {
+      flex: 1;
+      background: #0a1628;
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      font-size: 0.67rem;
+      padding: 2.5px 5px;
+      border-radius: 3px;
+      margin-bottom: 3px;
+    }
+    .mock-btn {
+      font-size: 0.66rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 2px 9px;
+      border-radius: 3px;
+      cursor: default;
+      align-self: flex-start;
+      margin-top: 1px;
+    }
+    @media (max-width: 900px) {
+      .mindmap-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    /* UX Interview slides */
+    .interview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .audience-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .audience-card h3 {
+      font-size: 1.05rem;
+      margin: 0 0 10px;
+      color: #fff;
+    }
+    .role-question {
+      font-size: 0.95rem;
+      color: #e0e7ff;
+      margin-bottom: 9px;
+      font-weight: 500;
+    }
+    .role-why {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .role-why ul {
+      padding-left: 16px;
+      margin: 6px 0 0;
+    }
+    .role-why li {
+      margin: 2px 0;
+    }
+    .block-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .ux-question {
+      font-size: 1.08rem;
+      color: #fff;
+      margin: 0 0 12px 0;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 9px;
+    }
+    .ux-option {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      transition: all .15s ease;
+    }
+    .ux-option:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .ux-option strong {
+      color: #e0e7ff;
+      display: block;
+      margin-bottom: 3px;
+      font-size: 0.87rem;
+    }
+    .ux-option .hint {
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+    .key-q {
+      background: #0f2744;
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin: 10px 0 14px;
+      font-size: 0.95rem;
+    }
+    .ux-mini {
+      margin-top: 14px;
+      padding-top: 11px;
+      border-top: 1px solid var(--border);
+    }
+    .ux-mini h4 {
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin: 0 0 5px;
+      font-weight: 600;
+    }
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .choice-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px 17px;
+    }
+    .choice-card h4 {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+    }
+    .choice-card.a {
+      border-color: #475569;
+    }
+    .choice-card.b {
+      border-color: var(--accent);
+    }
+    .ux-note {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 6px;
+    }
+    @media (max-width: 900px) {
+      .interview-grid, .choice-grid {
+        grid-template-columns: 1fr;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* References slides */
+    .ref-section-title {
+      font-size: 1.55rem;
+      margin: 0 0 4px;
+      color: #fff;
+    }
+    .ref-subtitle {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
+    .ref-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .ref-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .ref-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: .6px;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .ref-mock {
+      background: #0a1628;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    /* Odoo-style Kanban */
+    .kanban-steps {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .kanban-step {
+      flex: 1;
+      text-align: center;
+      font-size: 0.7rem;
+      padding: 6px 4px;
+      background: #12253f;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .kanban-step.active {
+      background: #1e3a5f;
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .kanban-step:hover {
+      border-color: #3b82f6;
+    }
+    .kanban-order {
+      background: #0f2744;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 10px;
+    }
+    .kanban-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      margin-bottom: 6px;
+    }
+    .progress {
+      height: 7px;
+      background: #1e3a5f;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, #3b82f6, #2563eb);
+      transition: width .4s ease;
+    }
+    .status-pills {
+      display: flex;
+      gap: 6px;
+      font-size: 0.68rem;
+    }
+    .pill {
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: rgba(16,185,129,0.15);
+      color: #34d399;
+    }
+    .pill.warn {
+      background: rgba(245,158,11,0.15);
+      color: #fbbf24;
+    }
+
+    /* Dynamics KPI */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .kpi {
+      background: #0f2744;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .kpi-value {
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+    }
+    .kpi-label {
+      font-size: 0.66rem;
+      color: #64748b;
+      margin-top: 3px;
+    }
+    .mini-chart {
+      height: 72px;
+      background: #0a1628;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mini-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Data flow */
+    .data-flow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    .flow-node {
+      flex: 1;
+      background: #0f2744;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 11px 12px;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+    .flow-node .icon {
+      font-size: 1.1rem;
+      margin-bottom: 3px;
+      display: block;
+    }
+    .flow-arrow {
+      flex: 0 0 58px;
+      text-align: center;
+      position: relative;
+    }
+    .flow-line {
+      height: 3px;
+      background: linear-gradient(to right, #3b82f6, #2563eb);
+      border-radius: 999px;
+      margin: 0 4px;
+      position: relative;
+      transition: box-shadow .2s;
+    }
+    .data-flow:hover .flow-line {
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+    }
+    .flow-cloud {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #162c47;
+      border: 1px solid #3b82f6;
+      font-size: 0.62rem;
+      padding: 1px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .flow-stat {
+      font-size: 0.7rem;
+      margin-top: 8px;
+      color: #34d399;
+      padding: 4px 8px;
+      background: rgba(52, 211, 153, 0.1);
+      border-radius: 4px;
+    }
+    .ref-argument {
+      font-size: 0.78rem;
+      background: #0f2744;
+      border-left: 3px solid var(--accent);
+      padding: 9px 12px;
+      margin-top: 12px;
+      border-radius: 0 6px 6px 0;
+      color: #cbd5e1;
+    }
+    .ref-argument strong {
+      color: #fff;
+    }
+    @media (max-width: 900px) {
+      .ref-two-col {
+        grid-template-columns: 1fr;
+      }
+      .kpi-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Design direction slides */
+    .dir-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--accent-2);
+      margin-bottom: 6px;
+    }
+    .dir-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+    .dir-concept {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .dir-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--accent-2);
+      text-decoration: none;
+      padding: 6px 12px;
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+    .dir-link:hover {
+      background: rgba(37, 99, 235, 0.18);
+      border-color: var(--accent);
+    }
+    .dir-link svg {
+      flex-shrink: 0;
+    }
+
+    /* Glassmorphic mock */
+    .glass-scene {
+      position: relative;
+      background: linear-gradient(135deg, #0f2744 0%, #1a3a5c 40%, #0a1628 100%);
+      border-radius: 10px;
+      padding: 16px;
+      overflow: hidden;
+      min-height: 168px;
+    }
+    .glass-scene::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -20px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .glass-scene::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 20px;
+      width: 90px;
+      height: 90px;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .glass-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 12px 10px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card .g-icon {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+    .glass-card .g-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .glass-card .g-sub {
+      font-size: 0.62rem;
+      color: #94a3b8;
+    }
+
+    /* Clean data mock */
+    .data-table-mock {
+      background: #0a1628;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .data-table-header {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 0.8fr 0.7fr;
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #64748b;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .data-table-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 0.8fr 0.7fr;
+      gap: 8px;
+      padding: 9px 12px;
+      font-size: 0.74rem;
+      border-top: 1px solid rgba(51, 65, 85, 0.5);
+      color: #cbd5e1;
+      transition: background 0.15s;
+    }
+    .data-table-row:hover {
+      background: rgba(37, 99, 235, 0.06);
+    }
+    .data-table-row .kpi-big {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .data-table-row .trend-up {
+      color: #34d399;
+      font-size: 0.68rem;
+    }
+    .data-table-row .trend-down {
+      color: #f87171;
+      font-size: 0.68rem;
+    }
+    .data-indicators {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .data-indicator {
+      flex: 1;
+      background: #0f2744;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .data-indicator .di-val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .data-indicator .di-lbl {
+      font-size: 0.62rem;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    /* Bento grid mock */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 8px;
+      min-height: 168px;
+    }
+    .bento-cell {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .bento-cell.span-2 {
+      grid-column: span 2;
+    }
+    .bento-cell.tall {
+      grid-row: span 2;
+    }
+    .bento-cell .b-num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .bento-cell .b-lbl {
+      font-size: 0.65rem;
+      color: #64748b;
+      margin-top: 3px;
+    }
+    .bento-cell .b-text {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      line-height: 1.35;
+    }
+    .bento-mini-flow {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.62rem;
+      color: #60a5fa;
+      margin-top: 4px;
+    }
+    .bento-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3b82f6;
+    }
+    .bento-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, #3b82f6, #2563eb);
+      border-radius: 999px;
+    }
+    @media (max-width: 900px) {
+      .glass-cards {
+        grid-template-columns: 1fr;
+      }
+      .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .bento-cell.span-2, .bento-cell.tall {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+    }
+
+    /* Stripe-style animated data flow */
+    .stripe-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+      padding: 18px 8px;
+      min-height: 150px;
+      position: relative;
+    }
+    .stripe-node {
+      flex: 0 0 88px;
+      text-align: center;
+      z-index: 2;
+    }
+    .stripe-node-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 6px;
+      border-radius: 10px;
+      background: #0f2744;
+      border: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .stripe-node-label {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      line-height: 1.25;
+    }
+    .stripe-node-label strong {
+      display: block;
+      color: #e2e8f0;
+      font-size: 0.7rem;
+    }
+    .stripe-path {
+      flex: 1;
+      position: relative;
+      height: 2px;
+      margin: 0 4px;
+      align-self: center;
+      top: -12px;
+    }
+    .stripe-line {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, #334155 15%, #475569 50%, #334155 85%, transparent);
+      border-radius: 999px;
+    }
+    .stripe-line::after {
+      content: '';
+      position: absolute;
+      inset: -1px 0;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15) 50%, transparent);
+      border-radius: 999px;
+    }
+    .stripe-pulse {
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      margin-top: -4px;
+      border-radius: 50%;
+      background: #60a5fa;
+      box-shadow: 0 0 10px #3b82f6, 0 0 20px rgba(59, 130, 246, 0.5);
+      z-index: 3;
+    }
+    .stripe-pulse::before {
+      content: attr(data-label);
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.58rem;
+      font-weight: 600;
+      color: #60a5fa;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+    .pulse-orders {
+      animation: stripePulseLeft 3.2s ease-in-out infinite;
+    }
+    .pulse-invoice {
+      animation: stripePulseRight 3.2s ease-in-out infinite;
+      background: #34d399;
+      box-shadow: 0 0 10px #10b981, 0 0 20px rgba(52, 211, 153, 0.5);
+    }
+    .pulse-invoice::before {
+      color: #34d399;
+      content: 'INVOICE';
+    }
+    @keyframes stripePulseLeft {
+      0% { left: 0%; opacity: 0; }
+      8% { opacity: 1; }
+      42% { left: calc(100% - 8px); opacity: 1; }
+      48% { left: calc(100% - 8px); opacity: 0; }
+      100% { left: calc(100% - 8px); opacity: 0; }
+    }
+    @keyframes stripePulseRight {
+      0%, 48% { left: 0%; opacity: 0; }
+      54% { opacity: 1; }
+      92% { left: calc(100% - 8px); opacity: 1; }
+      98% { opacity: 0; }
+      100% { left: calc(100% - 8px); opacity: 0; }
+    }
+    .stripe-hub {
+      flex: 0 0 108px;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+      top: -12px;
+    }
+    .hub-core {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(15, 39, 68, 0.9) 70%);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #93c5fd;
+      letter-spacing: 0.5px;
+      animation: hubGlow 3.2s ease-in-out infinite;
+    }
+    @keyframes hubGlow {
+      0%, 38% { box-shadow: 0 0 0 rgba(59, 130, 246, 0); border-color: rgba(96, 165, 250, 0.35); }
+      44%, 56% { box-shadow: 0 0 24px rgba(59, 130, 246, 0.7), 0 0 48px rgba(59, 130, 246, 0.3); border-color: #60a5fa; }
+      62%, 100% { box-shadow: 0 0 0 rgba(59, 130, 246, 0); border-color: rgba(96, 165, 250, 0.35); }
+    }
+    .hub-label {
+      font-size: 0.62rem;
+      color: #94a3b8;
+      line-height: 1.3;
+    }
+    .hub-label strong {
+      display: block;
+      color: #e2e8f0;
+      font-size: 0.68rem;
+    }
+    .ux-idea-list {
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      line-height: 1.45;
+    }
+    .ux-idea-list li {
+      padding: 4px 0 4px 14px;
+      position: relative;
+    }
+    .ux-idea-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.72rem;
+    }
+
+    /* 3D Isometric mock */
+    .iso-scene {
+      position: relative;
+      min-height: 168px;
+      padding: 12px 8px;
+      overflow: hidden;
+    }
+    .iso-scene svg {
+      width: 100%;
+      height: 168px;
+    }
+    .iso-chip {
+      animation: isoChipMove 4s ease-in-out infinite;
+    }
+    .iso-chip-2 {
+      animation: isoChipMove2 4s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    @keyframes isoChipMove {
+      0% { transform: translate(30px, 95px); opacity: 0; }
+      10% { opacity: 1; }
+      45% { transform: translate(155px, 72px); opacity: 1; }
+      55% { transform: translate(155px, 72px); opacity: 0; }
+      100% { transform: translate(155px, 72px); opacity: 0; }
+    }
+    @keyframes isoChipMove2 {
+      0%, 50% { transform: translate(155px, 72px); opacity: 0; }
+      60% { opacity: 1; }
+      95% { transform: translate(280px, 50px); opacity: 1; }
+      100% { transform: translate(280px, 50px); opacity: 0; }
+    }
+    .iso-glow {
+      animation: isoCoreGlow 4s ease-in-out infinite;
+    }
+    @keyframes isoCoreGlow {
+      0%, 40% { opacity: 0.4; }
+      48%, 58% { opacity: 1; }
+      65%, 100% { opacity: 0.4; }
+    }
+
+    /* Pipeline deconstruction slides */
+    .flow-pair {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .flow-row-card {
+      background: #0a1628;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .flow-row-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .flow-row-label.a { color: #60a5fa; }
+    .flow-row-label.b { color: #34d399; }
+    .flow-chain {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      font-size: 0.68rem;
+    }
+    .flow-chip {
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #cbd5e1;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .flow-chip.file {
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      font-weight: 600;
+      font-size: 0.64rem;
+    }
+    .flow-chip.file.green {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(52, 211, 153, 0.35);
+      color: #6ee7b7;
+    }
+    .flow-arrow {
+      color: #475569;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+    .problem-box {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: #fca5a5;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .goal-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: #86efac;
+      line-height: 1.45;
+    }
+    .goal-list {
+      margin: 6px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .goal-list li {
+      padding: 2px 0 2px 14px;
+      position: relative;
+      font-size: 0.76rem;
+      color: #cbd5e1;
+    }
+    .goal-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #34d399;
+      font-size: 0.7rem;
+    }
+
+    /* Triplex architecture mock */
+    .triplex-arch {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 4px 4px;
+      min-height: 200px;
+    }
+    .triplex-zone {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .triplex-zone .tz-icon {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+    .triplex-zone .tz-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .triplex-zone .tz-sub {
+      font-size: 0.62rem;
+      color: #64748b;
+      line-height: 1.3;
+    }
+    .triplex-zone .tz-role {
+      font-size: 0.58rem;
+      color: var(--accent-2);
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .triplex-hub-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 2;
+    }
+    .triplex-hub {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(15, 39, 68, 0.95) 65%);
+      border: 1px solid rgba(147, 197, 253, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #93c5fd;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(59, 130, 246, 0.2);
+      transform: translateY(-6px);
+      animation: hubGlow 3.2s ease-in-out infinite;
+    }
+    .triplex-hub-label {
+      font-size: 0.6rem;
+      color: #94a3b8;
+      text-align: center;
+      line-height: 1.25;
+      max-width: 90px;
+    }
+    .triplex-hub-label strong {
+      display: block;
+      color: #e2e8f0;
+      font-size: 0.65rem;
+    }
+    .triplex-lanes {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 4px;
+    }
+    .triplex-lane {
+      position: relative;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #334155 10%, #475569 50%, #334155 90%, transparent);
+      border-radius: 999px;
+    }
+    .triplex-lane .lane-pulse {
+      position: absolute;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      margin-top: -3.5px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .lane-pulse.fwd {
+      background: #60a5fa;
+      box-shadow: 0 0 8px #3b82f6;
+      animation: laneFwd 3.5s ease-in-out infinite;
+    }
+    .lane-pulse.rev {
+      background: #34d399;
+      box-shadow: 0 0 8px #10b981;
+      animation: laneRev 3.5s ease-in-out infinite;
+    }
+    .lane-tag {
+      position: absolute;
+      top: -14px;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .lane-tag.fwd { left: 8%; color: #60a5fa; }
+    .lane-tag.rev { right: 8%; color: #34d399; }
+    @keyframes laneFwd {
+      0% { left: 5%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { left: 93%; opacity: 1; }
+      100% { left: 93%; opacity: 0; }
+    }
+    @keyframes laneRev {
+      0% { left: 93%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { left: 5%; opacity: 1; }
+      100% { left: 5%; opacity: 0; }
+    }
+    .viz-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent-2);
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+    }
+
+    /* Interactive UX scenarios */
+    .scenario-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .scenario-trigger {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elev);
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .scenario-trigger:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .scenario-trigger.active {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .scenario-trigger.running {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .scenario-trigger.s2 {
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    .scenario-trigger.s2.active,
+    .scenario-trigger.s2:hover {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #34d399;
+      color: #fff;
+    }
+    .scenario-stage-wrap {
+      background: #0a1628;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 12px 10px;
+      position: relative;
+      min-height: 175px;
+    }
+    .scenario-stage {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 6px;
+      align-items: start;
+      position: relative;
+    }
+    .sc-zone {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      min-height: 72px;
+    }
+    .sc-zone .scz-icon { font-size: 1.1rem; margin-bottom: 4px; }
+    .sc-zone .scz-title { font-size: 0.68rem; font-weight: 700; color: #fff; }
+    .sc-zone .scz-sub { font-size: 0.58rem; color: #64748b; }
+    .sc-zone.pulse-origin {
+      border-color: rgba(96, 165, 250, 0.6);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
+    }
+    .sc-zone.pulse-dest {
+      border-color: rgba(52, 211, 153, 0.6);
+      box-shadow: 0 0 16px rgba(52, 211, 153, 0.25);
+    }
+    .sc-hub {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.28) 0%, rgba(15, 39, 68, 0.95) 70%);
+      border: 1px solid rgba(147, 197, 253, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #93c5fd;
+      margin-top: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .sc-hub.validating {
+      border-color: #60a5fa;
+      box-shadow: 0 0 28px rgba(59, 130, 246, 0.65);
+      animation: hubValidate 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes hubValidate {
+      from { transform: scale(1); }
+      to { transform: scale(1.06); }
+    }
+    .sc-track-area {
+      grid-column: 1 / -1;
+      position: relative;
+      height: 36px;
+      margin-top: 2px;
+    }
+    .sc-track-line {
+      position: absolute;
+      top: 50%;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      margin-top: -1px;
+      background: linear-gradient(90deg, transparent, #334155 10%, #475569 50%, #334155 90%, transparent);
+      border-radius: 999px;
+    }
+    .sc-chip {
+      position: absolute;
+      top: 50%;
+      margin-top: -11px;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      opacity: 0;
+      transform: translateX(-50%);
+      transition: left 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      z-index: 3;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .sc-chip.blue {
+      background: rgba(59, 130, 246, 0.85);
+      border: 1px solid #93c5fd;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+    }
+    .sc-chip.green {
+      background: rgba(16, 185, 129, 0.85);
+      border: 1px solid #6ee7b7;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
+    }
+    .sc-chip.visible { opacity: 1; }
+    .sc-hub-status {
+      text-align: center;
+      font-size: 0.62rem;
+      color: #60a5fa;
+      min-height: 16px;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .sc-result {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.35s ease;
+      min-height: 0;
+    }
+    .sc-result.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .sc-result.success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      color: #86efac;
+    }
+    .sc-result.success strong { color: #34d399; }
+    .step-timeline {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .step-timeline li {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+    }
+    .step-timeline li:last-child { border-bottom: none; }
+    .step-num {
+      flex: 0 0 20px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.2);
+      color: var(--accent-2);
+      font-size: 0.65rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-timeline.s2 .step-num {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    /* Moodboard slides */
+    .moodboard-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
+    }
+    .moodboard-desc {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+      max-width: 900px;
+    }
+    .moodboard-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .moodboard-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.12);
+      color: var(--accent-2);
+      letter-spacing: 0.2px;
+    }
+    .moodboard-frame {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #0d1b2e;
+      cursor: zoom-in;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .moodboard-frame:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+    .moodboard-frame img {
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: contain;
+      display: block;
+    }
+    .moodboard-zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 0.68rem;
+      color: #94a3b8;
+      background: rgba(10, 22, 40, 0.85);
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      pointer-events: none;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .moodboard-frame:hover .moodboard-zoom-hint {
+      opacity: 1;
+      color: #e2e8f0;
+    }
+
+    /* Image lightbox */
+    .img-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(2, 8, 18, 0.94);
+      align-items: center;
+      justify-content: center;
+      padding: 32px 48px;
+      cursor: zoom-out;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .img-lightbox.open {
+      display: flex;
+    }
+    .img-lightbox img {
+      max-width: 96vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+      cursor: default;
+    }
+    .img-lightbox-caption {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      color: #94a3b8;
+      background: rgba(10, 22, 40, 0.9);
+      padding: 6px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      max-width: 80vw;
+      text-align: center;
+      pointer-events: none;
+    }
+    .img-lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      background: rgba(10, 22, 40, 0.9);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      pointer-events: none;
+    }
+
+    /* Scheme transformation slides */
+    .transform-hero {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.22);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      color: #fca5a5;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .transform-hero strong { color: #fff; }
+    .transform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .transform-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .transform-card h4 {
+      margin: 0 0 8px;
+      font-size: 0.82rem;
+      color: #fff;
+    }
+    .transform-card.old { border-color: rgba(239, 68, 68, 0.3); }
+    .transform-card.old h4 { color: #f87171; }
+    .transform-card.new { border-color: rgba(52, 211, 153, 0.35); }
+    .transform-card.new h4 { color: #34d399; }
+    .transform-card ul {
+      margin: 0;
+      padding-left: 14px;
+      font-size: 0.74rem;
+      color: var(--text-soft);
+      line-height: 1.45;
+    }
+    .transform-card li { margin: 3px 0; }
+    .solution-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .solution-pillar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .solution-pillar .sp-icon { font-size: 1.2rem; margin-bottom: 4px; }
+    .solution-pillar .sp-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .solution-pillar .sp-desc {
+      font-size: 0.62rem;
+      color: #64748b;
+      line-height: 1.35;
+    }
+    @media (max-width: 900px) {
+      .transform-grid, .solution-pillars {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* UX Approach slides */
+    .approach-ref {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .approach-ref strong { color: #94a3b8; }
+
+    /* Approach 1: Timeline */
+    .ux-timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: 10px;
+    }
+    .tl-step {
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      padding: 0 4px;
+    }
+    .tl-step::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: #334155;
+      z-index: 0;
+    }
+    .tl-step:last-child::after { display: none; }
+    .tl-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #0f2744;
+      border: 2px solid #334155;
+      margin: 0 auto 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #64748b;
+      position: relative;
+      z-index: 1;
+      transition: all 0.25s ease;
+    }
+    .tl-step.active .tl-dot {
+      border-color: #60a5fa;
+      background: rgba(59, 130, 246, 0.25);
+      color: #93c5fd;
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
+    }
+    .tl-title {
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: #64748b;
+      line-height: 1.25;
+    }
+    .tl-step.active .tl-title { color: #e2e8f0; }
+    .tl-preview {
+      background: #0a1628;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 72px;
+      font-size: 0.72rem;
+      color: #94a3b8;
+      line-height: 1.45;
+      transition: opacity 0.2s;
+    }
+    .tl-preview strong { color: #fff; }
+    .tl-preview .tl-file {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      font-weight: 600;
+      font-size: 0.65rem;
+    }
+
+    /* Approach 2: Centered hub */
+    .ux-hub-layout {
+      position: relative;
+      min-height: 155px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    .hub-side {
+      flex: 1;
+      text-align: center;
+      font-size: 0.68rem;
+      color: #94a3b8;
+      z-index: 2;
+    }
+    .hub-side strong { display: block; color: #e2e8f0; font-size: 0.72rem; margin-bottom: 2px; }
+    .hub-center-node {
+      flex: 0 0 100px;
+      text-align: center;
+      z-index: 3;
+      position: relative;
+    }
+    .hub-glass-core {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(147, 197, 253, 0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #93c5fd;
+      line-height: 1.2;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 24px rgba(59, 130, 246, 0.15);
+    }
+    .hub-center-label {
+      font-size: 0.58rem;
+      color: #64748b;
+      line-height: 1.25;
+    }
+    .hub-threads {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hub-threads svg {
+      width: 100%;
+      height: 100%;
+    }
+    .hub-float-chip {
+      position: absolute;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      z-index: 4;
+    }
+    .hub-float-chip.c1 {
+      top: 38%;
+      left: 22%;
+      background: rgba(59, 130, 246, 0.8);
+      color: #fff;
+      animation: hubChipL 3s ease-in-out infinite;
+    }
+    .hub-float-chip.c2 {
+      top: 52%;
+      right: 20%;
+      background: rgba(16, 185, 129, 0.8);
+      color: #fff;
+      animation: hubChipR 3s ease-in-out infinite;
+      animation-delay: 1.5s;
+    }
+    @keyframes hubChipL {
+      0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+      50% { transform: translate(80px, 0); opacity: 1; }
+    }
+    @keyframes hubChipR {
+      0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+      50% { transform: translate(-80px, 0); opacity: 1; }
+    }
+
+    /* Approach 3: Live log */
+    .live-log-window {
+      background: #050a12;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .live-log-bar {
+      background: #0f172a;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .live-log-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .live-log-dot.r { background: #ef4444; }
+    .live-log-dot.y { background: #eab308; }
+    .live-log-dot.g { background: #22c55e; }
+    .live-log-title {
+      font-size: 0.62rem;
+      color: #64748b;
+      margin-left: 4px;
+    }
+    .live-log-body {
+      padding: 10px 12px;
+      min-height: 118px;
+      font-size: 0.64rem;
+      line-height: 1.55;
+    }
+    .log-line {
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.35s ease;
+      margin: 1px 0;
+    }
+    .log-line.show { opacity: 1; transform: translateY(0); }
+    .log-line .ts { color: #475569; }
+    .log-line .act { color: #60a5fa; font-weight: 600; }
+    .log-line .act.ok { color: #34d399; }
+    .log-line .act.warn { color: #fbbf24; }
+    .log-line .msg { color: #94a3b8; }
+    .log-line.success .msg { color: #86efac; }
+    .live-log-trigger {
+      margin-top: 8px;
+      font-size: 0.68rem;
+    }
+
+    /* Final value slide */
+    .final-slide-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .final-lead {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+      max-width: 920px;
+    }
+    .final-lead p {
+      margin: 0 0 8px;
+    }
+    .final-lead strong { color: #fff; }
+    .final-mock {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .final-mock-top {
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #0f2744 0%, #0a1628 100%);
+    }
+    .final-mock-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--accent-2);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .final-mini-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 4px 0;
+    }
+    .final-node {
+      font-size: 0.62rem;
+      color: #94a3b8;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .final-node.hub {
+      border-color: rgba(96, 165, 250, 0.4);
+      color: #93c5fd;
+      font-weight: 600;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+    }
+    .final-flow-line {
+      flex: 0 0 40px;
+      height: 2px;
+      background: linear-gradient(90deg, #334155, #60a5fa, #334155);
+      position: relative;
+    }
+    .final-flow-dot {
+      position: absolute;
+      top: -3px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #60a5fa;
+      box-shadow: 0 0 8px #3b82f6;
+      animation: finalDotMove 2.5s ease-in-out infinite;
+    }
+    @keyframes finalDotMove {
+      0% { left: 0%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { left: calc(100% - 6px); opacity: 1; }
+      100% { left: calc(100% - 6px); opacity: 0; }
+    }
+    .final-benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .final-benefit {
+      padding: 14px 16px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .final-benefit:last-child { border-right: none; }
+    .final-benefit .fb-icon {
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+    .final-benefit .fb-metric {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .final-benefit .fb-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
+    .final-benefit .fb-desc {
+      font-size: 0.65rem;
+      color: #64748b;
+      line-height: 1.35;
+    }
+    .final-tagline {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      font-style: italic;
+      padding: 10px 14px;
+      background: #0f2744;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      line-height: 1.45;
+    }
+    @media (max-width: 900px) {
+      .final-benefits { grid-template-columns: 1fr; }
+      .final-benefit { border-right: none; border-bottom: 1px solid var(--border); }
+      .final-benefit:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: COVER -->
+      <section class="title-slide hero-bg">
+        <div>
+          <div class="brand" style="margin-bottom: 2rem; justify-content: center;">
+            <div class="logo">I</div>
+            <div>
+              <span class="brand-name">INFOTEC</span><br>
+              <span class="brand-sub">infotec.ee</span>
+            </div>
+          </div>
+
+          <h1 style="font-size: 3.6rem; margin-bottom: 0.75rem;">Управление<br>производством и продажами</h1>
+          <div class="accent-bar" style="margin: 22px auto;"></div>
+          
+          <p class="tagline" style="margin: 0 auto 3rem;">
+            Профессиональные ERP-модули для точного планирования, 
+            полного контроля и автоматизации документооборота
+          </p>
+
+          <div class="meta" style="justify-content: center;">
+            <span>Производство</span>
+            <span>Продажи</span>
+            <span>Интеграции</span>
+          </div>
+
+          <div style="margin-top: 3.25rem; font-size: 0.85rem; color: #64748b;">
+            Используйте ← → или пробел для навигации
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee</span>
+          <span style="opacity:0.4">Enterprise Software</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OVERVIEW -->
+      <section>
+        <div class="section-header">
+          <div>
+            <span class="section-badge">Обзор</span>
+          </div>
+          <h2 style="margin: 0;">Решения Infotec</h2>
+        </div>
+
+        <p style="max-width: 720px; margin-bottom: 2.2rem; color: var(--text-soft);">
+          Три ключевых модуля, которые закрывают основные задачи современного 
+          промышленного и торгового предприятия.
+        </p>
+
+        <div class="overview-cards">
+          <div class="overview-card">
+            <div class="num">01</div>
+            <h3>Production management</h3>
+            <p>Управление производством: планирование, цеха, материалы, себестоимость и контроль отклонений.</p>
+          </div>
+          <div class="overview-card">
+            <div class="num">02</div>
+            <h3>Sales management</h3>
+            <p>Управление продажами: заказы, ценообразование, отгрузки и аналитика рентабельности.</p>
+          </div>
+          <div class="overview-card">
+            <div class="num">03</div>
+            <h3>EDI Infotec</h3>
+            <p>Специальные разработки: автоматизация обмена данными, мобильные рапорты и интеграции с кассами.</p>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee</span>
+        </div>
+      </section>
+
+      <!-- PRODUCTION SECTION: TITLE -->
+      <section>
+        <div class="module-title">
+          <div class="module-number">МОДУЛЬ 01</div>
+          <h2>Production management</h2>
+          <div style="margin: 12px 0 16px;">
+            <span style="font-size: 1.55rem; color: var(--accent);">Управление производством</span>
+          </div>
+          <div class="accent-bar"></div>
+          <p class="module-desc">Комплексное решение для точного планирования, контроля технологических процессов и оптимизации затрат.</p>
+        </div>
+      </section>
+
+      <!-- PRODUCTION: FEATURES -->
+      <section>
+        <div class="section-header">
+          <div><span class="section-badge">Production</span></div>
+          <h2 style="margin: 0;">Главные задачи и решения</h2>
+        </div>
+
+        <div class="cards">
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-4 4"/></svg>
+            </div>
+            <h3>Оптимизация планирования и расчет себестоимости</h3>
+            <p>Формирование производственного плана, глубокий анализ потребности в материалах, загрузке оборудования и расчет плановой/фактической себестоимости изделий.</p>
+            <div class="card-label">ПЛАНИРОВАНИЕ • СЕБЕСТОИМОСТЬ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15l3 3 3-3"/></svg>
+            </div>
+            <h3>Контроль цехов и диспетчеризация</h3>
+            <p>Полное операционное описание технологических процессов, маршрутные карты изделий, учет трудовых норм и персонала. Диспетчеризация и контроль выполнения операций в реальном времени.</p>
+            <div class="card-label">ЦЕХА • ДИСПЕТЧЕРИЗАЦИЯ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 15l2 2 4-4"/></svg>
+            </div>
+            <h3>Учет материалов и исключение перерасхода</h3>
+            <p>Жесткий контроль списания материалов и автоматический расчет остатков незавершенного производства. Гибкое использование аналогов (заменителей) с автоматическим пересчетом коэффициентов.</p>
+            <div class="card-label">МАТЕРИАЛЫ • АНАЛОГИ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 21V3"/><path d="M3 21V8"/><path d="M7 21v-5"/><path d="M11 21v-9"/><path d="M15 21v-3"/><path d="M19 21v-7"/></svg>
+            </div>
+            <h3>Анализ отклонений (План vs Факт)</h3>
+            <p>Контроль отклонений фактических затрат, расхода материалов и трудозатрат от плановых показателей по конкретным работникам, операциям и изделиям.</p>
+            <div class="card-label">АНАЛИТИКА • ОТКЛОНЕНИЯ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </div>
+            <h3>Сдача на склад</h3>
+            <p>Автоматическое оформление накладных на выпуск готовой продукции и передача её на склад по завершении технологических операций.</p>
+            <div class="card-label">ВЫПУСК • СКЛАД</div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee</span>
+        </div>
+      </section>
+
+      <!-- SALES SECTION: TITLE -->
+      <section>
+        <div class="module-title">
+          <div class="module-number">МОДУЛЬ 02</div>
+          <h2>Sales management</h2>
+          <div style="margin: 12px 0 16px;">
+            <span style="font-size: 1.55rem; color: var(--accent);">Управление продажами</span>
+          </div>
+          <div class="accent-bar"></div>
+          <p class="module-desc">Прозрачный контроль заказов, гибкое ценообразование и автоматизированный документооборот.</p>
+        </div>
+      </section>
+
+      <!-- SALES: FEATURES -->
+      <section>
+        <div class="section-header">
+          <div><span class="section-badge">Sales</span></div>
+          <h2 style="margin: 0;">Ключевой функционал</h2>
+        </div>
+
+        <div class="cards">
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+            </div>
+            <h3>Четкий контроль заказов</h3>
+            <p>Регистрация заказов на продажу товаров и услуг. Жесткий контроль сроков и полноты выполнения обязательств перед покупателями. Отслеживание фактической отгрузки по коду строки заказа.</p>
+            <div class="card-label">ЗАКАЗЫ • КОНТРОЛЬ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/><path d="M6 2v2m12-2v2"/></svg>
+            </div>
+            <h3>Гибкое ценообразование</h3>
+            <p>Механизм формирования цен и использование различных видов скидок для обеспечения индивидуального подхода к каждому клиенту.</p>
+            <div class="card-label">ЦЕНЫ • СКИДКИ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+            </div>
+            <h3>Контроль отгрузок</h3>
+            <p>Формирование планов отгрузки и оперативный анализ данных о просроченных отгрузках для контроля хода выполнения заказов.</p>
+            <div class="card-label">ОТГРУЗКИ • ПЛАН-ФАКТ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h2"/><path d="M8 17h2"/><path d="M14 13h2"/><path d="M14 17h2"/></svg>
+            </div>
+            <h3>Автоматизация документооборота</h3>
+            <p>Загрузка заказов из файлов XML и TXT. Быстрая передача счетов в другие системы в виде XML-файлов. Экономит время менеджеров и сводит к нулю вероятность ошибок ручного ввода.</p>
+            <div class="card-label">XML • АВТОМАТИЗАЦИЯ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M19 9l-6 6-4-4-3 3"/></svg>
+            </div>
+            <h3>Аналитика прибыльности</h3>
+            <p>Мощные отчеты по анализу продаж и рентабельности, позволяющие оценить доходность каждого отдельного заказа.</p>
+            <div class="card-label">ПРИБЫЛЬ • РЕНТАБЕЛЬНОСТЬ</div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee</span>
+        </div>
+      </section>
+
+      <!-- EDI SECTION: TITLE -->
+      <section>
+        <div class="module-title">
+          <div class="module-number">МОДУЛЬ 03</div>
+          <h2>EDI Infotec</h2>
+          <div style="margin: 12px 0 16px;">
+            <span style="font-size: 1.55rem; color: var(--accent);">Специальные разработки / Обмен данными</span>
+          </div>
+          <div class="accent-bar"></div>
+          <p class="module-desc">Автоматизация интеграций и исключение ручного ввода при обмене коммерческими данными.</p>
+        </div>
+      </section>
+
+      <!-- EDI: FEATURES -->
+      <section>
+        <div class="section-header">
+          <div><span class="section-badge">EDI &amp; Integrations</span></div>
+          <h2 style="margin: 0;">Суть и ценность решения</h2>
+        </div>
+
+        <div class="cards">
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M8 3v3"/><path d="M16 3v3"/><path d="M12 3v3"/><path d="M3 8h18"/><path d="M5 12h14"/><path d="M5 16h14"/><path d="M5 20h14"/><path d="M5 8v12"/><path d="M19 8v12"/></svg>
+            </div>
+            <h3>Автоматизация документооборота без ручного ввода</h3>
+            <p>Полное исключение человеческого фактора при передаче коммерческих данных (ORDERS, INVOICE и др.) между различными информационными базами и контрагентами.</p>
+            <div class="card-label">БЕЗ РУЧНОГО ВВОДА</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="17" r="1"/></svg>
+            </div>
+            <h3>Безопасная и быстрая интеграция через SFTP</h3>
+            <p>Надёжный обмен данными между разнородными программами через выделенные FTP/SFTP-серверы. Гарантия скорости и сохранности информации.</p>
+            <div class="card-label">SFTP • БЕЗОПАСНОСТЬ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+            </div>
+            <h3>Связь с мобильными устройствами и торговыми точками</h3>
+            <p>Рапортирование работ напрямую из производства или ввод данных торговыми агентами с мобильных устройств в единую систему в реальном времени.</p>
+            <div class="card-label">МОБИЛЬНОСТЬ • РАПОРТЫ</div>
+          </div>
+
+          <div class="card fragment fade-up">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M5 8h14"/><path d="M5 16h14"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Прямая интеграция с кассами и банками</h3>
+            <p>Обмен данными с кассовыми аппаратами и серверами через интернет. Автоматическая выгрузка/загрузка платежных документов и банковских выписок по стандарту SEPA в формате XML.</p>
+            <div class="card-label">КАССЫ • БАНКИ • SEPA XML</div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee</span>
+        </div>
+      </section>
+
+      <!-- MINDMAP STRUCTURE DRAFT -->
+      <section>
+        <div class="section-header" style="margin-bottom: 1.25rem;">
+          <div>
+            <span class="section-badge">Draft</span>
+          </div>
+          <h2 style="margin: 0; font-size: 1.85rem;">Драфт структуры страниц (Mindmap)</h2>
+        </div>
+
+        <div class="mindmap-grid">
+          <!-- Variant A -->
+          <div class="mindmap-col fragment fade-up">
+            <div class="mindmap-header">
+              <span class="variant-badge">A</span>
+              <strong>Вариант А (Продуктовый)</strong>
+            </div>
+
+            <div class="tree">
+              <div class="tree-module">Production <span class="tree-url">/production/</span></div>
+              <div class="tree-item">Planning &amp; Cost <span class="tree-url">/production/planning</span> <span class="tree-form">PlanForm</span></div>
+              <div class="tree-item">Dispatch &amp; Control <span class="tree-url">/production/dispatch</span> <span class="tree-form">DispatchForm</span></div>
+              <div class="tree-item">Materials &amp; Analogs <span class="tree-url">/production/materials</span> <span class="tree-form">MaterialLedger</span></div>
+              <div class="tree-item">Deviations <span class="tree-url">/production/deviations</span> <span class="tree-form">VarianceReport</span></div>
+              <div class="tree-item">Release to Warehouse <span class="tree-url">/production/release</span> <span class="tree-form">IssueNoteForm</span></div>
+
+              <div class="tree-module">Sales <span class="tree-url">/sales/</span></div>
+              <div class="tree-item">Orders Control <span class="tree-url">/sales/orders</span> <span class="tree-form">OrderForm</span></div>
+              <div class="tree-item">Pricing &amp; Discounts <span class="tree-url">/sales/pricing</span> <span class="tree-form">PriceMatrix</span></div>
+              <div class="tree-item">Shipments <span class="tree-url">/sales/shipments</span> <span class="tree-form">ShipmentPlan</span></div>
+              <div class="tree-item">Docs (XML) <span class="tree-url">/sales/docs</span> <span class="tree-form">XmlImportExport</span></div>
+              <div class="tree-item">Analytics <span class="tree-url">/sales/analytics</span> <span class="tree-form">ProfitReport</span></div>
+
+              <div class="tree-module">EDI <span class="tree-url">/edi/</span></div>
+              <div class="tree-item">Data Exchange <span class="tree-url">/edi/exchange</span> <span class="tree-form">SftpSync</span></div>
+              <div class="tree-item">Mobile Reports <span class="tree-url">/edi/mobile</span> <span class="tree-form">MobileRaport</span></div>
+              <div class="tree-item">Cash &amp; Bank <span class="tree-url">/edi/cashbank</span> <span class="tree-form">SepaXml</span></div>
+            </div>
+          </div>
+
+          <!-- Variant B -->
+          <div class="mindmap-col fragment fade-up">
+            <div class="mindmap-header">
+              <span class="variant-badge">B</span>
+              <strong>Вариант Б (Платформенный)</strong>
+            </div>
+
+            <div class="platform-mock">
+              <div class="url-bar">https://infotec.ee/capabilities/</div>
+
+              <div class="tabs">
+                <div class="tab active">Production</div>
+                <div class="tab">Sales</div>
+                <div class="tab">EDI</div>
+              </div>
+
+              <div class="tab-content">
+                <div style="font-size:0.7rem; color:#64748b; margin-bottom:4px;">PRODUCTION MODULE</div>
+                <ul class="mini-list">
+                  <li>Планирование и расчет себестоимости</li>
+                  <li>Контроль цехов и диспетчеризация</li>
+                  <li>Учет материалов и аналоги</li>
+                  <li>Анализ отклонений План/Факт</li>
+                  <li>Сдача на склад</li>
+                </ul>
+              </div>
+
+              <div class="cross-form">
+                <div class="form-title">СКВОЗНАЯ ФОРМА</div>
+                <div class="mock-row">
+                  <input class="mock-input" value="Иван Петров" readonly>
+                  <input class="mock-input" value="infotec-demo" readonly>
+                </div>
+                <div class="mock-row">
+                  <input class="mock-input" value="ivan@client.ee" readonly>
+                  <select class="mock-input" style="flex:0.9;"><option>Все модули</option></select>
+                </div>
+                <button class="mock-btn">Отправить заявку</button>
+              </div>
+            </div>
+
+            <div style="margin-top: 5px; font-size: 0.65rem; color: #64748b;">
+              Единая страница + табы + сквозная форма
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee</span>
+        </div>
+      </section>
+
+      <!-- UX INTERVIEW DIVIDER -->
+      <section>
+        <div class="module-title" style="text-align:center; padding:0 40px;">
+          <div style="display:flex; justify-content:center; margin-bottom:10px;">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="module-number" style="letter-spacing:2px;">UX / UI ИНТЕРВЬЮ</div>
+          <h2 style="font-size:2.6rem;">Проектирование бизнес-логики</h2>
+          <div style="margin: 10px 0 16px;">
+            <span style="font-size:1.35rem; color:var(--accent);">infotec.ee</span>
+          </div>
+          <div class="accent-bar" style="margin:0 auto;"></div>
+          <p style="max-width:620px; margin:16px auto 0; color:var(--text-muted); font-size:1.05rem;">
+            Ключевые вопросы по целевой аудитории, конверсиям, архитектуре и структуре контента
+          </p>
+        </div>
+      </section>
+
+      <!-- БЛОК 1: Целевая аудитория и Тональность -->
+      <section>
+        <div style="margin-bottom:1.1rem;">
+          <span class="section-badge">БЛОК 1</span>
+          <h2 style="margin:6px 0 0; font-size:1.75rem;">Целевая аудитория и Тональность</h2>
+          <div class="ux-note">Разные роли — разные боли и язык коммуникации</div>
+        </div>
+
+        <div class="interview-grid">
+          <!-- Production -->
+          <div class="audience-card fragment fade-up">
+            <div style="margin-bottom:4px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3>Production management</h3>
+            <div class="role-question">Кто наш главный читатель на странице?</div>
+            <div class="role-why">
+              <strong>Возможные роли:</strong><br>
+              Генеральный директор / владелец бизнеса<br>
+              IT-директор (CIO)<br>
+              Главный технолог / начальник производства
+            </div>
+            <div class="ux-mini">
+              <h4>Значение:</h4>
+              <ul style="font-size:0.8rem; margin:0; padding-left:14px; color:#94a3b8;">
+                <li>Директору — цифры, снижение издержек</li>
+                <li>IT-директору — интеграция и стек</li>
+                <li>Технологу — удобство маршрутных карт, План-Факт</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sales -->
+          <div class="audience-card fragment fade-up">
+            <div style="margin-bottom:4px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M19 9l-6 6-4-4-3 3"/></svg></div>
+            <h3>Sales management</h3>
+            <div class="role-question">Кто принимает решение по автоматизации продаж?</div>
+            <div class="role-why">
+              <strong>Возможные роли:</strong><br>
+              Коммерческий директор<br>
+              Руководитель отдела продаж (РОП)<br>
+              Собственник бизнеса
+            </div>
+            <div class="ux-mini">
+              <h4>Содержание:</h4>
+              <div style="font-size:0.82rem; color:#94a3b8; margin-top:4px;">
+                Определить, какие боли и термины использовать: контроль воронки, прозрачность отгрузок, ROI менеджеров или общее управление бизнесом.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX интервью</span>
+        </div>
+      </section>
+
+      <!-- БЛОК 2: Конверсии и CTA -->
+      <section>
+        <div style="margin-bottom:1rem;">
+          <span class="section-badge">БЛОК 2</span>
+          <h2 style="margin:6px 0 0; font-size:1.7rem;">Конверсии и CTA</h2>
+        </div>
+
+        <div class="ux-question">Какое идеальное целевое действие должен совершить посетитель?</div>
+
+        <div class="options-grid">
+          <div class="ux-option fragment fade-up">
+            <strong>Заявка на живое демо</strong>
+            <div class="hint">Zoom / Teams с экспертом</div>
+          </div>
+          <div class="ux-option fragment fade-up">
+            <strong>Тестовый доступ</strong>
+            <div class="hint">Временная песочница ERP</div>
+          </div>
+          <div class="ux-option fragment fade-up">
+            <strong>Скачать PDF-кейс / прайс</strong>
+            <div class="hint">В обмен на контакты</div>
+          </div>
+          <div class="ux-option fragment fade-up">
+            <strong>Обратный звонок</strong>
+            <div class="hint">Быстрая консультация</div>
+          </div>
+        </div>
+
+        <div class="ux-mini">
+          <h4>Быстрая ценность прямо на сайте?</h4>
+          <div class="ux-option" style="margin-top:6px;">
+            Простой <strong>калькулятор окупаемости внедрения ERP</strong> — позволяет получить ценность и лид без сильного трения.
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX интервью</span>
+        </div>
+      </section>
+
+      <!-- БЛОК 3: EDI & Архитектура -->
+      <section>
+        <div style="margin-bottom:1rem;">
+          <span class="section-badge">БЛОК 3</span>
+          <h2 style="margin:6px 0 0; font-size:1.7rem;">Продуктовая архитектура (EDI &amp; Интеграции)</h2>
+        </div>
+
+        <div class="key-q fragment fade-up">
+          <strong>Статус модуля EDI Infotec:</strong><br>
+          Это <strong>самостоятельный продукт</strong> (можно продавать отдельно как облачный сервис обмена для компаний со своими CRM) <span style="color:#64748b">или</span> <strong>жёсткое встроенное дополнение</strong>, которое работает только в связке с ERP?
+        </div>
+
+        <div class="ux-mini">
+          <h4>Приоритеты интеграции (Эстония / Балтия)</h4>
+          <div style="font-size:0.9rem; color:var(--text-soft); margin-bottom:8px;">
+            На какие экосистемы и стандарты (кроме SEPA и XML) делаем упор?<br>
+            Важно ли показывать клиентам логотипы банков (Swedbank, SEB, LHV) и бухгалтерских систем?
+          </div>
+
+          <div class="options-grid">
+            <div class="ux-option">
+              <strong>Банки Эстонии</strong><br>
+              <span class="hint">Swedbank, SEB, LHV, Luminor</span>
+            </div>
+            <div class="ux-option">
+              <strong>Бухгалтерские системы</strong><br>
+              <span class="hint">Standard Books, Merit, Hansa, 1C</span>
+            </div>
+            <div class="ux-option">
+              <strong>Другие стандарты</strong><br>
+              <span class="hint">EDIFACT, Peppol, e-invoice</span>
+            </div>
+            <div class="ux-option">
+              <strong>Мобильные интеграции</strong><br>
+              <span class="hint">Складские приложения, POS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX интервью</span>
+        </div>
+      </section>
+
+      <!-- БЛОК 4: Выбор структуры -->
+      <section>
+        <div style="margin-bottom:0.9rem;">
+          <span class="section-badge">БЛОК 4</span>
+          <h2 style="margin:4px 0 0; font-size:1.7rem;">Выбор структуры (Вариант А vs Вариант Б)</h2>
+        </div>
+
+        <div class="ux-question" style="margin-bottom:8px;">Готовы ли мы сейчас написать качественный подробный контент для трёх отдельных страниц?</div>
+
+        <div class="choice-grid">
+          <div class="choice-card a">
+            <h4 style="color:#cbd5e1;">Вариант А — Продуктовый</h4>
+            <div style="font-size:0.85rem; color:#94a3b8;">
+              Три отдельные сильные посадочные страницы:<br>
+              /production/, /sales/, /edi/<br><br>
+              + Плюсы: точный фокус, SEO, глубокий контент<br>
+              – Минусы: нужно много качественного текста, сложнее поддерживать
+            </div>
+          </div>
+          <div class="choice-card b">
+            <h4 style="color:#60a5fa;">Вариант Б — Платформенный</h4>
+            <div style="font-size:0.85rem; color:#94a3b8;">
+              Одна сильная страница /capabilities/ с табами<br><br>
+              + Плюсы: не размываем трафик, быстрее запустить, легче поддерживать<br>
+              – Минусы: меньше SEO-возможностей под отдельные запросы
+            </div>
+          </div>
+        </div>
+
+        <div class="key-q" style="margin-top:14px;">
+          Главный вопрос: <strong>На первом этапе лучше сфокусироваться на одной мощной интерактивной странице (B)</strong>, чтобы не размывать фокус и трафик?
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX интервью</span>
+        </div>
+      </section>
+
+      <!-- REFERENCES INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 20px;">
+          <div class="module-number" style="letter-spacing:1.5px;">UX РЕФЕРЕНСЫ</div>
+          <h2 style="font-size: 2.35rem; margin: 8px 0 12px;">Вдохновение из лучших продуктов</h2>
+          <p style="max-width: 680px; margin: 0 auto; color: var(--text-muted);">
+            Как Odoo, Microsoft Dynamics 365 и современные EDI-платформы упаковывают сложные процессы в понятные и красивые интерфейсы.<br>
+            Идеи для страниц Production, Sales и EDI на сайте infotec.ee.
+          </p>
+        </div>
+      </section>
+
+      <!-- РЕФЕРЕНС 1: Odoo style -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Референс 1</span>
+          <h2 class="ref-section-title">Odoo — Канбан и управление цехами</h2>
+          <div class="ref-subtitle">Интерактивные карточки вместо бесконечных таблиц</div>
+        </div>
+
+        <div class="ref-two-col">
+          <!-- How they do it -->
+          <div class="ref-card">
+            <div class="ref-label">Референс рынка</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.4;">
+              Вместо сухих таблиц — визуальные карточки (Kanban) и крупные Gantt.<br>
+              Статус станка/заказа виден сразу. Чистые таймлайны.
+            </div>
+          </div>
+
+          <!-- What to propose -->
+          <div class="ref-card">
+            <div class="ref-label">Решение для сайта</div>
+
+            <div style="margin-bottom:8px; font-size:0.82rem; color:#94a3b8;">Интерактивный блок «Эволюция контроля цеха» <span style="color:#475569; font-size:0.72rem;">(кликните на фазу)</span></div>
+
+            <!-- Interactive Kanban mock -->
+            <div class="ref-mock">
+              <div class="kanban-steps" id="kanban-steps">
+                <div class="kanban-step active" data-phase="1">Планирование</div>
+                <div class="kanban-step" data-phase="2">Диспетчеризация</div>
+                <div class="kanban-step" data-phase="3">Выпуск на склад</div>
+              </div>
+
+              <div id="kanban-content">
+                <!-- JS populates based on clicked phase -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Odoo упаковывает сложнейшие заводы в понятные карточки. На сайте Infotec — такая же инфографика: ERP управляет цехом в пару кликов, без хаоса.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX референсы</span>
+        </div>
+      </section>
+
+      <!-- РЕФЕРЕНС 2: Dynamics 365 style -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Референс 2</span>
+          <h2 class="ref-section-title">Microsoft Dynamics 365 — Премиальные дашборды</h2>
+          <div class="ref-subtitle">Крупные KPI + чистая визуализация трендов</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">Референс рынка</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.4;">
+              Много воздуха, аккуратные скругления. Важные цифры — в крупных KPI-карточках. Графики — чистые линии без шума.
+            </div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Решение для сайта</div>
+            <div style="margin-bottom: 8px; font-size:0.82rem; color:#94a3b8;">Блок «Управление продажами как на ладони»</div>
+
+            <!-- Mini Dashboard Mock -->
+            <div class="ref-mock">
+              <div class="kpi-row">
+                <div class="kpi">
+                  <div class="kpi-value" style="color:#34d399;">+12%</div>
+                  <div class="kpi-label">Рентабельность заказов</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi-value">0</div>
+                  <div class="kpi-label">Просроченные отгрузки</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi-value">98%</div>
+                  <div class="kpi-label">XML обработано автоматически</div>
+                </div>
+              </div>
+
+              <div style="font-size:0.7rem; color:#64748b; margin-bottom:3px;">Динамика продаж (последние 6 мес)</div>
+              <div class="mini-chart">
+                <svg viewBox="0 0 300 72" preserveAspectRatio="none">
+                  <polyline fill="none" stroke="#3b82f6" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"
+                    points="10,55 50,48 90,52 130,35 170,28 210,22 250,18 290,12"></polyline>
+                  <circle cx="10" cy="55" r="2.5" fill="#3b82f6"/>
+                  <circle cx="50" cy="48" r="2.5" fill="#3b82f6"/>
+                  <circle cx="90" cy="52" r="2.5" fill="#3b82f6"/>
+                  <circle cx="130" cy="35" r="2.5" fill="#3b82f6"/>
+                  <circle cx="170" cy="28" r="2.5" fill="#3b82f6"/>
+                  <circle cx="210" cy="22" r="2.5" fill="#3b82f6"/>
+                  <circle cx="250" cy="18" r="2.5" fill="#3b82f6"/>
+                  <circle cx="290" cy="12" r="2.5" fill="#3b82f6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Директору или менеджеру не нужны терабайты сырых данных. Infotec ERP собирает рутину в понятную аналитику, где сразу видны точки роста.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX референсы</span>
+        </div>
+      </section>
+
+      <!-- РЕФЕРЕНС 3: SAP / Modern EDI -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Референс 3</span>
+          <h2 class="ref-section-title">SAP &amp; современные EDI — Data Flows</h2>
+          <div class="ref-subtitle">Визуализация потоков данных вместо технических схем</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">Референс рынка</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; line-height:1.4;">
+              Интеграции показывают через анимированные схемы Data Flows. Видно, как документ движется от А к Б.
+            </div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Решение для сайта</div>
+            <div class="ref-mock">
+              <div class="data-flow">
+                <!-- Left node -->
+                <div class="flow-node">
+                  <span class="icon">📦</span>
+                  <div><strong>База покупателя</strong></div>
+                  <div style="font-size:0.7rem; color:#64748b;">Заказ ORDERS</div>
+                </div>
+
+                <!-- Arrow + Cloud -->
+                <div class="flow-arrow">
+                  <div class="flow-line"></div>
+                  <div class="flow-cloud">EDI Infotec</div>
+                </div>
+
+                <!-- Right node -->
+                <div class="flow-node">
+                  <span class="icon">📄</span>
+                  <div><strong>База поставщика</strong></div>
+                  <div style="font-size:0.7rem; color:#64748b;">Счет INVOICE</div>
+                </div>
+              </div>
+
+              <div class="flow-stat" style="text-align:center; cursor:default;">
+                Автоматическая загрузка за <strong>0.4 сек</strong> • Исключение ручного ввода
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Вместо сложных схем SFTP — интерактивный таймлайн EDI. Файлы улетают сами, скорость мгновенная, ошибок — ноль.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX референсы</span>
+        </div>
+      </section>
+
+      <!-- DESIGN DIRECTIONS INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 20px;">
+          <div class="module-number" style="letter-spacing:1.5px;">ДИЗАЙН-НАПРАВЛЕНИЯ</div>
+          <h2 style="font-size: 2.35rem; margin: 8px 0 12px;">Стили интерфейса для infotec.ee</h2>
+          <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">
+            Три визуальных концепции для презентации ERP-модулей: премиальность, читаемость данных и современная структура страниц.
+          </p>
+        </div>
+      </section>
+
+      <!-- НАПРАВЛЕНИЕ 1: Glassmorphic -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">1</span>
+            НАПРАВЛЕНИЕ
+          </div>
+          <h2 class="ref-section-title">Apple-style &amp; Glassmorphic интерфейсы</h2>
+          <div class="ref-subtitle">Премиальная презентация модулей</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">СУТЬ КОНЦЕПЦИИ</div>
+            <div class="dir-concept">
+              Вместо обычных плоских блоков мы упаковываем каждый ERP-модуль в аккуратную стеклянную карточку с мягким размытием заднего плана (<code style="font-size:0.78rem; color:#60a5fa;">backdrop-filter: blur</code>), тонкой неоновой или белой обводкой в 1px (имитирующей фаску стекла) и глубокими, едва заметными тенями.
+            </div>
+            <div class="dir-concept" style="margin-bottom: 14px;">
+              Это создаёт ощущение сложного, дорогого физического объекта на экране — как у Apple и премиальных B2B-дашбордов.
+            </div>
+            <a class="dir-link" href="https://www.pinterest.com/search/pins/?q=Glassmorphic%20B2B%20dashboard%20landing%20page&rs=typed" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Примеры на Pinterest
+            </a>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">ВИЗУАЛИЗАЦИЯ</div>
+            <div class="glass-scene">
+              <div class="glass-cards">
+                <div class="glass-card">
+                  <div class="g-icon">🏭</div>
+                  <div class="g-title">Production</div>
+                  <div class="g-sub">Планирование цехов</div>
+                </div>
+                <div class="glass-card">
+                  <div class="g-icon">📊</div>
+                  <div class="g-title">Sales</div>
+                  <div class="g-sub">Аналитика заказов</div>
+                </div>
+                <div class="glass-card">
+                  <div class="g-icon">🔗</div>
+                  <div class="g-title">EDI</div>
+                  <div class="g-sub">Обмен данными</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Каждый модуль Infotec выглядит как отдельный премиальный продукт — не «коробка софта», а инструмент управления бизнесом.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Дизайн-направления</span>
+        </div>
+      </section>
+
+      <!-- НАПРАВЛЕНИЕ 2: Clean Data -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">2</span>
+            НАПРАВЛЕНИЕ
+          </div>
+          <h2 class="ref-section-title">Сложные данные в красивой обёртке</h2>
+          <div class="ref-subtitle">Переосмысление таблиц и графиков EDI</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">СУТЬ КОНЦЕПЦИИ</div>
+            <div class="dir-concept">
+              Главный страх B2B-клиента — в погоне за красотой пропадут важные данные. Мы показываем обратное: за счёт контрастной типографики (крупные, чёткие цифры KPI), иконок-индикаторов и правильных отступов данные становятся <strong style="color:#fff;">более читаемыми</strong>, чем в старой Excel-таблице.
+            </div>
+            <div class="dir-concept" style="margin-bottom: 14px;">
+              Убираем жёсткие чёрные сетки таблиц, заменяя их лёгким контрастом строк и обилием воздуха.
+            </div>
+            <a class="dir-link" href="https://www.pinterest.com/search/pins/?q=Clean%20corporate%20dashboard%20analytics%20landing%20page&rs=typed" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Примеры на Pinterest
+            </a>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">ВИЗУАЛИЗАЦИЯ</div>
+            <div class="data-indicators">
+              <div class="data-indicator">
+                <div class="di-val">847</div>
+                <div class="di-lbl">Документов / день</div>
+              </div>
+              <div class="data-indicator">
+                <div class="di-val" style="color:#34d399;">99.2%</div>
+                <div class="di-lbl">Без ошибок</div>
+              </div>
+              <div class="data-indicator">
+                <div class="di-val">0.4с</div>
+                <div class="di-lbl">Среднее время</div>
+              </div>
+            </div>
+            <div class="data-table-mock" style="margin-top:10px;">
+              <div class="data-table-header">
+                <span>Документ</span>
+                <span>Контрагент</span>
+                <span>Сумма</span>
+                <span>Статус</span>
+              </div>
+              <div class="data-table-row">
+                <span>INVOICE #2841</span>
+                <span>AS Baltika</span>
+                <span class="kpi-big">12 450 €</span>
+                <span class="trend-up">▲ Обработан</span>
+              </div>
+              <div class="data-table-row">
+                <span>ORDERS #9102</span>
+                <span>OÜ Merk</span>
+                <span class="kpi-big">3 280 €</span>
+                <span class="trend-up">▲ Загружен</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Красота не отнимает данные — она делает их заметнее. KPI видны за 2 секунды, без Excel.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Дизайн-направления</span>
+        </div>
+      </section>
+
+      <!-- НАПРАВЛЕНИЕ 3: Bento Grid -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">3</span>
+            НАПРАВЛЕНИЕ
+          </div>
+          <h2 class="ref-section-title">Структурированный Bento-Grid</h2>
+          <div class="ref-subtitle">Идеально для страницы ERP-модулей</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">СУТЬ КОНЦЕПЦИИ</div>
+            <div class="dir-concept">
+              Bento Grid (сетка в стиле коробочек для бэнто) — самый горячий и при этом максимально применимый в корпоративном сегменте тренд. Страница модуля делится на аккуратные прямоугольные блоки разного размера.
+            </div>
+            <div class="dir-concept" style="margin-bottom: 14px;">
+              В одном блоке — крупная цифра, во втором — мини-схема обмена документами, в третьем — короткий текст про контроль цехов. Сетка выглядит монолитно, строго и очень современно.
+            </div>
+            <a class="dir-link" href="https://www.pinterest.com/search/pins/?q=Bento%20grid%20UI%20landing%20page&rs=typed" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Примеры на Pinterest
+            </a>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">ВИЗУАЛИЗАЦИЯ</div>
+            <div class="bento-grid">
+              <div class="bento-cell span-2">
+                <div class="b-num">-18%</div>
+                <div class="b-lbl">Снижение издержек производства</div>
+              </div>
+              <div class="bento-cell tall">
+                <div class="b-text"><strong style="color:#fff;">Контроль цехов</strong><br>Диспетчеризация в реальном времени, маршрутные карты, План vs Факт</div>
+              </div>
+              <div class="bento-cell">
+                <div class="b-text">EDI обмен</div>
+                <div class="bento-mini-flow">
+                  <span class="bento-dot"></span>
+                  <span class="bento-line"></span>
+                  <span class="bento-dot" style="background:#34d399;"></span>
+                </div>
+              </div>
+              <div class="bento-cell">
+                <div class="b-num" style="font-size:1.1rem;">XML</div>
+                <div class="b-lbl">Автозагрузка заказов</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Одна страница модуля — цельная картина возможностей. Bento-сетка упаковывает ERP в понятные блоки без потери серьёзности.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Дизайн-направления</span>
+        </div>
+      </section>
+
+      <!-- EDI VISUALIZATION INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 20px;">
+          <div class="module-number" style="letter-spacing:1.5px;">ВИЗУАЛИЗАЦИЯ EDI</div>
+          <h2 style="font-size: 2.35rem; margin: 8px 0 12px;">Потоки данных на сайте</h2>
+          <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">
+            Два подхода к показу интеграций EDI Infotec: «живые» анимированные схемы в стиле Stripe и объёмная изометрия в духе Apple / AWS.
+          </p>
+        </div>
+      </section>
+
+      <!-- EDI НАПРАВЛЕНИЕ 1: Stripe-style flows -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">1</span>
+            НАПРАВЛЕНИЕ
+          </div>
+          <h2 class="ref-section-title">Интерактивные потоки данных</h2>
+          <div class="ref-subtitle">В стиле Stripe / Supabase / Vercel — самый выигрышный вариант для веб-сайта</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">СУТЬ КОНЦЕПЦИИ</div>
+            <div class="dir-concept">
+              Вместо статичных стрелок — тонкие, едва заметные линии (светло-серые или неоновые), по которым плавно двигаются светящиеся точки-импульсы, символизирующие передачу файлов ORDERS или INVOICE.
+            </div>
+            <div class="ref-label" style="margin-top:10px;">Сценарий</div>
+            <ul class="ux-idea-list">
+              <li><strong style="color:#fff;">Слева</strong> — минималистичный блок «ERP-система Клиента»</li>
+              <li><strong style="color:#fff;">Справа</strong> — блок «База Поставщика (1С / ERP)»</li>
+              <li><strong style="color:#fff;">По центру</strong> — светящийся узел «EDI Infotec Secure SFTP Server»</li>
+              <li>Точка <strong style="color:#60a5fa;">ORDERS (XML)</strong> летит от клиента к узлу → узел подсвечивается → точка мгновенно уходит к поставщику как <strong style="color:#34d399;">INVOICE</strong></li>
+            </ul>
+            <div style="margin-top: 12px;">
+              <a class="dir-link" href="https://www.pinterest.com/search/pins/?q=Stripe%20style%20data%20flow%20animation%20landing%20page&rs=typed" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Примеры на Pinterest
+              </a>
+            </div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Анимированная схема</div>
+            <div class="ref-mock">
+              <div class="stripe-flow">
+                <div class="stripe-node">
+                  <div class="stripe-node-icon">🏢</div>
+                  <div class="stripe-node-label">
+                    <strong>ERP Клиента</strong>
+                    Заказчик
+                  </div>
+                </div>
+
+                <div class="stripe-path">
+                  <div class="stripe-line"></div>
+                  <div class="stripe-pulse pulse-orders" data-label="ORDERS"></div>
+                </div>
+
+                <div class="stripe-hub">
+                  <div class="hub-core">EDI</div>
+                  <div class="hub-label">
+                    <strong>EDI Infotec</strong>
+                    Secure SFTP Server
+                  </div>
+                </div>
+
+                <div class="stripe-path">
+                  <div class="stripe-line"></div>
+                  <div class="stripe-pulse pulse-invoice"></div>
+                </div>
+
+                <div class="stripe-node">
+                  <div class="stripe-node-icon">📦</div>
+                  <div class="stripe-node-label">
+                    <strong>База Поставщика</strong>
+                    1С / ERP
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Как Stripe или Vercel показывают интеграции: чистая «живая» схема с анимацией световых точек. За секунду считывается — данные летают безопасно, автоматически и быстро.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Визуализация EDI</span>
+        </div>
+      </section>
+
+      <!-- EDI НАПРАВЛЕНИЕ 2: 3D Isometry -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">2</span>
+            НАПРАВЛЕНИЕ
+          </div>
+          <h2 class="ref-section-title">3D-минимализм и Изометрия</h2>
+          <div class="ref-subtitle">В стиле Apple / AWS Modern Architecture</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">СУТЬ КОНЦЕПЦИИ</div>
+            <div class="dir-concept">
+              Если клиент хочет видеть физическое присутствие серверов и баз данных, плоские иконки из клипартов заменяются на дорогой трёхмерный минимализм. Серверы — глянцевые стеклянные или матовые монолитные кубы, связи — объёмные неоновые трубки или стеклянные дорожки.
+            </div>
+            <div class="ref-label" style="margin-top:10px;">Сценарий</div>
+            <ul class="ux-idea-list">
+              <li>Вся схема в <strong style="color:#fff;">изометрической проекции</strong> (3D под углом)</li>
+              <li>Вместо классического сервера — <strong style="color:#fff;">полупрозрачный куб</strong> (Glassmorphism) с мягко светящимся ядром внутри</li>
+              <li>ORDERS и INVOICE — аккуратные <strong style="color:#fff;">3D-плашки</strong>, плывущие по стеклянным конвейерным лентам между кубами-серверами</li>
+            </ul>
+            <div style="margin-top: 12px;">
+              <a class="dir-link" href="https://www.pinterest.com/search/pins/?q=3D%20isometric%20cloud%20infrastructure%20minimalist%20landing%20page&rs=typed" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Примеры на Pinterest
+              </a>
+            </div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Изометрическая схема</div>
+            <div class="ref-mock">
+              <div class="iso-scene">
+                <svg viewBox="0 0 360 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Glass conveyor paths -->
+                  <path d="M 40 110 L 155 80 L 270 50" stroke="rgba(96,165,250,0.25)" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M 40 110 L 155 80 L 270 50" stroke="rgba(59,130,246,0.5)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/>
+
+                  <!-- Left cube (Client ERP) -->
+                  <polygon points="30,95 55,82 55,112 30,125" fill="rgba(30,58,95,0.9)" stroke="rgba(96,165,250,0.4)" stroke-width="1"/>
+                  <polygon points="55,82 80,95 80,125 55,112" fill="rgba(22,44,71,0.95)" stroke="rgba(96,165,250,0.3)" stroke-width="1"/>
+                  <polygon points="30,95 55,82 80,95 55,108" fill="rgba(59,130,246,0.15)" stroke="rgba(147,197,253,0.5)" stroke-width="1"/>
+                  <circle cx="55" cy="93" r="6" fill="rgba(59,130,246,0.3)" class="iso-glow"/>
+                  <text x="55" y="138" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="system-ui,sans-serif">ERP Клиента</text>
+
+                  <!-- Center cube (EDI Hub) -->
+                  <polygon points="130,67 160,50 160,85 130,102" fill="rgba(30,58,95,0.9)" stroke="rgba(96,165,250,0.5)" stroke-width="1.2"/>
+                  <polygon points="160,50 190,67 190,102 160,85" fill="rgba(22,44,71,0.95)" stroke="rgba(96,165,250,0.4)" stroke-width="1"/>
+                  <polygon points="130,67 160,50 190,67 160,80" fill="rgba(59,130,246,0.2)" stroke="rgba(147,197,253,0.6)" stroke-width="1"/>
+                  <circle cx="160" cy="63" r="9" fill="rgba(59,130,246,0.4)" class="iso-glow"/>
+                  <text x="160" y="63" text-anchor="middle" dominant-baseline="middle" fill="#93c5fd" font-size="7" font-weight="700" font-family="system-ui,sans-serif">EDI</text>
+                  <text x="160" y="118" text-anchor="middle" fill="#94a3b8" font-size="7" font-family="system-ui,sans-serif">SFTP Server</text>
+
+                  <!-- Right cube (Supplier) -->
+                  <polygon points="250,45 280,28 280,63 250,80" fill="rgba(30,58,95,0.9)" stroke="rgba(96,165,250,0.4)" stroke-width="1"/>
+                  <polygon points="280,28 310,45 310,80 280,63" fill="rgba(22,44,71,0.95)" stroke="rgba(96,165,250,0.3)" stroke-width="1"/>
+                  <polygon points="250,45 280,28 310,45 280,58" fill="rgba(59,130,246,0.15)" stroke="rgba(147,197,253,0.5)" stroke-width="1"/>
+                  <circle cx="280" cy="41" r="6" fill="rgba(52,211,153,0.3)"/>
+                  <text x="280" y="96" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="system-ui,sans-serif">1С / ERP</text>
+
+                  <!-- Animated 3D chips -->
+                  <g class="iso-chip">
+                    <rect x="-14" y="-6" width="28" height="12" rx="2" fill="rgba(59,130,246,0.8)" stroke="#93c5fd" stroke-width="0.8"/>
+                    <text x="0" y="3" text-anchor="middle" fill="#fff" font-size="6" font-weight="600" font-family="system-ui,sans-serif">ORDERS</text>
+                  </g>
+                  <g class="iso-chip-2">
+                    <rect x="-14" y="-6" width="28" height="12" rx="2" fill="rgba(16,185,129,0.8)" stroke="#6ee7b7" stroke-width="0.8"/>
+                    <text x="0" y="3" text-anchor="middle" fill="#fff" font-size="6" font-weight="600" font-family="system-ui,sans-serif">INVOICE</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Физическое присутствие инфраструктуры без «клипартовости». Стеклянные кубы и неоновые дорожки — архитектура уровня Apple или AWS, понятная любому руководителю.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Визуализация EDI</span>
+        </div>
+      </section>
+
+      <!-- DECONSTRUCTION INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 20px;">
+          <div class="module-number" style="letter-spacing:1.5px;">ДЕКОНСТРУКЦИЯ СХЕМЫ</div>
+          <h2 style="font-size: 2.35rem; margin: 8px 0 12px;">Перевод на язык UX и бизнеса</h2>
+          <p style="max-width: 720px; margin: 0 auto; color: var(--text-muted);">
+            От технической «каши» к чистой сквозной логике двух независимых потоков данных — и к интерактивному блоку на сайте.
+          </p>
+        </div>
+      </section>
+
+      <!-- ДВА ПОТОКА ДАННЫХ -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Деконструкция</span>
+          <h2 class="ref-section-title" style="margin-top:4px;">Два независимых потока данных</h2>
+          <div class="ref-subtitle">Убираем дублирование — остаётся чистая логика Continental ↔ SKS Estonia</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">ПРОБЛЕМА СТАРОЙ СХЕМЫ</div>
+            <div class="problem-box">
+              Старая схема пытается одновременно показать и <strong style="color:#fff;">техническую топологию</strong>, и <strong style="color:#fff;">типы файлов</strong> — из-за этого возникает каша и дублирование надписей слева и справа.
+            </div>
+            <div class="dir-concept" style="margin-bottom:0;">
+              Если убрать дублирование, получаем две понятные цепочки — без ручного сопоставления одинаковых блоков.
+            </div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">ЧИСТАЯ ЛОГИКА</div>
+            <div class="flow-pair">
+              <div class="flow-row-card">
+                <div class="flow-row-label a">
+                  <span>▶</span> ПОТОК А — Исходящий от Continental
+                </div>
+                <div class="flow-chain">
+                  <span class="flow-chip">SAP (Continental)</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-chip file">ORDER</span>
+                  <span class="flow-chip file">ORDERCH</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-chip">SFTP-шлюз</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-chip">Infotec (SKS Estonia)</span>
+                </div>
+                <div style="font-size:0.62rem; color:#64748b; margin-top:5px;">Заказ / изменение заказа автоматически залетает в базу</div>
+              </div>
+
+              <div class="flow-row-card">
+                <div class="flow-row-label b">
+                  <span>◀</span> ПОТОК Б — Ответный от SKS Estonia
+                </div>
+                <div class="flow-chain">
+                  <span class="flow-chip">Infotec (SKS Estonia)</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-chip file green">ORDSP</span>
+                  <span class="flow-chip file green">DESADV</span>
+                  <span class="flow-chip file green">INVOICE</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-chip">SFTP-шлюз</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-chip">SAP (Continental)</span>
+                </div>
+                <div style="font-size:0.62rem; color:#64748b; margin-top:5px;">Подтверждение, отгрузка и счёт зеркально летят обратно</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Деконструкция схемы</span>
+        </div>
+      </section>
+
+      <!-- UX-ЦЕЛЬ -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">UX-цель</span>
+          <h2 class="ref-section-title" style="margin-top:4px;">Главный грех старой схемы</h2>
+          <div class="ref-subtitle">Статичность, ручное сопоставление, отсутствие ощущения автоматизации</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">Проблема</div>
+            <ul class="ux-idea-list">
+              <li>Схема <strong style="color:#fff;">статична</strong> — не передаёт движение данных</li>
+              <li>Пользователь <strong style="color:#fff;">вручную сопоставляет</strong> одинаковые надписи слева и справа</li>
+              <li>Не видно <strong style="color:#fff;">изоляции систем</strong> — кажется, что базы связаны напрямую</li>
+              <li>Роль <strong style="color:#fff;">защищённого буфера SFTP</strong> теряется в визуальном шуме</li>
+            </ul>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Цель нового сайта</div>
+            <div class="goal-box">
+              Показать три ключевых свойства интеграции:
+            </div>
+            <ul class="goal-list" style="margin-top:10px;">
+              <li><strong style="color:#fff;">Автоматизация</strong> — файлы летят сами, без ручного ввода</li>
+              <li><strong style="color:#fff;">Бесшовность</strong> — сквозной поток без разрывов и дублирования</li>
+              <li><strong style="color:#fff;">Изоляция систем</strong> — никто не имеет прямого доступа к чужой базе; всё идёт через защищённый буфер SFTP</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Фокус не на том, «как устроены серверы», а на том, <em>как безопасно и автоматически живут данные</em> между двумя изолированными системами.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Деконструкция схемы</span>
+        </div>
+      </section>
+
+      <!-- DATA PIPELINE VISUALIZER -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="viz-badge">КОНЦЕПЦИЯ</span>
+          <h2 class="ref-section-title">Data Pipeline Visualizer</h2>
+          <div class="ref-subtitle">Интерактивный блок вместо мёртвой картинки</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">СУТЬ БЛОКА</div>
+            <div class="dir-concept">
+              Вместо статичной схемы — <strong style="color:#fff;">интерактивный визуализатор интеграций</strong> в стиле Stripe / Vercel. Блок оживает при взаимодействии: пользователь видит, как файлы реально движутся между системами.
+            </div>
+            <div class="ref-label" style="margin-top:10px;">Структура блока</div>
+            <ul class="ux-idea-list">
+              <li><strong style="color:#fff;">Триплексная структура</strong> — Лево → Центр → Право</li>
+              <li>При наведении или клике запускается анимация потока А или Б</li>
+              <li>Формат: <strong style="color:#fff;">Bento-Grid</strong> или широкий полноэкранный блок на странице EDI</li>
+              <li>За 3 секунды считывается: данные изолированы, но обмен — мгновенный и автоматический</li>
+            </ul>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Сравнение подходов</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px;">
+              <div style="background:#1a0f0f; border:1px solid rgba(239,68,68,0.3); border-radius:8px; padding:12px;">
+                <div style="font-size:0.65rem; font-weight:700; color:#f87171; margin-bottom:6px;">БЫЛО</div>
+                <div style="font-size:0.72rem; color:#94a3b8; line-height:1.4;">
+                  Статичная схема<br>
+                  Дублирование блоков<br>
+                  Ручное сопоставление<br>
+                  Технический шум
+                </div>
+              </div>
+              <div style="background:#0f1f17; border:1px solid rgba(52,211,153,0.3); border-radius:8px; padding:12px;">
+                <div style="font-size:0.65rem; font-weight:700; color:#34d399; margin-bottom:6px;">СТАНЕТ</div>
+                <div style="font-size:0.72rem; color:#94a3b8; line-height:1.4;">
+                  Живая анимация<br>
+                  Два чистых потока<br>
+                  SFTP как герой<br>
+                  Stripe-уровень UX
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          ORDER и INVOICE не лежат в таблице — они <em>летают</em> через защищённый шлюз. Это и есть EDI Infotec.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Деконструкция схемы</span>
+        </div>
+      </section>
+
+      <!-- TRIPLEX ARCHITECTURE -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Архитектура блока</span>
+          <h2 class="ref-section-title">Триплекс: Лево — Центр — Право</h2>
+          <div class="ref-subtitle">Bento-Grid / широкий экран • Glassmorphic карточки + приподнятый SFTP-хаб</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">ТРИ ЗОНЫ БЛОКА</div>
+            <ul class="ux-idea-list">
+              <li><strong style="color:#fff;">Левая зона (Контрагент)</strong> — минималистичная glassmorphic-карточка: «Система Заказчика» (SAP / Continental)</li>
+              <li><strong style="color:#fff;">Правая зона (Исполнитель)</strong> — такая же чистая карточка: «Ваша ERP-система» (Infotec / SKS Estonia)</li>
+              <li><strong style="color:#fff;">Центральный хаб (Безопасность)</strong> — эстетичный узел, визуально приподнятый над плоскостью за счёт мягких теней: «Защищённый EDI-шлюз Infotec (SFTP Buffer)»</li>
+            </ul>
+            <div class="dir-concept" style="margin-top:10px; margin-bottom:0;">
+              Верхняя линия — Поток А (ORDER →). Нижняя — Поток Б (← INVOICE). Центр подсвечивается при прохождении импульса.
+            </div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Визуализация блока</div>
+            <div class="ref-mock">
+              <div class="triplex-arch">
+                <div class="triplex-zone">
+                  <div class="tz-icon">🏢</div>
+                  <div class="tz-title">SAP Continental</div>
+                  <div class="tz-sub">Система Заказчика</div>
+                  <div class="tz-role">Контрагент</div>
+                </div>
+
+                <div class="triplex-hub-wrap">
+                  <div class="triplex-hub">SFTP</div>
+                  <div class="triplex-hub-label">
+                    <strong>EDI Infotec</strong>
+                    Secure SFTP Buffer
+                  </div>
+                </div>
+
+                <div class="triplex-zone">
+                  <div class="tz-icon">⚙️</div>
+                  <div class="tz-title">Infotec SKS Estonia</div>
+                  <div class="tz-sub">Ваша ERP-система</div>
+                  <div class="tz-role">Исполнитель</div>
+                </div>
+
+                <div class="triplex-lanes">
+                  <div class="triplex-lane">
+                    <span class="lane-tag fwd">Поток А: ORDER · ORDERCH →</span>
+                    <div class="lane-pulse fwd"></div>
+                  </div>
+                  <div class="triplex-lane">
+                    <span class="lane-tag rev">← Поток Б: ORDSP · DESADV · INVOICE</span>
+                    <div class="lane-pulse rev"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          «Живая витрина интеграции»: слева и справа — изолированные системы, в центре — единственная защищённая точка контакта SFTP.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Деконструкция схемы</span>
+        </div>
+      </section>
+
+      <!-- UX SCENARIOS INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 20px;">
+          <div class="module-number" style="letter-spacing:1.5px;">UX-СЦЕНАРИЙ</div>
+          <h2 style="font-size: 2.35rem; margin: 8px 0 12px;">Как это работает в интерактивности</h2>
+          <p style="max-width: 720px; margin: 0 auto; color: var(--text-muted);">
+            Два переключателя (или поочерёдная анимация при скролле) — для наглядной демонстрации автоматизации EDI Infotec.
+          </p>
+          <div style="display:flex; gap:12px; justify-content:center; margin-top:28px; flex-wrap:wrap;">
+            <span class="scenario-trigger active" style="cursor:default; pointer-events:none;">Сценарий 1: Размещение заказа</span>
+            <span class="scenario-trigger s2 active" style="cursor:default; pointer-events:none;">Сценарий 2: Отгрузка и Расчёт</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- UX SCENARIO 1 -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Сценарий 1</span>
+          <h2 class="ref-section-title" style="margin-top:4px;">Цепочка заказа</h2>
+          <div class="ref-subtitle">Клик «Размещение заказа» → ORDER летит Continental → SFTP → Infotec</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">ПОШАГОВАЯ ЛОГИКА</div>
+            <ol class="step-timeline">
+              <li><span class="step-num">1</span><span>Из блока <strong style="color:#fff;">Continental</strong> вылетает светящаяся плашка-импульс <strong style="color:#60a5fa;">ORDER</strong></span></li>
+              <li><span class="step-num">2</span><span>Плашка плавно скользит по тонкой неоновой линии в центральный хаб <strong style="color:#fff;">SFTP</strong></span></li>
+              <li><span class="step-num">3</span><span>В хабе — микро-анимация: <em>«Проверка безопасности и валидация XML»</em></span></li>
+              <li><span class="step-num">4</span><span>Импульс мгновенно падает в правую карточку <strong style="color:#fff;">Infotec</strong></span></li>
+              <li><span class="step-num">5</span><span>Зелёный статус: заказ принят в производство за <strong style="color:#34d399;">0.4 сек</strong>. Без ручного ввода.</span></li>
+            </ol>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Интерактивная схема</div>
+            <div class="scenario-demo" data-scenario="order">
+              <div class="scenario-controls">
+                <button type="button" class="scenario-trigger active" data-run="order">▶ Размещение заказа</button>
+              </div>
+              <div class="scenario-stage-wrap">
+                <div class="scenario-stage">
+                  <div class="sc-zone sc-left">
+                    <div class="scz-icon">🏢</div>
+                    <div class="scz-title">Continental</div>
+                    <div class="scz-sub">SAP Заказчик</div>
+                  </div>
+                  <div>
+                    <div class="sc-hub">SFTP</div>
+                  </div>
+                  <div class="sc-zone sc-right">
+                    <div class="scz-icon">⚙️</div>
+                    <div class="scz-title">Infotec</div>
+                    <div class="scz-sub">SKS Estonia</div>
+                  </div>
+                  <div class="sc-track-area">
+                    <div class="sc-track-line"></div>
+                    <div class="sc-chip blue"></div>
+                  </div>
+                </div>
+                <div class="sc-hub-status"></div>
+                <div class="sc-result"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX-сценарии</span>
+        </div>
+      </section>
+
+      <!-- UX SCENARIO 2 -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Сценарий 2</span>
+          <h2 class="ref-section-title" style="margin-top:4px;">Закрывающие документы</h2>
+          <div class="ref-subtitle">Клик «Отгрузка и Расчёт» → DESADV + INVOICE летят Infotec → SFTP → SAP</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">ПОШАГОВАЯ ЛОГИКА</div>
+            <ol class="step-timeline s2">
+              <li><span class="step-num">1</span><span>Процесс идёт <strong style="color:#fff;">в обратную сторону</strong> — от исполнителя к заказчику</span></li>
+              <li><span class="step-num">2</span><span>Из <strong style="color:#fff;">Infotec</strong> одна за другой вылетают плашки <strong style="color:#34d399;">DESADV</strong> и <strong style="color:#34d399;">INVOICE</strong></span></li>
+              <li><span class="step-num">3</span><span>Документы пролетают через центральный <strong style="color:#fff;">SFTP-буфер</strong> с валидацией</span></li>
+              <li><span class="step-num">4</span><span>Безболезненная интеграция в <strong style="color:#fff;">SAP Continental</strong></span></li>
+              <li><span class="step-num">5</span><span>Результат: счёт выставлен и учтён в бухгалтерии. <strong style="color:#34d399;">Вероятность ошибки — 0%</strong></span></li>
+            </ol>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Интерактивная схема</div>
+            <div class="scenario-demo" data-scenario="ship">
+              <div class="scenario-controls">
+                <button type="button" class="scenario-trigger s2 active" data-run="ship">▶ Отгрузка и Расчёт</button>
+              </div>
+              <div class="scenario-stage-wrap">
+                <div class="scenario-stage">
+                  <div class="sc-zone sc-left">
+                    <div class="scz-icon">🏢</div>
+                    <div class="scz-title">Continental</div>
+                    <div class="scz-sub">SAP Заказчик</div>
+                  </div>
+                  <div>
+                    <div class="sc-hub">SFTP</div>
+                  </div>
+                  <div class="sc-zone sc-right">
+                    <div class="scz-icon">⚙️</div>
+                    <div class="scz-title">Infotec</div>
+                    <div class="scz-sub">SKS Estonia</div>
+                  </div>
+                  <div class="sc-track-area">
+                    <div class="sc-track-line"></div>
+                    <div class="sc-chip green"></div>
+                    <div class="sc-chip green chip-2"></div>
+                  </div>
+                </div>
+                <div class="sc-hub-status"></div>
+                <div class="sc-result"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Два сценария кнопками показывают оба направления потока вживую — нагляднее любой статичной схемы.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • UX-сценарии</span>
+        </div>
+      </section>
+
+      <!-- SCHEME TRANSFORMATION INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 16px;">
+          <div class="module-number" style="letter-spacing:1.5px;">ТРАНСФОРМАЦИЯ СХЕМЫ</div>
+          <h2 style="font-size: 2.2rem; margin: 8px 0 12px;">От Word-диаграммы к современному UX</h2>
+          <p style="max-width: 740px; margin: 0 auto; color: var(--text-muted); font-size:0.95rem;">
+            Исходная схема EDI несёт ключевую бизнес-ценность, но «бочки» и стрелки из Word не дают крупному B2B-клиенту (уровня Continental) считать технологичность и безопасность решения.
+          </p>
+        </div>
+      </section>
+
+      <!-- SCHEME: WHY TRANSFORM -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Проблема</span>
+          <h2 class="ref-section-title" style="margin-top:4px;">Почему старая схема не доносит ценность</h2>
+          <div class="ref-subtitle">Надёжность есть, но визуальный язык её не передаёт</div>
+        </div>
+
+        <div class="transform-hero">
+          На схеме завязана <strong>ключевая бизнес-ценность</strong> продукта: изолированные базы, защищённый SFTP, автоматический обмен ORDER / INVOICE. Но из-за визуального хаоса посетитель видит «бухгалтерскую головоломку», а не современную ИТ-платформу.
+        </div>
+
+        <div class="transform-grid">
+          <div class="transform-card old">
+            <h4>Текущее восприятие</h4>
+            <ul>
+              <li>Тяжёлые «бочки» баз данных и путаница стрелок</li>
+              <li>Дублирование надписей слева и справа</li>
+              <li>Статичная картинка — нет ощущения движения данных</li>
+              <li>Топология + типы файлов в одной плоскости = каша</li>
+              <li>Ручное сопоставление блоков вместо автоматизации</li>
+            </ul>
+          </div>
+          <div class="transform-card new">
+            <h4>Ключевые сообщения</h4>
+            <ul>
+              <li><strong style="color:#fff;">Безопасно</strong> — прямого доступа к чужой базе нет</li>
+              <li><strong style="color:#fff;">Автоматически</strong> — файлы летают сами, без ручного ввода</li>
+              <li><strong style="color:#fff;">Бесшовно</strong> — два чистых потока А и Б через SFTP-буфер</li>
+              <li><strong style="color:#fff;">Быстро</strong> — заказ принят за 0.4 сек</li>
+              <li><strong style="color:#fff;">Надёжно</strong> — вероятность ошибки → 0%</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Трансформация схемы</span>
+        </div>
+      </section>
+
+      <!-- SCHEME: CHANGE SUMMARY -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <span class="section-badge">Изменения</span>
+          <h2 class="ref-section-title" style="margin-top:4px;">Что меняем на новом сайте</h2>
+          <div class="ref-subtitle">Деконструкция → Data Pipeline Visualizer → интерактивные сценарии</div>
+        </div>
+
+        <div class="ref-two-col" style="gap:14px;">
+          <div class="ref-card">
+            <div class="ref-label">1. ДЕКОНСТРУКЦИЯ</div>
+            <div class="dir-concept" style="margin-bottom:8px;">Два независимых потока вместо дублирования:</div>
+            <div class="flow-row-card" style="margin-bottom:8px;">
+              <div class="flow-row-label a"><span>▶</span> ПОТОК А — Continental → SFTP → Infotec</div>
+              <div class="flow-chain">
+                <span class="flow-chip file">ORDER</span>
+                <span class="flow-chip file">ORDERCH</span>
+              </div>
+            </div>
+            <div class="flow-row-card">
+              <div class="flow-row-label b"><span>◀</span> ПОТОК Б — Infotec → SFTP → SAP</div>
+              <div class="flow-chain">
+                <span class="flow-chip file green">ORDSP</span>
+                <span class="flow-chip file green">DESADV</span>
+                <span class="flow-chip file green">INVOICE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">2. ИНТЕРАКТИВНЫЙ БЛОК</div>
+            <div class="dir-concept">Вместо мёртвой картинки — <strong style="color:#fff;">Data Pipeline Visualizer</strong> в стиле Stripe / Vercel:</div>
+            <div class="solution-pillars">
+              <div class="solution-pillar">
+                <div class="sp-icon">🏢</div>
+                <div class="sp-title">Лево</div>
+                <div class="sp-desc">Glassmorphic карточка заказчика SAP / Continental</div>
+              </div>
+              <div class="solution-pillar">
+                <div class="sp-icon">🔒</div>
+                <div class="sp-title">Центр</div>
+                <div class="sp-desc">Приподнятый SFTP-хаб EDI Infotec</div>
+              </div>
+              <div class="solution-pillar">
+                <div class="sp-icon">⚙️</div>
+                <div class="sp-title">Право</div>
+                <div class="sp-desc">Карточка исполнителя Infotec / SKS Estonia</div>
+              </div>
+            </div>
+            <div class="dir-concept" style="margin-top:10px; margin-bottom:0; font-size:0.78rem;">
+              Два переключателя: <strong style="color:#60a5fa;">Размещение заказа</strong> (ORDER →) и <strong style="color:#34d399;">Отгрузка и Расчёт</strong> (← DESADV + INVOICE)
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Техническая надёжность превращается в визуальную демонстрацию: одна кнопка — и видно, как документы летают между изолированными системами.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Трансформация схемы</span>
+        </div>
+      </section>
+
+      <!-- SCHEME: ORIGINAL IMAGE -->
+      <section>
+        <div class="moodboard-wrap">
+          <div>
+            <span class="section-badge">Исходная схема</span>
+            <h2 style="margin:6px 0 4px; font-size:1.65rem;">Текущая визуализация EDI</h2>
+            <p class="moodboard-desc">
+              Это отправная точка трансформации: схема уже содержит правильную логику (заказчик → SFTP-шлюз → Infotec, валидация XML, сценарии ORDERS / INVOICE), но визуально перегружена, статична и не доносит премиальность решения до уровня Continental. Именно её мы заменяем интерактивным Data Pipeline Visualizer.
+            </p>
+            <div class="moodboard-tags">
+              <span class="moodboard-tag">Continental / SAP</span>
+              <span class="moodboard-tag">SFTP Buffer</span>
+              <span class="moodboard-tag">ORDER · INVOICE</span>
+              <span class="moodboard-tag">→ Stripe-style UX</span>
+            </div>
+          </div>
+          <div class="moodboard-frame" data-lightbox="img/scheme-1.png" data-caption="Исходная схема EDI — Continental ↔ Infotec через SFTP">
+            <img src="img/scheme-1.png" alt="Исходная схема Data Pipeline Visualizer EDI Infotec">
+            <span class="moodboard-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+              Увеличить
+            </span>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Трансформация схемы</span>
+        </div>
+      </section>
+
+      <!-- UX APPROACHES INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 20px;">
+          <div class="module-number" style="letter-spacing:1.5px;">3 ПОДХОДА К UX</div>
+          <h2 style="font-size: 2.35rem; margin: 8px 0 12px;">Как заменить схему на сайте</h2>
+          <p style="max-width: 720px; margin: 0 auto; color: var(--text-muted);">
+            Три альтернативные анатомии интерфейса — от пошагового таймлайна до живого лога в стиле Vercel.
+          </p>
+        </div>
+      </section>
+
+      <!-- APPROACH 1: Timeline -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">1</span>
+            ПОДХОД
+          </div>
+          <h2 class="ref-section-title">Линейный интерактивный таймлайн</h2>
+          <div class="ref-subtitle">Шаг за шагом — без хаоса стрелок</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">АНАТОМИЯ UX</div>
+            <div class="dir-concept">
+              Вместо всех стрелок сразу — <strong style="color:#fff;">упорядоченный конвейер</strong>. Экран разбит на пронумерованные шаги. При скролле или клике активный шаг подсвечивается неоном, а на мини-экране рядом плавно отрисовывается движение файла.
+            </div>
+            <ol class="step-timeline" style="margin-top:10px;">
+              <li><span class="step-num">1</span><span><strong style="color:#fff;">Continental</strong> отправляет файл ORDER</span></li>
+              <li><span class="step-num">2</span><span><strong style="color:#fff;">Безопасный транзит</strong> — шифрование и SFTP-буфер</span></li>
+              <li><span class="step-num">3</span><span><strong style="color:#fff;">Мгновенный ответ</strong> — Infotec принимает заказ и генерирует ORDSP / INVOICE обратно</span></li>
+            </ol>
+            <div class="approach-ref"><strong>Референс с рынка:</strong> Prisma (миграция данных) · GitHub Actions (шаги деплоя)</div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Интерактивная схема</div>
+            <div class="ux-timeline-demo" data-timeline>
+              <div class="ux-timeline">
+                <div class="tl-step active" data-step="1">
+                  <div class="tl-dot">1</div>
+                  <div class="tl-title">Заказчик</div>
+                </div>
+                <div class="tl-step" data-step="2">
+                  <div class="tl-dot">2</div>
+                  <div class="tl-title">SFTP</div>
+                </div>
+                <div class="tl-step" data-step="3">
+                  <div class="tl-dot">3</div>
+                  <div class="tl-title">Infotec</div>
+                </div>
+              </div>
+              <div class="tl-preview" data-tl-preview>
+                <strong>Шаг 1:</strong> Система Заказчика (Continental) отправляет файл ORDER.
+                <span class="tl-file">ORDER.xml →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • 3 подхода к UX</span>
+        </div>
+      </section>
+
+      <!-- APPROACH 2: Centered Hub -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">2</span>
+            ПОДХОД
+          </div>
+          <h2 class="ref-section-title">Минималистичный хаб</h2>
+          <div class="ref-subtitle">Центрированная схема — баланс и симметрия</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">АНАТОМИЯ UX</div>
+            <div class="dir-concept">
+              В центре — главный элемент: <strong style="color:#fff;">стеклянный светящийся узел</strong> «Smart E-Doc Connector». Влево и вправо — тонкие нити к Continental и SKS Estonia. Типы документов — компактные плашки-пульсы, плывущие по линиям. Без нагромождения текста.
+            </div>
+            <div class="approach-ref"><strong>Референс с рынка:</strong> Stripe (распределение платежей) · Supabase (подключение БД к облаку)</div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Визуализация</div>
+            <div class="ref-mock">
+              <div class="ux-hub-layout">
+                <div class="hub-threads">
+                  <svg viewBox="0 0 300 80" preserveAspectRatio="none">
+                    <path d="M 30 40 Q 100 20 150 40" fill="none" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
+                    <path d="M 270 40 Q 200 60 150 40" fill="none" stroke="rgba(52,211,153,0.35)" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <div class="hub-side">
+                  <strong>Continental</strong>
+                  SAP
+                </div>
+                <div class="hub-center-node">
+                  <div class="hub-glass-core">Smart<br>E-Doc</div>
+                  <div class="hub-center-label">EDI Connector</div>
+                </div>
+                <div class="hub-side">
+                  <strong>SKS Estonia</strong>
+                  Infotec ERP
+                </div>
+                <span class="hub-float-chip c1">ORDERS</span>
+                <span class="hub-float-chip c2">INVOICE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • 3 подхода к UX</span>
+        </div>
+      </section>
+
+      <!-- APPROACH 3: Live Log Dashboard -->
+      <section>
+        <div style="margin-bottom: 8px;">
+          <div class="dir-badge">
+            <span class="dir-num">3</span>
+            ПОДХОД
+          </div>
+          <h2 class="ref-section-title">Стиль дашборда</h2>
+          <div class="ref-subtitle">Фичи вместо схемы — Живой лог (Live Activity Log)</div>
+        </div>
+
+        <div class="ref-two-col">
+          <div class="ref-card">
+            <div class="ref-label">АНАТОМИЯ UX</div>
+            <div class="dir-concept">
+              Полный отказ от сетевой топологии со стрелками. Вместо этого — <strong style="color:#fff;">премиальная панель реального времени</strong>: тёмное или кристально-белое окно-консоль, где в демо-анимации бегут строки статусов автоматизации.
+            </div>
+            <div class="approach-ref"><strong>Референс с рынка:</strong> Vercel (панель сборки) · Cloudflare (live-статусы)</div>
+          </div>
+
+          <div class="ref-card">
+            <div class="ref-label">Демонстрация лога</div>
+            <div class="live-log-demo" data-live-log>
+              <div class="live-log-window">
+                <div class="live-log-bar">
+                  <span class="live-log-dot r"></span>
+                  <span class="live-log-dot y"></span>
+                  <span class="live-log-dot g"></span>
+                  <span class="live-log-title">EDI Infotec — Live Activity Log</span>
+                </div>
+                <div class="live-log-body" data-log-body>
+                  <div class="log-line" data-delay="0"><span class="ts">[10:14:02]</span> <span class="act">FETCH:</span> <span class="msg">ORDER file received from Continental via SFTP</span></div>
+                  <div class="log-line" data-delay="600"><span class="ts">[10:14:03]</span> <span class="act warn">VALIDATE:</span> <span class="msg">XML structure confirmed. Errors: 0%</span></div>
+                  <div class="log-line" data-delay="1200"><span class="ts">[10:14:03]</span> <span class="act">INTEGRATE:</span> <span class="msg">Successfully converted &amp; injected to Infotec ERP database</span></div>
+                  <div class="log-line success" data-delay="1800"><span class="ts">[10:14:04]</span> <span class="act ok">SUCCESS:</span> <span class="msg">Production task generated automatically</span></div>
+                </div>
+              </div>
+              <button type="button" class="scenario-trigger live-log-trigger" data-run-log>▶ Запустить анимацию лога</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref-argument">
+          Не схема, а «живая консоль» — поток событий в реальном времени, как в DevOps-панели. Технологичность считывается мгновенно.
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • 3 подхода к UX</span>
+        </div>
+      </section>
+
+      <!-- MOODBOARDS INTRO -->
+      <section>
+        <div style="text-align:center; padding-top: 20px;">
+          <div class="module-number" style="letter-spacing:1.5px;">МУДБОРДЫ</div>
+          <h2 style="font-size: 2.35rem; margin: 8px 0 12px;">Визуальные референсы дизайна</h2>
+          <p style="max-width: 680px; margin: 0 auto; color: var(--text-muted);">
+            Три концепции цвета и типографики для новой цифровой идентичности Infotec ERP.<br>
+            <span style="font-size:0.85rem; color:#64748b;">Нажмите на изображение, чтобы увеличить</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- MOODBOARD 1 -->
+      <section>
+        <div class="moodboard-wrap">
+          <div>
+            <span class="section-badge">Мудборд 1</span>
+            <h2 style="margin:6px 0 4px; font-size:1.65rem;">New Digital Identity</h2>
+            <p class="moodboard-desc">
+              Базовая концепция: палитра <strong style="color:#fff;">«Благородный B2B &amp; Неоновый Техно»</strong> — глубокий синий и кристальный белый для glass-эффектов, неон Aqua/Magenta для графиков и EDI-потоков. Типографика <strong style="color:#fff;">Inter</strong> — крупные цифры KPI, чёткое различие символов в плотных таблицах.
+            </p>
+            <div class="moodboard-tags">
+              <span class="moodboard-tag">Glass Effect</span>
+              <span class="moodboard-tag">Неоновые акценты</span>
+              <span class="moodboard-tag">Inter</span>
+              <span class="moodboard-tag">B2B Data UI</span>
+            </div>
+          </div>
+          <div class="moodboard-frame" data-lightbox="img/moodboard-1.png" data-caption="Мудборд 1 — Благородный B2B & Неоновый Техно · Inter">
+            <img src="img/moodboard-1.png" alt="Мудборд 1: цветовая палитра и типографика Inter">
+            <span class="moodboard-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+              Увеличить
+            </span>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Мудборды</span>
+        </div>
+      </section>
+
+      <!-- MOODBOARD 2 -->
+      <section>
+        <div class="moodboard-wrap">
+          <div>
+            <span class="section-badge">Мудборд 2</span>
+            <h2 style="margin:6px 0 4px; font-size:1.65rem;">Альтернативный прототип — Техно-Шик</h2>
+            <p class="moodboard-desc">
+              Вариант с более глубоким космическим синим <strong style="color:#fff;">#0A1A2F</strong> и двумя неоновыми акцентами — Electric Cyan и Lime для EDI-анимаций. Шрифты <strong style="color:#fff;">Geist Sans + Geist Mono</strong>: моноширинные цифры для аналитики, sans для интерфейса. Акцент на полупрозрачных glass-карточках.
+            </p>
+            <div class="moodboard-tags">
+              <span class="moodboard-tag">Глубокий Космос</span>
+              <span class="moodboard-tag">Неон Электрик + Лайм</span>
+              <span class="moodboard-tag">Geist</span>
+              <span class="moodboard-tag">Glass Cards</span>
+            </div>
+          </div>
+          <div class="moodboard-frame" data-lightbox="img/moodboard-2.png" data-caption="Мудборд 2 — Благородный Техно-Шик · Geist Sans / Mono">
+            <img src="img/moodboard-2.png" alt="Мудборд 2: альтернативная палитра Техно-Шик">
+            <span class="moodboard-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+              Увеличить
+            </span>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Мудборды</span>
+        </div>
+      </section>
+
+      <!-- MOODBOARD 3 -->
+      <section>
+        <div class="moodboard-wrap">
+          <div>
+            <span class="section-badge">Мудборд 3</span>
+            <h2 style="margin:6px 0 4px; font-size:1.65rem;">Альтернативный концепт — Арктический Неон</h2>
+            <p class="moodboard-desc">
+              Самая «футуристичная» палитра: арктический тёмный фон <strong style="color:#fff;">#050E1B</strong>, снежный лёд и три неоновых акцента (синий, зелёный, розовый) для KPI и интерактивных потоков. Тот же Geist, но с более холодным, «цифровым» настроением — подходит для Stripe-style EDI-визуализатора.
+            </p>
+            <div class="moodboard-tags">
+              <span class="moodboard-tag">Арктический Неон</span>
+              <span class="moodboard-tag">3 неоновых акцента</span>
+              <span class="moodboard-tag">Geist</span>
+              <span class="moodboard-tag">EDI / KPI</span>
+            </div>
+          </div>
+          <div class="moodboard-frame" data-lightbox="img/moodboard-3.png" data-caption="Мудборд 3 — Арктический Неон · Geist Sans / Mono">
+            <img src="img/moodboard-3.png" alt="Мудборд 3: палитра Арктический Неон">
+            <span class="moodboard-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+              Увеличить
+            </span>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Мудборды</span>
+        </div>
+      </section>
+
+      <!-- FINAL VALUE PROPOSITION -->
+      <section>
+        <div class="final-slide-wrap">
+          <div>
+            <span class="section-badge">Итог</span>
+            <h2 style="margin:6px 0 8px; font-size:1.75rem;">Ценность с первой секунды</h2>
+            <div class="final-lead">
+              <p>Мы детально проанализировали логику обмена данными в вашем EDI. Крупные ИТ-компании часто выносят <strong>сложную архитектуру серверов</strong> на первый план — но директору или руководителю логистики важен не код, а <strong>конкретный профит для бизнеса</strong>.</p>
+              <p>Наш приоритет — не пугать и не перегружать. Схема обмена станет <strong>лёгкой, воздушной, в Apple-стиле</strong> (интерактивный поток данных). Под ней — три бьющих в цель бизнес-преимущества. Строгость логики сохраняем, упаковываем в <strong>дорогую B2B-обёртку</strong>, понятную любому топ-менеджеру.</p>
+            </div>
+          </div>
+
+          <div class="final-mock">
+            <div class="final-mock-top">
+              <div class="final-mock-label">Верх блока — Glassmorphic-схема потока</div>
+              <div class="final-mini-flow">
+                <span class="final-node">Continental</span>
+                <div class="final-flow-line"><span class="final-flow-dot"></span></div>
+                <span class="final-node hub">SFTP</span>
+                <div class="final-flow-line"><span class="final-flow-dot" style="animation-delay:1.2s"></span></div>
+                <span class="final-node">Infotec</span>
+              </div>
+            </div>
+            <div class="final-mock-label" style="padding:8px 14px 0; background:var(--bg-card);">Низ блока — Bento-Grid: три бизнес-преимущества</div>
+            <div class="final-benefits">
+              <div class="final-benefit">
+                <div class="fb-icon">⚡</div>
+                <div class="fb-metric">2 сек</div>
+                <div class="fb-title">Мгновенная скорость</div>
+                <div class="fb-desc">Передача заказов, счетов и уведомлений между базами. Автоматический обмен без задержек.</div>
+              </div>
+              <div class="final-benefit">
+                <div class="fb-icon">🔒</div>
+                <div class="fb-metric">SFTP</div>
+                <div class="fb-title">Абсолютная безопасность</div>
+                <div class="fb-desc">Изолированный обмен со сквозным шифрованием. Данные клиентов и контрагентов под защитой.</div>
+              </div>
+              <div class="final-benefit">
+                <div class="fb-icon">✓</div>
+                <div class="fb-metric">0%</div>
+                <div class="fb-title">Работа без ошибок</div>
+                <div class="fb-desc">Автоматическая конвертация XML исключает человеческий фактор и ручной ввод данных.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="final-tagline">
+            Строгость технической логики сочетается с понятной бизнес-выгодой — в духе современного B2B-дизайна.
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <span style="opacity:0.6">infotec.ee • Итог</span>
+        </div>
+      </section>
+
+      <!-- CLOSING -->
+      <section class="closing">
+        <div class="brand" style="margin: 0 auto 2.4rem; justify-content: center;">
+          <div class="logo">I</div>
+          <span class="brand-name">INFOTEC</span>
+        </div>
+
+        <h2>Готовы оптимизировать<br>ваши процессы?</h2>
+        
+        <p style="max-width: 560px; margin: 1.75rem auto 2.5rem; color: var(--text-muted); font-size: 1.15rem;">
+          Объедините управление производством, продажи и интеграции в единой надёжной системе.
+        </p>
+
+        <div class="contact">
+          <a href="https://infotec.ee" target="_blank">infotec.ee</a>
+        </div>
+
+        <div style="margin-top: 3.5rem; font-size: 0.85rem; color: var(--text-muted);">
+          Строгие решения для серьёзного бизнеса
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Lightbox for moodboard zoom -->
+  <div class="img-lightbox" id="img-lightbox" aria-hidden="true">
+    <span class="img-lightbox-close">Esc или клик — закрыть</span>
+    <img src="" alt="" id="img-lightbox-img">
+    <span class="img-lightbox-caption" id="img-lightbox-caption"></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      center: false,
+      controls: true,
+      controlsLayout: 'bottom-right',
+      progress: true,
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      touch: true,
+      loop: false,
+      fragments: true,
+      fragmentInURL: true,
+      embedded: false,
+      keyboard: true,
+      overview: true,
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+    });
+
+    // Small enhancement: press "?" shows help hint
+    document.addEventListener('keydown', function(e) {
+      if (e.key === '?') {
+        const footer = document.querySelector('.slide-footer');
+        if (footer) footer.style.transition = 'opacity 0.2s';
+      }
+    });
+
+    // Make sure cards reveal nicely on mobile
+    console.log('%c[Infotec] Presentation ready. Reveal.js v4.5 loaded.', 'color:#475569');
+
+    // Interactive Kanban for Reference 1 (Odoo-style)
+    function initKanban() {
+      const stepsContainer = document.getElementById('kanban-steps');
+      const contentContainer = document.getElementById('kanban-content');
+      if (!stepsContainer || !contentContainer) return;
+
+      const phases = {
+        1: `
+          <div class="kanban-order">
+            <div class="kanban-header">
+              <div><strong>Заказ #482</strong> — Изготовление детали</div>
+              <div style="color:#34d399; font-size:0.7rem;">Планирование</div>
+            </div>
+            <div style="font-size:0.72rem;">Потребность в материалах рассчитана • 3 операции</div>
+            <div class="progress"><div class="progress-bar" style="width:28%"></div></div>
+            <div class="status-pills">
+              <span class="pill">План утверждён</span>
+            </div>
+          </div>
+        `,
+        2: `
+          <div class="kanban-order">
+            <div class="kanban-header">
+              <div><strong>Заказ #482</strong> — Изготовление детали</div>
+              <div style="color:#fbbf24; font-size:0.7rem;">В цеху</div>
+            </div>
+            <div style="font-size:0.72rem;">Станок: CNC-03 • Оператор: Иванов А.</div>
+            <div class="progress"><div class="progress-bar" style="width:65%"></div></div>
+            <div class="status-pills">
+              <span class="pill">В работе</span>
+              <span class="pill warn">Материал: заменён на аналог</span>
+            </div>
+          </div>
+        `,
+        3: `
+          <div class="kanban-order">
+            <div class="kanban-header">
+              <div><strong>Заказ #482</strong> — Изготовление детали</div>
+              <div style="color:#60a5fa; font-size:0.7rem;">Готово</div>
+            </div>
+            <div style="font-size:0.72rem;">Фактическая себестоимость: 1240 € • 2.4 часа</div>
+            <div class="progress"><div class="progress-bar" style="width:100%"></div></div>
+            <div class="status-pills">
+              <span class="pill">Сдано на склад</span>
+            </div>
+          </div>
+        `
+      };
+
+      function setPhase(phase) {
+        // Update active state on buttons
+        stepsContainer.querySelectorAll('.kanban-step').forEach(el => {
+          el.classList.toggle('active', el.dataset.phase === String(phase));
+        });
+        // Update content
+        contentContainer.innerHTML = phases[phase] || phases[1];
+      }
+
+      stepsContainer.addEventListener('click', function(e) {
+        const step = e.target.closest('.kanban-step');
+        if (!step) return;
+        const phase = parseInt(step.dataset.phase, 10);
+        setPhase(phase);
+      });
+
+      // Default state
+      setPhase(1);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initKanban);
+    } else {
+      initKanban();
+    }
+
+    // Re-init Kanban when the reference slide becomes visible (Reveal.js)
+    if (typeof Reveal !== 'undefined') {
+      Reveal.addEventListener('slidechanged', function(event) {
+        if (event.currentSlide && event.currentSlide.querySelector('#kanban-steps')) {
+          // Small delay in case content needs to settle
+          setTimeout(initKanban, 60);
+        }
+      });
+    }
+
+    // Interactive UX scenario demos (ORDER / DESADV+INVOICE)
+    function initScenarioDemos() {
+      const POS = { left: '10%', center: '50%', right: '90%' };
+
+      function resetDemo(demo) {
+        const hub = demo.querySelector('.sc-hub');
+        const hubStatus = demo.querySelector('.sc-hub-status');
+        const result = demo.querySelector('.sc-result');
+        const left = demo.querySelector('.sc-left');
+        const right = demo.querySelector('.sc-right');
+        const isShip = demo.dataset.scenario === 'ship';
+        demo.querySelectorAll('.sc-chip').forEach(function(chip) {
+          const isSecond = chip.classList.contains('chip-2');
+          chip.className = isShip
+            ? (isSecond ? 'sc-chip green chip-2' : 'sc-chip green')
+            : 'sc-chip blue';
+          chip.style.left = '';
+          chip.style.top = '';
+          chip.textContent = '';
+        });
+        if (hub) hub.classList.remove('validating');
+        if (hubStatus) hubStatus.textContent = '';
+        if (result) { result.className = 'sc-result'; result.textContent = ''; }
+        if (left) left.classList.remove('pulse-origin', 'pulse-dest');
+        if (right) right.classList.remove('pulse-origin', 'pulse-dest');
+        demo._running = false;
+      }
+
+      function wait(ms) {
+        return new Promise(function(resolve) { setTimeout(resolve, ms); });
+      }
+
+      async function runOrderScenario(demo, btn) {
+        if (demo._running) return;
+        demo._running = true;
+        if (btn) btn.classList.add('running');
+        resetDemo(demo);
+
+        const chip = demo.querySelector('.sc-chip:not(.chip-2)');
+        const hub = demo.querySelector('.sc-hub');
+        const hubStatus = demo.querySelector('.sc-hub-status');
+        const result = demo.querySelector('.sc-result');
+        const left = demo.querySelector('.sc-left');
+        const right = demo.querySelector('.sc-right');
+
+        chip.textContent = 'ORDER';
+        chip.classList.add('blue', 'visible');
+        chip.style.left = POS.left;
+        left.classList.add('pulse-origin');
+
+        await wait(350);
+        chip.style.left = POS.center;
+        hub.classList.add('validating');
+        hubStatus.textContent = 'Проверка безопасности и валидация XML…';
+
+        await wait(900);
+        hub.classList.remove('validating');
+        hubStatus.textContent = '';
+        chip.style.left = POS.right;
+
+        await wait(600);
+        right.classList.add('pulse-dest');
+        result.className = 'sc-result show success';
+        result.innerHTML = '✓ Заказ автоматически принят в производство за <strong>0.4 сек</strong>. Без ручного ввода.';
+
+        await wait(300);
+        if (btn) btn.classList.remove('running');
+        demo._running = false;
+      }
+
+      async function runShipScenario(demo, btn) {
+        if (demo._running) return;
+        demo._running = true;
+        if (btn) btn.classList.add('running');
+        resetDemo(demo);
+
+        const chips = demo.querySelectorAll('.sc-chip');
+        const chip1 = chips[0];
+        const chip2 = chips[1];
+        const hub = demo.querySelector('.sc-hub');
+        const hubStatus = demo.querySelector('.sc-hub-status');
+        const result = demo.querySelector('.sc-result');
+        const left = demo.querySelector('.sc-left');
+        const right = demo.querySelector('.sc-right');
+
+        async function flyChip(chip, label, offset) {
+          chip.textContent = label;
+          chip.classList.add('green', 'visible');
+          chip.style.top = 'calc(50% + ' + offset + 'px)';
+          chip.style.left = POS.right;
+          right.classList.add('pulse-origin');
+
+          await wait(300);
+          chip.style.left = POS.center;
+          hub.classList.add('validating');
+          hubStatus.textContent = 'Проверка безопасности и валидация XML…';
+
+          await wait(750);
+          hub.classList.remove('validating');
+          chip.style.left = POS.left;
+
+          await wait(550);
+          chip.classList.remove('visible');
+        }
+
+        await flyChip(chip1, 'DESADV', -8);
+        hubStatus.textContent = '';
+        await wait(200);
+        await flyChip(chip2, 'INVOICE', 8);
+        hubStatus.textContent = '';
+
+        left.classList.add('pulse-dest');
+        result.className = 'sc-result show success';
+        result.innerHTML = '✓ Счёт выставлен и учтён в бухгалтерии клиента. Вероятность ошибки — <strong>0%</strong>.';
+
+        await wait(300);
+        if (btn) btn.classList.remove('running');
+        demo._running = false;
+      }
+
+      document.querySelectorAll('.scenario-demo').forEach(function(demo) {
+        if (demo._bound) return;
+        demo._bound = true;
+
+        const btn = demo.querySelector('[data-run]');
+        if (!btn) return;
+
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const type = btn.dataset.run;
+          if (type === 'order') runOrderScenario(demo, btn);
+          else if (type === 'ship') runShipScenario(demo, btn);
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScenarioDemos);
+    } else {
+      initScenarioDemos();
+    }
+
+    if (typeof Reveal !== 'undefined') {
+      Reveal.addEventListener('slidechanged', function(event) {
+        if (event.currentSlide && event.currentSlide.querySelector('.scenario-demo')) {
+          setTimeout(initScenarioDemos, 60);
+        }
+      });
+    }
+
+    // Moodboard lightbox (click to zoom)
+    function initMoodboardLightbox() {
+      const lightbox = document.getElementById('img-lightbox');
+      const lightboxImg = document.getElementById('img-lightbox-img');
+      const lightboxCaption = document.getElementById('img-lightbox-caption');
+      if (!lightbox || !lightboxImg) return;
+
+      function openLightbox(src, alt, caption) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightboxCaption.textContent = caption || '';
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      if (!lightbox._bound) {
+        lightbox._bound = true;
+        lightbox.addEventListener('click', function(e) {
+          if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+        });
+      }
+
+      document.querySelectorAll('.moodboard-frame').forEach(function(frame) {
+        if (frame._lbBound) return;
+        frame._lbBound = true;
+        frame.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const img = frame.querySelector('img');
+          openLightbox(
+            frame.dataset.lightbox || img.src,
+            img.alt,
+            frame.dataset.caption || img.alt
+          );
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMoodboardLightbox);
+    } else {
+      initMoodboardLightbox();
+    }
+
+    if (typeof Reveal !== 'undefined') {
+      Reveal.addEventListener('slidechanged', function() {
+        setTimeout(initMoodboardLightbox, 60);
+        setTimeout(initUxApproaches, 60);
+      });
+    }
+
+    // UX Approaches: timeline steps + live log demo
+    function initUxApproaches() {
+      const tlContent = {
+        1: '<strong>Шаг 1:</strong> Система Заказчика (Continental) отправляет файл ORDER.<span class="tl-file">ORDER.xml →</span>',
+        2: '<strong>Шаг 2:</strong> Безопасный транзит. Данные шифруются и летят через защищённый SFTP-буфер.<span class="tl-file">🔒 SFTP Transit</span>',
+        3: '<strong>Шаг 3:</strong> Мгновенный ответ. База Infotec принимает заказ и генерирует ORDSP / INVOICE обратно.<span class="tl-file" style="background:rgba(16,185,129,0.2);color:#34d399;">← INVOICE</span>'
+      };
+
+      document.querySelectorAll('[data-timeline]').forEach(function(demo) {
+        if (demo._tlBound) return;
+        demo._tlBound = true;
+        const preview = demo.querySelector('[data-tl-preview]');
+        demo.querySelectorAll('.tl-step').forEach(function(step) {
+          step.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const n = step.dataset.step;
+            demo.querySelectorAll('.tl-step').forEach(function(s) {
+              s.classList.toggle('active', s.dataset.step === n);
+            });
+            if (preview && tlContent[n]) preview.innerHTML = tlContent[n];
+          });
+        });
+      });
+
+      document.querySelectorAll('[data-live-log]').forEach(function(demo) {
+        if (demo._logBound) return;
+        demo._logBound = true;
+        const btn = demo.querySelector('[data-run-log]');
+        const lines = demo.querySelectorAll('.log-line');
+        let timers = [];
+
+        function resetLog() {
+          timers.forEach(clearTimeout);
+          timers = [];
+          lines.forEach(function(line) { line.classList.remove('show'); });
+        }
+
+        function runLog() {
+          resetLog();
+          if (btn) btn.classList.add('running');
+          lines.forEach(function(line) {
+            const delay = parseInt(line.dataset.delay, 10) || 0;
+            timers.push(setTimeout(function() {
+              line.classList.add('show');
+            }, delay));
+          });
+          const total = Math.max.apply(null, Array.from(lines).map(function(l) {
+            return parseInt(l.dataset.delay, 10) || 0;
+          })) + 800;
+          timers.push(setTimeout(function() {
+            if (btn) btn.classList.remove('running');
+          }, total));
+        }
+
+        if (btn) {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            runLog();
+          });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUxApproaches);
+    } else {
+      initUxApproaches();
+    }
+  </script>
+</body>
+</html>
