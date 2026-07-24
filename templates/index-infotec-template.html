@@ -139,6 +139,14 @@
       color: #0A6ED1;
     }
 
+    .nav-icon-btn--cta {
+      box-shadow: 0 0 16px rgba(10, 110, 209, 0.15), 0 4px 12px rgba(10, 110, 209, 0.04);
+    }
+
+    .nav-icon-btn--cta:hover {
+      box-shadow: 0 0 20px rgba(10, 110, 209, 0.22), 0 6px 20px rgba(10, 110, 209, 0.08);
+    }
+
     .nav-icon-btn svg {
       width: 1.125rem;
       height: 1.125rem;
@@ -227,7 +235,7 @@
       max-height: 0; overflow: hidden;
       transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0;
     }
-    .mobile-menu.open { max-height: 420px; opacity: 1; }
+    .mobile-menu.open { max-height: 320px; opacity: 1; }
 
     .metric-line path {
       stroke-dasharray: 200; stroke-dashoffset: 200;
@@ -235,86 +243,87 @@
     }
     @keyframes drawLine { to { stroke-dashoffset: 0; } }
 
-    /* Primary CTA — glassmorphism cushion button */
     .btn-cushion {
-      display: inline-flex;
-      padding: 5px;
-      border-radius: 9999px;
+      display: inline-flex; padding: 5px; border-radius: 9999px;
       background: rgba(10, 110, 209, 0.10);
-      box-shadow:
-        0 0 0 1px rgba(10, 110, 209, 0.12),
-        0 4px 16px -2px rgba(10, 110, 209, 0.20),
-        0 10px 28px -6px rgba(10, 110, 209, 0.15);
+      box-shadow: 0 0 0 1px rgba(10, 110, 209, 0.12), 0 4px 16px -2px rgba(10, 110, 209, 0.20), 0 10px 28px -6px rgba(10, 110, 209, 0.15);
       transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
     }
     .btn-cushion:hover {
       background: rgba(10, 110, 209, 0.15);
-      box-shadow:
-        0 0 0 1px rgba(10, 110, 209, 0.18),
-        0 6px 22px -2px rgba(10, 110, 209, 0.30),
-        0 14px 36px -6px rgba(10, 110, 209, 0.20);
+      box-shadow: 0 0 0 1px rgba(10, 110, 209, 0.18), 0 6px 22px -2px rgba(10, 110, 209, 0.30), 0 14px 36px -6px rgba(10, 110, 209, 0.20);
     }
     .btn-cushion:active { transform: scale(0.98); }
-    .btn-cushion:focus-visible {
-      outline: 2px solid rgba(10, 110, 209, 0.45);
-      outline-offset: 3px;
-    }
 
     .btn-cushion-inner {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1.125rem; border-radius: 9999px; font-size: 0.875rem;
+      font-family: 'Inter', sans-serif; font-weight: 500; color: #FFFFFF;
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 50%, #0960bd 100%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 1px 2px rgba(8, 91, 176, 0.35), 0 4px 14px -2px rgba(10, 110, 209, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.30), inset 0 -2px 4px rgba(8, 91, 176, 0.25);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .btn-cushion:hover .btn-cushion-inner {
+      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 50%, #074a93 100%);
+    }
+    .btn-cushion-arrow { transition: transform 0.3s ease; }
+
+    .hero-glass-cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.5rem 1.125rem;
-      border-radius: 9999px;
-      font-size: 0.875rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
+      padding: 1rem 1.75rem; /* py-4 px-7 */
+      border-radius: 1rem; /* rounded-2xl */
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.75) 0%, rgba(10, 110, 209, 0.85) 50%, rgba(30, 136, 229, 0.8) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(10, 110, 209, 0.4);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 8px 24px rgba(10, 110, 209, 0.16);
       color: #FFFFFF;
-      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 50%, #0960bd 100%);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow:
-        0 1px 2px rgba(8, 91, 176, 0.35),
-        0 4px 14px -2px rgba(10, 110, 209, 0.40),
-        inset 0 1px 0 rgba(255, 255, 255, 0.30),
-        inset 0 -2px 4px rgba(8, 91, 176, 0.25);
-      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-      white-space: nowrap;
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.025em;
+      text-decoration: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
     }
-    .btn-cushion:hover .btn-cushion-inner {
-      background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 50%, #074a93 100%);
-      box-shadow:
-        0 2px 4px rgba(8, 91, 176, 0.40),
-        0 6px 18px -2px rgba(10, 110, 209, 0.50),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        inset 0 -2px 4px rgba(7, 74, 147, 0.30);
+
+    .hero-glass-cta-label {
+      filter: drop-shadow(0px 1px 2px rgba(18, 33, 54, 0.4));
     }
-    .btn-cushion:active .btn-cushion-inner {
-      box-shadow:
-        0 1px 2px rgba(8, 91, 176, 0.30),
-        inset 0 2px 4px rgba(7, 74, 147, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    @media (min-width: 640px) {
+      .hero-glass-cta {
+        font-size: 1rem;
+      }
     }
-    .btn-cushion-arrow {
+
+    .hero-glass-cta:hover,
+    .hero-glass-cta:focus-visible {
+      background: linear-gradient(135deg, #7C3AED 0%, #0A6ED1 100%);
+      border-color: rgba(10, 110, 209, 0.55);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.35),
+        0 12px 28px rgba(10, 110, 209, 0.25);
+      outline: none;
+    }
+
+    .hero-glass-cta:active {
+      transform: scale(0.98);
+    }
+
+    .hero-glass-cta-arrow {
       width: 1rem;
       height: 1rem;
       flex-shrink: 0;
       transition: transform 0.3s ease;
     }
-    .btn-cushion:hover .btn-cushion-arrow,
-    .btn-cushion:focus-visible .btn-cushion-arrow {
+
+    .hero-glass-cta:hover .hero-glass-cta-arrow,
+    .hero-glass-cta:focus-visible .hero-glass-cta-arrow {
       transform: translateX(4px);
-    }
-    .btn-cushion--block {
-      display: flex;
-      width: 100%;
-    }
-    .btn-cushion--block .btn-cushion-inner {
-      width: 100%;
     }
 
     .hero-trust-badges {
@@ -394,31 +403,9 @@
     }
 
     .btn-cushion--submit { padding: 6px; }
-    .btn-cushion--submit .btn-cushion-inner {
-      padding: 0.75rem 1.25rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-      white-space: nowrap;
-      border-radius: 9999px;
-    }
-    @media (min-width: 640px) {
-      .btn-cushion--submit .btn-cushion-inner { padding: 0.75rem 1.5rem; }
-    }
-    @media (min-width: 1024px) {
-      .btn-cushion--submit .btn-cushion-inner { padding: 0.875rem 1.75rem; font-size: 0.9375rem; }
-    }
-
-    .btn-cushion--hero .btn-cushion-inner {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9375rem;
-      font-weight: 600;
-    }
-    @media (min-width: 640px) {
-      .btn-cushion--hero .btn-cushion-inner {
-        padding: 0.875rem 1.75rem;
-        font-size: 1rem;
-      }
-    }
+    .btn-cushion--submit .btn-cushion-inner { padding: 0.75rem 1.25rem; font-size: 0.875rem; font-weight: 600; white-space: nowrap; border-radius: 9999px; }
+    @media (min-width: 640px) { .btn-cushion--submit .btn-cushion-inner { padding: 0.75rem 1.5rem; } }
+    @media (min-width: 1024px) { .btn-cushion--submit .btn-cushion-inner { padding: 0.875rem 1.75rem; font-size: 0.9375rem; } }
 
     .glass-3d {
       background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 100%);
@@ -547,25 +534,22 @@
       position: relative;
       overflow: hidden;
       border-radius: 1.5rem;
-      border: 1px solid rgba(10, 110, 209, 0.1);
-      background:
-        linear-gradient(155deg, rgba(255, 255, 255, 0.88) 0%, rgba(248, 250, 252, 0.72) 100%);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow:
-        0 8px 32px rgba(10, 110, 209, 0.04),
-        0 2px 8px rgba(18, 33, 54, 0.03),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-      transition: transform 0.35s ease, border-color 0.3s ease, box-shadow 0.35s ease;
+        0 4px 24px rgba(10, 110, 209, 0.02),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       min-height: 340px;
     }
     .bento-solution-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(10, 110, 209, 0.28);
+      border-color: rgba(10, 110, 209, 0.3);
       box-shadow:
-        0 24px 56px rgba(10, 110, 209, 0.08),
-        0 4px 14px rgba(18, 33, 54, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
+        0 20px 50px rgba(10, 110, 209, 0.06),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
     }
     .bento-solution-card .bento-bg {
       position: absolute;
@@ -679,501 +663,40 @@
     .footer-link { transition: color 0.2s ease; }
     .footer-link:hover { color: #0A6ED1; }
 
-    .footer-contact-input {
-      width: 100%; padding: 0.625rem 0.875rem; border-radius: 0.625rem;
-      border: 1px solid #E2E8F0; background: #FFFFFF;
+    .footer-cta-cushion {
+      padding: 3px; border-radius: 9999px; background: rgba(10, 110, 209, 0.10);
+      box-shadow: 0 0 0 1px rgba(10, 110, 209, 0.10), 0 4px 14px -2px rgba(10, 110, 209, 0.28);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .footer-cta-cushion:hover { background: rgba(10, 110, 209, 0.15); }
+    .footer-cta-primary {
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 55%, #0960bd 100%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 3px rgba(8, 91, 176, 0.22);
+    }
+    .footer-cta-secondary {
+      background: #FFFFFF; border: 1px solid rgba(10, 110, 209, 0.20);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .footer-cta-secondary:hover { border-color: rgba(10, 110, 209, 0.40); box-shadow: 0 8px 32px rgba(10, 110, 209, 0.08); }
+
+    .footer-contact-input, .footer-contact-textarea {
+      width: 100%; padding: 0.625rem 0.875rem; border-radius: 0.75rem;
+      border: 1px solid rgba(10, 110, 209, 0.15); background: #FFFFFF;
       font-size: 0.8125rem; color: #122136; outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .footer-contact-input:focus {
+    .footer-contact-input:focus, .footer-contact-textarea:focus {
       border-color: rgba(10, 110, 209, 0.45);
       box-shadow: 0 0 0 3px rgba(10, 110, 209, 0.08);
     }
+    .footer-contact-textarea { resize: vertical; min-height: 4.5rem; }
 
-
-    /* ── Case Studies ── */
-    .case-item {
-      border-left: 2px solid #E2E8F0;
-      padding: 0.875rem 0 0.875rem 1.125rem;
-      transition: border-color 0.2s ease;
-    }
-    .case-item.is-active { border-left-color: #0A6ED1; }
-    .case-item-btn {
-      background: none; border: none; padding: 0; text-align: left; cursor: pointer;
-      font-size: 1rem; font-weight: 700; color: #6A7B95; line-height: 1.35;
-      transition: color 0.2s ease;
-    }
-    .case-item.is-active .case-item-btn { color: #122136; }
-    .case-item-btn:hover { color: #0A6ED1; }
-    .case-item-body {
-      display: none;
-      margin-top: 0.625rem;
-    }
-    .case-item.is-active .case-item-body { display: block; }
-    .case-preview {
-      position: relative;
-      border-radius: 1rem;
-      overflow: hidden;
-      border: 1px solid #E2E8F0;
-      background: #F8FAFC;
-      min-height: 280px;
-      height: 100%;
-      min-height: 320px;
-    }
-    .case-preview-visual {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: #F5F7FA;
-    }
-    .case-preview-img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      pointer-events: none;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-    .case-preview-badge {
-      position: absolute;
-      left: 1rem;
-      bottom: 1rem;
-      z-index: 2;
-      background: #fff;
-      border-radius: 0.625rem;
-      padding: 0.625rem 1rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: #122136;
-    }
-
-    /* ── Industry solution cards (prototype layout) ── */
-    .industry-card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.875rem;
-    }
-    .industry-card-media {
-      position: relative;
-      border-radius: 1.125rem;
-      overflow: hidden;
-      border: 1px solid #E2E8F0;
-      background: #F1F5F9;
-      min-height: 240px;
-      aspect-ratio: 4 / 3;
-    }
-    .industry-card-media::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(160deg, rgba(10, 110, 209, 0.08) 0%, rgba(139, 92, 246, 0.06) 40%, rgba(248, 250, 252, 0.95) 100%),
-        linear-gradient(90deg, rgba(10, 110, 209, 0.04) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(10, 110, 209, 0.04) 1px, transparent 1px);
-      background-size: auto, 20px 20px, 20px 20px;
-    }
-    .industry-card-panel {
-      position: absolute;
-      left: 0.75rem;
-      right: 0.75rem;
-      bottom: 0.75rem;
-      background: #fff;
-      border-radius: 0.875rem;
-      padding: 1rem;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-    }
-    .industry-kpi {
-      display: inline-flex;
-      font-size: 0.6875rem;
-      font-weight: 600;
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 9999px;
-      padding: 0.25rem 0.625rem;
-      color: #122136;
-    }
-    .industry-link {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: #0A6ED1;
-      text-decoration: none;
-      transition: color 0.2s ease, gap 0.2s ease;
-    }
-    .industry-link:hover { color: #085bb0; }
-
-    /* ── AI + ERP Flow — VIP premium ── */
-    .ai-vip-section {
-      position: relative;
-      overflow: hidden;
-    }
-    .ai-vip-shell {
-      position: relative;
-      border-radius: 1.75rem;
-      padding: 1.5rem;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.72) 0%, rgba(248,250,252,0.55) 45%, rgba(255,255,255,0.4) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      box-shadow:
-        0 24px 64px rgba(10, 110, 209, 0.07),
-        0 4px 16px rgba(18, 33, 54, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95),
-        inset 0 -1px 0 rgba(10, 110, 209, 0.04);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-    @media (min-width: 640px) {
-      .ai-vip-shell { padding: 2rem 2.25rem; border-radius: 2rem; }
-    }
-    .ai-vip-shell::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      opacity: 0.5;
-      background-image:
-        linear-gradient(90deg, rgba(10, 110, 209, 0.035) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-    .ai-vip-shell::after {
-      content: '';
-      position: absolute;
-      top: -40%;
-      right: -15%;
-      width: 55%;
-      height: 80%;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 68%);
-      pointer-events: none;
-      filter: blur(8px);
-    }
-
-    .ai-flow-panel {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 0.125rem;
-      background: linear-gradient(165deg, rgba(255,255,255,0.92) 0%, rgba(248,250,252,0.88) 100%);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      border-radius: 1.375rem;
-      padding: 1.5rem 1.5rem 1.625rem;
-      box-shadow:
-        0 16px 40px rgba(18, 33, 54, 0.06),
-        0 2px 8px rgba(10, 110, 209, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-      overflow: hidden;
-    }
-    @media (min-width: 640px) {
-      .ai-flow-panel { padding: 1.875rem 2rem; border-radius: 1.5rem; }
-    }
-    .ai-flow-panel::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 50% at 12% 0%, rgba(10, 110, 209, 0.07), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 88% 100%, rgba(139, 92, 246, 0.06), transparent 55%);
-    }
-    .ai-flow-panel-glow {
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: rgba(10, 110, 209, 0.12);
-      filter: blur(48px);
-      pointer-events: none;
-      top: 38%;
-      left: 0.5rem;
-      z-index: 0;
-    }
-
-    .ai-flow-step {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      padding: 0.875rem 0.875rem;
-      border-radius: 1rem;
-      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-    }
-    .ai-flow-step:hover {
-      background: rgba(255, 255, 255, 0.75);
-      box-shadow: 0 8px 24px rgba(10, 110, 209, 0.05);
-    }
-    .ai-flow-step--core {
-      background: linear-gradient(135deg, rgba(10, 110, 209, 0.06) 0%, rgba(139, 92, 246, 0.05) 100%);
-      border: 1px solid rgba(10, 110, 209, 0.12);
-      box-shadow:
-        0 8px 28px rgba(10, 110, 209, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    }
-    .ai-flow-step--core:hover {
-      background: linear-gradient(135deg, rgba(10, 110, 209, 0.09) 0%, rgba(139, 92, 246, 0.07) 100%);
-      border-color: rgba(10, 110, 209, 0.2);
-      box-shadow:
-        0 12px 32px rgba(10, 110, 209, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      transform: translateY(-1px);
-    }
-
-    .ai-flow-icon {
-      position: relative;
-      width: 3.25rem;
-      height: 3.25rem;
-      border-radius: 0.875rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
-      border: 1px solid rgba(226, 232, 240, 0.95);
-      box-shadow:
-        0 4px 14px rgba(18, 33, 54, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-    .ai-flow-step:hover .ai-flow-icon {
-      transform: translateY(-1px);
-      box-shadow:
-        0 8px 20px rgba(18, 33, 54, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-    }
-    .ai-flow-icon--brand {
-      background: linear-gradient(160deg, #1e88e5 0%, #0A6ED1 48%, #085bb0 100%);
-      border-color: rgba(255, 255, 255, 0.28);
-      box-shadow:
-        0 8px 24px rgba(10, 110, 209, 0.35),
-        0 0 0 4px rgba(10, 110, 209, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -2px 6px rgba(8, 91, 176, 0.35);
-    }
-    .ai-flow-step:hover .ai-flow-icon--brand {
-      box-shadow:
-        0 10px 28px rgba(10, 110, 209, 0.42),
-        0 0 0 5px rgba(10, 110, 209, 0.12),
-        0 0 32px rgba(139, 92, 246, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    }
-    .ai-flow-icon--brand::after {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 1.05rem;
-      border: 1px solid rgba(10, 110, 209, 0.18);
-      animation: aiBrandRing 2.8s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes aiBrandRing {
-      0%, 100% { opacity: 0.35; transform: scale(1); }
-      50% { opacity: 0.85; transform: scale(1.04); }
-    }
-    .ai-flow-icon--erp {
-      border-color: rgba(10, 110, 209, 0.2);
-      background: linear-gradient(180deg, #FFFFFF 0%, #F0F7FF 100%);
-      box-shadow:
-        0 4px 14px rgba(10, 110, 209, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-    }
-
-    .ai-flow-connector {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      padding: 0.15rem 0 0.15rem 1.55rem;
-      min-height: 2.25rem;
-    }
-    .ai-flow-connector-line {
-      position: relative;
-      width: 2px;
-      height: 2rem;
-      flex-shrink: 0;
-      margin-left: 1.5rem;
-      border-radius: 9999px;
-      background: linear-gradient(180deg, rgba(203, 213, 225, 0.4) 0%, rgba(10, 110, 209, 0.45) 50%, rgba(203, 213, 225, 0.4) 100%);
-      overflow: hidden;
-    }
-    .ai-flow-connector-line::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.9), transparent);
-      animation: aiFlowPulse 2.2s ease-in-out infinite;
-    }
-    @keyframes aiFlowPulse {
-      0% { top: -40%; opacity: 0; }
-      30% { opacity: 1; }
-      100% { top: 100%; opacity: 0; }
-    }
-    .ai-flow-connector-text {
-      font-size: 0.75rem;
-      line-height: 1.5;
-      color: #94A3B8;
-      margin: 0;
-      letter-spacing: 0.01em;
-    }
-
-    .ai-flow-step-label {
-      font-size: 0.9375rem;
-      font-weight: 700;
-      color: #122136;
-      letter-spacing: -0.02em;
-      line-height: 1.35;
-      margin: 0;
-    }
-    .ai-flow-step-sub {
-      font-size: 0.8125rem;
-      color: #6A7B95;
-      line-height: 1.55;
-      margin: 0.25rem 0 0;
-    }
-    .ai-flow-step-meta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      margin-top: 0.5rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.625rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #8B5CF6;
-    }
-    .ai-flow-step-meta::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 9999px;
-      background: #8B5CF6;
-      box-shadow: 0 0 8px rgba(139, 92, 246, 0.7);
-      animation: aiPulseDot 2s ease-in-out infinite;
-    }
-
-    .ai-vip-side {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-    .ai-vip-card {
-      position: relative;
-      display: block;
-      padding: 1.35rem 1.4rem 1.4rem;
-      border-radius: 1.25rem;
-      background: linear-gradient(160deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.75) 100%);
-      border: 1px solid rgba(226, 232, 240, 0.85);
-      box-shadow:
-        0 10px 32px rgba(18, 33, 54, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-      text-decoration: none;
-      overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .ai-vip-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 1rem;
-      bottom: 1rem;
-      width: 3px;
-      border-radius: 0 4px 4px 0;
-      background: linear-gradient(180deg, #0A6ED1, #8B5CF6);
-      opacity: 0.55;
-      transition: opacity 0.3s ease, top 0.3s ease, bottom 0.3s ease;
-    }
-    .ai-vip-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(10, 110, 209, 0.28);
-      box-shadow:
-        0 18px 44px rgba(10, 110, 209, 0.1),
-        0 0 0 1px rgba(10, 110, 209, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-    }
-    .ai-vip-card:hover::before {
-      opacity: 1;
-      top: 0.65rem;
-      bottom: 0.65rem;
-    }
-    .ai-vip-card-title {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #0A6ED1;
-      letter-spacing: -0.02em;
-      line-height: 1.35;
-      margin: 0 0 0.5rem;
-      transition: gap 0.25s ease, color 0.2s ease;
-    }
-    .ai-vip-card:hover .ai-vip-card-title {
-      gap: 0.55rem;
-      color: #085bb0;
-    }
-    .ai-vip-card-title svg {
-      width: 0.95rem;
-      height: 0.95rem;
-      flex-shrink: 0;
-      transition: transform 0.25s ease;
-    }
-    .ai-vip-card:hover .ai-vip-card-title svg {
-      transform: translateX(3px);
-    }
-    .ai-vip-card-desc {
-      font-size: 0.875rem;
-      color: #6A7B95;
-      line-height: 1.65;
-      margin: 0;
-    }
-    .ai-vip-card-foot {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      padding-top: 0.85rem;
-      border-top: 1px solid rgba(226, 232, 240, 0.8);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.625rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #94A3B8;
-    }
-    .ai-vip-card-foot span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .ai-vip-card-foot .dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 9999px;
-      background: #10B981;
-      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    .footer-wordmark {
+      font-size: clamp(4rem, 14vw, 11rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: rgba(18, 33, 54, 0.07);
     }
 
     .review-quote-mark {
@@ -1609,30 +1132,6 @@
         0 20px 50px rgba(10, 110, 209, 0.06),
         inset 0 1.5px 2px rgba(255, 255, 255, 0.9);
     }
-    /* Background mockup: full image scaled to platform size (not oversized) */
-    .module-blueprint-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      pointer-events: none;
-      padding: 4.5rem 0.75rem 5.5rem;
-    }
-    .module-blueprint-bg img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      object-position: center;
-      mix-blend-mode: multiply;
-      -webkit-user-drag: none;
-      user-select: none;
-    }
     .module-row-seam {
       border-bottom: 1px solid transparent;
       border-image: linear-gradient(to right, transparent, rgba(148, 163, 184, 0.45), transparent) 1;
@@ -1699,40 +1198,6 @@
       position: relative;
       z-index: 10;
     }
-
-    .hero-mockup-wrap {
-      background: transparent;
-      /* no isolation — blend with page/hero canvas */
-    }
-
-    .hero-mockup-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      pointer-events: none;
-      /* White JPG sides blend away; soft glows + UI stay.
-         Page mesh / light background shows through instead of a white box. */
-      mix-blend-mode: multiply;
-      -webkit-user-drag: none;
-      user-select: none;
-    }
-
-    .ai-header-mockup-wrap {
-      background: transparent;
-    }
-
-    .ai-header-mockup-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      pointer-events: none;
-      /* White JPG sides blend away so page background shows through */
-      mix-blend-mode: multiply;
-      -webkit-user-drag: none;
-      user-select: none;
-    }
   </style>
 </head>
 <body class="bg-[#FFFFFF] min-h-screen font-sans text-[#122136] antialiased">
@@ -1769,8 +1234,6 @@
         </li>
         <li role="none"><a href="#solutions" role="menuitem" class="nav-link" data-nav="solutions">Готовые решения</a></li>
         <li role="none"><a href="#news" role="menuitem" class="nav-link" data-nav="news">Новости</a></li>
-        <li role="none"><a href="#" role="menuitem" class="nav-link" data-nav="price">Цены</a></li>
-        <li role="none"><a href="#" role="menuitem" class="nav-link" data-nav="cust">Клиенты</a></li>
       </ul>
 
       <div class="nav-icon-actions shrink-0" role="group" aria-label="Действия в шапке">
@@ -1795,13 +1258,10 @@
           </div>
         </div>
 
-        <a href="#" class="btn-cushion group shrink-0 transition-all duration-300 hidden sm:inline-flex" aria-label="Демо-доступ">
-          <span class="btn-cushion-inner text-white text-sm font-medium">
-            Демо-доступ
-            <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </span>
+        <a href="#" class="nav-icon-btn nav-icon-btn--cta" aria-label="Демо-доступ">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M13 2L4 14h7l-1 8 10-14h-7l0-6z"/>
+          </svg>
         </a>
 
         <a href="#" class="nav-icon-btn" aria-label="Войти в аккаунт">
@@ -1826,16 +1286,6 @@
         <li><a href="#solutions" class="mobile-nav-link" data-nav="solutions" role="menuitem">Готовые решения</a></li>
         <li><a href="#news" class="mobile-nav-link" data-nav="news" role="menuitem">Новости</a></li>
         <li class="pt-2 border-t border-[#E2E8F0]"><a href="#" class="mobile-nav-link" role="menuitem">Войти</a></li>
-        <li class="pt-2">
-          <a href="#" class="btn-cushion btn-cushion--block group w-full transition-all duration-300" role="menuitem" aria-label="Демо-доступ">
-            <span class="btn-cushion-inner text-white text-sm font-medium">
-              Демо-доступ
-              <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </span>
-          </a>
-        </li>
       </ul>
     </div>
   </header>
@@ -1849,43 +1299,41 @@
       </div>
 
       <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20">
-      <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-        <div class="group/hero flex flex-col gap-6 lg:gap-7 order-2 lg:order-1 min-w-0">
+        <div class="group/hero flex flex-col gap-6 lg:gap-7 order-2 lg:order-1">
           <div class="hero-eyebrow-pill self-start" role="status" aria-label="Trusted by leading Baltic enterprises">
             <span class="hero-eyebrow-telemetry" aria-hidden="true">
               <span class="hero-telemetry-bar hero-telemetry-bar--1"></span>
               <span class="hero-telemetry-bar hero-telemetry-bar--2"></span>
               <span class="hero-telemetry-bar hero-telemetry-bar--3 animate-pulse"></span>
             </span>
-            <span class="hero-eyebrow-label">Работаем с балтийскими МСП с 2007 года</span>
+            <span class="hero-eyebrow-label">Trusted by leading Baltic enterprises</span>
           </div>
 
           <h1 class="hero-headline">
             <span class="hero-glass-wrap">
-              <span class="hero-glass-text">Infotec ERP готовая ERP система</span>
+              <span class="hero-glass-text">Infotec ERP система</span>
               <svg class="hero-sparkle animate-pulse" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2l1.8 5.4H19l-4.5 3.3 1.8 5.4L12 14.8 7.7 16.1 9.5 10.7 5 7.4h5.2L12 2z"/>
               </svg>
             </span>
-            <span class="hero-headline-baseline">для SME промышленных и торговых предприятий</span>
+            <span class="hero-headline-baseline">для учета и планирования на малых и средних предприятиях</span>
           </h1>
 
           <p class="hero-subtitle">
-            Infotec ERP это больше чем программа - это ключь к пониманию где ваш бизнес сейчас и в каком направлении необходимо двигаться.
+            Экосистема Infotec ERP объединяет продажи, закупки, производство и финансы в единой платформе — создана специально для балтийских МСП, которым нужен прозрачный учёт, быстрые решения и масштабируемость без лишней сложности.
           </p>
 
-          <a href="#" class="btn-cushion btn-cushion--hero group self-start transition-all duration-300" aria-label="Получить спецификацию модуля">
-            <span class="btn-cushion-inner text-white">
-              Получить спецификацию модуля
-              <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </span>
+          <a href="#" class="hero-glass-cta text-white font-semibold text-sm sm:text-base tracking-wide">
+            <span class="hero-glass-cta-label">Получить спецификацию модуля</span>
+            <svg class="hero-glass-cta-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
           </a>
 
           <div class="hero-trust-badges" role="list" aria-label="Гарантии Infotec ERP">
-            <!-- <span class="hero-trust-badge" role="listitem">
+            <span class="hero-trust-badge" role="listitem">
               <span class="hero-trust-icon hero-trust-icon--shield" aria-hidden="true">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 3l7 3v6c0 4.5-3.5 7.5-7 9-3.5-1.5-7-4.5-7-9V6l7-3z"/>
@@ -1903,28 +1351,139 @@
                 </svg>
               </span>
               <span class="hero-trust-label">Ответ за 24 часа</span>
-            </span> -->
+            </span>
           </div>
         </div>
 
-        <!-- Hero mockup (50% right) — white JPG sides blend into page bg -->
-        <div class="hero-mockup-wrap relative order-1 lg:order-2 min-w-0 w-full" aria-label="Демонстрация интерфейса Infotec ERP">
-          <img
-            src="img/main-hero-2.jpg"
-            alt="Infotec ERP — аналитика: заказы, отгрузки, бюджет и клиенты"
-            class="hero-mockup-img w-full h-auto max-w-none object-contain select-none"
-            width="1600"
-            height="1000"
-            decoding="async"
-            fetchpriority="high"
-          />
+        <!-- Dashboard panel -->
+        <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end" aria-label="Демонстрация интерфейса ERP">
+          <div class="absolute -top-4 -right-4 w-[90%] h-[95%] rounded-2xl bg-gradient-to-br from-[#0A6ED1]/[0.03] to-[#8B5CF6]/[0.05] border border-[#0A6ED1]/10 rotate-2" aria-hidden="true"></div>
+
+          <div class="dashboard-panel relative w-full max-w-[520px] rounded-2xl border border-[#0A6ED1]/15 overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-3.5 border-b border-[#E2E8F0]/60 bg-white/80">
+              <div class="flex items-center gap-2.5">
+                <div class="flex gap-1.5" aria-hidden="true">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                </div>
+                <span class="text-sm font-semibold text-[#122136] tracking-tight">Infotec ERP Dashboard</span>
+              </div>
+              <span class="text-xs font-medium quantum-badge px-2.5 py-1 rounded-md flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse"></span>Live</span>
+            </div>
+
+            <div class="px-5 py-4 border-b border-[#0A6ED1]/10 bg-white">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">Выручка · 7 дней</span>
+                <span class="text-[10px] font-bold text-[#0A6ED1]">€ 284K</span>
+              </div>
+              <div class="relative h-24" role="img" aria-label="График выручки за неделю">
+                <svg class="metric-line w-full h-full" viewBox="0 0 280 80" preserveAspectRatio="none" aria-hidden="true">
+                  <line x1="0" y1="20" x2="280" y2="20" stroke="rgba(10,110,209,0.06)" stroke-width="1"/>
+                  <line x1="0" y1="40" x2="280" y2="40" stroke="rgba(10,110,209,0.06)" stroke-width="1"/>
+                  <line x1="0" y1="60" x2="280" y2="60" stroke="rgba(10,110,209,0.06)" stroke-width="1"/>
+                  <path d="M0 65 L40 58 L80 52 L120 38 L160 42 L200 22 L240 28 L280 12" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-opacity="0.35" stroke-linecap="round" stroke-dasharray="4 4"/>
+                  <path d="M0 68 L40 55 L80 48 L120 32 L160 35 L200 18 L240 20 L280 8" fill="url(#heroChartFill)" stroke="#0A6ED1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="280" cy="8" r="3" fill="#0A6ED1"/>
+                  <defs>
+                    <linearGradient id="heroChartFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#0A6ED1" stop-opacity="0.12"/>
+                      <stop offset="100%" stop-color="#0A6ED1" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="flex justify-between mt-2 text-[10px] text-[#6A7B95] font-medium">
+                <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+              </div>
+            </div>
+
+            <div class="px-5 py-3 border-t border-[#E2E8F0]/40 bg-[#F5F7FA]/40">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]">Корпоративные клиенты</span>
+                <span class="text-[10px] font-medium text-[#0A6ED1]">ID трекинг</span>
+              </div>
+              <table class="w-full text-[10px] border-collapse" aria-label="Таблица корпоративных клиентов">
+                <thead>
+                  <tr class="text-[#6A7B95] border-b border-[#E2E8F0]/60">
+                    <th class="text-left py-1.5 pr-2 font-semibold">ID</th>
+                    <th class="text-left py-1.5 pr-2 font-semibold">Компания</th>
+                    <th class="text-right py-1.5 font-semibold">Статус</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[#122136]">
+                  <tr class="border-b border-[#E2E8F0]/30">
+                    <td class="py-1.5 pr-2 font-mono font-semibold text-[#0A6ED1]">C-10482</td>
+                    <td class="py-1.5 pr-2 font-medium">Baltic Trade OÜ</td>
+                    <td class="py-1.5 text-right"><span class="text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded">Active</span></td>
+                  </tr>
+                  <tr class="border-b border-[#E2E8F0]/30">
+                    <td class="py-1.5 pr-2 font-mono font-semibold text-[#0A6ED1]">C-10891</td>
+                    <td class="py-1.5 pr-2 font-medium">Nordic Parts AS</td>
+                    <td class="py-1.5 text-right"><span class="text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td class="py-1.5 pr-2 font-mono font-semibold text-[#8B5CF6]">C-11024</td>
+                    <td class="py-1.5 pr-2 font-medium">Riga Logistics SIA</td>
+                    <td class="py-1.5 text-right"><span class="text-amber-600 font-semibold bg-amber-50 px-1.5 py-0.5 rounded">Pending</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="px-5 py-4 border-t border-[#E2E8F0]/40 space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-[#6A7B95] font-medium">Выполнение плана</span>
+                  <span class="text-[#122136] font-semibold">78%</span>
+                </div>
+                <div class="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
+                  <div class="progress-fill h-full bg-gradient-to-r from-[#0A6ED1] to-[#8B5CF6] rounded-full" style="width:78%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-[#6A7B95] font-medium">Маржинальность</span>
+                  <span class="text-[#122136] font-semibold">62%</span>
+                </div>
+                <div class="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
+                  <div class="progress-fill h-full bg-gradient-to-r from-[#0A6ED1]/70 to-[#0A6ED1] rounded-full" style="width:62%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Analysis widget -->
+          <div class="float-card cyber-card absolute -bottom-6 -left-4 sm:-left-8 backdrop-blur-lg rounded-2xl p-4 w-[220px] sm:w-[240px] z-20">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-8 h-8 rounded-lg bg-[#8B5CF6]/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-[#8B5CF6]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+              </div>
+              <span class="text-[10px] font-semibold quantum-badge px-2 py-0.5 rounded-md">AI</span>
+            </div>
+            <p class="text-xs font-semibold text-[#122136] leading-snug">AI Analysis of Financial Statements</p>
+            <p class="text-[10px] text-[#6A7B95] mt-1.5">Аномалии в P&amp;L выявлены · 3 рекомендации</p>
+          </div>
+
+          <!-- Transaction alert -->
+          <div class="float-card cyber-card absolute -top-5 -right-2 sm:-right-6 backdrop-blur-lg rounded-2xl p-3.5 w-[180px] sm:w-[200px] z-20" style="animation-delay:-3s">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#0A6ED1] to-[#8B5CF6] flex items-center justify-center shadow-[0_4px_16px_rgba(10,110,209,0.25)]">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-[10px] text-[#6A7B95] font-medium">Новая транзакция</p>
+                <p class="text-sm font-bold text-[#122136] tracking-tight">€ 12 450</p>
+              </div>
+            </div>
+            <p class="text-[10px] text-[#6A7B95] mt-2 pl-11">Оплата получена · Baltic Trade OÜ</p>
+          </div>
         </div>
       </div>
       </div>
     </section>
 
-    <!-- TRUST METRIC RIBBON (TEMPORARILY COMMENTED OUT) -->
-    <!--
+    <!-- TRUST METRIC RIBBON -->
     <section class="relative z-20 px-4 sm:px-6 lg:px-8 -mt-2 sm:-mt-4 mb-10 sm:mb-14" aria-label="Ключевые показатели Infotec ERP">
       <div id="trustRibbon" class="trust-ribbon group max-w-7xl mx-auto px-8 py-6 rounded-3xl bg-white/30 backdrop-blur-xl shadow-[0_20px_50px_rgba(10,110,209,0.06),0_1px_3px_rgba(18,33,54,0.02),inset_0_1.5px_3px_rgba(255,255,255,0.9),inset_0_-1px_2px_rgba(10,110,209,0.03)] flex flex-col lg:flex-row items-center justify-between gap-6">
         <div class="trust-ribbon-glows" aria-hidden="true">
@@ -1996,357 +1555,6 @@
         </blockquote>
       </div>
     </section>
-    -->
-
-    <!-- CASE STUDIES — proof via real customer stories -->
-    <section id="case-studies" class="section-blueprint border-t border-[#0A6ED1]/10 relative overflow-hidden" aria-labelledby="case-studies-heading">
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <header class="mb-8 sm:mb-10 max-w-2xl">
-          <h2 id="case-studies-heading" class="text-2xl sm:text-3xl font-extrabold text-[#122136] tracking-tight leading-tight mb-3.5">
-            Решения, которым доверяют малые и средние предприятия
-          </h2>
-          <p class="desc-text text-sm sm:text-base">
-            Узнайте, как компании на Infotec ERP внедряют новые процессы, а их специалисты расширяют профессиональные навыки.
-          </p>
-        </header>
-
-        <div class="grid grid-cols-1 lg:grid-cols-[minmax(240px,340px)_1fr] gap-8 lg:gap-10 items-start">
-          <div class="flex flex-col" role="tablist" aria-label="Истории клиентов" id="caseStudyList">
-            <div class="case-item is-active" data-case="textile" role="presentation">
-              <button type="button" class="case-item-btn" role="tab" id="case-tab-textile" aria-selected="true" aria-controls="case-panel" data-case="textile">SKS Estonia Textile</button>
-              <div class="case-item-body">
-                <p class="text-[13px] text-[#6A7B95] leading-relaxed mb-2.5 max-w-md">Текстильное производство перешло на единый учёт партий и остатков — брак и простои видны цехом раньше, чем срывают отгрузку.</p>
-                <a href="#news" class="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors">Читать историю клиента ›</a>
-              </div>
-            </div>
-            <div class="case-item" data-case="logistics" role="presentation">
-              <button type="button" class="case-item-btn" role="tab" id="case-tab-logistics" aria-selected="false" aria-controls="case-panel" data-case="logistics">Riga Logistics SIA</button>
-              <div class="case-item-body">
-                <p class="text-[13px] text-[#6A7B95] leading-relaxed mb-2.5 max-w-md">Логистический оператор связал закупки, склад и договоры с перевозчиками — стоимость доставки считается автоматически по каждому рейсу.</p>
-                <a href="#news" class="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors">Читать историю клиента ›</a>
-              </div>
-            </div>
-            <div class="case-item" data-case="trade" role="presentation">
-              <button type="button" class="case-item-btn" role="tab" id="case-tab-trade" aria-selected="false" aria-controls="case-panel" data-case="trade">Baltic Trade OÜ</button>
-              <div class="case-item-body">
-                <p class="text-[13px] text-[#6A7B95] leading-relaxed mb-2.5 max-w-md">Торговая компания свела продажи, склад и финансы в одну систему — отчёт о марже теперь готов за минуты, а не дни.</p>
-                <a href="#news" class="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors">Читать историю клиента ›</a>
-              </div>
-            </div>
-            <div class="case-item" data-case="metall" role="presentation">
-              <button type="button" class="case-item-btn" role="tab" id="case-tab-metall" aria-selected="false" aria-controls="case-panel" data-case="metall">EstMetall Grupp</button>
-              <div class="case-item-body">
-                <p class="text-[13px] text-[#6A7B95] leading-relaxed mb-2.5 max-w-md">Металлообработка настроила производственный учёт под свои BOM и цеха — себестоимость видна по каждому заказу.</p>
-                <a href="#news" class="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors">Читать историю клиента ›</a>
-              </div>
-            </div>
-          </div>
-
-          <div id="case-panel" class="case-preview" role="tabpanel" aria-labelledby="case-tab-textile">
-            <div class="case-preview-visual">
-              <!-- Temporary shared image for all case tabs -->
-              <img
-                id="case-preview-img"
-                class="case-preview-img"
-                src="img/main-title-1.png"
-                alt="SKS Estonia Textile"
-                width="1200"
-                height="800"
-                decoding="async"
-                loading="lazy"
-              />
-              <span id="case-preview-label" class="sr-only">SKS Estonia Textile</span>
-            </div>
-            <div class="case-preview-badge" id="case-preview-badge">SKS Estonia Textile</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI + ERP FLOW — VIP premium augmentation story -->
-    <section id="showcase" class="ai-vip-section section-blueprint border-t border-[#0A6ED1]/10" aria-labelledby="ai-agents-heading">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="glow-orb w-[420px] h-[420px] bg-[#8B5CF6]/[0.07] -top-24 right-0"></div>
-        <div class="glow-orb w-[360px] h-[360px] bg-[#0A6ED1]/[0.06] bottom-0 -left-20"></div>
-        <div class="glow-orb w-[280px] h-[280px] bg-cyan-400/[0.04] top-1/2 left-1/3"></div>
-      </div>
-
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-
-        <header class="mb-10 sm:mb-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
-          <div class="min-w-0 max-w-3xl lg:max-w-none">
-            <div class="inline-flex items-center gap-2.5 mb-4">
-              <span class="ai-pulse-dot" aria-hidden="true"></span>
-              <span class="font-mono text-[10px] sm:text-[11px] font-medium tracking-[0.14em] text-[#8B5CF6] uppercase">[ SYSTEM.ENGINE // AI_PIPELINE · LIVE ]</span>
-            </div>
-            <h2 id="ai-agents-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#122136] tracking-tighter leading-[1.15]">
-              Искусственный интеллект —<br class="hidden sm:block">
-              <span class="text-gradient">мощное дополнение</span> к основным функциям Infotec&nbsp;ERP
-            </h2>
-            <p class="desc-text text-sm sm:text-base max-w-2xl mt-4">
-              От входящего файла до записи в ERP — без ручного ввода. AI-слой Infotec читает, сопоставляет и связывает данные, пока команда работает с результатом.
-            </p>
-          </div>
-
-          <!-- AI header mockup (green zone, top-right) — white JPG sides blend into page bg -->
-          <div class="ai-header-mockup-wrap relative min-w-0 w-full flex items-center justify-center lg:justify-end" aria-label="Демонстрация AI-слоя Infotec">
-            <img
-              src="img/main-ai-1.jpg"
-              alt="Infotec AI — интеллектуальный слой данных"
-              class="ai-header-mockup-img w-full h-auto max-w-none object-contain select-none"
-              width="1200"
-              height="800"
-              decoding="async"
-              loading="lazy"
-            />
-          </div>
-        </header>
-
-        <div class="ai-vip-shell">
-          <div class="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr] gap-6 lg:gap-8 items-stretch relative z-10">
-
-            <!-- Left: premium pipeline -->
-            <div class="ai-flow-panel">
-              <div class="ai-flow-panel-glow" aria-hidden="true"></div>
-
-              <div class="relative z-10 flex items-center justify-between gap-3 mb-4 pb-3 border-b border-[#E2E8F0]/80">
-                <div class="flex items-center gap-2">
-                  <span class="font-mono text-[9px] sm:text-[10px] font-semibold tracking-[0.12em] uppercase text-[#6A7B95]">Invoice · Ingest → Match → ERP</span>
-                </div>
-                <span class="inline-flex items-center gap-1.5 font-mono text-[9px] font-semibold tracking-wider uppercase text-emerald-600 bg-emerald-50/90 border border-emerald-100 px-2 py-0.5 rounded-md">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
-                  Live
-                </span>
-              </div>
-
-              <!-- Step 1 -->
-              <div class="ai-flow-step">
-                <div class="ai-flow-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="6" rx="1.5" stroke="#6A7B95" stroke-width="1.5"></rect><rect x="3" y="14" width="18" height="6" rx="1.5" stroke="#6A7B95" stroke-width="1.5"></rect><circle cx="6.5" cy="7" r="0.8" fill="#6A7B95"></circle><circle cx="6.5" cy="17" r="0.8" fill="#6A7B95"></circle></svg>
-                </div>
-                <div class="pt-1 min-w-0">
-                  <p class="ai-flow-step-label">Папка «Входящие счета» в файловой системе компании</p>
-                  <p class="ai-flow-step-meta">Source · File system</p>
-                </div>
-              </div>
-
-              <div class="ai-flow-connector">
-                <span class="ai-flow-connector-line" aria-hidden="true"></span>
-                <p class="ai-flow-connector-text">Автосохранение оригинала счёта в папку конкретного поставщика</p>
-              </div>
-
-              <!-- Step 2 — AI core -->
-              <div class="ai-flow-step ai-flow-step--core">
-                <div class="ai-flow-icon ai-flow-icon--brand" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12l4-8 4 8-4 8-4-8z" fill="#fff" fill-opacity="0.85"></path><path d="M13 12l4-8 4 8-4 8-4-8z" fill="#fff"></path></svg>
-                </div>
-                <div class="pt-0.5 min-w-0">
-                  <p class="ai-flow-step-label">Infotec AI</p>
-                  <p class="ai-flow-step-sub">Модуль на базе моделей OpenAI — читает и сопоставляет счёт с поставщиком</p>
-                  <p class="ai-flow-step-meta">OpenAI · Match engine</p>
-                </div>
-              </div>
-
-              <div class="ai-flow-connector">
-                <span class="ai-flow-connector-line" aria-hidden="true"></span>
-                <p class="ai-flow-connector-text">Автосвязь оригинала счёта с записью в Infotec ERP + сохранение данных поставщика</p>
-              </div>
-
-              <!-- Step 3 -->
-              <div class="ai-flow-step">
-                <div class="ai-flow-icon ai-flow-icon--erp" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="1.5" stroke="#0A6ED1" stroke-width="1.5"></rect><path d="M8 20h8M12 16v4" stroke="#0A6ED1" stroke-width="1.5" stroke-linecap="round"></path><path d="M6 9l3 3 2-2 3 3.5" stroke="#8B5CF6" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                </div>
-                <div class="pt-1 min-w-0">
-                  <p class="ai-flow-step-label">Infotec ERP — доступно всем пользователям компании</p>
-                  <p class="ai-flow-step-meta">ERP · Shared workspace</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Right: premium benefit cards -->
-            <div class="ai-vip-side">
-              <a href="#showcase" class="ai-vip-card group">
-                <p class="ai-vip-card-title">
-                  Превращайте планы в действия
-                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                </p>
-                <p class="ai-vip-card-desc">ИИ-агенты Infotec объединяют нужные данные и знания, чтобы всё необходимое для решения было под рукой — где бы вы ни работали.</p>
-                <div class="ai-vip-card-foot">
-                  <span><span class="dot" aria-hidden="true"></span>Agents online</span>
-                  <span class="text-[#E2E8F0]">·</span>
-                  <span>Context ready</span>
-                </div>
-              </a>
-
-              <a href="#showcase" class="ai-vip-card group">
-                <p class="ai-vip-card-title">
-                  Работа выполняется агентами Infotec AI
-                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                </p>
-                <p class="ai-vip-card-desc">Соберите всё в одном рабочем пространстве, где агенты и рабочие процессы помогают выполнять задачи быстрее и точнее.</p>
-                <div class="ai-vip-card-foot">
-                  <span><span class="dot" aria-hidden="true"></span>Workflow sync</span>
-                  <span class="text-[#E2E8F0]">·</span>
-                  <span>Zero re-entry</span>
-                </div>
-              </a>
-
-              <div class="mt-1 sm:mt-2 rounded-2xl border border-[#0A6ED1]/12 bg-gradient-to-br from-[#0A6ED1]/[0.04] via-white/40 to-[#8B5CF6]/[0.05] p-4 sm:p-5 backdrop-blur-sm">
-                <p class="font-mono text-[9px] font-semibold tracking-[0.12em] uppercase text-[#8B5CF6] mb-2">Why it feels premium</p>
-                <ul class="space-y-2" role="list">
-                  <li class="flex items-start gap-2.5 text-[13px] text-[#122136] leading-snug">
-                    <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[#0A6ED1] to-[#8B5CF6] shrink-0" aria-hidden="true"></span>
-                    Оригинал счёта и ERP-запись связаны автоматически
-                  </li>
-                  <li class="flex items-start gap-2.5 text-[13px] text-[#122136] leading-snug">
-                    <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[#0A6ED1] to-[#8B5CF6] shrink-0" aria-hidden="true"></span>
-                    Команда работает с готовыми данными, а не с файлами
-                  </li>
-                  <li class="flex items-start gap-2.5 text-[13px] text-[#122136] leading-snug">
-                    <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[#0A6ED1] to-[#8B5CF6] shrink-0" aria-hidden="true"></span>
-                    Тот же AI-слой усиливает продажи, закупки и финансы
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INDUSTRY SOLUTIONS — photo cards (restored) -->
-    <section id="industry" class="section-blueprint border-t border-[#0A6ED1]/10 relative overflow-hidden" aria-labelledby="industry-heading">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="glow-orb w-[380px] h-[380px] bg-[#8B5CF6]/[0.05] -top-20 right-0"></div>
-        <div class="glow-orb w-[320px] h-[320px] bg-[#0A6ED1]/[0.04] bottom-10 -left-16"></div>
-      </div>
-
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-
-        <header class="max-w-3xl mb-10 sm:mb-12">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#0A6ED1] mb-2.5">Готовые отраслевые решения</p>
-          <h2 id="industry-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#122136] tracking-tight leading-tight mb-3.5">
-            Настроено под вашу отрасль с первого дня
-          </h2>
-          <p class="desc-text text-base sm:text-lg text-[#6A7B95] max-w-2xl">
-            Не универсальная система — конфигурация под регламенты и процессы конкретной индустрии.
-          </p>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-
-          <!-- Card 1: Производство и машиностроение -->
-          <article class="group flex flex-col">
-            <div class="relative rounded-2xl overflow-hidden min-h-[180px] mb-4 bg-cover bg-center shadow-sm ring-1 ring-[#E2E8F0]/80" style="background-image:url('https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&amp;fit=crop&amp;w=800&amp;q=60');">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#122136]/90 via-[#122136]/40 to-transparent p-4 flex flex-col justify-end">
-                <p class="text-[10px] font-bold tracking-widest uppercase text-[#A78BFA] mb-1">ПРОИЗВОДСТВО</p>
-                <h3 class="text-base font-bold text-white leading-snug">Производство и машиностроение</h3>
-              </div>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3">
-              Планирование, себестоимость и контроль цеха в одной системе.
-            </p>
-            <div class="flex gap-2 flex-wrap mb-4">
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">OEE: +12%</span>
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">WIP: -18%</span>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3 flex-1">
-              ИИ-агенты сами планируют загрузку цеха и следят за себестоимостью — рутинные сверки не отвлекают от производства.
-            </p>
-            <a href="#solutions" class="inline-flex items-center gap-1 text-xs font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors mt-auto">
-              Подробнее ›
-            </a>
-          </article>
-
-          <!-- Card 2: Торговля и ритейл -->
-          <article class="group flex flex-col">
-            <div class="relative rounded-2xl overflow-hidden min-h-[180px] mb-4 bg-cover bg-center shadow-sm ring-1 ring-[#E2E8F0]/80" style="background-image:url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&amp;fit=crop&amp;w=800&amp;q=60');">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#122136]/90 via-[#122136]/40 to-transparent p-4 flex flex-col justify-end">
-                <p class="text-[10px] font-bold tracking-widest uppercase text-[#A78BFA] mb-1">ТОРГОВЛЯ</p>
-                <h3 class="text-base font-bold text-white leading-snug">Торговля и ритейл</h3>
-              </div>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3">
-              Управление запасами, ценами и оборачиваемостью SKU.
-            </p>
-            <div class="flex gap-2 flex-wrap mb-4">
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">Fill rate: 94%</span>
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">Stockout: -18%</span>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3 flex-1">
-              Возьмите под контроль закупки и цены с помощью автономных агентов, которые следят за оборачиваемостью и дефицитом.
-            </p>
-            <a href="#solutions" class="inline-flex items-center gap-1 text-xs font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors mt-auto">
-              Подробнее ›
-            </a>
-          </article>
-
-          <!-- Card 3: Логистика и цепочки поставок -->
-          <article class="group flex flex-col">
-            <div class="relative rounded-2xl overflow-hidden min-h-[180px] mb-4 bg-cover bg-center shadow-sm ring-1 ring-[#E2E8F0]/80" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&amp;fit=crop&amp;w=800&amp;q=60');">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#122136]/90 via-[#122136]/40 to-transparent p-4 flex flex-col justify-end">
-                <p class="text-[10px] font-bold tracking-widest uppercase text-[#A78BFA] mb-1">ЛОГИСТИКА</p>
-                <h3 class="text-base font-bold text-white leading-snug">Логистика и цепочки поставок</h3>
-              </div>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3">
-              Контроль закупок, договоров и стоимости доставки.
-            </p>
-            <div class="flex gap-2 flex-wrap mb-4">
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">On-time: 94%</span>
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">Vendors: 14</span>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3 flex-1">
-              Автономные агенты оптимизируют маршруты и сроки поставок, снижая риск просрочки ещё до отгрузки.
-            </p>
-            <a href="#solutions" class="inline-flex items-center gap-1 text-xs font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors mt-auto">
-              Подробнее ›
-            </a>
-          </article>
-
-          <!-- Card 4: Строительство и услуги -->
-          <article class="group flex flex-col">
-            <div class="relative rounded-2xl overflow-hidden min-h-[180px] mb-4 bg-cover bg-center shadow-sm ring-1 ring-[#E2E8F0]/80" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&amp;fit=crop&amp;w=800&amp;q=60');">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#122136]/90 via-[#122136]/40 to-transparent p-4 flex flex-col justify-end">
-                <p class="text-[10px] font-bold tracking-widest uppercase text-[#A78BFA] mb-1">СТРОИТЕЛЬСТВО</p>
-                <h3 class="text-base font-bold text-white leading-snug">Строительство и услуги</h3>
-              </div>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3">
-              Проектный учёт, бригады и биллинг в реальном времени.
-            </p>
-            <div class="flex gap-2 flex-wrap mb-4">
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">Crew sync: Live</span>
-              <span class="text-[11px] font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#122136] rounded-full px-2.5 py-1">Billing: Pending: 3</span>
-            </div>
-            <p class="text-xs text-[#6A7B95] leading-relaxed mb-3 flex-1">
-              Создайте будущее рабочих процессов — автономные агенты синхронизируют бригады и ускоряют биллинг по проектам.
-            </p>
-            <a href="#solutions" class="inline-flex items-center gap-1 text-xs font-semibold text-[#0A6ED1] hover:text-[#085bb0] transition-colors mt-auto">
-              Подробнее ›
-            </a>
-          </article>
-
-        </div>
-
-        <!-- CTA -->
-        <div class="mt-12 sm:mt-16 rounded-2xl bg-[#F0F7FF] border border-[#0A6ED1]/15 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm">
-          <div>
-            <h4 class="text-base sm:text-lg font-bold text-[#122136] mb-1">Не нашли свою отрасль?</h4>
-            <p class="text-xs sm:text-sm text-[#6A7B95]">Большинство конфигураций адаптируются под ваш процесс за 1–2 недели.</p>
-          </div>
-          <form onsubmit="event.preventDefault();" class="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto" aria-label="Запрос по отрасли">
-            <input type="email" placeholder="your@company.ee" required class="px-4 py-2.5 rounded-xl border border-[#E2E8F0] bg-white text-xs text-[#122136] outline-none focus:border-[#0A6ED1] min-w-[200px]" />
-            <button type="submit" class="px-5 py-2.5 rounded-full bg-[#0A6ED1] hover:bg-[#085bb0] text-white text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap">
-              Спросить →
-            </button>
-          </form>
-        </div>
-
-      </div>
-    </section>
 
     <!-- ═══════════════════════════════════════════
          ERP MODULE SHOWCASE — 3-column asymmetric
@@ -2369,7 +1577,7 @@
           </p>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
           <!-- LEFT — Module Navigator (~25–30%) -->
           <nav class="lg:col-span-3 order-1" aria-label="Навигатор модулей ERP" id="module-navigator">
@@ -2410,47 +1618,43 @@
                   <span class="module-chevron" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
                 </button>
               </li>
-              <li class="module-extra-item hidden">
+              <li>
                 <button type="button" role="option" aria-selected="false" data-module="assets" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl cursor-pointer">
                   <span class="module-label text-sm pr-2 text-left text-[#6A7B95]">Учет основных средств</span>
                   <span class="module-chevron" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
                 </button>
               </li>
-              <li class="module-extra-item hidden">
+              <li>
                 <button type="button" role="option" aria-selected="false" data-module="custom" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl cursor-pointer">
                   <span class="module-label text-sm pr-2 text-left text-[#6A7B95]">Специальные разработки</span>
                   <span class="module-chevron" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
                 </button>
               </li>
-              <li class="module-extra-item hidden">
+              <li>
                 <button type="button" role="option" aria-selected="false" data-module="pos" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl cursor-pointer">
                   <span class="module-label text-sm pr-2 text-left text-[#6A7B95]">Торговый зал магазина</span>
                   <span class="module-chevron" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
                 </button>
               </li>
-              <li class="module-extra-item hidden">
+              <li>
                 <button type="button" role="option" aria-selected="false" data-module="housing" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl cursor-pointer">
                   <span class="module-label text-sm pr-2 text-left text-[#6A7B95]">Квартирные товарищества</span>
                   <span class="module-chevron" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
                 </button>
               </li>
-              <li class="module-extra-item hidden">
+              <li>
                 <button type="button" role="option" aria-selected="false" data-module="horeca" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl cursor-pointer">
                   <span class="module-label text-sm pr-2 text-left text-[#6A7B95]">Калькуляция для кафе и ресторанов</span>
                   <span class="module-chevron" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
                 </button>
               </li>
-              <li class="module-extra-item hidden">
+              <li>
                 <button type="button" role="option" aria-selected="false" data-module="hotel" class="module-card group w-full flex items-center justify-between p-3.5 rounded-xl cursor-pointer">
                   <span class="module-label text-sm pr-2 text-left text-[#6A7B95]">Организация работы отеля</span>
                   <span class="module-chevron" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
                 </button>
               </li>
             </ul>
-            <button type="button" id="toggle-modules-btn" class="w-full mt-3 py-2.5 px-4 rounded-xl border border-[#0A6ED1]/20 bg-white/70 hover:bg-white text-[#0A6ED1] text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow hover:border-[#0A6ED1]/40 cursor-pointer">
-              <span id="toggle-modules-text">Показать больше</span>
-              <svg id="toggle-modules-icon" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-            </button>
           </nav>
 
           <!-- CENTER — Specification Core -->
@@ -2491,40 +1695,47 @@
           </div>
 
           <!-- RIGHT — Software Viewport Terminal -->
-          <div class="lg:col-span-5 order-3 flex flex-col h-full" id="module-blueprint-wrap">
-            <div class="module-blueprint-frame module-fade rounded-2xl p-5 relative overflow-hidden flex flex-col justify-between h-full min-h-[520px] lg:min-h-[580px]" id="module-blueprint" aria-label="Интерфейс модуля">
-              <!-- Mockup image: scaled to fit platform fully (contain) -->
-              <div class="module-blueprint-bg" aria-hidden="true">
-                <img
-                  src="img/main-hero-1.jpg"
-                  alt=""
-                  width="1200"
-                  height="1500"
-                  decoding="async"
-                  loading="lazy"
-                />
-              </div>
-              <div class="pointer-events-none absolute inset-0 z-[1] bg-white/25" aria-hidden="true"></div>
-              <div class="pointer-events-none absolute -top-12 -right-10 w-40 h-40 rounded-full bg-[#0A6ED1]/[0.06] blur-3xl z-[1]" aria-hidden="true"></div>
-              <div class="pointer-events-none absolute -bottom-14 -left-10 w-36 h-36 rounded-full bg-[#8B5CF6]/[0.06] blur-3xl z-[1]" aria-hidden="true"></div>
+          <div class="lg:col-span-5 order-3" id="module-blueprint-wrap">
+            <div class="module-blueprint-frame module-fade rounded-2xl p-5 relative overflow-hidden" id="module-blueprint" aria-label="Интерфейс модуля">
+              <div class="pointer-events-none absolute -top-12 -right-10 w-40 h-40 rounded-full bg-[#0A6ED1]/[0.06] blur-3xl" aria-hidden="true"></div>
+              <div class="pointer-events-none absolute -bottom-14 -left-10 w-36 h-36 rounded-full bg-[#8B5CF6]/[0.06] blur-3xl" aria-hidden="true"></div>
 
-              <!-- Top pinned group (Window Title + Table) -->
-              <div class="relative z-10 flex flex-col gap-3">
-                <div class="flex items-center justify-between mb-1">
-                  <div class="flex items-center gap-2.5">
-                    <div class="flex gap-1.5" aria-hidden="true">
-                      <span class="w-2 h-2 rounded-full bg-red-400/80 shadow-[0_0_4px_rgba(248,113,113,0.4)]"></span>
-                      <span class="w-2 h-2 rounded-full bg-amber-400/80 shadow-[0_0_4px_rgba(251,191,36,0.35)]"></span>
-                      <span class="w-2 h-2 rounded-full bg-emerald-400/80 shadow-[0_0_4px_rgba(52,211,153,0.35)]"></span>
-                    </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#122136] tracking-tight" id="blueprint-window-title">Sales Orders · Live</span>
+              <div class="relative z-10 flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="flex gap-1.5" aria-hidden="true">
+                    <span class="w-2 h-2 rounded-full bg-red-400/80 shadow-[0_0_4px_rgba(248,113,113,0.4)]"></span>
+                    <span class="w-2 h-2 rounded-full bg-amber-400/80 shadow-[0_0_4px_rgba(251,191,36,0.35)]"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400/80 shadow-[0_0_4px_rgba(52,211,153,0.35)]"></span>
                   </div>
-                  <span class="text-[10px] font-medium quantum-badge px-2 py-0.5 rounded-md flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse"></span>Live
-                  </span>
+                  <span class="text-xs sm:text-sm font-semibold text-[#122136] tracking-tight" id="blueprint-window-title">Sales Orders · Live</span>
+                </div>
+                <span class="text-[10px] font-medium quantum-badge px-2 py-0.5 rounded-md flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse"></span>Live
+                </span>
+              </div>
+
+              <div id="blueprint-body" class="relative z-10">
+                <div class="rounded-xl border border-white/70 bg-white/40 backdrop-blur-md p-3.5 mb-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.85)]">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-semibold uppercase tracking-wider text-[#6A7B95]" id="blueprint-metric-label">Выручка · 7 дней</span>
+                    <span class="text-[10px] font-bold text-[#0A6ED1]" id="blueprint-metric-value">€ 284K</span>
+                  </div>
+                  <div class="relative h-16" role="img" aria-label="График модуля">
+                    <svg class="w-full h-full" viewBox="0 0 280 64" preserveAspectRatio="none" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="modChartFill" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#0A6ED1" stop-opacity="0.2"/>
+                          <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path id="blueprint-chart-fill" d="M0 56 L40 48 L80 42 L120 28 L160 32 L200 16 L240 20 L280 8 L280 64 L0 64 Z" fill="url(#modChartFill)"/>
+                      <path id="blueprint-chart-line" d="M0 56 L40 48 L80 42 L120 28 L160 32 L200 16 L240 20 L280 8" fill="none" stroke="#0A6ED1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle id="blueprint-chart-dot" cx="280" cy="8" r="3" fill="#8B5CF6" style="filter:drop-shadow(0 0 4px #8B5CF6)"/>
+                    </svg>
+                  </div>
                 </div>
 
-                <div class="rounded-xl border border-white/70 bg-white/35 backdrop-blur-md overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]">
+                <div class="rounded-xl border border-white/70 bg-white/35 backdrop-blur-md overflow-hidden mb-3 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]">
                   <table class="w-full text-left" aria-label="Данные модуля" id="blueprint-table">
                     <thead>
                       <tr class="text-[10px] uppercase tracking-wider text-[#6A7B95] bg-white/40">
@@ -2564,12 +1775,7 @@
                     </tbody>
                   </table>
                 </div>
-              </div>
 
-              <!-- Large Empty Middle Space for Background Image -->
-
-              <!-- Bottom pinned group (AI Performance Assessment) -->
-              <div class="relative z-10 mt-auto pt-10 sm:pt-16">
                 <div class="module-ai-float rounded-xl p-3.5">
                   <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
@@ -2602,7 +1808,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -2610,7 +1815,7 @@
       </div>
     </section>
 
-    <!-- INDUSTRY SOLUTIONS — Cyber-Quantum Bento Grid (last content block) -->
+    <!-- INDUSTRY SOLUTIONS — Cyber-Quantum Bento Grid -->
     <section id="solutions" class="section-blueprint border-t border-[#0A6ED1]/10 relative overflow-hidden" aria-labelledby="solutions-heading">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
         <div class="glow-orb w-[380px] h-[380px] bg-[#8B5CF6]/[0.05] -top-20 right-0"></div>
@@ -2624,7 +1829,7 @@
             <span class="ai-pulse-dot" aria-hidden="true"></span>
             <span class="font-mono text-[10px] sm:text-[11px] font-medium tracking-[0.14em] text-[#8B5CF6] uppercase">[ ECOSYSTEM.SOLUTIONS // VERTICAL_MARKETS ]</span>
           </div>
-          <h2 id="solutions-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#122136] tracking-tighter leading-[1.15] mb-4">
+          <h2 id="solutions-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-[1.15] mb-4">
             Готовые решения для цифровизации<br class="hidden sm:block">
             <span class="text-gradient">ключевых отраслей</span>
           </h2>
@@ -2646,7 +1851,7 @@
                 <div class="flex items-center justify-between mb-3">
                   <div class="flex items-center gap-2">
                     <span class="w-7 h-7 rounded-lg bg-gradient-to-br from-[#8B5CF6]/15 to-[#0A6ED1]/10 border border-[#8B5CF6]/20 flex items-center justify-center">
-                      <svg class="w-3.5 h-3.5 text-[#8B5CF6]" style="filter:drop-shadow(0 0 3px #8B5CF6)" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l3-4 3 3 5-7"/></svg>
+                      <svg class="w-3.5 h-3.5 text-[#8B5CF6]" style="filter:drop-shadow(0 0 3px #8B5CF6)" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l3-4 3 3 5-7"/></svg>
                     </span>
                     <div>
                       <p class="text-[10px] font-semibold text-[#122136] leading-tight">Production Impact</p>
@@ -2677,10 +1882,10 @@
                 <p class="font-mono text-[9px] tracking-[0.12em] uppercase text-[#8B5CF6] mb-2">VERTICAL · MFG</p>
                 <h3 class="text-xl font-bold text-[#122136] mb-2 tracking-tight leading-snug">Производство &amp; машиностроение</h3>
                 <p class="text-[#6A7B95] text-xs sm:text-sm leading-relaxed mb-4">
-                  Планирование, производство, логистика и запасы в одной конфигурации — цех видит себестоимость и загрузку в реальном времени.
+                  Hoidke tarneahel sujuvalt toimimas autonoomsete agentide abil, mis optimeerivad pidevalt planeerimist, tootmist, logistikat ja varude haldust.
                 </p>
-                <a href="#modules" class="bento-link">
-                  Подробнее
+                <a href="inner-page-metalworking-cyber-quantum.html" class="bento-link">
+                  Lisateave
                   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
                 </a>
               </div>
@@ -2698,7 +1903,7 @@
                 <div class="flex items-center justify-between mb-3">
                   <div class="flex items-center gap-2">
                     <span class="w-7 h-7 rounded-lg bg-[#0A6ED1]/10 border border-[#0A6ED1]/20 flex items-center justify-center">
-                      <svg class="w-3.5 h-3.5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h10M4 18h14"/></svg>
+                      <svg class="w-3.5 h-3.5 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h10M4 18h14"/></svg>
                     </span>
                     <div>
                       <p class="text-[10px] font-semibold text-[#122136] leading-tight">Campaign Ideas</p>
@@ -2741,10 +1946,10 @@
                 <p class="font-mono text-[9px] tracking-[0.12em] uppercase text-[#8B5CF6] mb-2">VERTICAL · RETAIL</p>
                 <h3 class="text-xl font-bold text-[#122136] mb-2 tracking-tight leading-snug">Торговля &amp; ритейл</h3>
                 <p class="text-[#6A7B95] text-xs sm:text-sm leading-relaxed mb-4">
-                  Запасы, цены и оборачиваемость SKU под контролем — от витрины до закрытия финансового периода.
+                  Pange finantsid enda kasuks tööle — autonoomsed agendid juhivad ja täiustavad pidevalt planeerimist, sulgemisprotsesse ja rahandust.
                 </p>
-                <a href="#modules" class="bento-link">
-                  Подробнее
+                <a href="solutions.html" class="bento-link">
+                  Lisateave
                   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
                 </a>
               </div>
@@ -2762,7 +1967,7 @@
                 <div class="flex items-start justify-between gap-3 mb-3">
                   <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-[#122136] flex items-center justify-center shadow-md">
-                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                     </span>
                     <div>
                       <p class="text-[10px] font-semibold text-[#122136] leading-tight">Phone Sourcing Event</p>
@@ -2795,10 +2000,10 @@
                 <p class="font-mono text-[9px] tracking-[0.12em] uppercase text-[#8B5CF6] mb-2">VERTICAL · LOGISTICS</p>
                 <h3 class="text-xl font-bold text-[#122136] mb-2 tracking-tight leading-snug">Логистика &amp; цепочки поставок</h3>
                 <p class="text-[#6A7B95] text-xs sm:text-sm leading-relaxed mb-4">
-                  Закупки, договоры и стоимость доставки под контролем — меньше ручной рутины, быстрее решения по поставщикам.
+                  Võtke kulud kontrolli alla autonoomsete agentide abil, mis täiustavad pidevalt hankeprotsesse, ostujuhtimist ja lepinguhaldust.
                 </p>
-                <a href="#modules" class="bento-link">
-                  Подробнее
+                <a href="solutions.html" class="bento-link">
+                  Lisateave
                   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
                 </a>
               </div>
@@ -2816,7 +2021,7 @@
               <div class="flex flex-col gap-3 w-full sm:w-[48%] shrink-0">
                 <div class="bento-float p-3.5 flex items-center gap-3">
                   <span class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                   </span>
                   <div class="min-w-0 flex-1">
                     <p class="text-[10px] font-semibold text-[#122136] truncate">Shipment scheduled</p>
@@ -2826,7 +2031,7 @@
                 </div>
                 <div class="bento-float p-3.5 flex items-center gap-3">
                   <span class="w-9 h-9 rounded-xl bg-[#0A6ED1]/8 border border-[#0A6ED1]/15 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                   </span>
                   <div class="min-w-0 flex-1">
                     <p class="text-[10px] font-semibold text-[#122136] truncate">Release project billing request</p>
@@ -2848,10 +2053,10 @@
                 <p class="font-mono text-[9px] tracking-[0.12em] uppercase text-[#8B5CF6] mb-2">VERTICAL · BUILD · SERVICES</p>
                 <h3 class="text-xl font-bold text-[#122136] mb-2 tracking-tight leading-snug">Строительство &amp; сфера услуг</h3>
                 <p class="text-[#6A7B95] text-xs sm:text-sm leading-relaxed mb-4">
-                  Проекты, бригады и биллинг в одном контуре — синхронизация работ и прозрачная себестоимость по объектам.
+                  Looge tulevikuks valmis töötajaskond autonoomsete agentide abil, mis täiustavad pidevalt värbamist, oskuste arendamist ja planeerimist.
                 </p>
-                <a href="#modules" class="bento-link">
-                  Подробнее
+                <a href="solutions.html" class="bento-link">
+                  Lisateave
                   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
                 </a>
               </div>
@@ -2859,32 +2064,159 @@
           </article>
         </div>
 
-        <!-- Extended verticals + CTA -->
+        <!-- Extended vertical markets from ecosystem map -->
         <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-2.5">
           <span class="font-mono text-[9px] tracking-[0.14em] uppercase text-[#6A7B95]/80 mr-1">More verticals</span>
-          <a href="#solutions" class="bento-chip">Недоходный сектор</a>
-          <a href="#solutions" class="bento-chip">Квартирные товарищества</a>
-          <a href="#solutions" class="bento-chip">Общественное питание</a>
-          <a href="#solutions" class="bento-chip">Отели</a>
-          <a href="#solutions" class="bento-chip text-[#0A6ED1] border-[#0A6ED1]/25">Все 9 направлений →</a>
+          <a href="solutions.html" class="bento-chip">Недоходный сектор</a>
+          <a href="solutions.html" class="bento-chip">Квартирные товарищества</a>
+          <a href="solutions.html" class="bento-chip">Общественное питание</a>
+          <a href="solutions.html" class="bento-chip">Отели</a>
+          <a href="solutions.html" class="bento-chip text-[#0A6ED1] border-[#0A6ED1]/25">Все 9 направлений →</a>
         </div>
-
-        <div class="mt-10 sm:mt-12 rounded-2xl border border-[#0A6ED1]/12 bg-gradient-to-br from-[#0A6ED1]/[0.04] via-white/60 to-[#8B5CF6]/[0.05] p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-[0_12px_40px_rgba(10,110,209,0.05)] backdrop-blur-sm">
-          <div class="min-w-0">
-            <h4 class="text-base sm:text-lg font-bold text-[#122136] mb-1 tracking-tight">Не нашли свою отрасль?</h4>
-            <p class="text-xs sm:text-sm text-[#6A7B95] leading-relaxed">Большинство конфигураций адаптируются под ваш процесс за 1–2 недели.</p>
-          </div>
-          <form onsubmit="event.preventDefault();" class="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto shrink-0" aria-label="Запрос по отрасли">
-            <input type="email" placeholder="your@company.ee" required class="px-4 py-2.5 rounded-xl border border-[#E2E8F0] bg-white text-xs text-[#122136] outline-none focus:border-[#0A6ED1] min-w-[200px]" />
-            <button type="submit" class="px-5 py-2.5 rounded-full bg-[#0A6ED1] hover:bg-[#085bb0] text-white text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap shadow-[0_8px_20px_rgba(10,110,209,0.25)]">
-              Спросить →
-            </button>
-          </form>
-        </div>
-
       </div>
     </section>
 
+    <!-- AI AGENTS CORE -->
+    <section id="showcase" class="section-blueprint border-t border-[#0A6ED1]/10" aria-labelledby="ai-agents-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+
+        <!-- Component Header -->
+        <header class="mb-10 sm:mb-12 max-w-3xl">
+          <div class="inline-flex items-center gap-2.5 mb-4">
+            <span class="ai-pulse-dot" aria-hidden="true"></span>
+            <span class="font-mono text-[10px] sm:text-[11px] font-medium tracking-[0.14em] text-[#8B5CF6] uppercase">[ SYSTEM.ENGINE // AI_AGENTS_CORE ]</span>
+          </div>
+          <h2 id="ai-agents-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#122136] tracking-tighter leading-[1.15] mb-4">
+            Искусственный интеллект<br class="hidden sm:block">
+            <span class="text-gradient">мощное дополнение</span> к вашим бизнес-процессам
+          </h2>
+          <p class="desc-text text-sm sm:text-base max-w-2xl">
+            Автономные ИИ-агенты Infotec непрерывно анализируют данные, прогнозируют риски и выполняют рутинные операции вместо человека.
+          </p>
+        </header>
+
+        <!-- Three AI Agent Control Decks -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-6 sm:mb-8" role="tablist" aria-label="ИИ-агенты Infotec">
+
+          <button type="button" role="tab" id="agent-finance" aria-selected="true" aria-controls="ai-agent-workspace" data-agent="finance"
+            class="ai-agent-card group/card relative overflow-hidden text-left p-5 rounded-2xl border border-white/60 bg-white/30 backdrop-blur-md shadow-[0_4px_20px_rgba(10,110,209,0.02)] cursor-pointer">
+            <span class="ai-streak" aria-hidden="true"></span>
+            <span class="ai-quantum-node absolute top-3.5 right-3.5 w-3 h-3" aria-hidden="true">
+              <svg viewBox="0 0 12 12" class="w-full h-full" fill="none">
+                <circle cx="6" cy="6" r="3.5" fill="#8B5CF6" fill-opacity="0.25" stroke="#8B5CF6" stroke-width="1"/>
+                <circle cx="6" cy="6" r="1.6" fill="#8B5CF6"/>
+              </svg>
+            </span>
+            <div class="relative z-10 pr-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-white/80 border border-[#8B5CF6]/25 shadow-sm flex items-center justify-center">
+                  <svg class="w-4 h-4 text-[#8B5CF6]" style="filter:drop-shadow(0 0 3px #8B5CF6)" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 16l4-5 3 3 5-7"/></svg>
+                </span>
+                <span class="ai-agent-status font-mono text-[9px] tracking-wider uppercase text-[#6A7B95]">AGENT · ONLINE</span>
+              </div>
+              <h3 class="text-sm sm:text-base font-bold text-[#122136] tracking-tight leading-snug mb-1.5">Финансовый аналитик</h3>
+              <p class="text-[11px] sm:text-xs text-[#6A7B95] leading-relaxed">AI P&amp;L Assistant</p>
+              <p class="mt-3 text-[11px] text-[#6A7B95]/90 leading-relaxed">Прогноз ликвидности, аномалии P&amp;L, кассовые разрывы</p>
+            </div>
+          </button>
+
+          <button type="button" role="tab" id="agent-sourcing" aria-selected="false" aria-controls="ai-agent-workspace" data-agent="sourcing"
+            class="ai-agent-card group/card relative overflow-hidden text-left p-5 rounded-2xl border border-white/60 bg-white/30 backdrop-blur-md shadow-[0_4px_20px_rgba(10,110,209,0.02)] cursor-pointer">
+            <span class="ai-streak" aria-hidden="true"></span>
+            <span class="ai-quantum-node absolute top-3.5 right-3.5 w-3 h-3 hidden" aria-hidden="true">
+              <svg viewBox="0 0 12 12" class="w-full h-full" fill="none">
+                <circle cx="6" cy="6" r="3.5" fill="#8B5CF6" fill-opacity="0.25" stroke="#8B5CF6" stroke-width="1"/>
+                <circle cx="6" cy="6" r="1.6" fill="#8B5CF6"/>
+              </svg>
+            </span>
+            <div class="relative z-10 pr-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-white/80 border border-[#0A6ED1]/20 shadow-sm flex items-center justify-center">
+                  <svg class="w-4 h-4 text-[#0A6ED1]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                </span>
+                <span class="ai-agent-status font-mono text-[9px] tracking-wider uppercase text-[#6A7B95]">AGENT · STANDBY</span>
+              </div>
+              <h3 class="text-sm sm:text-base font-bold text-[#122136] tracking-tight leading-snug mb-1.5">Оптимизатор закупок</h3>
+              <p class="text-[11px] sm:text-xs text-[#6A7B95] leading-relaxed">AI Sourcing Agent</p>
+              <p class="mt-3 text-[11px] text-[#6A7B95]/90 leading-relaxed">Подбор поставщиков, ценовые аномалии, ROI закупок</p>
+            </div>
+          </button>
+
+          <button type="button" role="tab" id="agent-supply" aria-selected="false" aria-controls="ai-agent-workspace" data-agent="supply"
+            class="ai-agent-card group/card relative overflow-hidden text-left p-5 rounded-2xl border border-white/60 bg-white/30 backdrop-blur-md shadow-[0_4px_20px_rgba(10,110,209,0.02)] cursor-pointer">
+            <span class="ai-streak" aria-hidden="true"></span>
+            <span class="ai-quantum-node absolute top-3.5 right-3.5 w-3 h-3 hidden" aria-hidden="true">
+              <svg viewBox="0 0 12 12" class="w-full h-full" fill="none">
+                <circle cx="6" cy="6" r="3.5" fill="#8B5CF6" fill-opacity="0.25" stroke="#8B5CF6" stroke-width="1"/>
+                <circle cx="6" cy="6" r="1.6" fill="#8B5CF6"/>
+              </svg>
+            </span>
+            <div class="relative z-10 pr-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-white/80 border border-cyan-400/25 shadow-sm flex items-center justify-center">
+                  <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 17h.01M12 17h.01M16 17h.01M3 9l2-4h14l2 4M5 9v9a1 1 0 001 1h12a1 1 0 001-1V9M3 9h18"/></svg>
+                </span>
+                <span class="ai-agent-status font-mono text-[9px] tracking-wider uppercase text-[#6A7B95]">AGENT · STANDBY</span>
+              </div>
+              <h3 class="text-sm sm:text-base font-bold text-[#122136] tracking-tight leading-snug mb-1.5">Диспетчер отгрузок</h3>
+              <p class="text-[11px] sm:text-xs text-[#6A7B95] leading-relaxed">AI Supply Chain Agent</p>
+              <p class="mt-3 text-[11px] text-[#6A7B95]/90 leading-relaxed">Узкие места логистики, ETA, риск просрочки</p>
+            </div>
+          </button>
+        </div>
+
+        <!-- Live AI Terminal & Actions Workspace -->
+        <div id="ai-agent-workspace" role="tabpanel" aria-labelledby="agent-finance"
+          class="rounded-3xl border border-white/50 bg-white/40 backdrop-blur-xl shadow-[0_24px_60px_rgba(10,110,209,0.06),inset_0_1px_2px_rgba(255,255,255,0.8)] p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 relative overflow-hidden">
+
+          <div class="bg-[#8B5CF6]/6 blur-[120px] w-64 h-64 absolute -bottom-20 -left-20 pointer-events-none" aria-hidden="true"></div>
+          <div class="bg-cyan-400/5 blur-[100px] w-48 h-48 absolute -top-16 -right-10 pointer-events-none" aria-hidden="true"></div>
+
+          <!-- LEFT: Live AI Terminal -->
+          <div class="lg:col-span-5 relative z-10">
+            <div class="bg-[#122136]/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/10 font-mono text-xs text-slate-300 relative overflow-hidden min-h-[300px] sm:min-h-[340px]">
+              <div class="ai-scanline" aria-hidden="true"></div>
+
+              <!-- Title bar -->
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/10 relative z-10">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-400/90 shadow-[0_0_6px_rgba(248,113,113,0.5)]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400/90 shadow-[0_0_6px_rgba(251,191,36,0.45)]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/90 shadow-[0_0_6px_rgba(52,211,153,0.45)]"></span>
+                <span class="ml-2 text-[10px] text-slate-400 tracking-wide">infotec-ai · agent-core</span>
+                <span id="ai-terminal-agent-tag" class="ml-auto text-[9px] uppercase tracking-wider text-[#8B5CF6] bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 px-2 py-0.5 rounded-md">P&amp;L</span>
+              </div>
+
+              <!-- Prompt line -->
+              <div class="relative z-10 mb-3 text-[11px] leading-relaxed">
+                <span class="text-cyan-400">infotec-ai:~$</span>
+                <span id="ai-terminal-prompt" class="text-slate-200 ml-1.5">run system_health_check...</span><span class="ai-terminal-cursor" aria-hidden="true"></span>
+              </div>
+
+              <!-- Dynamic terminal body -->
+              <div id="ai-terminal-body" class="ai-terminal-body relative z-10 space-y-3">
+                <!-- Filled by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Operational Specs -->
+          <div class="lg:col-span-7 relative z-10 flex flex-col justify-center">
+            <div id="ai-specs-content" class="ai-content-swap">
+              <p id="ai-specs-eyebrow" class="font-mono text-[10px] tracking-[0.12em] uppercase text-[#8B5CF6] mb-3">AI P&amp;L ASSISTANT · ACTIVE</p>
+              <h3 id="ai-specs-title" class="text-xl sm:text-2xl font-bold text-[#122136] tracking-tight mb-3 leading-snug">
+                Финансовый ИИ-агент: Ликвидация кассовых разрывов
+              </h3>
+              <p id="ai-specs-desc" class="desc-text text-sm sm:text-base mb-6 sm:mb-7 max-w-xl">
+                Непрерывный мониторинг денежных потоков, автоматическое выявление аномалий в P&amp;L и предиктивные сценарии ликвидности на горизонте 30 дней.
+              </p>
+              <ul id="ai-specs-features" class="space-y-3.5 sm:space-y-4" role="list">
+                <!-- Filled by JS -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- NEWS & REVIEWS -->
     <section id="news" class="section-blueprint border-t border-[#0A6ED1]/10" aria-labelledby="news-heading">
@@ -2938,59 +2270,95 @@
         </div>
       </div>
     </section>
-
-    
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer-light text-[#122136] border-t border-[#E2E8F0]" aria-label="Подвал сайта">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 pb-7">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-12">
+  <footer class="footer-light text-[#122136] border-t border-[#0A6ED1]/10" aria-label="Подвал сайта">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 mb-16 sm:mb-20 lg:mb-24">
         <div>
-          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Платформа</h3>
-          <ul class="space-y-2">
-            <li><a href="#modules" class="footer-link text-sm text-[#122136]">Управление продажами</a></li>
-            <li><a href="#modules" class="footer-link text-sm text-[#122136]">Управление закупками</a></li>
-            <li><a href="#modules" class="footer-link text-sm text-[#122136]">Управление запасами</a></li>
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Платформа</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#modules" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Управление продажами</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Управление закупками</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Управление запасами</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Управление производством</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Бухгалтерский учет</a></li>
+            <li><a href="#modules" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Расчет заработной платы</a></li>
           </ul>
         </div>
         <div>
-          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Таллинн</h3>
-          <address class="not-italic space-y-1.5 text-sm text-[#6A7B95] leading-relaxed">
-            <p class="m-0">Narva mnt 150, off. 202</p>
-            <p class="m-0">Тел: <a href="tel:+3725111876" class="footer-link hover:text-[#0A6ED1]">+372 5111876</a></p>
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Решения</h3>
+          <ul class="space-y-2.5">
+            <li><a href="#solutions" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Дистрибьюция и торговля</a></li>
+            <li><a href="inner-page-metalworking-cyber-quantum.html" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Металлообработка</a></li>
+            <li><a href="#solutions" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">HoReCa и гостиницы</a></li>
+            <li><a href="#solutions" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">ЖК и товарищества</a></li>
+          </ul>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Таллинн</h3>
+          <address class="not-italic space-y-2.5 text-sm text-[#6A7B95] leading-relaxed">
+            <p>Narva mnt 150, off. 202</p>
+            <p>Тел: <a href="tel:+3725111876" class="footer-link hover:text-[#0A6ED1] transition-colors duration-200">+372 5111876</a></p>
+            <p>Тел: <a href="tel:+372525163595" class="footer-link hover:text-[#0A6ED1] transition-colors duration-200">+372 525163595</a></p>
           </address>
         </div>
-        <div>
-          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Нарва</h3>
-          <address class="not-italic space-y-1.5 text-sm text-[#6A7B95] leading-relaxed">
-            <p class="m-0">Pähklimäe tn 7-62, 13619</p>
-            <p class="m-0"><a href="mailto:support@infotec.ee" class="footer-link hover:text-[#0A6ED1]">support@infotec.ee</a></p>
+        <div class="col-span-2 sm:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Нарва</h3>
+          <address class="not-italic space-y-2.5 text-sm text-[#6A7B95] leading-relaxed">
+            <p>Pähklimäe tn 7-62, 13619</p>
+            <p>Ида-Вирумаа, Эстония</p>
+            <p><a href="mailto:support@infotec.ee" class="footer-link hover:text-[#0A6ED1] transition-colors duration-200">support@infotec.ee</a></p>
           </address>
         </div>
-        <div>
-          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Получить спецификацию</h3>
-          <form class="flex flex-col gap-2" action="#" method="post" novalidate aria-label="Получить спецификацию">
-            <input type="email" name="email" placeholder="your@company.ee" class="footer-contact-input" required>
-            <button type="submit" class="btn-cushion btn-cushion--block btn-cushion--submit group w-full transition-all duration-300">
-              <span class="btn-cushion-inner text-white text-sm font-semibold">
-                Прислать спецификацию
-                <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4"/>
-                </svg>
-              </span>
+        <div class="col-span-2 sm:col-span-3 lg:col-span-1">
+          <h3 class="ui-text text-xs text-[#6A7B95] uppercase tracking-wider mb-4">Компания</h3>
+          <ul class="space-y-2.5 mb-5">
+            <li><a href="#" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">О нас</a></li>
+            <li><a href="#news" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Новости</a></li>
+            <li><a href="#" class="footer-link text-sm text-[#122136] hover:text-[#0A6ED1] transition-colors duration-200">Партнеры</a></li>
+          </ul>
+          <div class="flex flex-col gap-2.5 w-full sm:w-auto lg:max-w-[240px] mb-5">
+            <a href="#" class="footer-cta-cushion inline-flex w-full transition-all duration-200">
+              <span class="footer-cta-primary inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-gradient-to-b from-[#1e88e5] to-[#0A6ED1] text-white text-sm font-semibold">Демо-доступ</span>
+            </a>
+            <a href="#" class="footer-cta-secondary inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full text-[#122136] text-sm font-medium transition-all duration-200">Связаться с нами</a>
+          </div>
+          <form class="space-y-2.5" action="#" method="post" novalidate aria-label="Контактная форма">
+            <input type="text" name="name" placeholder="Ваше имя" class="footer-contact-input" required>
+            <input type="email" name="email" placeholder="Email" class="footer-contact-input" required>
+            <textarea name="message" placeholder="Сообщение" class="footer-contact-textarea" required></textarea>
+            <button type="submit" class="btn-cushion btn-cushion--submit w-full transition-all duration-300">
+              <span class="btn-cushion-inner justify-center w-full rounded-full text-sm font-semibold">Отправить</span>
             </button>
-            <label class="flex items-start gap-2 text-[11px] text-[#6A7B95] cursor-pointer mt-0.5">
-              <input type="checkbox" name="subscribe" checked class="mt-0.5 w-3.5 h-3.5 accent-[#0A6ED1] shrink-0">
-              <span>Получать отраслевые кейсы и обновления по email</span>
-            </label>
-            <p class="text-[11px] text-[#94A3B8] m-0">Включено по умолчанию — отписаться можно в любом письме.</p>
           </form>
         </div>
       </div>
-      <div class="border-t border-[#E2E8F0] pt-5 flex flex-wrap items-center justify-between gap-3">
-        <span class="text-xl font-extrabold tracking-tight text-[#122136]">Infotec</span>
-        <span class="text-xs text-[#94A3B8]">© Infotec 2026</span>
+
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-16">
+        <div class="flex items-end gap-3 sm:gap-4 select-none" aria-label="Infotec">
+          <div class="shrink-0 mb-2 sm:mb-4 hidden sm:flex flex-col gap-1" aria-hidden="true">
+            <span class="w-8 h-2.5 bg-[#0A6ED1] rounded-sm"></span>
+            <span class="w-8 h-2.5 bg-[#0A6ED1]/60 rounded-sm"></span>
+            <span class="w-5 h-2.5 bg-[#8B5CF6]/50 rounded-sm"></span>
+          </div>
+          <span class="footer-wordmark font-bold tracking-tight">Infotec</span>
+        </div>
+        <div class="flex flex-col items-start lg:items-end gap-6 lg:gap-7 lg:pb-2 shrink-0">
+          <div class="flex items-center gap-5">
+            <a href="#" class="text-[#6A7B95] hover:text-[#0A6ED1] transition-colors duration-200" aria-label="LinkedIn"><svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.126 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="#" class="text-[#6A7B95] hover:text-[#0A6ED1] transition-colors duration-200" aria-label="X"><svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" class="text-[#6A7B95] hover:text-[#0A6ED1] transition-colors duration-200" aria-label="GitHub"><svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+          </div>
+          <nav aria-label="Legal information">
+            <ul class="flex flex-col lg:items-end gap-1.5">
+              <li><a href="#" class="footer-link text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider hover:text-[#0A6ED1] transition-colors duration-200">Privacy Policy</a></li>
+              <li><a href="#" class="footer-link text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider hover:text-[#0A6ED1] transition-colors duration-200">Terms of Use</a></li>
+              <li><p class="text-[10px] sm:text-[11px] font-medium text-[#6A7B95] uppercase tracking-wider pt-1">INFOTEC 2026</p></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </footer>
@@ -3074,46 +2442,6 @@
       }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
       ribbonObserver.observe(trustRibbon);
     }
-
-    /* ── Case Studies tabs ── */
-    (function initCaseStudies() {
-      const CASE_LABELS = {
-        textile: 'SKS Estonia Textile',
-        logistics: 'Riga Logistics SIA',
-        trade: 'Baltic Trade OÜ',
-        metall: 'EstMetall Grupp'
-      };
-      /* Temporary: same preview image for every tab */
-      const CASE_IMAGE = 'img/main-title-1.png';
-      const items = document.querySelectorAll('.case-item');
-      const labelEl = document.getElementById('case-preview-label');
-      const badgeEl = document.getElementById('case-preview-badge');
-      const imgEl = document.getElementById('case-preview-img');
-      const panel = document.getElementById('case-panel');
-      if (!items.length) return;
-
-      items.forEach((item) => {
-        const btn = item.querySelector('.case-item-btn');
-        if (!btn) return;
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.case;
-          items.forEach((el) => {
-            const active = el.dataset.case === id;
-            el.classList.toggle('is-active', active);
-            const b = el.querySelector('.case-item-btn');
-            if (b) b.setAttribute('aria-selected', active ? 'true' : 'false');
-          });
-          const name = CASE_LABELS[id] || id;
-          if (labelEl) labelEl.textContent = name;
-          if (badgeEl) badgeEl.textContent = name;
-          if (imgEl) {
-            if (imgEl.getAttribute('src') !== CASE_IMAGE) imgEl.src = CASE_IMAGE;
-            imgEl.alt = name;
-          }
-          if (panel) panel.setAttribute('aria-labelledby', 'case-tab-' + id);
-        });
-      });
-    })();
 
     /* ── ERP Module Showcase (3-column) ── */
     const MODULE_CATALOG = {
@@ -3592,22 +2920,248 @@
         });
       });
 
-      const toggleBtn = document.getElementById('toggle-modules-btn');
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-          const extraItems = document.querySelectorAll('.module-extra-item');
-          const textEl = document.getElementById('toggle-modules-text');
-          const iconEl = document.getElementById('toggle-modules-icon');
-          const isHidden = extraItems[0]?.classList.contains('hidden');
-          extraItems.forEach(el => el.classList.toggle('hidden'));
-          if (textEl) textEl.textContent = isHidden ? 'Свернуть' : 'Показать больше';
-          if (iconEl) iconEl.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-        });
-      }
-
       renderModuleView('sales');
     })();
 
+    /* ── Infotec AI Agent Core ── */
+    const AI_AGENTS = {
+      finance: {
+        tag: 'P&L',
+        statusOnline: 'AGENT · ONLINE',
+        statusStandby: 'AGENT · STANDBY',
+        prompt: 'run system_health_check --module=finance...',
+        eyebrow: 'AI P&L ASSISTANT · ACTIVE',
+        title: 'Финансовый ИИ-агент: Ликвидация кассовых разрывов',
+        desc: 'Непрерывный мониторинг денежных потоков, автоматическое выявление аномалий в P&L и предиктивные сценарии ликвидности на горизонте 30 дней.',
+        features: [
+          'Автоматическое прогнозирование дефицита ликвидности на 30 дней вперед',
+          'Детекция аномалий в структуре P&L и отклонений от бюджета в реальном времени',
+          'Сценарное моделирование кассовых разрывов с рекомендациями по закрытию'
+        ],
+        alert: 'AI-Предупреждение: Риск кассового разрыва через 12 дней',
+        terminalHtml: `
+          <div class="text-[10px] text-slate-500 space-y-0.5 mb-3">
+            <div><span class="text-emerald-400">✓</span> ledger.sync — 14 832 txs</div>
+            <div><span class="text-emerald-400">✓</span> cashflow.model — horizon 30d</div>
+            <div><span class="text-amber-400">⚠</span> anomaly.score — <span class="text-amber-300">0.78 CRITICAL</span></div>
+          </div>
+          <div class="rounded-xl bg-white/[0.03] border border-white/10 p-3 mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[9px] uppercase tracking-wider text-slate-500">Liquidity forecast</span>
+              <span class="text-[9px] text-cyan-400">€ · 30d</span>
+            </div>
+            <svg viewBox="0 0 220 72" class="w-full h-[72px]" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="aiFinGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,48 C20,46 30,40 50,42 C70,44 80,28 100,32 C120,36 130,18 150,22 C170,26 185,38 200,14 L220,20 L220,72 L0,72 Z" fill="url(#aiFinGrad)"/>
+              <path class="ai-chart-line" d="M0,48 C20,46 30,40 50,42 C70,44 80,28 100,32 C120,36 130,18 150,22 C170,26 185,38 200,14 L220,20" fill="none" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round"/>
+              <path class="ai-chart-line" d="M0,55 C40,52 70,50 110,48 C150,46 180,44 220,40" fill="none" stroke="#22d3ee" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="3 3" style="animation-delay:0.2s"/>
+              <circle cx="200" cy="14" r="3" fill="#f87171" style="filter:drop-shadow(0 0 4px #f87171)"/>
+            </svg>
+            <div class="flex gap-3 mt-1 text-[9px] text-slate-500">
+              <span><span class="inline-block w-2 h-0.5 bg-[#8B5CF6] align-middle mr-1"></span>Cash position</span>
+              <span><span class="inline-block w-2 h-0.5 bg-cyan-400 align-middle mr-1"></span>Baseline</span>
+            </div>
+          </div>
+          <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-2 rounded-lg text-[10px] leading-snug">
+            AI-Предупреждение: Риск кассового разрыва через 12 дней
+          </div>`
+      },
+      sourcing: {
+        tag: 'SOURCE',
+        statusOnline: 'AGENT · ONLINE',
+        statusStandby: 'AGENT · STANDBY',
+        prompt: 'run sourcing_optimizer --scan=vendors...',
+        eyebrow: 'AI SOURCING AGENT · ACTIVE',
+        title: 'ИИ-агент закупок: Оптимизация цепочек поставщиков',
+        desc: 'Автономный анализ рынка поставщиков, сопоставление коммерческих предложений и выявление ценовых аномалий до фиксации заказа.',
+        features: [
+          'Мгновенный бенчмаркинг цен поставщиков по номенклатуре и объёмам',
+          'Автоматический расчёт TCO и ROI альтернативных источников закупки',
+          'Предиктивные алерты по риску срыва поставок и росту lead-time'
+        ],
+        alert: 'AI-Предупреждение: Ценовая аномалия +18% у Vendor-204',
+        terminalHtml: `
+          <div class="text-[10px] text-slate-500 space-y-0.5 mb-3">
+            <div><span class="text-emerald-400">✓</span> vendor.index — 246 sources</div>
+            <div><span class="text-emerald-400">✓</span> quote.match — 38 RFQs</div>
+            <div><span class="text-amber-400">⚠</span> price.delta — <span class="text-amber-300">+18% outlier</span></div>
+          </div>
+          <div class="rounded-xl bg-white/[0.03] border border-white/10 p-3 mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[9px] uppercase tracking-wider text-slate-500">Purchase analytics</span>
+              <span class="text-[9px] text-cyan-400">TCO · 90d</span>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="text-[9px] text-slate-500 w-14 shrink-0">Vendor A</span>
+                <div class="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-[#8B5CF6] to-cyan-400" style="width:82%"></div></div>
+                <span class="text-[9px] text-slate-300 w-8 text-right">0.82</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[9px] text-slate-500 w-14 shrink-0">Vendor B</span>
+                <div class="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-[#8B5CF6]/70 to-cyan-400/70" style="width:64%"></div></div>
+                <span class="text-[9px] text-slate-300 w-8 text-right">0.64</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[9px] text-slate-500 w-14 shrink-0">Vendor C</span>
+                <div class="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full rounded-full bg-red-400/80" style="width:41%"></div></div>
+                <span class="text-[9px] text-red-300 w-8 text-right">0.41</span>
+              </div>
+            </div>
+            <svg viewBox="0 0 220 40" class="w-full h-10 mt-2" aria-hidden="true">
+              <path class="ai-chart-line" d="M0,28 L30,24 L55,30 L80,18 L110,22 L140,10 L170,16 L200,8 L220,12" fill="none" stroke="#8B5CF6" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="ai-chart-line" d="M0,32 L40,30 L90,28 L140,26 L220,24" fill="none" stroke="#22d3ee" stroke-width="1" stroke-dasharray="2 3" style="animation-delay:0.15s"/>
+            </svg>
+          </div>
+          <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-2 rounded-lg text-[10px] leading-snug">
+            AI-Предупреждение: Ценовая аномалия +18% у Vendor-204
+          </div>`
+      },
+      supply: {
+        tag: 'CHAIN',
+        statusOnline: 'AGENT · ONLINE',
+        statusStandby: 'AGENT · STANDBY',
+        prompt: 'run supply_chain_scan --orders=open...',
+        eyebrow: 'AI SUPPLY CHAIN AGENT · ACTIVE',
+        title: 'ИИ-диспетчер: Управление рисками отгрузок',
+        desc: 'Непрерывный контроль логистических цепочек, предиктивное выявление узких мест и автоматическая эскалация риска просрочки заказов.',
+        features: [
+          'Предиктивный ETA с учётом загрузки склада, перевозчиков и сезонности',
+          'Автоматическое выявление bottleneck-узлов в цепочке поставок',
+          'Мгновенные алерты по риску просрочки с предложением альтернативных маршрутов'
+        ],
+        alert: 'AI-Предупреждение: Риск просрочки заказа 1024',
+        terminalHtml: `
+          <div class="text-[10px] text-slate-500 space-y-0.5 mb-3">
+            <div><span class="text-emerald-400">✓</span> shipment.map — 64 routes</div>
+            <div><span class="text-emerald-400">✓</span> eta.engine — live</div>
+            <div><span class="text-amber-400">⚠</span> order.1024 — <span class="text-amber-300">delay risk 87%</span></div>
+          </div>
+          <div class="rounded-xl bg-white/[0.03] border border-white/10 p-3 mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[9px] uppercase tracking-wider text-slate-500">Supply chain map</span>
+              <span class="text-[9px] text-cyan-400">LIVE</span>
+            </div>
+            <svg viewBox="0 0 220 80" class="w-full h-20" aria-hidden="true">
+              <circle cx="24" cy="40" r="6" fill="#8B5CF6" fill-opacity="0.3" stroke="#8B5CF6" stroke-width="1.2"/>
+              <circle cx="24" cy="40" r="2.5" fill="#8B5CF6"/>
+              <circle cx="90" cy="22" r="5" fill="#22d3ee" fill-opacity="0.25" stroke="#22d3ee" stroke-width="1"/>
+              <circle cx="90" cy="22" r="2" fill="#22d3ee"/>
+              <circle cx="110" cy="58" r="5" fill="#f87171" fill-opacity="0.3" stroke="#f87171" stroke-width="1"/>
+              <circle cx="110" cy="58" r="2" fill="#f87171" style="filter:drop-shadow(0 0 4px #f87171)"/>
+              <circle cx="180" cy="36" r="6" fill="#8B5CF6" fill-opacity="0.25" stroke="#8B5CF6" stroke-width="1.2"/>
+              <circle cx="180" cy="36" r="2.5" fill="#8B5CF6"/>
+              <path class="ai-chart-line" d="M30,40 L84,24" fill="none" stroke="#22d3ee" stroke-width="1.2"/>
+              <path class="ai-chart-line" d="M30,42 L104,56" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="3 2" style="animation-delay:0.1s"/>
+              <path class="ai-chart-line" d="M96,24 L174,34" fill="none" stroke="#8B5CF6" stroke-width="1.2" style="animation-delay:0.2s"/>
+              <path class="ai-chart-line" d="M116,56 L174,38" fill="none" stroke="#8B5CF6" stroke-width="1" stroke-dasharray="2 2" style="animation-delay:0.3s"/>
+              <text x="14" y="56" fill="#64748b" font-size="7" font-family="monospace">WH-01</text>
+              <text x="100" y="72" fill="#f87171" font-size="7" font-family="monospace">#1024</text>
+              <text x="168" y="52" fill="#64748b" font-size="7" font-family="monospace">HUB</text>
+            </svg>
+            <div class="grid grid-cols-3 gap-1.5 mt-1">
+              <div class="rounded-md bg-white/5 px-1.5 py-1 text-center"><div class="text-[9px] text-cyan-400 font-semibold">94%</div><div class="text-[8px] text-slate-500">On-time</div></div>
+              <div class="rounded-md bg-white/5 px-1.5 py-1 text-center"><div class="text-[9px] text-amber-300 font-semibold">3</div><div class="text-[8px] text-slate-500">At risk</div></div>
+              <div class="rounded-md bg-white/5 px-1.5 py-1 text-center"><div class="text-[9px] text-[#a78bfa] font-semibold">1.4d</div><div class="text-[8px] text-slate-500">Avg ETA</div></div>
+            </div>
+          </div>
+          <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-2 rounded-lg text-[10px] leading-snug">
+            AI-Предупреждение: Риск просрочки заказа 1024
+          </div>`
+      }
+    };
+
+    const agentCards = document.querySelectorAll('.ai-agent-card[data-agent]');
+    const terminalBody = document.getElementById('ai-terminal-body');
+    const terminalPrompt = document.getElementById('ai-terminal-prompt');
+    const terminalTag = document.getElementById('ai-terminal-agent-tag');
+    const specsContent = document.getElementById('ai-specs-content');
+    const specsEyebrow = document.getElementById('ai-specs-eyebrow');
+    const specsTitle = document.getElementById('ai-specs-title');
+    const specsDesc = document.getElementById('ai-specs-desc');
+    const specsFeatures = document.getElementById('ai-specs-features');
+    const workspace = document.getElementById('ai-agent-workspace');
+
+    const SENSOR_SVG = `<svg class="ai-sensor-icon w-3 h-3" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5l1.6 3.5 3.8.4-2.9 2.6.9 3.7L8 9.7l-3.4 2 0.9-3.7L2.6 5.4l3.8-.4L8 1.5z"/></svg>`;
+
+    function renderFeatures(features) {
+      specsFeatures.innerHTML = features.map((text) => `
+        <li class="flex items-start">
+          <span class="w-6 h-6 rounded-lg bg-white border border-[#8B5CF6]/30 shadow-sm flex items-center justify-center mr-3 mt-0.5 shrink-0">
+            ${SENSOR_SVG}
+          </span>
+          <span class="text-sm sm:text-base text-[#122136] leading-snug pt-0.5">${text}</span>
+        </li>
+      `).join('');
+    }
+
+    function setAgentActive(agentId) {
+      const agent = AI_AGENTS[agentId];
+      if (!agent) return;
+
+      agentCards.forEach((card) => {
+        const isActive = card.dataset.agent === agentId;
+        card.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        const node = card.querySelector('.ai-quantum-node');
+        const status = card.querySelector('.ai-agent-status');
+        if (node) node.classList.toggle('hidden', !isActive);
+        if (status) status.textContent = isActive ? agent.statusOnline : AI_AGENTS[card.dataset.agent].statusStandby;
+      });
+
+      if (workspace) workspace.setAttribute('aria-labelledby', `agent-${agentId}`);
+
+      if (terminalBody) {
+        terminalBody.classList.add('is-fading');
+        window.setTimeout(() => {
+          terminalBody.innerHTML = agent.terminalHtml;
+          if (terminalPrompt) terminalPrompt.textContent = agent.prompt;
+          if (terminalTag) terminalTag.textContent = agent.tag;
+          terminalBody.classList.remove('is-fading');
+          terminalBody.querySelectorAll('.ai-chart-line').forEach((el) => {
+            el.style.animation = 'none';
+            void el.offsetWidth;
+            el.style.animation = '';
+          });
+        }, 180);
+      }
+
+      if (specsContent) {
+        specsContent.classList.remove('ai-content-swap');
+        void specsContent.offsetWidth;
+        specsContent.classList.add('ai-content-swap');
+      }
+      if (specsEyebrow) specsEyebrow.textContent = agent.eyebrow;
+      if (specsTitle) specsTitle.textContent = agent.title;
+      if (specsDesc) specsDesc.textContent = agent.desc;
+      renderFeatures(agent.features);
+    }
+
+    if (agentCards.length) {
+      setAgentActive('finance');
+
+      agentCards.forEach((card) => {
+        card.addEventListener('click', () => setAgentActive(card.dataset.agent));
+        card.addEventListener('keydown', (e) => {
+          const cards = Array.from(agentCards);
+          const idx = cards.indexOf(card);
+          let next = -1;
+          if (e.key === 'ArrowRight') next = (idx + 1) % cards.length;
+          else if (e.key === 'ArrowLeft') next = (idx - 1 + cards.length) % cards.length;
+          else if (e.key === 'Home') next = 0;
+          else if (e.key === 'End') next = cards.length - 1;
+          if (next >= 0) {
+            e.preventDefault();
+            cards[next].focus();
+            setAgentActive(cards[next].dataset.agent);
+          }
+        });
+      });
+    }
   </script>
 </body>
 </html>
