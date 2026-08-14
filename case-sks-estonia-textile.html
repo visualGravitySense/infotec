@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKS Estonia Textile: единый учёт партий и остатков на Infotec ERP</title>
+  <meta name="description" content="Как текстильное производство SKS Estonia Textile перешло на единый учёт партий и остатков на Infotec ERP — брак и простои видны цехом раньше, чем срывают отгрузку.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: 'Inter', sans-serif;
+      --color-brand: #0A6ED1;
+      --color-deep: #122136;
+      --color-muted: #6A7B95;
+      --color-border: #E2E8F0;
+      --color-surface: #F5F7FA;
+    }
+
+    html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
+    h1, h2 { font-weight: 700; letter-spacing: -0.025em; }
+    h1 { font-weight: 800; }
+
+    .desc-text { font-weight: 400; line-height: 1.625; color: #6A7B95; }
+    .ui-text { font-weight: 500; }
+
+    .section-blueprint {
+      background-color: #FFFFFF;
+      background-image:
+        linear-gradient(90deg, rgba(10, 110, 209, 0.02) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(10, 110, 209, 0.02) 1px, transparent 1px),
+        repeating-linear-gradient(125deg, transparent, transparent 8px, rgba(139, 92, 246, 0.02) 8px, rgba(139, 92, 246, 0.02) 9px);
+      background-size: 40px 40px, 40px 40px, auto;
+    }
+
+    .footer-light {
+      background-color: #F5F7FA;
+      background-image: linear-gradient(90deg, rgba(10, 110, 209, 0.015) 1px, transparent 1px), linear-gradient(0deg, rgba(10, 110, 209, 0.015) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .glow-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #0A6ED1 0%, #5B8DEF 45%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Nav ── */
+    .nav-link {
+      display: inline-flex; align-items: center; gap: 0.25rem;
+      border-radius: 9999px; font-size: 0.875rem; line-height: 1.25rem;
+      padding: 0.5rem 1rem; font-weight: 500; color: #6A7B95;
+      border: 1px solid transparent; background: transparent; box-shadow: none;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+    .nav-link:hover:not(.active) { color: #122136; }
+    .nav-link.active {
+      background: #FFFFFF; border-color: rgba(10, 110, 209, 0.15);
+      box-shadow: 0 4px 14px rgba(10, 110, 209, 0.05); color: #122136; font-weight: 600;
+    }
+
+    .mobile-nav-link {
+      display: block; border-radius: 9999px; font-size: 0.875rem; font-weight: 500;
+      color: #6A7B95; padding: 0.625rem 1rem; border: 1px solid transparent;
+      background: transparent; box-shadow: none;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+    .mobile-nav-link:hover:not(.active) { color: #122136; }
+    .mobile-nav-link.active {
+      background: rgba(255, 255, 255, 0.9); border-color: rgba(10, 110, 209, 0.15);
+      box-shadow: 0 4px 14px rgba(10, 110, 209, 0.05); color: #122136; font-weight: 600;
+    }
+
+    .nav-icon-btn {
+      width: 2.5rem; height: 2.5rem; display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border-radius: 0.75rem; background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(10, 110, 209, 0.12); box-shadow: 0 4px 12px rgba(10, 110, 209, 0.04);
+      color: #122136; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.2s ease;
+      cursor: pointer; text-decoration: none;
+    }
+    @media (min-width: 640px) { .nav-icon-btn { border-radius: 1rem; } }
+    .nav-icon-btn:hover { transform: translateY(-2px); border-color: rgba(10, 110, 209, 0.4); box-shadow: 0 6px 20px rgba(10, 110, 209, 0.08); color: #0A6ED1; }
+    .nav-icon-btn svg { width: 1.125rem; height: 1.125rem; stroke: currentColor; fill: none; stroke-width: 1.8; transition: stroke 0.2s ease, color 0.2s ease; }
+    .nav-icon-actions { display: flex; align-items: center; gap: 0.5rem; }
+    @media (min-width: 640px) { .nav-icon-actions { gap: 0.625rem; } }
+
+    .nav-dropdown {
+      opacity: 0; visibility: hidden; transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+    .nav-dropdown-wrap:hover .nav-dropdown, .nav-dropdown-wrap:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-lang-wrap:hover .nav-lang-dropdown, .nav-lang-wrap:focus-within .nav-lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
+    .mobile-menu.open { max-height: 420px; opacity: 1; }
+
+    .glass-header {
+      backdrop-blur: 12px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(10, 110, 209, 0.10);
+      box-shadow: 0 8px 32px rgba(10,110,209,0.06);
+    }
+
+    /* ── Buttons ── */
+    .btn-cushion {
+      display: inline-flex; padding: 5px; border-radius: 9999px; background: rgba(10, 110, 209, 0.10);
+      box-shadow: 0 0 0 1px rgba(10, 110, 209, 0.12), 0 4px 16px -2px rgba(10, 110, 209, 0.20), 0 10px 28px -6px rgba(10, 110, 209, 0.15);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      text-decoration: none; border: none; cursor: pointer; font-family: inherit;
+    }
+    .btn-cushion:hover { background: rgba(10, 110, 209, 0.15); box-shadow: 0 0 0 1px rgba(10, 110, 209, 0.18), 0 6px 22px -2px rgba(10, 110, 209, 0.30), 0 14px 36px -6px rgba(10, 110, 209, 0.20); }
+    .btn-cushion:active { transform: scale(0.98); }
+    .btn-cushion-inner {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem 1.125rem;
+      border-radius: 9999px; font-size: 0.875rem; font-family: 'Inter', sans-serif; font-weight: 500; color: #FFFFFF;
+      background: linear-gradient(180deg, #1e88e5 0%, #0A6ED1 50%, #0960bd 100%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 1px 2px rgba(8, 91, 176, 0.35), 0 4px 14px -2px rgba(10, 110, 209, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.30), inset 0 -2px 4px rgba(8, 91, 176, 0.25);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; white-space: nowrap;
+    }
+    .btn-cushion:hover .btn-cushion-inner { background: linear-gradient(180deg, #1a7fd4 0%, #085bb0 50%, #074a93 100%); }
+    .btn-cushion-arrow { width: 1rem; height: 1rem; flex-shrink: 0; transition: transform 0.3s ease; }
+    .btn-cushion:hover .btn-cushion-arrow { transform: translateX(4px); }
+    .btn-cushion--outline { background: rgba(18, 33, 54, 0.06); }
+    .btn-cushion--outline .btn-cushion-inner { background: #FFFFFF; color: #122136; border-color: #E2E8F0; box-shadow: 0 1px 2px rgba(18,33,54,0.06); }
+    .btn-cushion--outline:hover .btn-cushion-inner { background: #F5F7FA; }
+
+    .footer-link { transition: color 0.2s ease, opacity 0.2s ease; color: #122136; text-decoration: none; }
+    .footer-link:hover { color: #0A6ED1; }
+
+    /* ── Case hero ── */
+    .case-hero {
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse 90% 80% at 20% 0%, rgba(10,110,209,0.55) 0%, transparent 55%),
+                  linear-gradient(135deg, #0B1220 0%, #122136 55%, #0B1220 100%);
+    }
+    .case-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    /* ── Info strip ── */
+    .info-strip-item { border-left: 1px solid #E2E8F0; padding-left: 1.25rem; }
+    .info-strip-item:first-child { border-left: none; padding-left: 0; }
+
+    /* ── Stat cards ── */
+    .stat-card {
+      background: #FFFFFF; border: 1px solid rgba(10, 110, 209, 0.15);
+      box-shadow: 0 8px 32px rgba(10, 110, 209, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .stat-card:hover { transform: translateY(-3px); border-color: rgba(10, 110, 209, 0.4); box-shadow: 0 8px 32px rgba(10, 110, 209, 0.12); }
+
+    /* ── Quote block ── */
+    .quote-block {
+      background: #F5F7FA; border: 1px solid #E2E8F0; border-radius: 1.25rem;
+    }
+    .quote-mark { font-family: Georgia, serif; line-height: 0.6; }
+
+    /* ── Result cards ── */
+    .result-card {
+      background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 1.25rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .result-card:hover { transform: translateY(-2px); border-color: rgba(10, 110, 209, 0.35); box-shadow: 0 8px 28px rgba(10, 110, 209, 0.1); }
+    .result-icon {
+      width: 2.75rem; height: 2.75rem; border-radius: 0.875rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(10, 110, 209, 0.08); color: #0A6ED1;
+    }
+    .result-icon svg { width: 1.375rem; height: 1.375rem; stroke: currentColor; fill: none; stroke-width: 1.8; }
+  </style>
+</head>
+<body class="min-h-screen font-sans text-[#122136] antialiased">
+
+  <!-- HEADER -->
+  <header class="sticky top-4 z-50 px-4 sm:px-6 lg:px-8">
+    <nav class="backdrop-blur-md bg-white/80 border border-[#0A6ED1]/12 sticky top-4 z-50 rounded-2xl mx-auto max-w-7xl mt-4 px-6 py-4 flex items-center justify-between shadow-[0_8px_32px_rgba(10,110,209,0.04)]" aria-label="Основная навигация">
+      <a href="index-infotec.html" class="flex items-center gap-2 shrink-0 group">
+        <div class="w-8 h-8 rounded-lg bg-[#0A6ED1] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+          <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 3h5.5L4.5 17H0L1 3z" fill="#FFFFFF" fill-opacity="0.5"/>
+            <path d="M6.5 3H12L11 17H5.5L6.5 3z" fill="#FFFFFF" fill-opacity="0.75"/>
+            <path d="M12.5 3H18L17 17H11.5L12.5 3z" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <span class="font-bold text-[#122136] text-base sm:text-lg tracking-tight">Infotec ERP</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-1" role="menubar" id="desktopNav">
+        <li role="none"><a href="index-infotec.html" role="menuitem" class="nav-link" data-nav="home">Главная</a></li>
+        <li role="none" class="relative nav-dropdown-wrap">
+          <a href="index-infotec.html#modules" role="menuitem" class="nav-link" data-nav="modules">
+            ERP Модули
+            <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown absolute top-full left-0 mt-2 w-64 backdrop-blur-md bg-white/95 border border-[#E2E8F0] rounded-xl shadow-lg p-2 z-50" role="menu">
+            <a href="index-infotec.html#modules" class="block px-3 py-2 text-xs font-semibold text-[#0A6ED1] rounded-lg hover:bg-[#F5F7FA]">Управление продажами</a>
+            <a href="index-infotec.html#modules" class="block px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136]">Управление закупками</a>
+            <a href="index-infotec.html#modules" class="block px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136]">Управление запасами</a>
+            <a href="index-infotec.html#modules" class="block px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136]">Все 12 модулей →</a>
+          </div>
+        </li>
+        <li role="none"><a href="index-infotec.html#solutions" role="menuitem" class="nav-link" data-nav="solutions">Готовые решения</a></li>
+        <li role="none"><a href="index-infotec.html#news" role="menuitem" class="nav-link" data-nav="news">Новости</a></li>
+        <li role="none"><a href="index-infotec.html#" role="menuitem" class="nav-link" data-nav="price">Цены</a></li>
+        <li role="none"><a href="index-infotec.html#case-studies" role="menuitem" class="nav-link active" aria-current="page" data-nav="cust">Клиенты</a></li>
+      </ul>
+
+      <div class="nav-icon-actions shrink-0" role="group" aria-label="Действия в шапке">
+        <button type="button" class="nav-icon-btn" aria-label="Поиск">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M20 20l-3.5-3.5"/>
+          </svg>
+        </button>
+
+        <div class="relative nav-lang-wrap">
+          <button type="button" class="nav-icon-btn" aria-label="Выбор языка" aria-haspopup="true" aria-expanded="false" id="langToggle">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown nav-lang-dropdown absolute top-full right-0 mt-2 w-36 backdrop-blur-md bg-white/95 border border-[#E2E8F0] rounded-xl shadow-lg p-1.5 z-50" role="menu" aria-label="Языки">
+            <button type="button" role="menuitem" class="w-full text-left px-3 py-2 text-xs font-semibold text-[#0A6ED1] rounded-lg hover:bg-[#F5F7FA] transition-colors">ET · Eesti</button>
+            <button type="button" role="menuitem" class="w-full text-left px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136] transition-colors">RU · Русский</button>
+            <button type="button" role="menuitem" class="w-full text-left px-3 py-2 text-xs text-[#6A7B95] rounded-lg hover:bg-[#F5F7FA] hover:text-[#122136] transition-colors">EN · English</button>
+          </div>
+        </div>
+
+        <a href="index-infotec.html#" class="btn-cushion group shrink-0 transition-all duration-300 hidden sm:inline-flex" aria-label="Демо-доступ">
+          <span class="btn-cushion-inner text-white text-sm font-medium">
+            Демо-доступ
+            <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </span>
+        </a>
+
+        <a href="index-infotec.html#" class="nav-icon-btn" aria-label="Войти в аккаунт">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M5 20c0-4 3.5-6 7-6s7 2 7 6"/>
+          </svg>
+        </a>
+
+        <button id="menuToggle" type="button" class="nav-icon-btn lg:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="Открыть меню">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" aria-hidden="true">
+            <path id="menuIcon" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="mobile-menu lg:hidden glass-header max-w-7xl mx-auto mt-2 rounded-2xl" role="menu">
+      <ul class="p-4 space-y-1" id="mobileNav">
+        <li><a href="index-infotec.html" class="mobile-nav-link" data-nav="home" role="menuitem">Главная</a></li>
+        <li><a href="index-infotec.html#modules" class="mobile-nav-link" data-nav="modules" role="menuitem">ERP Модули</a></li>
+        <li><a href="index-infotec.html#solutions" class="mobile-nav-link" data-nav="solutions" role="menuitem">Готовые решения</a></li>
+        <li><a href="index-infotec.html#news" class="mobile-nav-link" data-nav="news" role="menuitem">Новости</a></li>
+        <li><a href="index-infotec.html#case-studies" class="mobile-nav-link active" aria-current="page" data-nav="cust" role="menuitem">Клиенты</a></li>
+        <li class="pt-2 border-t border-[#E2E8F0]"><a href="index-infotec.html#" class="mobile-nav-link" role="menuitem">Войти</a></li>
+        <li class="pt-2">
+          <a href="index-infotec.html#" class="btn-cushion btn-cushion--block group w-full transition-all duration-300" role="menuitem" aria-label="Демо-доступ">
+            <span class="btn-cushion-inner text-white text-sm font-medium">
+              Демо-доступ
+              <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+
+    <!-- BREADCRUMB -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10">
+      <a href="index-infotec.html#case-studies" class="inline-flex items-center gap-1.5 text-sm font-medium text-[#6A7B95] hover:text-[#0A6ED1] transition-colors">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        Все кейсы клиентов
+      </a>
+    </div>
+
+    <!-- HERO -->
+    <section class="case-hero relative mt-6 sm:mt-8" aria-labelledby="case-hero-heading">
+      <div class="case-hero-grid" aria-hidden="true"></div>
+      <div class="glow-orb w-[420px] h-[420px] bg-[#0A6ED1]/25 -top-20 -left-20" aria-hidden="true"></div>
+      <div class="glow-orb w-[320px] h-[320px] bg-[#8B5CF6]/15 bottom-0 right-10" aria-hidden="true"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div>
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-semibold uppercase tracking-wider text-white/80 mb-5">
+              Кейс клиента · Текстильное производство
+            </span>
+            <h1 id="case-hero-heading" class="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white tracking-tight leading-[1.15]">
+              SKS Estonia Textile: единый учёт партий и остатков без ручных сверок
+            </h1>
+            <p class="text-white/70 text-sm sm:text-base leading-relaxed mt-5 max-w-xl">
+              Как текстильное производство перешло на Infotec ERP и сделало брак и простои видимыми цехом раньше, чем они срывают отгрузку клиенту.
+            </p>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <img
+              src="img/main-title-1.png"
+              alt="Производство SKS Estonia Textile"
+              width="1200"
+              height="800"
+              class="w-full h-full object-cover"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENT INFO -->
+    <section class="section-blueprint border-b border-[#E2E8F0]" aria-labelledby="client-info-heading">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center gap-2.5 mb-6">
+            <div class="w-9 h-9 rounded-lg bg-[#122136] flex items-center justify-center shadow-sm">
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 3h5.5L4.5 17H0L1 3z" fill="#FFFFFF" fill-opacity="0.5"/>
+                <path d="M6.5 3H12L11 17H5.5L6.5 3z" fill="#FFFFFF" fill-opacity="0.75"/>
+                <path d="M12.5 3H18L17 17H11.5L12.5 3z" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <span id="client-info-heading" class="font-bold text-lg text-[#122136]">SKS Estonia Textile</span>
+          </div>
+
+          <p class="desc-text text-sm sm:text-base max-w-3xl mx-auto">
+            SKS Estonia Textile — текстильное производство полного цикла в Ида-Вирумаа: от приёмки пряжи и крашения до пошива и упаковки готовых партий. Компания поставляет ткани и готовые изделия розничным сетям и промышленным заказчикам по всей Балтии.
+          </p>
+          <p class="desc-text text-sm sm:text-base max-w-3xl mx-auto mt-4">
+            До внедрения Infotec ERP остатки сырья, полуфабрикатов и готовой продукции велись в разрозненных таблицах по каждому цеху отдельно. Данные о браке и простоях оборудования доходили до руководства только на следующий день — часто уже после того, как партия ушла клиенту.
+          </p>
+          <p class="desc-text text-sm sm:text-base max-w-3xl mx-auto mt-4">
+            С переходом на единый учёт партий и остатков в Infotec ERP производство получило картину в реальном времени: где какая партия, какой процент брака по смене и какие линии простаивают — видно сразу на экране мастера цеха.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 pt-8 border-t border-[#E2E8F0]">
+          <div class="info-strip-item">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">Отрасль</p>
+            <p class="text-sm font-semibold text-[#122136]">Текстильное производство</p>
+          </div>
+          <div class="info-strip-item">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">Размер компании</p>
+            <p class="text-sm font-semibold text-[#122136]">140 сотрудников</p>
+          </div>
+          <div class="info-strip-item">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">Регион</p>
+            <p class="text-sm font-semibold text-[#122136]">Ида-Вирумаа, Эстония</p>
+          </div>
+          <div class="info-strip-item">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">Внедрение</p>
+            <p class="text-sm font-semibold text-[#122136]">Infotec ERP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="bg-white" aria-label="Результаты в цифрах">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
+          <div class="stat-card rounded-2xl p-6 sm:p-7 text-center">
+            <p class="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#0A6ED1] to-[#5B8DEF] bg-clip-text text-transparent tracking-tight">-40%</p>
+            <p class="text-[#6A7B95] text-sm mt-3">времени на ручные сверки остатков и партий</p>
+          </div>
+          <div class="stat-card rounded-2xl p-6 sm:p-7 text-center">
+            <p class="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent tracking-tight">3×</p>
+            <p class="text-[#6A7B95] text-sm mt-3">быстрее обнаружение брака — прямо в цехе, а не на складе</p>
+          </div>
+          <div class="stat-card rounded-2xl p-6 sm:p-7 text-center">
+            <p class="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#10B981] to-[#0A6ED1] bg-clip-text text-transparent tracking-tight">100%</p>
+            <p class="text-[#6A7B95] text-sm mt-3">партий под сквозным учётом от сырья до отгрузки</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPPORTUNITY -->
+    <section class="section-blueprint border-t border-[#0A6ED1]/10" aria-labelledby="opportunity-heading">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-[#0A6ED1] mb-3">Задача</p>
+        <h2 id="opportunity-heading" class="text-2xl sm:text-3xl font-extrabold text-[#122136] tracking-tight leading-tight mb-5">
+          Разрозненные таблицы вместо единой картины по цехам
+        </h2>
+        <p class="desc-text text-sm sm:text-base">
+          Каждый цех — крашение, ткачество, пошив, упаковка — вёл собственный учёт остатков в Excel. Информация о партии терялась при переходе между этапами, а данные о браке и простоях оборудования сводились вручную в конце смены. К моменту, когда проблема доходила до руководства, партия часто уже была упакована или отгружена клиенту — переделка обходилась дорого и срывала сроки поставки.
+        </p>
+
+        <div class="quote-block p-6 sm:p-8 mt-8 flex flex-col sm:flex-row gap-5 sm:gap-6 items-start">
+          <div class="w-11 h-11 rounded-full bg-[#122136] shrink-0 flex items-center justify-center text-white font-bold text-sm">МК</div>
+          <div>
+            <span class="quote-mark text-4xl text-[#0A6ED1]/30 block mb-1">&ldquo;</span>
+            <p class="text-[#122136] text-base sm:text-lg font-medium leading-relaxed -mt-6 sm:-mt-7">
+              Мы узнавали о браке тогда, когда партия уже стояла на складе готовой продукции. К этому моменту исправить что-либо в производственном процессе было уже поздно — оставалось только пересчитывать убытки.
+            </p>
+            <p class="mt-4 text-sm font-semibold text-[#122136]">Марис Кару</p>
+            <p class="text-xs text-[#6A7B95]">Директор по производству, SKS Estonia Textile</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="bg-white border-t border-[#E2E8F0]" aria-labelledby="solution-heading">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-[#0A6ED1] mb-3">Решение</p>
+        <h2 id="solution-heading" class="text-2xl sm:text-3xl font-extrabold text-[#122136] tracking-tight leading-tight mb-5">
+          Сквозной учёт партий в модулях «Запасы» и «Производство»
+        </h2>
+        <p class="desc-text text-sm sm:text-base">
+          Внедрение началось с модулей «Управление запасами» и «Управление производством» Infotec ERP: каждая партия сырья и полуфабриката получила единый номер, который сопровождает её через все цеха. Мастера смены фиксируют брак и простои прямо на терминале в цехе, а данные сразу попадают в общую систему — без переноса из бумажных журналов и таблиц.
+        </p>
+        <p class="desc-text text-sm sm:text-base mt-4">
+          Панель мониторинга показывает статус каждой партии, процент брака по линии и загрузку оборудования в реальном времени, а бухгалтерия и склад работают с теми же данными, что и цех — без повторного ввода.
+        </p>
+
+        <div class="quote-block p-6 sm:p-8 mt-8 flex flex-col sm:flex-row gap-5 sm:gap-6 items-start">
+          <div class="w-11 h-11 rounded-full bg-[#0A6ED1] shrink-0 flex items-center justify-center text-white font-bold text-sm">ЯЛ</div>
+          <div>
+            <span class="quote-mark text-4xl text-[#0A6ED1]/30 block mb-1">&ldquo;</span>
+            <p class="text-[#122136] text-base sm:text-lg font-medium leading-relaxed -mt-6 sm:-mt-7">
+              Мы боялись, что переход на новую систему остановит производство на недели. Команда Infotec запускала модули по цехам поэтапно — линии не простаивали ни одной смены, а сотрудники освоили терминалы за пару дней.
+            </p>
+            <p class="mt-4 text-sm font-semibold text-[#122136]">Яна Лаук</p>
+            <p class="text-xs text-[#6A7B95]">ИТ-руководитель, SKS Estonia Textile</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="section-blueprint border-t border-[#0A6ED1]/10" aria-labelledby="result-heading">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-[#0A6ED1] mb-3">Результат</p>
+        <h2 id="result-heading" class="text-2xl sm:text-3xl font-extrabold text-[#122136] tracking-tight leading-tight mb-10 max-w-2xl">
+          От разрозненных таблиц к единой картине производства в реальном времени
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="result-card p-6 sm:p-7">
+            <span class="result-icon mb-4" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 14h7l-1 8 10-14h-7l0-6z"/></svg>
+            </span>
+            <h3 class="font-bold text-[#122136] mb-2">Меньше потерь на браке</h3>
+            <p class="text-sm text-[#6A7B95] leading-relaxed">Брак виден по каждой смене и линии сразу, а не в конце дня — цех успевает скорректировать процесс до того, как партия дойдёт до упаковки.</p>
+          </div>
+          <div class="result-card p-6 sm:p-7">
+            <span class="result-icon mb-4" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            </span>
+            <h3 class="font-bold text-[#122136] mb-2">Прозрачный учёт партий</h3>
+            <p class="text-sm text-[#6A7B95] leading-relaxed">Каждая партия прослеживается от приёмки сырья до отгрузки готового изделия — вопрос «где эта партия сейчас» больше не требует звонков по цехам.</p>
+          </div>
+          <div class="result-card p-6 sm:p-7">
+            <span class="result-icon mb-4" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </span>
+            <h3 class="font-bold text-[#122136] mb-2">Быстрее закрытие смены</h3>
+            <p class="text-sm text-[#6A7B95] leading-relaxed">Отчёт по смене формируется автоматически из данных терминалов — мастерам больше не нужно сводить бумажные журналы вручную вечером.</p>
+          </div>
+        </div>
+
+        <div class="quote-block p-6 sm:p-8 mt-10 flex flex-col sm:flex-row gap-5 sm:gap-6 items-start">
+          <div class="w-11 h-11 rounded-full bg-[#122136] shrink-0 flex items-center justify-center text-white font-bold text-sm">ТС</div>
+          <div>
+            <span class="quote-mark text-4xl text-[#0A6ED1]/30 block mb-1">&ldquo;</span>
+            <p class="text-[#122136] text-base sm:text-lg font-medium leading-relaxed -mt-6 sm:-mt-7">
+              Единый учёт партий изменил то, как мы принимаем решения. Мы больше не гадаем, где потерялась партия — мы видим её путь целиком, от сырья до отгрузки, и можем действовать раньше, а не разбираться постфактум.
+            </p>
+            <p class="mt-4 text-sm font-semibold text-[#122136]">Тоомас Саар</p>
+            <p class="text-xs text-[#6A7B95]">Генеральный директор, SKS Estonia Textile</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-white border-t border-[#E2E8F0]" aria-labelledby="cta-heading">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        <div class="rounded-3xl bg-[#122136] px-6 sm:px-12 py-10 sm:py-14 text-center relative overflow-hidden">
+          <div class="glow-orb w-[300px] h-[300px] bg-[#0A6ED1]/25 -top-16 left-1/4" aria-hidden="true"></div>
+          <div class="relative">
+            <h2 id="cta-heading" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+              Хотите похожий результат на своём производстве?
+            </h2>
+            <p class="text-white/70 text-sm sm:text-base max-w-xl mx-auto mb-8">
+              Расскажите нам о своих цехах и складах — подберём модули Infotec ERP под ваш процесс и запустим внедрение поэтапно, без остановки производства.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a href="index-infotec.html#" class="btn-cushion group transition-all duration-300" aria-label="Демо-доступ">
+                <span class="btn-cushion-inner text-white text-sm font-semibold px-2">
+                  Демо-доступ
+                  <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                  </svg>
+                </span>
+              </a>
+              <a href="index-infotec.html#case-studies" class="inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-white/25 text-white text-sm font-medium hover:bg-white/10 transition-colors">
+                Смотреть другие кейсы
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-light text-[#122136] border-t border-[#E2E8F0]" aria-label="Подвал сайта">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 pb-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-12">
+        <div>
+          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Платформа</h3>
+          <ul class="space-y-2">
+            <li><a href="index-infotec.html#modules" class="footer-link text-sm text-[#122136]">Управление продажами</a></li>
+            <li><a href="index-infotec.html#modules" class="footer-link text-sm text-[#122136]">Управление закупками</a></li>
+            <li><a href="index-infotec.html#modules" class="footer-link text-sm text-[#122136]">Управление запасами</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Таллинн</h3>
+          <address class="not-italic space-y-1.5 text-sm text-[#6A7B95] leading-relaxed">
+            <p class="m-0">Narva mnt 150, off. 202</p>
+            <p class="m-0">Тел: <a href="tel:+3725111876" class="footer-link hover:text-[#0A6ED1]">+372 5111876</a></p>
+          </address>
+        </div>
+        <div>
+          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Нарва</h3>
+          <address class="not-italic space-y-1.5 text-sm text-[#6A7B95] leading-relaxed">
+            <p class="m-0">Pähklimäe tn 7-62, 13619</p>
+            <p class="m-0"><a href="mailto:support@infotec.ee" class="footer-link hover:text-[#0A6ED1]">support@infotec.ee</a></p>
+          </address>
+        </div>
+        <div>
+          <h3 class="ui-text text-[11px] text-[#94A3B8] uppercase tracking-[0.06em] mb-3 font-bold">Получить спецификацию</h3>
+          <form class="flex flex-col gap-2" action="#" method="post" novalidate aria-label="Получить спецификацию">
+            <input type="email" name="email" placeholder="your@company.ee" class="footer-contact-input" required>
+            <button type="submit" class="btn-cushion btn-cushion--block group w-full transition-all duration-300">
+              <span class="btn-cushion-inner text-white text-sm font-semibold">
+                Прислать спецификацию
+                <svg class="btn-cushion-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+              </span>
+            </button>
+            <label class="flex items-start gap-2 text-[11px] text-[#6A7B95] cursor-pointer mt-0.5">
+              <input type="checkbox" name="subscribe" checked class="mt-0.5 w-3.5 h-3.5 accent-[#0A6ED1] shrink-0">
+              <span>Получать отраслевые кейсы и обновления по email</span>
+            </label>
+            <p class="text-[11px] text-[#94A3B8] m-0">Включено по умолчанию — отписаться можно в любом письме.</p>
+          </form>
+        </div>
+      </div>
+      <div class="border-t border-[#E2E8F0] pt-5 flex flex-wrap items-center justify-between gap-3">
+        <span class="text-xl font-extrabold tracking-tight text-[#122136]">Infotec</span>
+        <span class="text-xs text-[#94A3B8]">© Infotec 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    .footer-contact-input {
+      width: 100%; padding: 0.625rem 0.875rem; border-radius: 0.625rem;
+      border: 1px solid #E2E8F0; background: #FFFFFF;
+      font-size: 0.8125rem; color: #122136; outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .footer-contact-input:focus {
+      border-color: rgba(10, 110, 209, 0.45);
+      box-shadow: 0 0 0 3px rgba(10, 110, 209, 0.08);
+    }
+    .btn-cushion--block { display: flex; width: 100%; }
+    .btn-cushion--block .btn-cushion-inner { width: 100%; }
+  </style>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      menuIcon.setAttribute('d', isOpen ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target) && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuIcon.setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
+      }
+    });
+  </script>
+
+</body>
+</html>
