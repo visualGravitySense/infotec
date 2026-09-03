@@ -1,0 +1,188 @@
+[
+ {
+  "rel": "case-sks-estonia-textile.html",
+  "name": "case-sks-estonia-textile.html",
+  "dir": ".",
+  "shot": "_gallery/shots/case-sks-estonia-textile.png"
+ },
+ {
+  "rel": "index-cyber-quantum-template.html",
+  "name": "index-cyber-quantum-template.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-cyber-quantum-template.png"
+ },
+ {
+  "rel": "index-cyber-quantum.html",
+  "name": "index-cyber-quantum.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-cyber-quantum.png"
+ },
+ {
+  "rel": "index-cyber.html",
+  "name": "index-cyber.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-cyber.png"
+ },
+ {
+  "rel": "index-glassmorphism.html",
+  "name": "index-glassmorphism.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-glassmorphism.png"
+ },
+ {
+  "rel": "index-infotec-1.html",
+  "name": "index-infotec-1.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-infotec-1.png"
+ },
+ {
+  "rel": "index-infotec-basic.html",
+  "name": "index-infotec-basic.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-infotec-basic.png"
+ },
+ {
+  "rel": "index-infotec-template.html",
+  "name": "index-infotec-template.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-infotec-template.png"
+ },
+ {
+  "rel": "index-infotec.html",
+  "name": "index-infotec.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-infotec.png"
+ },
+ {
+  "rel": "index-swiss-minimalist-tech.html",
+  "name": "index-swiss-minimalist-tech.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-swiss-minimalist-tech.png"
+ },
+ {
+  "rel": "index-test-fresh.html",
+  "name": "index-test-fresh.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index-test-fresh.png"
+ },
+ {
+  "rel": "index.html",
+  "name": "index.html",
+  "dir": ".",
+  "shot": "_gallery/shots/index.png"
+ },
+ {
+  "rel": "industry-solutions.html",
+  "name": "industry-solutions.html",
+  "dir": ".",
+  "shot": "_gallery/shots/industry-solutions.png"
+ },
+ {
+  "rel": "inner-page-1.html",
+  "name": "inner-page-1.html",
+  "dir": ".",
+  "shot": "_gallery/shots/inner-page-1.png"
+ },
+ {
+  "rel": "inner-page-2.html",
+  "name": "inner-page-2.html",
+  "dir": ".",
+  "shot": "_gallery/shots/inner-page-2.png"
+ },
+ {
+  "rel": "inner-page-3.html",
+  "name": "inner-page-3.html",
+  "dir": ".",
+  "shot": "_gallery/shots/inner-page-3.png"
+ },
+ {
+  "rel": "inner-page-metalworking-cyber-quantum.html",
+  "name": "inner-page-metalworking-cyber-quantum.html",
+  "dir": ".",
+  "shot": "_gallery/shots/inner-page-metalworking-cyber-quantum.png"
+ },
+ {
+  "rel": "inner-page-metalworking-template.html",
+  "name": "inner-page-metalworking-template.html",
+  "dir": ".",
+  "shot": "_gallery/shots/inner-page-metalworking-template.png"
+ },
+ {
+  "rel": "news.html",
+  "name": "news.html",
+  "dir": ".",
+  "shot": "_gallery/shots/news.png"
+ },
+ {
+  "rel": "presentation/main-page-presentation/Infotec ERP Prototype.dc.html",
+  "name": "Infotec ERP Prototype.dc.html",
+  "dir": "presentation/main-page-presentation",
+  "shot": "_gallery/shots/presentation__main-page-presentation__Infotec_ERP_Prototype.dc.png"
+ },
+ {
+  "rel": "presentation/main-page-presentation/Infotec ERP UX Improvements Deck.dc.html",
+  "name": "Infotec ERP UX Improvements Deck.dc.html",
+  "dir": "presentation/main-page-presentation",
+  "shot": "_gallery/shots/presentation__main-page-presentation__Infotec_ERP_UX_Improvements_Deck.dc.png"
+ },
+ {
+  "rel": "presentation/main-page-presentation/uploads/index-infotec.html",
+  "name": "index-infotec.html",
+  "dir": "presentation/main-page-presentation/uploads",
+  "shot": "_gallery/shots/presentation__main-page-presentation__uploads__index-infotec.png"
+ },
+ {
+  "rel": "solutions.html",
+  "name": "solutions.html",
+  "dir": ".",
+  "shot": "_gallery/shots/solutions.png"
+ },
+ {
+  "rel": "templates/index-infotec-template.html",
+  "name": "index-infotec-template.html",
+  "dir": "templates",
+  "shot": "_gallery/shots/templates__index-infotec-template.png"
+ },
+ {
+  "rel": "templates/main-page-2/Infotec ERP Prototype.dc.html",
+  "name": "Infotec ERP Prototype.dc.html",
+  "dir": "templates/main-page-2",
+  "shot": "_gallery/shots/templates__main-page-2__Infotec_ERP_Prototype.dc.png"
+ },
+ {
+  "rel": "templates/main-page-2/Infotec ERP UX Improvements Deck.dc.html",
+  "name": "Infotec ERP UX Improvements Deck.dc.html",
+  "dir": "templates/main-page-2",
+  "shot": "_gallery/shots/templates__main-page-2__Infotec_ERP_UX_Improvements_Deck.dc.png"
+ },
+ {
+  "rel": "templates/main-page-2/uploads/Infotec ERP Prototype.dc.html",
+  "name": "Infotec ERP Prototype.dc.html",
+  "dir": "templates/main-page-2/uploads",
+  "shot": "_gallery/shots/templates__main-page-2__uploads__Infotec_ERP_Prototype.dc.png"
+ },
+ {
+  "rel": "templates/main-page-2/uploads/index-infotec.html",
+  "name": "index-infotec.html",
+  "dir": "templates/main-page-2/uploads",
+  "shot": "_gallery/shots/templates__main-page-2__uploads__index-infotec.png"
+ },
+ {
+  "rel": "templates/main-page/Infotec ERP Prototype.dc.html",
+  "name": "Infotec ERP Prototype.dc.html",
+  "dir": "templates/main-page",
+  "shot": "_gallery/shots/templates__main-page__Infotec_ERP_Prototype.dc.png"
+ },
+ {
+  "rel": "templates/main-page/tmp-old/Infotec ERP Prototype.dc.html",
+  "name": "Infotec ERP Prototype.dc.html",
+  "dir": "templates/main-page/tmp-old",
+  "shot": "_gallery/shots/templates__main-page__tmp-old__Infotec_ERP_Prototype.dc.png"
+ },
+ {
+  "rel": "templates/main-page/uploads/index-infotec.html",
+  "name": "index-infotec.html",
+  "dir": "templates/main-page/uploads",
+  "shot": "_gallery/shots/templates__main-page__uploads__index-infotec.png"
+ }
+]

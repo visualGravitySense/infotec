@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Галерея шаблонов — Infotec</title><style>
+*{box-sizing:border-box}
+body{margin:0;background:#0e1420;color:#e8eef7;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 28px;border-bottom:1px solid #24324a;display:flex;align-items:baseline;gap:14px;position:sticky;top:0;background:#0e1420;z-index:5;flex-wrap:wrap}
+header h1{font-size:18px;margin:0}
+header .count{color:#93a1b5}
+header input{margin-left:auto;background:#182234;border:1px solid #2b3a55;color:#e8eef7;padding:8px 12px;border-radius:8px;width:260px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;padding:24px 28px}
+.card{margin:0;background:#141d2e;border:1px solid #24324a;border-radius:12px;overflow:hidden;cursor:pointer;transition:.15s;display:flex;flex-direction:column}
+.card:hover{border-color:#3b82f6;transform:translateY(-3px)}
+.thumb{height:210px;overflow:hidden;background:#0b1120;border-bottom:1px solid #24324a}
+.thumb img{width:100%;display:block;object-fit:cover;object-position:top}
+.noshot{display:flex;align-items:center;justify-content:center;height:100%;color:#5b6b82}
+figcaption{padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.fn{font-weight:600;word-break:break-all}
+.dir{color:#93a1b5;font-size:12px;word-break:break-all}
+.hidden{display:none}
+.modal{position:fixed;inset:0;background:rgba(5,8,14,.92);display:none;flex-direction:column;z-index:50}
+.modal.open{display:flex}
+.mbar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:#141d2e;border-bottom:1px solid #24324a;flex-wrap:wrap}
+.mbar .title{font-weight:600}
+.mbar a{color:#7fb0ff;text-decoration:none;font-size:13px}
+.mbar button{background:#24324a;border:0;color:#e8eef7;width:34px;height:34px;border-radius:8px;font-size:18px;cursor:pointer}
+.mbar #mclose{margin-left:auto}
+.mbar .zoom{background:#1f2c44;padding:0 12px;width:auto;font-size:13px}
+.frameWrap{flex:1;overflow:auto;background:#fff}
+iframe{border:0;background:#fff;display:block}
+</style></head><body>
+<header><h1>Галерея HTML-шаблонов</h1><span class="count" id="count"></span>
+<input id="q" type="search" placeholder="фильтр по имени/папке…"></header>
+<div class="grid" id="grid">
+<figure class="card" data-src="case-sks-estonia-textile.html" data-name="case-sks-estonia-textile.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/case-sks-estonia-textile.png' alt=''></div><figcaption><span class="fn">case-sks-estonia-textile.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-cyber-quantum-template.html" data-name="index-cyber-quantum-template.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-cyber-quantum-template.png' alt=''></div><figcaption><span class="fn">index-cyber-quantum-template.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-cyber-quantum.html" data-name="index-cyber-quantum.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-cyber-quantum.png' alt=''></div><figcaption><span class="fn">index-cyber-quantum.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-cyber.html" data-name="index-cyber.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-cyber.png' alt=''></div><figcaption><span class="fn">index-cyber.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-glassmorphism.html" data-name="index-glassmorphism.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-glassmorphism.png' alt=''></div><figcaption><span class="fn">index-glassmorphism.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-infotec-1.html" data-name="index-infotec-1.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-infotec-1.png' alt=''></div><figcaption><span class="fn">index-infotec-1.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-infotec-basic.html" data-name="index-infotec-basic.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-infotec-basic.png' alt=''></div><figcaption><span class="fn">index-infotec-basic.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-infotec-template.html" data-name="index-infotec-template.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-infotec-template.png' alt=''></div><figcaption><span class="fn">index-infotec-template.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-infotec.html" data-name="index-infotec.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-infotec.png' alt=''></div><figcaption><span class="fn">index-infotec.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-swiss-minimalist-tech.html" data-name="index-swiss-minimalist-tech.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-swiss-minimalist-tech.png' alt=''></div><figcaption><span class="fn">index-swiss-minimalist-tech.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index-test-fresh.html" data-name="index-test-fresh.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index-test-fresh.png' alt=''></div><figcaption><span class="fn">index-test-fresh.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="index.html" data-name="index.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/index.png' alt=''></div><figcaption><span class="fn">index.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="industry-solutions.html" data-name="industry-solutions.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/industry-solutions.png' alt=''></div><figcaption><span class="fn">industry-solutions.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="inner-page-1.html" data-name="inner-page-1.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/inner-page-1.png' alt=''></div><figcaption><span class="fn">inner-page-1.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="inner-page-2.html" data-name="inner-page-2.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/inner-page-2.png' alt=''></div><figcaption><span class="fn">inner-page-2.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="inner-page-3.html" data-name="inner-page-3.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/inner-page-3.png' alt=''></div><figcaption><span class="fn">inner-page-3.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="inner-page-metalworking-cyber-quantum.html" data-name="inner-page-metalworking-cyber-quantum.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/inner-page-metalworking-cyber-quantum.png' alt=''></div><figcaption><span class="fn">inner-page-metalworking-cyber-quantum.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="inner-page-metalworking-template.html" data-name="inner-page-metalworking-template.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/inner-page-metalworking-template.png' alt=''></div><figcaption><span class="fn">inner-page-metalworking-template.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="news.html" data-name="news.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/news.png' alt=''></div><figcaption><span class="fn">news.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="presentation/main-page-presentation/Infotec ERP Prototype.dc.html" data-name="Infotec ERP Prototype.dc.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/presentation__main-page-presentation__Infotec_ERP_Prototype.dc.png' alt=''></div><figcaption><span class="fn">Infotec ERP Prototype.dc.html</span><span class="dir">presentation/main-page-presentation</span></figcaption></figure>
+<figure class="card" data-src="presentation/main-page-presentation/Infotec ERP UX Improvements Deck.dc.html" data-name="Infotec ERP UX Improvements Deck.dc.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/presentation__main-page-presentation__Infotec_ERP_UX_Improvements_Deck.dc.png' alt=''></div><figcaption><span class="fn">Infotec ERP UX Improvements Deck.dc.html</span><span class="dir">presentation/main-page-presentation</span></figcaption></figure>
+<figure class="card" data-src="presentation/main-page-presentation/uploads/index-infotec.html" data-name="index-infotec.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/presentation__main-page-presentation__uploads__index-infotec.png' alt=''></div><figcaption><span class="fn">index-infotec.html</span><span class="dir">presentation/main-page-presentation/uploads</span></figcaption></figure>
+<figure class="card" data-src="solutions.html" data-name="solutions.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/solutions.png' alt=''></div><figcaption><span class="fn">solutions.html</span><span class="dir">.</span></figcaption></figure>
+<figure class="card" data-src="templates/index-infotec-template.html" data-name="index-infotec-template.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__index-infotec-template.png' alt=''></div><figcaption><span class="fn">index-infotec-template.html</span><span class="dir">templates</span></figcaption></figure>
+<figure class="card" data-src="templates/main-page-2/Infotec ERP Prototype.dc.html" data-name="Infotec ERP Prototype.dc.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__main-page-2__Infotec_ERP_Prototype.dc.png' alt=''></div><figcaption><span class="fn">Infotec ERP Prototype.dc.html</span><span class="dir">templates/main-page-2</span></figcaption></figure>
+<figure class="card" data-src="templates/main-page-2/Infotec ERP UX Improvements Deck.dc.html" data-name="Infotec ERP UX Improvements Deck.dc.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__main-page-2__Infotec_ERP_UX_Improvements_Deck.dc.png' alt=''></div><figcaption><span class="fn">Infotec ERP UX Improvements Deck.dc.html</span><span class="dir">templates/main-page-2</span></figcaption></figure>
+<figure class="card" data-src="templates/main-page-2/uploads/Infotec ERP Prototype.dc.html" data-name="Infotec ERP Prototype.dc.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__main-page-2__uploads__Infotec_ERP_Prototype.dc.png' alt=''></div><figcaption><span class="fn">Infotec ERP Prototype.dc.html</span><span class="dir">templates/main-page-2/uploads</span></figcaption></figure>
+<figure class="card" data-src="templates/main-page-2/uploads/index-infotec.html" data-name="index-infotec.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__main-page-2__uploads__index-infotec.png' alt=''></div><figcaption><span class="fn">index-infotec.html</span><span class="dir">templates/main-page-2/uploads</span></figcaption></figure>
+<figure class="card" data-src="templates/main-page/Infotec ERP Prototype.dc.html" data-name="Infotec ERP Prototype.dc.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__main-page__Infotec_ERP_Prototype.dc.png' alt=''></div><figcaption><span class="fn">Infotec ERP Prototype.dc.html</span><span class="dir">templates/main-page</span></figcaption></figure>
+<figure class="card" data-src="templates/main-page/tmp-old/Infotec ERP Prototype.dc.html" data-name="Infotec ERP Prototype.dc.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__main-page__tmp-old__Infotec_ERP_Prototype.dc.png' alt=''></div><figcaption><span class="fn">Infotec ERP Prototype.dc.html</span><span class="dir">templates/main-page/tmp-old</span></figcaption></figure>
+<figure class="card" data-src="templates/main-page/uploads/index-infotec.html" data-name="index-infotec.html"><div class="thumb"><img loading='lazy' src='_gallery/shots/templates__main-page__uploads__index-infotec.png' alt=''></div><figcaption><span class="fn">index-infotec.html</span><span class="dir">templates/main-page/uploads</span></figcaption></figure>
+</div>
+<div class="modal" id="modal"><div class="mbar">
+<span class="title" id="mtitle"></span>
+<a id="mopen" target="_blank" rel="noopener">открыть в новой вкладке ↗</a>
+<button class="zoom" id="zoomOut">−</button>
+<span id="zoomLabel" style="font-size:13px;min-width:44px;text-align:center">100%</span>
+<button class="zoom" id="zoomIn">+</button>
+<button class="zoom" id="zoomReset">сброс</button>
+<button id="mclose" title="закрыть (Esc)">×</button>
+</div><div class="frameWrap" id="frameWrap"><iframe id="frame" title="preview"></iframe></div></div>
+<script>
+var modal=document.getElementById('modal'),frame=document.getElementById('frame'),
+frameWrap=document.getElementById('frameWrap'),mtitle=document.getElementById('mtitle'),
+mopen=document.getElementById('mopen'),q=document.getElementById('q'),
+countEl=document.getElementById('count'),zoomLabel=document.getElementById('zoomLabel');
+var cards=[].slice.call(document.querySelectorAll('.card')),zoom=1;
+function refreshCount(){countEl.textContent=cards.filter(function(c){return !c.classList.contains('hidden')}).length+' / '+cards.length;}
+refreshCount();
+function applyZoom(){zoomLabel.textContent=Math.round(zoom*100)+'%';
+frame.style.width=(100/zoom)+'%';frame.style.height=(frameWrap.clientHeight/zoom)+'px';
+frame.style.transform='scale('+zoom+')';frame.style.transformOrigin='top left';}
+function openModal(src,name){mtitle.textContent=name;mopen.href=src;frame.src=src;zoom=1;
+modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(applyZoom,50);}
+function closeModal(){modal.classList.remove('open');frame.src='about:blank';document.body.style.overflow='';}
+cards.forEach(function(c){c.addEventListener('click',function(){openModal(c.dataset.src,c.dataset.name);});});
+document.getElementById('mclose').addEventListener('click',closeModal);
+modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
+document.getElementById('zoomIn').addEventListener('click',function(){zoom=Math.min(3,zoom+0.25);applyZoom();});
+document.getElementById('zoomOut').addEventListener('click',function(){zoom=Math.max(0.25,zoom-0.25);applyZoom();});
+document.getElementById('zoomReset').addEventListener('click',function(){zoom=1;applyZoom();});
+window.addEventListener('resize',function(){if(modal.classList.contains('open'))applyZoom();});
+q.addEventListener('input',function(){var t=q.value.toLowerCase();
+cards.forEach(function(c){var hay=(c.dataset.src+' '+c.dataset.name).toLowerCase();
+c.classList.toggle('hidden',t&&hay.indexOf(t)===-1);});refreshCount();});
+</script></body></html>
